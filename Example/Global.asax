@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="Macaw.Umbraco.Foundation.Application" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="Muffin.Application" Language="C#" %>

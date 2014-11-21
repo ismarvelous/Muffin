@@ -1,5 +1,5 @@
-﻿using Macaw.Umbraco.Foundation.Controllers;
-using Macaw.Umbraco.Foundation.Core;
+﻿using Muffin.Controllers;
+using Muffin.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;

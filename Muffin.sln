@@ -1,0 +1,72 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8F87E13A-EFDF-4DBA-BCB2-706C9B72FC94}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{F96DE596-A458-41FA-B860-D68D07F3E4DD}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{5734CB28-1B6A-43A5-90A3-5A0289D5EC60}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{1A93A4A5-7920-49BA-BA38-59BD702978A4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{640CA869-826B-4A2F-B362-0FF321CFC6A9}"
+	ProjectSection(SolutionItems) = preProject
+		nuget\content\Implementation\Controllers\SearchController.cs.pp = nuget\content\Implementation\Controllers\SearchController.cs.pp
+		nuget\content\Implementation\Events\StartupHandler.cs.pp = nuget\content\Implementation\Events\StartupHandler.cs.pp
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Muffin", "Muffin\Muffin.csproj", "{38B824F4-CC9D-49ED-A905-69413EE3E192}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Muffin.Test", "Muffin.Test\Muffin.Test.csproj", "{52EE6C1F-5A04-449E-9A2E-6E168AF732D4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Azure.Staging|Any CPU = Azure.Staging|Any CPU
+		Azure.Test|Any CPU = Azure.Test|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5734CB28-1B6A-43A5-90A3-5A0289D5EC60}.Azure.Staging|Any CPU.ActiveCfg = Release|Any CPU
+		{5734CB28-1B6A-43A5-90A3-5A0289D5EC60}.Azure.Staging|Any CPU.Build.0 = Release|Any CPU
+		{5734CB28-1B6A-43A5-90A3-5A0289D5EC60}.Azure.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{5734CB28-1B6A-43A5-90A3-5A0289D5EC60}.Azure.Test|Any CPU.Build.0 = Release|Any CPU
+		{5734CB28-1B6A-43A5-90A3-5A0289D5EC60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5734CB28-1B6A-43A5-90A3-5A0289D5EC60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5734CB28-1B6A-43A5-90A3-5A0289D5EC60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5734CB28-1B6A-43A5-90A3-5A0289D5EC60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38B824F4-CC9D-49ED-A905-69413EE3E192}.Azure.Staging|Any CPU.ActiveCfg = Azure.Staging|Any CPU
+		{38B824F4-CC9D-49ED-A905-69413EE3E192}.Azure.Staging|Any CPU.Build.0 = Azure.Staging|Any CPU
+		{38B824F4-CC9D-49ED-A905-69413EE3E192}.Azure.Test|Any CPU.ActiveCfg = Azure.Test|Any CPU
+		{38B824F4-CC9D-49ED-A905-69413EE3E192}.Azure.Test|Any CPU.Build.0 = Azure.Test|Any CPU
+		{38B824F4-CC9D-49ED-A905-69413EE3E192}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38B824F4-CC9D-49ED-A905-69413EE3E192}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38B824F4-CC9D-49ED-A905-69413EE3E192}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38B824F4-CC9D-49ED-A905-69413EE3E192}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52EE6C1F-5A04-449E-9A2E-6E168AF732D4}.Azure.Staging|Any CPU.ActiveCfg = Release|Any CPU
+		{52EE6C1F-5A04-449E-9A2E-6E168AF732D4}.Azure.Staging|Any CPU.Build.0 = Release|Any CPU
+		{52EE6C1F-5A04-449E-9A2E-6E168AF732D4}.Azure.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{52EE6C1F-5A04-449E-9A2E-6E168AF732D4}.Azure.Test|Any CPU.Build.0 = Release|Any CPU
+		{52EE6C1F-5A04-449E-9A2E-6E168AF732D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52EE6C1F-5A04-449E-9A2E-6E168AF732D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52EE6C1F-5A04-449E-9A2E-6E168AF732D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52EE6C1F-5A04-449E-9A2E-6E168AF732D4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{640CA869-826B-4A2F-B362-0FF321CFC6A9} = {1A93A4A5-7920-49BA-BA38-59BD702978A4}
+	EndGlobalSection
+EndGlobal

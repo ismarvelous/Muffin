@@ -1,4 +1,4 @@
-@model Example.Implementation.ViewModels.ContentViewModel
+@inherits UmbracoViewPage<dynamic>
 @{
 	Layout = "~/Views/Shared/_layout.cshtml";
 }
@@ -32,4 +32,9 @@
 
         @Model.MiniIntro
     </section>
+    
+    @*@foreach (var item in Model.Grid.sections)
+    {
+        @item.grid
+    }*@
 }

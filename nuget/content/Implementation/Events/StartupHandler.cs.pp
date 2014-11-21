@@ -1,9 +1,9 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
-using Macaw.Umbraco.Foundation.Core;
-using Macaw.Umbraco.Foundation.Events;
-using Macaw.Umbraco.Foundation.Infrastructure;
+using Muffin.Core;
+using Muffin.Events;
+using Muffin.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +22,7 @@ namespace $rootnamespace$.Implementation.Events
 		{
 			var builder = new ContainerBuilder();
 			builder.RegisterApiControllers(typeof(UmbracoApiController).Assembly);
-			builder.RegisterControllers(typeof(Macaw.Umbraco.Foundation.Controllers.DynamicBaseController).Assembly);
+			builder.RegisterControllers(typeof(Muffin.Controllers.DynamicBaseController).Assembly);
 			builder.RegisterControllers(System.Reflection.Assembly.GetExecutingAssembly());
 
 			builder.Register(s => new SiteRepository(

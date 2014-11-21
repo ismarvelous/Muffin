@@ -1,8 +1,8 @@
 ﻿using Example.Implementation.ViewModels;
-using Macaw.Umbraco.Foundation.Controllers;
-using Macaw.Umbraco.Foundation.Core;
-using Macaw.Umbraco.Foundation.Core.Models;
-using Macaw.Umbraco.Foundation.Mvc;
+using Muffin.Controllers;
+using Muffin.Core;
+using Muffin.Core.Models;
+using Muffin.Mvc;
 using Umbraco.Core.Dynamics;
 
 namespace Example.Controllers
@@ -20,12 +20,13 @@ namespace Example.Controllers
                 //var content = model.Content.As<ContentViewModel>();
                 //content.Homepage = DynamicNull.Null; //define your typed homepage type here..
             //or in our case this also works, because the dynamicmodel contains a property homepage which can directly be mapped to the viewmodel aswell.
-                var content = model.Content.As<DynamicModel>().As<ContentViewModel>();
+                //var content = model.Content.As<DynamicModel>().As<ContentViewModel>();
+
 
             //default: return View(model.Content.As<DynamicModel>()); //you actually don't need a custom controller for this.
-            //example 1: return View(model.Content.As<ContentViewModel>()); //hybride viewmodel (proxy)
-            //example 2: 
-            return View(content); //typed viewmodel
+            //example 1: 
+            return View(model.Content.As<ContentViewModel>()); //hybride viewmodel (proxy)
+            //example 2: return View(content); //typed viewmodel
         }
 
         public System.Web.Mvc.ActionResult NewsOld(Umbraco.Web.Models.RenderModel model) //template name
