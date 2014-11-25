@@ -1,8 +1,10 @@
 ﻿using Umbraco.Core.Models;
+using Umbraco.Web;
+using Umbraco.Web.Models;
 
 namespace Muffin.Core.Models
 {
-	public class DynamicMediaModel : DynamicModel
+	public class DynamicMediaModel : DynamicModel, IImageModel
 	{
 		private readonly string _url;
 
@@ -20,9 +22,25 @@ namespace Muffin.Core.Models
 			}
 		}
 
-		public override string ToString()
+		public override string ToString() //todo: add support for multiple media types (not only default images)
 		{
 			return this.Url;
 		}
-	}
+
+	    public IUrlModel this[int width, int height]
+	    {
+	        get
+	        {
+                return new UrlModel
+                {
+                    Url = Url.GetCropUrl(height: height, width: width, imageCropMode:ImageCropMode.Crop)
+                };
+	        }
+	    }
+
+        public string ToHtmlString()
+        {
+            return ToString();
+        }
+    }
 }

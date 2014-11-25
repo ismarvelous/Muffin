@@ -1,5 +1,4 @@
 ﻿@using Muffin.Mvc
-@using Muffin.Helpers
 @{
 	Layout = "~/Views/Shared/_layout.cshtml";
 }
@@ -8,7 +7,7 @@
 {
 	<header>
 	    Rotatie snelheids: @Model.CarrouselContainer.Rotatiesnelheid<br />
-        @Muffin.ToJson(Model.CarrouselContainer.Children)
+        @Muffin.Helpers.Muffin.ToJson(Model.CarrouselContainer.Children)
 		<ul>
 		@foreach(var item in Model.CarrouselContainer.Children)
 		{

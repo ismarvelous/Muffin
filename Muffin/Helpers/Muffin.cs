@@ -1,14 +1,13 @@
-﻿using Muffin.Core.Models;
-using System;
+﻿using System.Text;
+using Muffin.Core.Models;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Umbraco.Core;
 using Umbraco.Core.Models;
+using Umbraco.Web;
 
 namespace Muffin.Helpers
 {
@@ -20,15 +19,15 @@ namespace Muffin.Helpers
             {
                 return ToJson((IPublishedContent)obj);
             }
-            else if (obj is IEnumerable<IPublishedContent>)
+            
+            if (obj is IEnumerable<IPublishedContent>)
             {
                 return ToJson((IEnumerable<IPublishedContent>)obj);
             }
-            else
-            {
-                var ret = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
-                return MvcHtmlString.Create(ret);
-            }
+            
+            //default
+            var ret = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
+            return MvcHtmlString.Create(ret);
         }
 
         public static MvcHtmlString ToJson(IPublishedContent content, string[] properties = null, bool includeHiddenItems = true)

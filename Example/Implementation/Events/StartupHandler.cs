@@ -11,7 +11,7 @@ using System.Web;
 using Umbraco.Web;
 using Umbraco.Web.WebApi;
 
-namespace Website.Implementation.Events
+namespace Example.Implementation.Events
 {
 	public class StartupHandler : FoundationEventHandler
 	{

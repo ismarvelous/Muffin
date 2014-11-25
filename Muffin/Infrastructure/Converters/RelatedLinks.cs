@@ -29,29 +29,32 @@ namespace Muffin.Infrastructure.Converters
 
         public object ConvertDataToSource(object source)
         {
-            var ret = new List<UrlModel>(); //return value
+            var ret = new List<LinkModel>(); //return value
             var arr = Newtonsoft.Json.JsonConvert.DeserializeObject(source.ToString()) as Newtonsoft.Json.Linq.JArray;
 
-            foreach (var item in arr)
+            if (arr != null)
             {
-                int id;
-                if (int.TryParse(item["link"].ToString(), out id)) //internal
+                foreach (var item in arr)
                 {
-                    ret.Add(new UrlModel
+                    int id;
+                    if (int.TryParse(item["link"].ToString(), out id)) //internal
                     {
-                        Title = item["title"].ToString(),
-                        Url = Repository.FriendlyUrl(id),
-                        NewWindow = (item["newWindow"].ToString() == "1")
-                    });
-                }
-                else //external link
-                {
-                    ret.Add(new UrlModel
+                        ret.Add(new LinkModel
+                        {
+                            Title = item["title"].ToString(),
+                            Url = Repository.FriendlyUrl(id),
+                            NewWindow = (item["newWindow"].ToString() == "1")
+                        });
+                    }
+                    else //external link
                     {
-                        Title = item["title"].ToString(),
-                        Url = item["link"].ToString(),
-                        NewWindow = (bool)item["newWindow"]
-                    });
+                        ret.Add(new LinkModel
+                        {
+                            Title = item["title"].ToString(),
+                            Url = item["link"].ToString(),
+                            NewWindow = (bool) item["newWindow"]
+                        });
+                    }
                 }
             }
 

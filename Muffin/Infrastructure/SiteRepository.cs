@@ -112,14 +112,11 @@ namespace Muffin.Infrastructure
 
         public DynamicMediaModel FindMediaById(int id)
         {
-			var media = Helper.TypedMedia(id);
-			if(media != null)
-				return new DynamicMediaModel(media, this); //todo: dynamicmediamodel
-			else
-				return null;
+            var media = Helper.TypedMedia(id);
+            return media != null ? new DynamicMediaModel(media, this) : null;
         }
 
-		public string Translate(string key)
+        public string Translate(string key)
 		{
 			return Helper.GetDictionaryValue(key);
 		}

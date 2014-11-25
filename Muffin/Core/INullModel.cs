@@ -1,6 +1,6 @@
 ﻿namespace Muffin.Core
 {
-	public interface INullModel
+	public interface INullModel //todo: move to core.models namespace
 	{
 		/// <summary>
 		/// available for all dynamic objects, using this construction prevents 

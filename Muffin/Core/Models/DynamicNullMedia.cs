@@ -8,7 +8,7 @@ namespace Muffin.Core.Models
 	/// <summary>
 	/// Null media item, returns default image for the url.
 	/// </summary>
-	public class DynamicNullMedia : DynamicObject, INullModel, IEnumerable, IHtmlString
+    public class DynamicNullMedia : DynamicObject, INullModel, IEnumerable, IImageModel
 	{
 		//Same usage as UmbracoCore DynamicNull
 		public static readonly DynamicNullMedia Null = new DynamicNullMedia(DynamicNull.Null);
@@ -40,7 +40,7 @@ namespace Muffin.Core.Models
 
 		public virtual string ToHtmlString()
 		{
-			return _dynamicNull.ToHtmlString();
+		    return ToString();
 		}
 
 		//DynamicNull proxy functions
@@ -80,7 +80,12 @@ namespace Muffin.Core.Models
 
 		public override string ToString()
 		{
-			return _dynamicNull.ToString();
+		    return Url;
 		}
+
+	    public IUrlModel this[int width, int height]
+	    {
+            get { return Null; }
+	    }
 	}
 }

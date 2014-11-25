@@ -1,3 +1,5 @@
+@using Muffin.Core.Models
+@using Muffin.Mvc
 @inherits UmbracoViewPage<dynamic>
 @{
 	Layout = "~/Views/Shared/_layout.cshtml";
@@ -5,12 +7,24 @@
 @section Main
 {
 	<header>
-        <h1>@Model.Titel</h1>
-		@if(Model.Afbeelding.IsNull())
-		{
-			<p>Er is geen afbeelding ingegeven.</p>
-		}
-		<p><img src="@Model.Afbeelding.Url" width="400px" height="400px" /></p>
+	    <h1>@Model.Titel</h1>
+        
+
+        <h2>Old</h2>
+        <br />
+        <img src="@Model.CroppedImage["640x480"]" />
+        <img src="@Model.CroppedImage["1024x768"]" />
+        <img src="@Model.CroppedImage[200, 100]" />
+        
+
+	    @if (Model.Afbeelding.IsNull())
+	    {
+	        <p>Er is geen afbeelding ingegeven.</p>
+	    }
+	    else
+	    {
+	        <p><img src="@Model.Afbeelding.Url" width="400px" height="400px" /></p>
+	    }
 
         <i>@Model.Intro</i>
     </header>
@@ -33,6 +47,10 @@
         @Model.MiniIntro
     </section>
     
+    <br/>
+
+
+
     @*@foreach (var item in Model.Grid.sections)
     {
         @item.grid
