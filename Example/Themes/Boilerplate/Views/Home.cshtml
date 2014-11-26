@@ -1,6 +1,7 @@
 ﻿@using Muffin.Mvc
+
 @{
-	Layout = "~/Views/Shared/_layout.cshtml";
+    Layout = "~/Themes/Boilerplate/Views/Shared/_layout.cshtml";
 }
 
 @section Main
@@ -13,6 +14,7 @@
 		{
 			<li>@item.Afbeelding.Url @item.Titel - @item.Beschrijving @item.Link</li>
 		}
+
 		</ul>
     </header>
 	<section>
@@ -28,8 +30,8 @@
 {
 	@foreach(var widget in Model.WidgetArea)
     {
-	    <aside>
-	        @widget
-	    </aside> 
+        <aside>
+            @widget
+        </aside> 
 	}
 }

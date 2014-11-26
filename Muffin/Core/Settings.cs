@@ -16,9 +16,19 @@ namespace Muffin.Core
 		{
 			get
 			{
-				var ret = WebConfigurationManager.AppSettings["Macaw.Umbraco.Foundation.EmptyImageUrl"];
+				var ret = WebConfigurationManager.AppSettings["Muffin.EmptyImageUrl"];
 				return ret ?? string.Empty;
 			}
 		}
+
+        public static string CurrentTheme
+        {
+            get
+            {
+                var ret = WebConfigurationManager.AppSettings["Muffin.Themes.Current"];
+                return ret ?? string.Empty;
+            }
+        }
+
 	}
 }

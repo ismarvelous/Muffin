@@ -46,6 +46,7 @@ namespace Muffin.Mvc
 				if (_macro == null)
 				{
 					_macro = Repository.FindMacroByAlias(Model.MacroAlias, (int)CurrentPage.Id, Model.MacroParameters);
+                    //todo: aware!!! _marco.Macro.ScriptPath is not correct here!!
 				}
 
 				return _macro;

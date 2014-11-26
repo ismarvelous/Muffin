@@ -2,7 +2,7 @@
 @using Muffin.Mvc
 @inherits UmbracoViewPage<dynamic>
 @{
-	Layout = "~/Views/Shared/_layout.cshtml";
+	Layout = "~/Themes/Boilerplate/Views/Shared/_layout.cshtml";
 }
 @section Main
 {
@@ -29,8 +29,9 @@
         <i>@Model.Intro</i>
     </header>
     <section>
-        @Model.MainBody
+
         
+        @((Model as IPublishedContent).GetGridHtml("Grid"))
         <hr/>
         
         @* for demo purpose only...

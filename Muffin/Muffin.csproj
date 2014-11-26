@@ -314,6 +314,7 @@
     <Compile Include="Infrastructure\LuceneHighlightHelper.cs" />
     <Compile Include="Infrastructure\SiteRepository.cs" />
     <Compile Include="Mvc\SitemapActionResult.cs" />
+    <Compile Include="Mvc\ThemeViewEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

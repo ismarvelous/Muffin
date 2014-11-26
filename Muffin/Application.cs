@@ -10,10 +10,10 @@ namespace Muffin
 {
 	public class Application : UmbracoApplication
 	{
-		public override string GetVaryByCustomString(HttpContext context, string custom)
+		public override string GetVaryByCustomString(HttpContext context, string custom) //Create cache key..
         {
-            string[] keys = custom.ToLower().Split(new char[] { ',', ';' });
-            string ret = string.Empty;
+            var keys = custom.ToLower().Split(new char[] { ',', ';' });
+            var ret = string.Empty;
 
             foreach (var key in keys)
             {

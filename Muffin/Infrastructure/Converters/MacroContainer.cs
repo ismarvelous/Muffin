@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Muffin.Core;
 using Muffin.Infrastructure.Converters.Models;
 using Umbraco.Core;
 using Umbraco.Core.Dynamics;
+using Umbraco.Core.IO;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 
@@ -44,10 +47,21 @@ namespace Muffin.Infrastructure.Converters
                     var values = parameters.Where(val => !val.Groups[1].Value.Equals("macroAlias"))
                         .ToDictionary(val => val.Groups[1].Value, val => val.Groups[2].Value.Replace("\"", string.Empty).Replace("'", string.Empty) as object);
 
-                    var macroProxy = new DynamicMacroModelHtmlProxy(Repository.FindMacroByAlias(alias, UmbracoContext.Current.PageId.Value, values),
+                    #region select corret scriptpath
+                    //todo: check file availability, otherwise use default path as a fallback.
+                    var macro = Repository.FindMacroByAlias(alias, UmbracoContext.Current.PageId.Value, values);
+                    var macroPartialsPath = string.Concat(SystemDirectories.MvcViews, "/MacroPartials/");
+                    if (macro.Macro.ScriptPath.Contains(macroPartialsPath))
+                    {
+                        macro.Macro.ScriptPath = macro.Macro.ScriptPath.Replace(macroPartialsPath,
+                            string.Format("~/Themes/{0}/Views/{1}/", Settings.CurrentTheme, "MacroPartials"));
+                    }
+                    #endregion
+
+                    var macroProxy = new DynamicMacroModelHtmlProxy(macro,
                         UmbracoContext.Current.PageId.Value, match.Value);
 
-                    ret.Add(macroProxy);
+                    ret.Add(macroProxy); 
                 }
 
                 return ret;

@@ -19,12 +19,12 @@ namespace Muffin.Infrastructure.Converters
 		protected ISiteRepository Repository;
 		protected UmbracoHelper Helper;
 
-		public BaseConverter() 
+	    protected BaseConverter() 
         {
 			Initialize(DependencyResolver.Current.GetService<ISiteRepository>());
         }
 
-		public BaseConverter(ISiteRepository rep)
+	    protected BaseConverter(ISiteRepository rep)
         {
             Initialize(rep);
         }

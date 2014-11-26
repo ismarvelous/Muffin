@@ -1,5 +1,6 @@
 ﻿using System;
 using Muffin.Controllers;
+using Muffin.Mvc;
 using Umbraco.Core;
 using Umbraco.Core.Services;
 using Umbraco.Web.Mvc;
@@ -56,6 +57,9 @@ namespace Muffin.Events
 
 			//todo: for flexibility it's maybe better to move this into the project / implementation itself.
 			DefaultRenderMvcControllerResolver.Current.SetDefaultControllerType(typeof(DynamicBaseController));
+
+            //theme engine as default view engine!
+            ViewEngines.Engines.Insert(0, new ThemeViewEngine());
 		}
 
 		public abstract void InitializeAtStartup(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext,

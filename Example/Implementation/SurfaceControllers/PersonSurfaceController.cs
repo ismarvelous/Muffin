@@ -26,7 +26,7 @@ namespace Example.Implementation.SurfaceControllers
             dynamic content = Repository.FindById(contentId);
 
             //map the documenttype to a typed object..
-            return PartialView("Person", new Example.Implementation.ViewModels.Person
+            return PartialView("Person", new ViewModels.Person
             {
                 Name = content.Name,
                 City = content.Woonplaats

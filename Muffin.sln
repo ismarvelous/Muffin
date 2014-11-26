@@ -30,6 +30,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Muffin", "Muffin\Muffin.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Muffin.Test", "Muffin.Test\Muffin.Test.csproj", "{52EE6C1F-5A04-449E-9A2E-6E168AF732D4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{A806B2F1-EE53-47EE-B103-7579B6BF35BF}"
+	ProjectSection(SolutionItems) = preProject
+		Muffin.sln.DotSettings = Muffin.sln.DotSettings
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Azure.Staging|Any CPU = Azure.Staging|Any CPU

@@ -23,7 +23,7 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>e998861d</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>096aa23d</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -277,15 +277,13 @@
     <Content Include="js\main.js" />
     <Content Include="js\vendor\jquery-1.10.1.min.js" />
     <Content Include="js\vendor\modernizr-2.6.2-respond-1.1.0.min.js" />
-    <Content Include="masterpages\dummy.txt" />
     <Content Include="Media\1001\dont_shout.jpg" />
     <Content Include="Media\1001\dont_shout_thumb.jpg" />
     <Content Include="Media\1002\avatar.png" />
     <Content Include="Media\1002\avatar_thumb.jpg" />
     <Content Include="Media\dummy.txt" />
-    <Content Include="scripts\dummy.txt" />
     <Content Include="usercontrols\dummy.txt" />
-    <Content Include="Views\Partials\dummy.txt" />
+    <Content Include="Themes\Boilerplate\Views\Partials\dummy.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -293,14 +291,14 @@
     <Content Include="Config\log4net.config" />
     <Content Include="Config\tinyMceConfig.config" />
     <Content Include="Config\umbracoSettings.config" />
-    <Content Include="Views\Partials\Grid\Editors\Textstring.cshtml" />
-    <Content Include="Views\Partials\Grid\Editors\Rte.cshtml" />
-    <Content Include="Views\Partials\Grid\Editors\Media.cshtml" />
-    <Content Include="Views\Partials\Grid\Editors\Macro.cshtml" />
-    <Content Include="Views\Partials\Grid\Editors\Embed.cshtml" />
-    <Content Include="Views\Partials\Grid\Editors\Base.cshtml" />
-    <Content Include="Views\Partials\Grid\Bootstrap3.cshtml" />
-    <Content Include="Views\Partials\Grid\Bootstrap2.cshtml" />
+    <Content Include="Themes\Boilerplate\Views\Partials\Grid\Editors\Textstring.cshtml" />
+    <Content Include="Themes\Boilerplate\Views\Partials\Grid\Editors\Rte.cshtml" />
+    <Content Include="Themes\Boilerplate\Views\Partials\Grid\Editors\Media.cshtml" />
+    <Content Include="Themes\Boilerplate\Views\Partials\Grid\Editors\Macro.cshtml" />
+    <Content Include="Themes\Boilerplate\Views\Partials\Grid\Editors\Embed.cshtml" />
+    <Content Include="Themes\Boilerplate\Views\Partials\Grid\Editors\Base.cshtml" />
+    <Content Include="Themes\Boilerplate\Views\Partials\Grid\Bootstrap3.cshtml" />
+    <Content Include="Themes\Boilerplate\Views\Partials\Grid\Bootstrap2.cshtml" />
     <Content Include="Config\UrlRewriting.config" />
     <Content Include="Config\trees.config" />
     <Content Include="Config\scripting.config" />
@@ -314,6 +312,11 @@
     <Content Include="Config\BaseRestExtensions.config" />
     <Content Include="Config\applications.config" />
     <Content Include="Config\404handlers.config" />
+    <Content Include="Themes\Boilerplate\Views\MacroPartials\Afbeelding.cshtml" />
+    <Content Include="Themes\Boilerplate\Views\MacroPartials\Content.cshtml" />
+    <Content Include="Themes\Boilerplate\Views\MacroPartials\Listing.cshtml" />
+    <Content Include="Themes\Boilerplate\Views\MacroPartials\Person.cshtml" />
+    <Content Include="Themes\Boilerplate\Views\MacroPartials\Youtube.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -344,24 +347,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Web.config">
+    <Content Include="Themes\Boilerplate\Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Web.config.transform" />
-    <Content Include="Views\Content.cshtml" />
-    <Content Include="Views\Home.cshtml" />
-    <Content Include="Views\Listing.cshtml" />
-    <Content Include="Views\MacroPartials\Afbeelding.cshtml" />
-    <Content Include="Views\MacroPartials\Content.cshtml" />
-    <Content Include="Views\MacroPartials\Listing.cshtml" />
-    <Content Include="Views\MacroPartials\Youtube.cshtml" />
-    <Content Include="Views\News.cshtml" />
-    <Content Include="Views\Search.cshtml" />
-    <Content Include="Views\Shared\_layout.cshtml" />
-    <Content Include="Views\MacroPartials\Person.cshtml" />
-    <Content Include="Views\Partials\Person.cshtml" />
-    <Content Include="Views\NewsOld.cshtml" />
-    <Content Include="Views\Shared\_layoutOld.cshtml" />
+    <Content Include="Themes\Boilerplate\Views\Content.cshtml" />
+    <Content Include="Themes\Boilerplate\Views\Home.cshtml" />
+    <Content Include="Themes\Boilerplate\Views\Listing.cshtml" />
+    <Content Include="Themes\Boilerplate\Views\News.cshtml" />
+    <Content Include="Themes\Boilerplate\Views\Search.cshtml" />
+    <Content Include="Themes\Boilerplate\Views\Shared\_layout.cshtml" />
+    <Content Include="Themes\Boilerplate\Views\Partials\Person.cshtml" />
+    <Content Include="Themes\Boilerplate\Views\NewsOld.cshtml" />
+    <Content Include="Themes\Boilerplate\Views\Shared\_layoutOld.cshtml" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -376,6 +373,9 @@
       <Project>{38b824f4-cc9d-49ed-a905-69413ee3e192}</Project>
       <Name>Muffin</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
