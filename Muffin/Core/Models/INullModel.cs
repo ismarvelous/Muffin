@@ -1,4 +1,4 @@
-﻿namespace Muffin.Core
+﻿namespace Muffin.Core.Models
 {
 	public interface INullModel //todo: move to core.models namespace
 	{

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Muffin.Core.Models;
 
-namespace Muffin.Core
+namespace Muffin.Core.Models
 {
 	/// <summary>
 	/// Interface for models that need to show paged result sets.

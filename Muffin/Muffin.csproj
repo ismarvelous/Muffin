@@ -282,8 +282,8 @@
     <Compile Include="Caching\DiskOutputCacheProvider.cs" />
     <Compile Include="Controllers\ContainerBaseController.cs" />
     <Compile Include="Controllers\SearchBaseController.cs" />
-    <Compile Include="Core\INullModel.cs" />
-    <Compile Include="Core\IPager.cs" />
+    <Compile Include="Core\Models\INullModel.cs" />
+    <Compile Include="Core\Models\IPager.cs" />
     <Compile Include="Core\ISiteRepository.cs" />
     <Compile Include="Core\Mapper.cs" />
     <Compile Include="Core\Models\CroppedImageModel.cs" />
