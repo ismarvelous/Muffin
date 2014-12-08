@@ -7,7 +7,7 @@ namespace Muffin.Core.Models
 	/// <summary>
 	/// Interface for models that need to show paged result sets.
 	/// </summary>
-    public interface IPager //todo: move to core.models namespace
+    public interface IPager
 	{
 		/// <summary>
 		/// Add a custom implementation for the paged results..

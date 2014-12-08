@@ -27,8 +27,6 @@ namespace Muffin.Infrastructure.Converters.Models
 
         public override string ToString()
         {
-            //todo: or is it better to implement our own IMacroEngine
-
             if (!string.IsNullOrWhiteSpace(_macroValue)) //_macrovalue is not used anymore to render the content, however this check is still valid.
             {
                 var engine = new PartialViewMacroEngine();
@@ -44,11 +42,6 @@ namespace Muffin.Infrastructure.Converters.Models
 
                 return engine.Execute(m, Repository.FindById(_pageId));
             }
-
-            //Old / obsolete implementation
-            //if (!string.IsNullOrWhiteSpace(_macroValue))
-            //    return umbraco.library.RenderMacroContent(_macroValue,
-            //        _pageId);
 
             return Macro.Alias; //default;
         }

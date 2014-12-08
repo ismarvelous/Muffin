@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Configuration;
+using Newtonsoft.Json.Converters;
 
 namespace Muffin.Core
 {
 	/// <summary>
-	/// Settings from the web.config Macaw.Umbraco.Foundation.* keys
+	/// Settings from the web.config Muffin.* keys
 	/// </summary>
 	public static class Settings
 	{
@@ -21,6 +22,7 @@ namespace Muffin.Core
 			}
 		}
 
+        #region Theme / custom view folder support
         public static string CurrentTheme
         {
             get
@@ -30,5 +32,27 @@ namespace Muffin.Core
             }
         }
 
-	}
+	    public static string CurrentThemeViewPath
+	    {
+	        get 
+            {
+	            return !string.IsNullOrEmpty(CurrentTheme) ? 
+                    string.Format("~/Themes/{0}/Views", CurrentTheme) : 
+                    "~/Views";
+	        }
+	    }
+
+        public static string CurrentThemePath
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(CurrentTheme) ?
+                    string.Format("~/Themes/{0}", CurrentTheme) :
+                    "~/";
+            }
+        }
+
+        #endregion
+
+    }
 }

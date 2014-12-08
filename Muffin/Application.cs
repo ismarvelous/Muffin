@@ -24,10 +24,7 @@ namespace Muffin
                 //any future keys...
             }
 
-            if (!string.IsNullOrWhiteSpace(ret))
-                return ret;
-            else
-                return base.GetVaryByCustomString(context, custom);
+            return !string.IsNullOrWhiteSpace(ret) ? ret : base.GetVaryByCustomString(context, custom);
         }
 	}
 }

@@ -18,15 +18,17 @@ namespace Muffin.Controllers
 
 		public override abstract ActionResult Index(RenderModel model);
 
-		/// <summary>
-		/// This default implementation is using the childcollection as the container..
+        /// <summary>
+        /// This default implementation is using the childcollection as the container..
         /// Allowed querystring parameters:
         /// p = Pagenumber
         /// s = pageSize
         /// </summary>
         /// <param name="model"></param>
+        /// <param name="p"></param>
+        /// <param name="s"></param>
         /// <returns></returns>
-		public virtual ActionResult Container(RenderModel model,
+        public virtual ActionResult Container(RenderModel model,
 			int p=1, //read querystring parameters without using this.Request.
             int s=10)
 		{

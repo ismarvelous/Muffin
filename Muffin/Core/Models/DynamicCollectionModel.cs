@@ -18,12 +18,13 @@ namespace Muffin.Core.Models
 			Container = containerParent.Children.Select(n => new DynamicModel(n, Repository));
 		}
 
-		/// <summary>
-		/// Dynamic Model Collection used for list view pages..
-		/// </summary>
-		/// <param name="source">Published content showing all data.</param>
-		/// <param name="container">Container containing all list items</param>
-		public DynamicCollectionModel(IPublishedContent source, ISiteRepository repository, IEnumerable<IPublishedContent> container)
+	    /// <summary>
+	    /// Dynamic Model Collection used for list view pages..
+	    /// </summary>
+	    /// <param name="source">Published content showing all data.</param>
+	    /// <param name="repository"></param>
+	    /// <param name="container">Container containing all list items</param>
+	    public DynamicCollectionModel(IPublishedContent source, ISiteRepository repository, IEnumerable<IPublishedContent> container)
 			:base(source, repository)
 		{
 			Container = container.Select(n => new DynamicModel(n, Repository));

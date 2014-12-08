@@ -1,43 +1,52 @@
-<h1>Macaw Umbraco Foundation</h1>
+﻿<h1>Muffin (An Umbraco Foundation)</h1>
 
-<h3>Work in progress!</h3>
+<p>Muffin is the reincarnation of the foundation formerly known as the Macaw Umbraco Foundation. It's a simplefied templating API / facade on top of the
+Umbraco framework to allow easier front-end development, quicker development. It also comes with some helpers and default implementations of frequently used functionality.
+It tries to focus SOLID principles as much as possible to allow better testability. For more info you can als find a presentation given at the BUUG: 
+<a href="http://www.slideshare.net/JeroenWijdeven">A dynamic journey of concerns</a></p>
 
-<p>Foundation library used at Macaw Netherlands. Some features are:  </p>
+<h3>Some features:</h3>
 
 <ul>
-<li>Standard Examine Search implementation  </li>
+<li>Frontend developers friendly hybride "dynamic" models for templates </li>
+<li>Frontend developers friendly Partial view Macros </li>
 <li>Paged result views  </li>
-<li>Frontend developers friendly dynamic models for Templates and Macro  </li>
 <li>Basic property editor converters </li>
-<li>Testable controllers </li>
-<li>"Distributed" file caching with MvcDonutCaching</li>
-<li>Several Html helpers like ToJson...</li>
+<li>Focused on SOLID principles, to allow better unit-testability</li>
+<li>Mappers to convert objects to Json</li>
+<li>Mappers to convert objects to typed objects..</li>
+<li>Rss feeds for all document types http://--domain--/rss/{urlpath}</li>
+<li>Json Request converters. By calling http://--domain--/json/{urlpath} the IPublishedContent based on the urlpath is returned as Json.</li>
+<li>Umbraco.ImageCropper simplefied API, works for traditional mediatypes and grid images aswell.</li>
+<li>Standard Examine Search implementation  </li>
+<li>File based caching with MvcDonutCaching</li>
+<li>Grid manipulation (typed grid object and control value converters)</li>
 </ul>
 
-<p>Currently build on top of Umbraco 7.1.4</p>
+<h3>Underconstruction:</h3>
+
+<p>The whole foundation is constantly under development. But currently we are especially focused on:</p>
+
+<ul>
+<li>Theme engine</li>
+<li>Azure ready examine: https://github.com/Shazwazza/Examine/wiki/Examine-with-Azure-Websites</li>
+</ul>
+
+<p>Currently build on top of Umbraco 7.2.0</p>
 
 <h2>Installation</h2>
 
-<p>First create an empty website project and set the target framework to .net 4.5. Extract the Umbraco 7.0.1 files into the same directory (except the App_Code and Bin folders).
-If not already done.</p>
-
-<p><code><br />
-PM> Install-Package Macaw.Umbraco.Foundation
-</code><br />
-<code><br />
-PM> Install-Package Macaw.Umbraco.Foundation -IncludePrerelease
-</code></p>
-
-<p>Currently only available as pre release version.</p>
+<p>Umbraco is installed and updated via Nuget.</p>
 
 <h2>Examples and documentation</h2>
-
-<p>Both the example project and the nuget package only use the Umbraco Core libraries. 
-To run a website follow the instructions by ben-morris to setup and run your project. (In case of the example project don't overwrite any file)</p>
-
-<p>http://www.ben-morris.com/using-umbraco-6-to-create-an-asp-net-mvc-4-web-applicatio  </p>
 
 <ul>
 <li>The example database username is "admin" and the password is "password".  </li>
 <li>The nuget package and the example project both use Autofac. See the implementation folder for more information and / or customization. </li>
+</ul>
+
+<h2>Credits</h2>
+
+<ul>
+<li><a href="https://github.com/MacawNL/Macaw.Umbraco.Foundation/">Macaw Umbraco Foundation</a></li>
 </ul>

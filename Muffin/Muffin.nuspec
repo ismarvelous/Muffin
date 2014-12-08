@@ -6,11 +6,14 @@
 		<title>Muffin</title>
 		<authors>Chuhukon</authors>
 		<owners>Marvelous IT Solutions</owners>
-		<licenseUrl>http://github.com/Chuhukon/Macaw.Umbraco.Foundation/blob/master/LICENSE</licenseUrl>
-		<projectUrl>http://github.com/Chuhukon/Macaw.Umbraco.Foundation/</projectUrl>
-		<iconUrl>http://www.macaw.nl/favicon.ico</iconUrl>
+		<licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+		<projectUrl>http://www.ismarvelous.nl</projectUrl>
+		<iconUrl>http://www.ismarvelous.nl/images/favicon/favicon.ico</iconUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>The reincarnation of the foundation formely known as the Macaw Umbraco Foundation. "Because we like Muffins"</description>
+		<description>
+      A simplefied templating API / facade on top of the
+      Umbraco framework to allow easier front-end development and rapid development.
+    </description>
 		<releaseNotes>This is a beta release.</releaseNotes>
 		<copyright>Copyright 2014</copyright>
 		<tags>umbraco foundation mvc</tags>
@@ -18,7 +21,8 @@
 			<dependency id="Autofac" version="3.2.0"/>
 			<dependency id="Autofac.Mvc4" version="3.1.0"  />
 			<dependency id="Autofac.WebApi" version="3.1.0"  />
-			<dependency id="UmbracoCms.Core" version="7.2.0"  />
+      <dependency id="Newtonsoft.Json" version="4.5.0" />
+			<dependency id="UmbracoCms" version="7.1.0"  />
 		</dependencies>
 	</metadata>
 	<files>

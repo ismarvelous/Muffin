@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Muffin")]
-[assembly: AssemblyDescription("Macaw best practices for Umbraco websites")]
+[assembly: AssemblyDescription("Muffin Umbraco Foundation")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Macaw")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Website")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]

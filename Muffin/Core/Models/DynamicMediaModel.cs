@@ -4,7 +4,10 @@ using Umbraco.Web.Models;
 
 namespace Muffin.Core.Models
 {
-	public class DynamicMediaModel : DynamicModel, IImageModel
+    /// <summary>
+    /// For media items, supports cropping of images.
+    /// </summary>
+	public class DynamicMediaModel : DynamicModel, ICropImageModel
 	{
 		private readonly string _url;
 

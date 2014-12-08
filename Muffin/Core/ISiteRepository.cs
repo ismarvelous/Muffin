@@ -12,6 +12,7 @@ namespace Muffin.Core
         DynamicMacroModel FindMacroByAlias(string alias, int pageId, IDictionary<string, object> values);
 		DynamicMediaModel FindMediaById(int id);
         DynamicModel FindById(int id);
+        DynamicModel FindByUrl(string urlpath);
 		IContent FindContentById(int id);
 
         IEnumerable<DynamicModel> Find(string query);
@@ -26,5 +27,6 @@ namespace Muffin.Core
 		string FriendlyUrl(IPublishedContent content);
 
         object GetPropertyValue(MacroPropertyModel property);
+        object GetPropertyValue(Control gridControl);
     }
 }

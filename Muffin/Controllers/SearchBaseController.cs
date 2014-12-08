@@ -32,6 +32,9 @@ namespace Muffin.Controllers
         /// q = Query
         /// </summary>
         /// <param name="model"></param>
+        /// <param name="p"></param>
+        /// <param name="s"></param>
+        /// <param name="q"></param>
         /// <returns></returns>
         public virtual ActionResult Search(RenderModel model, 
             int p=1, //read querystring parameters without using this.Request.

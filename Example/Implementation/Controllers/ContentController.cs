@@ -23,9 +23,10 @@ namespace Example.Controllers
                 //var content = model.Content.As<DynamicModel>().As<ContentViewModel>();
 
 
-            //default: return View(model.Content.As<DynamicModel>()); //you actually don't need a custom controller for this.
+            //default: 
+            return View(model.Content.As<DynamicModel>()); //you actually don't need a custom controller for this.
             //example 1: 
-            return View(model.Content.As<ContentViewModel>()); //hybride viewmodel (proxy)
+            //return View(model.Content.As<ContentViewModel>()); //hybride viewmodel (proxy)
             //example 2: return View(content); //typed viewmodel
         }
 

@@ -13,6 +13,8 @@ namespace Muffin.Core.Models
 	/// https://github.com/MacawNL/Macaw.Umbraco.Foundation/wiki/Core-Models
 	/// Cause we like to have some extra control over some properties we implement our own IPublishedContent as the base class
 	/// Instead of using DynamicPublishedContent directly.
+    /// 
+    /// DynamicModel is the Core of Muffin. It's an hybride proxy object combining typed (for the most used properties) and dynamic for all things which are dynamically defined in Umbraco.
 	/// </summary>
 	public class DynamicModel : DynamicObject, IPublishedContent, INullModel
 	{
@@ -183,7 +185,7 @@ namespace Muffin.Core.Models
 			get { return Source.Id; }
 		}
 
-		bool IPublishedContent.IsDraft //todo test this implementation
+		bool IPublishedContent.IsDraft
 		{
 			get { return ((IPublishedContent)Source).IsDraft; }
 		}
@@ -208,7 +210,7 @@ namespace Muffin.Core.Models
 			get { return Source.Path; }
 		}
 
-		ICollection<IPublishedProperty> IPublishedContent.Properties //todo: test this implementation
+		ICollection<IPublishedProperty> IPublishedContent.Properties
 		{
 			get { return ((IPublishedContent)Source).Properties; }
 		}

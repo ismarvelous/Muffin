@@ -4,6 +4,7 @@ using Muffin.Mvc;
 using Umbraco.Core.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Muffin.Core;
 
 namespace Muffin.Test
 {
@@ -14,13 +15,13 @@ namespace Muffin.Test
 		/// Single item test
 		/// </summary>
 		[TestMethod]
-		public void ToJson__Include_hidden_items_set_to_false__Json_output_returns_nonhidden_item()
+		public void AsJson__Include_hidden_items_set_to_false__Json_output_returns_nonhidden_item()
 		{
 			//1. Arrange
 			var mContent = Arrange.Content("Consectetur hidden item", true);
 
 			//2. act
-			var output = Helpers.Muffin.ToJson(mContent.Object, null, false);
+			var output = mContent.Object.AsJson(null, false);
 
 			//3. assert
 			Assert.IsTrue(output.ToString().Equals(string.Empty), "Ouput does contain hidden item");
@@ -30,13 +31,13 @@ namespace Muffin.Test
 		/// Single item test
 		/// </summary>
 		[TestMethod]
-		public void ToJson__Include_hidden_items_not_set__Json_output_returns_nonhidden_item()
+		public void AsJson__Include_hidden_items_not_set__Json_output_returns_nonhidden_item()
 		{
 			//1. Arrange
 			var mContent = Arrange.Content("Consectetur hidden item", true);
 
 			//2. act
-			var output = Helpers.Muffin.ToJson(mContent.Object, null);
+			var output = mContent.Object.AsJson(null);
 
 			//3. assert
 			Assert.IsTrue(output.ToString().Contains("Consectetur hidden item"), "Ouput does not contains item");
@@ -46,7 +47,7 @@ namespace Muffin.Test
         /// IEnumerable testWhen IncludeHiddenItems is set to false only non hidden items have to be rendered as json
         /// </summary>
         [TestMethod]
-        public void ToJson__Include_hidden_items_set_to_false__Json_output_returns_nonhidden_items()
+        public void AsJson__Include_hidden_items_set_to_false__Json_output_returns_nonhidden_items()
         {
             //1. Arrange
             var mContent = Arrange.Content("lorem parent page", //setup a page with 5 child objects
@@ -60,7 +61,7 @@ namespace Muffin.Test
 				});
 
             //2. act
-            var output = Helpers.Muffin.ToJson(mContent.Object.Children, null, false);
+            var output = mContent.Object.Children.AsJson(null, false);
 
             //3. assert
             Assert.IsTrue(output.ToString().Contains("Lorem child page 1"), "Ouput does not contains non-hidden child 1");
@@ -75,7 +76,7 @@ namespace Muffin.Test
         /// Include hidden items aswell.
         /// </summary>
         [TestMethod]
-        public void ToJson__Include_hidden_items_not_set__Json_output_returns_all_items()
+        public void AsJson__Include_hidden_items_not_set__Json_output_returns_all_items()
         {
             //1. Arrange
             var mContent = Arrange.Content("lorem parent page", //setup a page with 5 child objects
@@ -89,7 +90,7 @@ namespace Muffin.Test
 				});
 
             //2. act
-            var output = Helpers.Muffin.ToJson(mContent.Object.Children, null);
+            var output = mContent.Object.Children.AsJson(null);
 
             //3. assert
             Assert.IsTrue(output.ToString().Contains("Lorem child page 1"), "Ouput does not contains non-hidden child 1");
@@ -104,7 +105,7 @@ namespace Muffin.Test
         /// For IPublishedContent you can specify which properties are part of the json output.
         /// </summary>
         [TestMethod]
-        public void ToJson__Some_aliasses_specified__Json_output_only_contains_specified_aliasses()
+        public void AsJson__Some_aliasses_specified__Json_output_only_contains_specified_aliasses()
         {
             //1. Arrange
             var mContent = Arrange.Content("lorem parent page", //setup a page with 5 child objects
@@ -118,7 +119,7 @@ namespace Muffin.Test
 				});
 
             //2. act
-            var output = Helpers.Muffin.ToJson(mContent.Object.Children, new[] { "title" });
+            var output = mContent.Object.Children.AsJson(new[] { "title" });
 
             //3. assert
             Assert.IsTrue(!output.ToString().Contains("mainBody"), "Output contains mainbody, but only title has to be returned");
@@ -130,7 +131,7 @@ namespace Muffin.Test
         /// actualy this is testing the newtonsoft json implementation which is hopefully correct.
         /// </summary>
         [TestMethod]
-        public void ToJson__Custom_object__A_normal_json_convert_is_executed() //actualy this is testing the newtonsoft json implementation which is hopefully correct.
+        public void AsJson__Custom_object__A_normal_json_convert_is_executed() //actualy this is testing the newtonsoft json implementation which is hopefully correct.
         {
             //1. Arrange
             var obj = new {
@@ -140,7 +141,7 @@ namespace Muffin.Test
             };
 
             //2. Act
-            System.Web.Mvc.MvcHtmlString output = Helpers.Muffin.ToJson(obj);
+            var output = Mapper.AsJson(obj);
 
             //3. Assert
             Assert.IsTrue(output.ToString().Equals("{\"Name\":\"John Doe\",\"City\":\"New York\",\"Age\":38}"));

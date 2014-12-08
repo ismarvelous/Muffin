@@ -8,7 +8,7 @@ namespace Muffin.Core.Models
 	/// <summary>
 	/// Null media item, returns default image for the url.
 	/// </summary>
-    public class DynamicNullMedia : DynamicObject, INullModel, IEnumerable, IImageModel
+    public class DynamicNullMedia : DynamicObject, INullModel, IEnumerable, ICropImageModel
 	{
 		//Same usage as UmbracoCore DynamicNull
 		public static readonly DynamicNullMedia Null = new DynamicNullMedia(DynamicNull.Null);

@@ -20,21 +20,23 @@ namespace Muffin.Infrastructure
         //protected IMediaService MediaService;
         protected IContentService Service;
         protected IMacroService MacroService;
+        protected UmbracoContext CurrentContext;
 
         protected UmbracoHelper Helper;
         public string SearchProvidername { get; private set; }
 
-        public SiteRepository(IContentService service, IMacroService macroService, UmbracoHelper helper)
-			: this(service, macroService, helper, "ExternalSearcher") //use umbraco default searcher.
+        public SiteRepository(IContentService service, IMacroService macroService, UmbracoContext ctx)
+			: this(service, macroService, ctx, "ExternalSearcher") //use umbraco default searcher.
 		{
 		}
 
-        public SiteRepository(IContentService service, IMacroService macroService, UmbracoHelper helper, string searchProvidername)
+        public SiteRepository(IContentService service, IMacroService macroService, UmbracoContext ctx, string searchProvidername)
         {
             Service = service;
             MacroService = macroService;
             SearchProvidername = searchProvidername;
-            Helper = helper;
+            Helper = new UmbracoHelper(ctx);
+            CurrentContext = ctx;
         }
 
         /// <summary>
@@ -52,7 +54,7 @@ namespace Muffin.Infrastructure
 
             foreach (var item in results)
             {
-                Dictionary<string, string> fields = item.Fields.Where(f => f.Value.ToUpper()
+                var fields = item.Fields.Where(f => f.Value.ToUpper()
                     .Contains(query.ToUpper())
                     || f.Value.ToUpper().Split(new[] { ' ' })
                         .Any(val => query.Split(new[] { ' ' })
@@ -61,17 +63,16 @@ namespace Muffin.Infrastructure
                 var field = fields.Keys.Contains("mainbody", StringComparer.InvariantCultureIgnoreCase) ? 
                     fields.FirstOrDefault(f => f.Key.ToLower() == "mainbody") : fields.FirstOrDefault();
 
-                string searchHiglight = !String.IsNullOrEmpty(field.Key) ?
+                var searchHiglight = !String.IsNullOrEmpty(field.Key) ?
                     LuceneHighlightHelper.Instance.GetHighlight(field.Value, field.Key, ((LuceneSearcher)searcher).GetSearcher(), query) : String.Empty;
 
 				var content = FindById(item.Id); //returns dynamic null if this is not a content item (for example when this is a media item.
 
 				if (content != null)
 				{
-					var ret = new DynamicSearchResultItem(content, this);
-					ret.HighlightText = searchHiglight;
+					var ret = new DynamicSearchResultItem(content, this) {HighlightText = searchHiglight};
 
-					yield return ret;
+				    yield return ret;
 				}
             }
         }
@@ -80,7 +81,7 @@ namespace Muffin.Infrastructure
 		{
 			var result = new List<DynamicModel>();
 			var roots = Helper.ContentAtRoot() as IEnumerable<IPublishedContent>;
-            return FindAll(roots.Select(n => new DynamicModel(n, this)));
+		    return roots != null ? FindAll(roots.Select(n => new DynamicModel(n, this))) : null;
 		}
 
 
@@ -98,14 +99,17 @@ namespace Muffin.Infrastructure
 
 		public DynamicModel FindById(int id)
 		{
-			var content = Helper.TypedContent(id);
-			if (content != null)
-				return new DynamicModel(Helper.TypedContent(id), this);
-			else
-				return null;
+		    var content = Helper.TypedContent(id);
+		    return content != null ? new DynamicModel(content, this) : null;
 		}
 
-		public IContent FindContentById(int id)
+        public DynamicModel FindByUrl(string urlpath)
+        {
+            var content = CurrentContext.ContentCache.GetByRoute(urlpath);
+            return content != null ? new DynamicModel(content, this) : null;
+        }
+
+        public IContent FindContentById(int id)
 		{
 			return Service.GetById(id);
 		}
@@ -146,7 +150,7 @@ namespace Muffin.Infrastructure
         {
             if (property != null)
             {
-                Assembly assembly = typeof(IConverter).Assembly;
+                var assembly = typeof(IConverter).Assembly;
                 var types = assembly.GetTypes().Where(type => type != typeof(IConverter) && typeof(IConverter).IsAssignableFrom(type)).ToList();
 
                 foreach (var type in types)
@@ -158,13 +162,28 @@ namespace Muffin.Infrastructure
                     }
                 }
 
-                if (property.Value == null) //convert null to dynamicnull
-                    return DynamicNull.Null;
-                else //no converter found, return property value.
-                    return property.Value;
+                return property.Value ?? DynamicNull.Null;
             }
             else
                 return DynamicNull.Null;
         }
-	}
+
+
+        public object GetPropertyValue(Control gridControl)
+        {
+            var assembly = typeof(IConverter).Assembly;
+            var types = assembly.GetTypes().Where(type => type != typeof(IConverter) && typeof(IConverter).IsAssignableFrom(type)).ToList();
+
+            foreach (var type in types)
+            {
+                var instance = (IConverter)Activator.CreateInstance(type);
+                if (instance.IsConverter(gridControl.Editor.Alias))
+                {
+                    return instance.ConvertDataToSource(gridControl.SourceValue);
+                }
+            }
+
+            return gridControl.SourceValue;
+        }
+    }
 }

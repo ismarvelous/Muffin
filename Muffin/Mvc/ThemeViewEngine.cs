@@ -12,15 +12,14 @@ namespace Muffin.Mvc
 
         public ThemeViewEngine()
         {
-            var themefolder = string.Format("~/Themes/{0}/Views", Settings.CurrentTheme);
-
-            ViewLocationFormats = _viewLocations.ForEach(l => string.Concat(themefolder, l));
-            PartialViewLocationFormats = _umbracoPartialViewLocations.ForEach(l => string.Concat(themefolder, l));
+            ViewLocationFormats = _viewLocations.ForEach(l => string.Concat(Settings.CurrentThemeViewPath, l));
+            PartialViewLocationFormats = _umbracoPartialViewLocations.ForEach(l => string.Concat(Settings.CurrentThemeViewPath, l));
 
             AreaPartialViewLocationFormats = new string[] { };
             AreaViewLocationFormats = new string[] { };
         }
 
+        //2014-12-08 the themeview engine is underconstruction
         //TODO: find view / find partial view
 
     }

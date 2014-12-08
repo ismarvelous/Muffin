@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Muffin.Core;
@@ -54,7 +53,7 @@ namespace Muffin.Infrastructure.Converters
                     if (macro.Macro.ScriptPath.Contains(macroPartialsPath))
                     {
                         macro.Macro.ScriptPath = macro.Macro.ScriptPath.Replace(macroPartialsPath,
-                            string.Format("~/Themes/{0}/Views/{1}/", Settings.CurrentTheme, "MacroPartials"));
+                            string.Format("{0}/{1}/", Settings.CurrentThemeViewPath, "MacroPartials"));
                     }
                     #endregion
 

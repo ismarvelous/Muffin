@@ -1,11 +1,16 @@
 ﻿using System;
 using Muffin.Core.Models;
+using umbraco;
 using Umbraco.Core;
 using Umbraco.Core.Models;
 using System.Web.Mvc;
 using System.Reflection; //for service locator.
 using Umbraco.Web;
 using System.Collections.Generic;
+using System.Dynamic;
+using System.Web;
+using System.Linq;
+
 
 namespace Muffin.Core
 {
@@ -21,7 +26,7 @@ namespace Muffin.Core
 		public static T As<T>(this IPublishedContent content)
 		{
 		    if (content is T) //besure you don't convert to the same type!
-		        throw new ArgumentException(String.Format("You try to convert a type <{0}> into it's own typed", typeof(T).FullName));
+		        throw new ArgumentException(String.Format("Muffin.Core.Mapper argument exception; Now mapping needed! You try to convert a type <{0}> into it's own type", typeof(T).FullName));
 
             
             if (typeof (T).Inherits<DynamicModel>())
@@ -35,7 +40,7 @@ namespace Muffin.Core
             {
                 #region General mapping construction
 
-                //if you don't use the Macaw.Umbraco.Foundation, you only need this region, to create a simple IPublishContent -> ViewModel mapper.
+                //if you don't use the Muffin, you only need this region, to create a simple IPublishContent -> ViewModel mapper.
 
                 var obj = Activator.CreateInstance<T>();
 
@@ -68,6 +73,80 @@ namespace Muffin.Core
         public static IEnumerable<T> As<T>(this IEnumerable<IPublishedContent> items)
         {
             return items.ForEach(i => i.As<T>());
+        }
+
+        internal static dynamic ToDynamic(IPublishedContent content, string[] aliases)
+        {
+            IDictionary<string, object> expando = new ExpandoObject();
+
+            if (aliases != null)
+            {
+                foreach (var prop in content.Properties.Where(p => aliases.Contains(p.PropertyTypeAlias)))
+                {
+                    if (prop.Value is HtmlString || prop.Value is DynamicMediaModel) //htmlstring & DynamicMediaModel can not be serialized with Newtonsoft json..
+                        expando.Add(prop.PropertyTypeAlias, prop.Value.ToString());
+                    else
+                        expando.Add(prop.PropertyTypeAlias, prop.Value);
+                }
+            }
+            else
+            {
+                foreach (var prop in content.Properties)
+                {
+                    if (prop.Value is HtmlString || prop.Value is DynamicMediaModel) //htmlstring & DynamicMediaModel can not be serialized with Newtonsoft json..
+                        expando.Add(prop.PropertyTypeAlias, prop.Value.ToString());
+                    else
+                        expando.Add(prop.PropertyTypeAlias, prop.Value);
+                }
+            }
+
+            return expando as ExpandoObject;
+        }
+
+        internal static IEnumerable<dynamic> ToDynamic(IEnumerable<IPublishedContent> collection, string[] aliases)
+        {
+            return collection.Select(item => ToDynamic(item, aliases));
+        }
+
+        public static MvcHtmlString AsJson(object obj)
+        {
+            var content = obj as IPublishedContent;
+            if (content != null)
+            {
+                return content.AsJson();
+            }
+
+            var contents = obj as IEnumerable<IPublishedContent>;
+            if (contents != null)
+            {
+                return contents.AsJson();
+            }
+
+            //default
+            var ret = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
+            return MvcHtmlString.Create(ret);
+        }
+
+        public static MvcHtmlString AsJson(this IPublishedContent content, string[] properties = null, bool includeHiddenItems = true)
+        {
+            var ret = string.Empty;
+            if (!(bool)content.GetProperty(Constants.Conventions.Content.NaviHide).Value || includeHiddenItems)
+            {
+                ret = Newtonsoft.Json.JsonConvert.SerializeObject(ToDynamic(content, properties));
+            }
+
+            return MvcHtmlString.Create(ret);
+        }
+
+        public static MvcHtmlString AsJson(this IEnumerable<IPublishedContent> collection, string[] properties = null, bool includeHiddenItems = true)
+        {
+            var ret = "undefined";
+            if (!includeHiddenItems) //not using IsVisible() here because it's not easy to mock for testing...
+                ret = Newtonsoft.Json.JsonConvert.SerializeObject(ToDynamic(collection.Where(p => !(bool)p.GetProperty(Constants.Conventions.Content.NaviHide).Value), properties));
+            else
+                ret = Newtonsoft.Json.JsonConvert.SerializeObject(ToDynamic(collection, properties));
+
+            return MvcHtmlString.Create(ret);
         }
     }
 }

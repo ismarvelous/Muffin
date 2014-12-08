@@ -1,10 +1,6 @@
 ﻿using System;
 using Muffin.Core.Models;
-using Umbraco.Core;
-using Umbraco.Core.Dynamics;
 using Umbraco.Core.Models.PublishedContent;
-using Umbraco.Web.PropertyEditors;
-using Umbraco.Web;
 
 namespace Muffin.Infrastructure.Converters
 {
@@ -20,7 +16,8 @@ namespace Muffin.Infrastructure.Converters
 
         public bool IsConverter(string editoralias)
         {
-            return "Umbraco.ImageCropper".Equals(editoralias);
+            return "Umbraco.ImageCropper".Equals(editoralias) 
+                || "media".Equals(editoralias); //support for grid media aswell.
         }
 
         public override object ConvertDataToSource(PublishedPropertyType propertyType, object source, bool preview)
@@ -32,9 +29,9 @@ namespace Muffin.Infrastructure.Converters
         {
             try
             {
-                return new CroppedImageModel(source.ToString());
+                return DynamicCroppedImageModel.Create(source.ToString());
             }
-            catch
+            catch(Exception ex)
             {
                 //todo: log exception...
                 return DynamicNullMedia.Null;
