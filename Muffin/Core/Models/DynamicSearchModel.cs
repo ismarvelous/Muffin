@@ -15,9 +15,7 @@ namespace Muffin.Core.Models
             ISiteRepository repository,
             string query)
 			: base(source, repository, 
-				repository.Find(string.IsNullOrWhiteSpace(query) ? "<NOT>" : query)
-				.Where(f => f.IsVisible())
-			)
+				repository.Find(string.IsNullOrWhiteSpace(query) ? "<NOT>" : query))
 
         {
             Query = string.IsNullOrWhiteSpace(query) ? "<NOT>" : query;

@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Web;
-using Newtonsoft.Json.Linq;
-using Umbraco.Core.Configuration.UmbracoSettings;
-using Umbraco.Core.Dynamics;
-using Newtonsoft.Json;
 using System.Web.Mvc;
-using Umbraco.Core.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Umbraco.Core.Dynamics;
 
 namespace Muffin.Core.Models
 {
     /// <summary>
-    /// The dynamic grid proxy is like the normal grid model, but return controls using the available converters.
+    /// Typed GridModel is based on the normal grid model, but the controls are using the IConverter Interface
+    /// The Dynamic behaviour is used to allow compatibility with the dynamic json objects used by Umbraco.
     /// </summary>
     public class DynamicGridModel : DynamicObject
     {
@@ -36,7 +35,7 @@ namespace Muffin.Core.Models
 
         public static DynamicGridModel Create(string json) //allow to have a parameterless constructor, to take advantage of the JsonConvert('ers)
         {
-            var ret = Newtonsoft.Json.JsonConvert.DeserializeObject<DynamicGridModel>(json);
+            var ret = JsonConvert.DeserializeObject<DynamicGridModel>(json);
             ret._json = json; //for performance reasons, set what we already have
             
             return ret;
@@ -122,27 +121,6 @@ namespace Muffin.Core.Models
 
         [JsonProperty("editor")]
         public virtual Editor Editor { get; set; }
-
-        //public override bool TryGetMember(GetMemberBinder binder, out object result) //support default umbraco way of working. (lower case, based on json source)
-        //{
-        //    if (PropertyValue is DynamicObject)
-        //    {
-
-        //    }
-
-        //    //else
-
-        //    JObject obj = Value;
-        //    JToken token;
-        //    if (obj.TryGetValue(binder.Name, out token)) //todo: trygetvalue start with Uppercase..
-        //        result = token;
-        //    else
-        //    {
-        //        result = DynamicNull.Null;
-        //    }
-
-        //    return true;
-        //}
 
         public string Alias
         {

@@ -25,6 +25,7 @@ It tries to focus SOLID principles as much as possible to allow better testabili
 
 The whole foundation is constantly under development. But currently we are especially focused on:
 
+- Support for: IPublishedContentModelFactory
 - Theme engine
 - Azure ready examine: https://github.com/Shazwazza/Examine/wiki/Examine-with-Azure-Websites
 

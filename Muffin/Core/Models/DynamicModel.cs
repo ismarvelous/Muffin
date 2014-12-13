@@ -15,6 +15,7 @@ namespace Muffin.Core.Models
 	/// Instead of using DynamicPublishedContent directly.
     /// 
     /// DynamicModel is the Core of Muffin. It's an hybride proxy object combining typed (for the most used properties) and dynamic for all things which are dynamically defined in Umbraco.
+    /// If you like to make your typed object more specific, implement this class as a base class and user the .As<T> mappers to create a typed representation of you documenttype.
 	/// </summary>
 	public class DynamicModel : DynamicObject, IPublishedContent, INullModel
 	{

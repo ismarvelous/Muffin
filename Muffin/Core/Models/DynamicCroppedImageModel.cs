@@ -4,10 +4,13 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Umbraco.Core.Dynamics;
 using Umbraco.Web;
-using Umbraco.Web.Models;
 
 namespace Muffin.Core.Models
 {
+    /// <summary>
+    /// Typed CroppedImage model
+    /// The Dynamic behaviour is used to allow compatibility with the dynamic json objects used by Umbraco.
+    /// </summary>
     public class DynamicCroppedImageModel : DynamicObject, ICropImageModel, INullModel
     {
         private string _json; //for performance reasons, do not constantly serialize and deserialize
