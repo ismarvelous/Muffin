@@ -3,10 +3,12 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using DevTrends.MvcDonutCaching;
 using Muffin.Controllers;
+using Muffin.Core.Models;
 using Muffin.Mvc;
 using Umbraco.Core;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models;
+using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Core.Services;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.Routing;
@@ -74,6 +76,11 @@ namespace Muffin.Infrastructure
             DefaultRenderMvcControllerResolver.Current.SetDefaultControllerType(typeof(DynamicBaseController));
             //theme engine as default view engine!
             ViewEngines.Engines.Insert(0, new ThemeViewEngine());
+
+            var types = PluginManager.Current.ResolveTypes<ModelBase>();
+            var factory = new PublishedContentModelFactory(types);
+            PublishedContentModelFactoryResolver.Current.SetFactory(factory);
+
             #endregion
 
             IDependencyResolver resolver;

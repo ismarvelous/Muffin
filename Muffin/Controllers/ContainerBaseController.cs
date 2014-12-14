@@ -32,13 +32,13 @@ namespace Muffin.Controllers
 			int p=1, //read querystring parameters without using this.Request.
             int s=10)
 		{
-			var resultModel = new DynamicCollectionModel(model.Content, Repository, model.Content.Children);
+			var resultModel = new DynamicCollectionModel(model.Content.As<ModelBase>(), model.Content.Children);
 
 			resultModel.PagedResults = () => resultModel.Container //or model.Content.Children which is the same in this case.
 			    .Skip(s * (p - 1))
 			    .Take(s)
-			    .Select(n => new DynamicModel(n, Repository));
-
+                .Select(n => new DynamicModelBaseWrapper(n)); //todo: bad code!!!! this conversion is here because we need to use it as a dynamic
+             
 			resultModel.CurrentPage = p;
 			resultModel.PageSize = s;
 

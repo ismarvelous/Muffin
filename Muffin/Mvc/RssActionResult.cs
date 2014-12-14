@@ -8,9 +8,9 @@ namespace Muffin.Mvc
 {
     public class RssActionResult : ActionResult
     {
-        protected DynamicModel Content;
+        protected ModelBase Content;
 
-        public RssActionResult(DynamicModel content)
+        public RssActionResult(ModelBase content)
         {
             Content = content;
             //this.title = title;

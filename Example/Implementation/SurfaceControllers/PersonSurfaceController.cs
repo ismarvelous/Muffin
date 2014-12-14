@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Muffin.Core.Models;
 using Umbraco.Web.Mvc;
 
 namespace Example.Implementation.SurfaceControllers
@@ -23,7 +24,7 @@ namespace Example.Implementation.SurfaceControllers
         public ActionResult GetPerson(int contentId)
         {
             //call your business services or call your repositories..
-            dynamic content = Repository.FindById(contentId);
+            dynamic content = Repository.FindById(contentId).As<DynamicModelBaseWrapper>();
 
             //map the documenttype to a typed object..
             return PartialView("Person", new ViewModels.Person

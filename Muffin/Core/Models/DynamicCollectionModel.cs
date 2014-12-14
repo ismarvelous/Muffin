@@ -8,31 +8,29 @@ namespace Muffin.Core.Models
 	/// <summary>
 	/// "View"model used by the container controller
 	/// </summary>
-	public class DynamicCollectionModel : DynamicModel, IPager, IEnumerable<DynamicModel>
+    [Obsolete("We need to implement a generic class for this!!")] //todo: bad code!!!!
+    public class DynamicCollectionModel : DynamicModelBaseWrapper, IPager, IEnumerable<IModel<IPublishedContent>>
 	{
-		public IEnumerable<DynamicModel> Container { get; private set; }
+		public IEnumerable<ModelBase> Container { get; private set; }
 
-		public DynamicCollectionModel(IPublishedContent source, ISiteRepository repository, IPublishedContent containerParent)
-			: base(source, repository)
+		public DynamicCollectionModel(ModelBase source, IPublishedContent containerParent)
+			: base(source)
 		{
-			Container = containerParent.Children.Select(n => new DynamicModel(n, Repository));
+			Container = containerParent.Children.Select(n => new ModelBase(n)); //todo: bad code!!!!, don't use Modelbase hardcoded here..
 		}
 
 	    /// <summary>
 	    /// Dynamic Model Collection used for list view pages..
 	    /// </summary>
-	    /// <param name="source">Published content showing all data.</param>
-	    /// <param name="repository"></param>
-	    /// <param name="container">Container containing all list items</param>
-	    public DynamicCollectionModel(IPublishedContent source, ISiteRepository repository, IEnumerable<IPublishedContent> container)
-			:base(source, repository)
+	    public DynamicCollectionModel(ModelBase source, IEnumerable<IPublishedContent> container)
+			:base(source)
 		{
-			Container = container.Select(n => new DynamicModel(n, Repository));
+            Container = container.Select(n => new ModelBase(n)); //todo: bad code!!!!, don't use Modelbase hardcoded here..
 		}
 
-		public Func<IEnumerable<DynamicModel>> PagedResults { get; set; }
+		public Func<IEnumerable<IModel<IPublishedContent>>> PagedResults { get; set; }
 
-		public virtual IEnumerable<DynamicModel> Results
+        public virtual IEnumerable<IModel<IPublishedContent>> Results
 		{
 			get
 			{
@@ -40,7 +38,7 @@ namespace Muffin.Core.Models
 			}
 		}
 
-		public int? _totalResults;
+	    private int? _totalResults;
 
 		public int TotalResults
 		{
@@ -53,7 +51,7 @@ namespace Muffin.Core.Models
 			}
 		}
 
-		public IEnumerator<DynamicModel> GetEnumerator()
+        public IEnumerator<IModel<IPublishedContent>> GetEnumerator()
 		{
 			return Results.GetEnumerator();
 		}

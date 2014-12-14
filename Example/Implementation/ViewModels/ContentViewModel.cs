@@ -6,33 +6,47 @@ using System.Linq;
 using System.Web;
 using Umbraco.Core.Models;
 using umbraco.dialogs;
+using Umbraco.Web;
 
 namespace Example.Implementation.ViewModels
 {
-    public class ContentViewModel : DynamicModel
+    public class Content : ModelBase
     {
-        public ContentViewModel(IPublishedContent source, ISiteRepository repository)
-            : base(source, repository)
+        public Content(IPublishedContent content)
+            : base(content)
         {
-
+            
         }
 
-        /// <summary>
-        /// As used on the homepage highligted news items list.
-        /// </summary>
-        public virtual string MiniIntro
-        {
-            get
-            {
-                string intro = CurrentContent.Intro;
-                if (intro.Length < 110)
-                    return intro;
-                else
-                    return string.Format("{0}..", intro.Substring(0, 110));
-            }
+        public string Title {
+            get { return this.GetPropertyValue<string>("titel"); }
         }
-
     }
+
+    //public class ContentViewModel : DynamicModel
+    //{
+    //    public ContentViewModel(IPublishedContent source, ISiteRepository repository)
+    //        : base(source, repository)
+    //    {
+
+    //    }
+
+    //    /// <summary>
+    //    /// As used on the homepage highligted news items list.
+    //    /// </summary>
+    //    public virtual string MiniIntro
+    //    {
+    //        get
+    //        {
+    //            string intro = CurrentContent.Intro;
+    //            if (intro.Length < 110)
+    //                return intro;
+    //            else
+    //                return string.Format("{0}..", intro.Substring(0, 110));
+    //        }
+    //    }
+
+    //}
 
     //public class ContentViewModel
     //{

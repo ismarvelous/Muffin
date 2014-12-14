@@ -31,7 +31,13 @@ namespace Muffin.Controllers
         [DonutOutputCache(Duration = 86400, VaryByCustom = "url", Options = OutputCacheOptions.NoCacheLookupForPosts)]
         public virtual ActionResult Index(RenderModel model) //Template name, default is Index
         {
-            return View(model.Content.As<DynamicModel>());
+            if (model.Content is ModelBase)
+            {
+                return View(model.Content);
+            }
+
+            //if there is not a typed version found, wrap the model in a dynamic class..
+            return View(new DynamicModelBaseWrapper(new ModelBase(model.Content)));
         }
 
         //http://our.umbraco.org/documentation/Reference/Mvc/custom-controllers

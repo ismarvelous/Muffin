@@ -25,7 +25,7 @@ namespace Muffin.Test
 			//1. Arrange
 			var mSite = new Mock<ISiteRepository>();
 			mSite.Setup(s => s.Find(It.IsAny<string>()))
-				.Returns(new List<DynamicModel>()); //mocked object
+				.Returns(new List<ModelBase>()); //mocked object
 
 			var mController = new Mock<SearchBaseController>(mSite.Object) { CallBase = true }; //abstract class callBase
 			var renderModel = new RenderModel(Arrange.Content().Object, CultureInfo.InvariantCulture);
@@ -48,7 +48,7 @@ namespace Muffin.Test
             //1. Arrange
 			var mSite = new Mock<ISiteRepository>();
 			mSite.Setup(s => s.Find(It.IsAny<string>()))
-				.Returns(new List<DynamicModel>());
+				.Returns(new List<ModelBase>());
 
 			var mController = new Mock<SearchBaseController>(mSite.Object) { CallBase = true }; //abstract class callBase
 			var renderModel = new RenderModel(Arrange.Content().Object, CultureInfo.InvariantCulture);

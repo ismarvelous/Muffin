@@ -29,7 +29,7 @@ namespace Muffin.Infrastructure.Converters
         {
             try
             {
-                return DynamicCroppedImageModel.Create(source.ToString());
+                return CroppedImageModel.Create(source.ToString());
             }
             catch(Exception ex)
             {

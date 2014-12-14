@@ -11,11 +11,10 @@ namespace Muffin.Core.Models
         public string Query { get; private set; }
 
         public DynamicSearchModel(
-            IPublishedContent source,
-            ISiteRepository repository,
+            ModelBase source,
             string query)
-			: base(source, repository, 
-				repository.Find(string.IsNullOrWhiteSpace(query) ? "<NOT>" : query))
+			: base(source, 
+				source.Repository.Find(string.IsNullOrWhiteSpace(query) ? "<NOT>" : query))
 
         {
             Query = string.IsNullOrWhiteSpace(query) ? "<NOT>" : query;

@@ -41,12 +41,13 @@ namespace Muffin.Controllers
             int s=10,
             string q="") //for search template
 		{
-            var resultModel = new DynamicSearchModel(model.Content,
-                Repository,
+            var resultModel = new DynamicSearchModel(model.Content.As<ModelBase>(),
                 q);//this.Request.QueryString["q"]);
 
             //late binding for pagedresults
-            resultModel.PagedResults = () => resultModel.Container.Skip(s * (p - 1)).Take(s);
+            resultModel.PagedResults = () => resultModel.Container.Skip(s * (p - 1))
+                .Take(s)
+                .Select(n => new DynamicModelBaseWrapper(n)); //todo: bad code!!!! this conversion is here because we need to use it as a dynamic
 
 			resultModel.CurrentPage = p;
 			resultModel.PageSize = s;

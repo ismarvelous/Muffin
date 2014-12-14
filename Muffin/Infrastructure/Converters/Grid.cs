@@ -26,7 +26,7 @@ namespace Muffin.Infrastructure.Converters
         {
             try
             {
-                var ret = DynamicGridModel.Create(source.ToString());
+                var ret = GridModel.Create(source.ToString());
                 return ret;
             }
             catch (Exception ex)

@@ -1,4 +1,6 @@
 ﻿using System;
+using Muffin.Core;
+using Muffin.Core.Models;
 using Umbraco.Core;
 using Umbraco.Core.Dynamics;
 using Umbraco.Core.Models.PublishedContent;
@@ -30,7 +32,7 @@ namespace Muffin.Infrastructure.Converters
                 var content = Repository.FindById(Convert.ToInt32(source));
 
                 if (content != null)
-                    return content;
+                    return content.As<DynamicModelBaseWrapper>(); //todo: We like to have typed versions of the content here!!
             }
 
             return DynamicNull.Null;

@@ -23,51 +23,57 @@ namespace Muffin.Core
 		/// <typeparam name="T"></typeparam>
 		/// <param name="content"></param>
 		/// <returns></returns>
-		public static T As<T>(this IPublishedContent content)
+		public static T As<T>(this IPublishedContent content) //todo: try to use Ditto instead of this custom implementation!
 		{
 		    if (content is T) //besure you don't convert to the same type!
-		        throw new ArgumentException(String.Format("Muffin.Core.Mapper argument exception; Now mapping needed! You try to convert a type <{0}> into it's own type", typeof(T).FullName));
-
-            
-            if (typeof (T).Inherits<DynamicModel>())
 		    {
-		        var dyn = content as DynamicModel;
-		        var repo = dyn != null ? dyn.Repository : DependencyResolver.Current.GetService<ISiteRepository>();
-
-		        return (T) Activator.CreateInstance(typeof (T), content, repo);
+		        return (T)content;
+		        //todo: throw new ArgumentException(
+		        //    String.Format(
+		        //        "Muffin.Core.Mapper argument exception; Now mapping needed! You try to convert a type <{0}> into it's own type",
+		        //        typeof (T).FullName));
 		    }
-		    else
+
+		    T obj;
+		    if (typeof (T).Inherits<DynamicModelBaseWrapper>())
+		    {
+		        var source = content as ModelBase ?? new ModelBase(content);
+		        return (T) Activator.CreateInstance(typeof (T), source);
+		    }
+
+            //typed!
+            if (typeof (T).Inherits<ModelBase>())
             {
-                #region General mapping construction
-
-                //if you don't use the Muffin, you only need this region, to create a simple IPublishContent -> ViewModel mapper.
-
-                var obj = Activator.CreateInstance<T>();
-
-                foreach (var prop in typeof(T).GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty))
-		        {
-		            if (content.HasProperty(prop.Name))
-		            {
-		                prop.SetValue(obj, content.GetPropertyValue(prop.Name), null);
-		            }
-                    else if (content.HasProperty(char.ToLower(prop.Name[0]) + prop.Name.Substring(1))) //lowercase starting character for alias
-                    {
-                        prop.SetValue(obj, content.GetPropertyValue(char.ToLower(prop.Name[0]) + prop.Name.Substring(1)), null);
-                    }
-                    else
-                    {
-                        var sourceProp = content.GetType().GetProperty(prop.Name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.GetProperty);
-                        if (sourceProp != null)
-                        {
-                            prop.SetValue(obj, sourceProp.GetValue(content), null);
-                        }
-                    }
-		        }
-
-		        return obj;
-
-                #endregion
+                obj = (T) Activator.CreateInstance(typeof (T), content);
             }
+            else
+            {
+                //if you don't use the Muffin, you only need this region, to create a simple IPublishContent -> ViewModel mapper.
+                obj = Activator.CreateInstance<T>();
+            }
+
+		    foreach (var prop in typeof(T).GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty))
+		    {
+		        if (content.HasProperty(prop.Name))
+		        {
+		            prop.SetValue(obj, content.GetPropertyValue(prop.Name), null);
+		        }
+                else if (content.HasProperty(char.ToLower(prop.Name[0]) + prop.Name.Substring(1))) //lowercase starting character for alias
+                {
+                    prop.SetValue(obj, content.GetPropertyValue(char.ToLower(prop.Name[0]) + prop.Name.Substring(1)), null);
+                }
+                else
+                {
+                    var sourceProp = content.GetType().GetProperty(prop.Name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.GetProperty);
+                    if (sourceProp != null && sourceProp.CanWrite && sourceProp.GetSetMethod(true).IsPublic)
+                    {
+                        prop.SetValue(obj, sourceProp.GetValue(content), null);
+                    }
+                }
+		    }
+
+		    return obj;
+            
 		}
 
         public static IEnumerable<T> As<T>(this IEnumerable<IPublishedContent> items)
@@ -83,7 +89,7 @@ namespace Muffin.Core
             {
                 foreach (var prop in content.Properties.Where(p => aliases.Contains(p.PropertyTypeAlias)))
                 {
-                    if (prop.Value is HtmlString || prop.Value is DynamicMediaModel) //htmlstring & DynamicMediaModel can not be serialized with Newtonsoft json..
+                    if (prop.Value is HtmlString || prop.Value is MediaModel) //htmlstring & DynamicMediaModel can not be serialized with Newtonsoft json..
                         expando.Add(prop.PropertyTypeAlias, prop.Value.ToString());
                     else
                         expando.Add(prop.PropertyTypeAlias, prop.Value);
@@ -93,7 +99,7 @@ namespace Muffin.Core
             {
                 foreach (var prop in content.Properties)
                 {
-                    if (prop.Value is HtmlString || prop.Value is DynamicMediaModel) //htmlstring & DynamicMediaModel can not be serialized with Newtonsoft json..
+                    if (prop.Value is HtmlString || prop.Value is MediaModel) //htmlstring & DynamicMediaModel can not be serialized with Newtonsoft json..
                         expando.Add(prop.PropertyTypeAlias, prop.Value.ToString());
                     else
                         expando.Add(prop.PropertyTypeAlias, prop.Value);

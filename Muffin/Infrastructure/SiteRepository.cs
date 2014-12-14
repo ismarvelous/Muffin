@@ -44,7 +44,7 @@ namespace Muffin.Infrastructure
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        public IEnumerable<DynamicModel> Find(string query)
+        public IEnumerable<ModelBase> Find(string query)
         {
 			//todo: check for PublishedContentExtensions Search and SearchChildren extensions..
             var searcher = ExamineManager.Instance.SearchProviderCollection[SearchProvidername];
@@ -70,43 +70,42 @@ namespace Muffin.Infrastructure
 
 				if (content != null)
 				{
-					var ret = new DynamicSearchResultItem(content, this) {HighlightText = searchHiglight};
+					var ret = new SearchResultItem(content) {HighlightText = searchHiglight};
 
 				    yield return ret;
 				}
             }
         }
 
-		public IEnumerable<DynamicModel> FindAll()
+		public IEnumerable<ModelBase> FindAll()
 		{
-			var result = new List<DynamicModel>();
 			var roots = Helper.ContentAtRoot() as IEnumerable<IPublishedContent>;
-		    return roots != null ? FindAll(roots.Select(n => new DynamicModel(n, this))) : null;
+		    return roots != null ? FindAll(roots.Select(n => new ModelBase(n))) : null;
 		}
 
 
-        public IEnumerable<DynamicModel> FindAll(IEnumerable<DynamicModel> rootNodes)
+        public IEnumerable<ModelBase> FindAll(IEnumerable<ModelBase> rootNodes)
 		{
-            var result = new List<DynamicModel>();
+            var result = new List<ModelBase>();
             foreach (var node in rootNodes)
             {
                 result.Add(node);
-                result.AddRange(node.Children().Select(n => new DynamicModel(n, this)));
+                result.AddRange(node.Children().Select(n => new ModelBase(n)));
             }
 
             return result;
 		}
 
-		public DynamicModel FindById(int id)
+		public ModelBase FindById(int id)
 		{
 		    var content = Helper.TypedContent(id);
-		    return content != null ? new DynamicModel(content, this) : null;
+		    return content != null ? new ModelBase(content) : null;
 		}
 
-        public DynamicModel FindByUrl(string urlpath)
+        public ModelBase FindByUrl(string urlpath)
         {
             var content = CurrentContext.ContentCache.GetByRoute(urlpath);
-            return content != null ? new DynamicModel(content, this) : null;
+            return content != null ? new ModelBase(content) : null;
         }
 
         public IContent FindContentById(int id)
@@ -114,10 +113,10 @@ namespace Muffin.Infrastructure
 			return Service.GetById(id);
 		}
 
-        public DynamicMediaModel FindMediaById(int id)
+        public MediaModel FindMediaById(int id)
         {
             var media = Helper.TypedMedia(id);
-            return media != null ? new DynamicMediaModel(media, this) : null;
+            return media != null ? new MediaModel(media) : null;
         }
 
         public string Translate(string key)

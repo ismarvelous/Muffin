@@ -26,7 +26,7 @@ namespace Muffin.Mvc
                 // ReSharper disable once ConvertIfStatementToNullCoalescingExpression : For readability
 				if (_currentPage == null)
 				{
-					_currentPage = (base.CurrentPage as IPublishedContent).As<DynamicModel>();
+					_currentPage = (base.CurrentPage as IPublishedContent).As<DynamicModelBaseWrapper>();
 				}
 
 				return _currentPage;

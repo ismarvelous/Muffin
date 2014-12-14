@@ -10,13 +10,13 @@ namespace Muffin.Core
 		string Translate(string key);
 
         DynamicMacroModel FindMacroByAlias(string alias, int pageId, IDictionary<string, object> values);
-		DynamicMediaModel FindMediaById(int id);
-        DynamicModel FindById(int id);
-        DynamicModel FindByUrl(string urlpath);
+		MediaModel FindMediaById(int id);
+        ModelBase FindById(int id);
+        ModelBase FindByUrl(string urlpath);
 		IContent FindContentById(int id);
 
-        IEnumerable<DynamicModel> Find(string query);
-		IEnumerable<DynamicModel> FindAll();
+        IEnumerable<ModelBase> Find(string query);
+		IEnumerable<ModelBase> FindAll();
 
 		/// <summary>
 		/// Returns a friendly url with domainname
