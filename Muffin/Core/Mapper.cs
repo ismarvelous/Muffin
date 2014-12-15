@@ -16,70 +16,70 @@ namespace Muffin.Core
 {
     public static class Mapper
     {
-		/// <summary>
-		/// Turn your IPublishedContent model into your own typed version.
-		/// Supported are models with a parameterless constructor and DynamicModel ViewModels.
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="content"></param>
-		/// <returns></returns>
-		public static T As<T>(this IPublishedContent content) //todo: try to use Ditto instead of this custom implementation!
-		{
-		    if (content is T) //besure you don't convert to the same type!
-		    {
-		        return (T)content;
-		        //todo: throw new ArgumentException(
-		        //    String.Format(
-		        //        "Muffin.Core.Mapper argument exception; Now mapping needed! You try to convert a type <{0}> into it's own type",
-		        //        typeof (T).FullName));
-		    }
+        ///// <summary>
+        ///// Turn your IPublishedContent model into your own typed version.
+        ///// Supported are models with a parameterless constructor and DynamicModel ViewModels.
+        ///// </summary>
+        ///// <typeparam name="T"></typeparam>
+        ///// <param name="content"></param>
+        ///// <returns></returns>
+        //public static T As<T>(this IPublishedContent content) //todo: try to use Ditto instead of this custom implementation!
+        //{
+        //    if (content is T) //besure you don't convert to the same type!
+        //    {
+        //        return (T)content;
+        //        //todo: throw new ArgumentException(
+        //        //    String.Format(
+        //        //        "Muffin.Core.Mapper argument exception; Now mapping needed! You try to convert a type <{0}> into it's own type",
+        //        //        typeof (T).FullName));
+        //    }
 
-		    T obj;
-		    if (typeof (T).Inherits<DynamicModelBaseWrapper>())
-		    {
-		        var source = content as ModelBase ?? new ModelBase(content);
-		        return (T) Activator.CreateInstance(typeof (T), source);
-		    }
+        //    T obj;
+        //    if (typeof (T).Inherits<DynamicModelBaseWrapper>())
+        //    {
+        //        var source = content as ModelBase ?? new ModelBase(content);
+        //        return (T) Activator.CreateInstance(typeof (T), source);
+        //    }
 
-            //typed!
-            if (typeof (T).Inherits<ModelBase>())
-            {
-                obj = (T) Activator.CreateInstance(typeof (T), content);
-            }
-            else
-            {
-                //if you don't use the Muffin, you only need this region, to create a simple IPublishContent -> ViewModel mapper.
-                obj = Activator.CreateInstance<T>();
-            }
+        //    //typed!
+        //    if (typeof (T).Inherits<ModelBase>())
+        //    {
+        //        obj = (T) Activator.CreateInstance(typeof (T), content);
+        //    }
+        //    else
+        //    {
+        //        //if you don't use the Muffin, you only need this region, to create a simple IPublishContent -> ViewModel mapper.
+        //        obj = Activator.CreateInstance<T>();
+        //    }
 
-		    foreach (var prop in typeof(T).GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty))
-		    {
-		        if (content.HasProperty(prop.Name))
-		        {
-		            prop.SetValue(obj, content.GetPropertyValue(prop.Name), null);
-		        }
-                else if (content.HasProperty(char.ToLower(prop.Name[0]) + prop.Name.Substring(1))) //lowercase starting character for alias
-                {
-                    prop.SetValue(obj, content.GetPropertyValue(char.ToLower(prop.Name[0]) + prop.Name.Substring(1)), null);
-                }
-                else
-                {
-                    var sourceProp = content.GetType().GetProperty(prop.Name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.GetProperty);
-                    if (sourceProp != null && sourceProp.CanWrite && sourceProp.GetSetMethod(true).IsPublic)
-                    {
-                        prop.SetValue(obj, sourceProp.GetValue(content), null);
-                    }
-                }
-		    }
+        //    foreach (var prop in typeof(T).GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty))
+        //    {
+        //        if (content.HasProperty(prop.Name))
+        //        {
+        //            prop.SetValue(obj, content.GetPropertyValue(prop.Name), null);
+        //        }
+        //        else if (content.HasProperty(char.ToLower(prop.Name[0]) + prop.Name.Substring(1))) //lowercase starting character for alias
+        //        {
+        //            prop.SetValue(obj, content.GetPropertyValue(char.ToLower(prop.Name[0]) + prop.Name.Substring(1)), null);
+        //        }
+        //        else
+        //        {
+        //            var sourceProp = content.GetType().GetProperty(prop.Name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.GetProperty);
+        //            if (sourceProp != null && sourceProp.CanWrite && sourceProp.GetSetMethod(true).IsPublic)
+        //            {
+        //                prop.SetValue(obj, sourceProp.GetValue(content), null);
+        //            }
+        //        }
+        //    }
 
-		    return obj;
+        //    return obj;
             
-		}
+        //}
 
-        public static IEnumerable<T> As<T>(this IEnumerable<IPublishedContent> items)
-        {
-            return items.ForEach(i => i.As<T>());
-        }
+        //public static IEnumerable<T> As<T>(this IEnumerable<IPublishedContent> items)
+        //{
+        //    return items.ForEach(i => i.As<T>());
+        //}
 
         internal static dynamic ToDynamic(IPublishedContent content, string[] aliases)
         {

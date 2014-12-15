@@ -5,6 +5,8 @@ using Umbraco.Core;
 using Umbraco.Web.Macros;
 using Umbraco.Core.Models;
 using System.Web.Mvc;
+using Our.Umbraco.Ditto;
+using Umbraco.Web;
 
 namespace Muffin.Mvc
 {
@@ -26,7 +28,7 @@ namespace Muffin.Mvc
                 // ReSharper disable once ConvertIfStatementToNullCoalescingExpression : For readability
 				if (_currentPage == null)
 				{
-					_currentPage = (base.CurrentPage as IPublishedContent).As<DynamicModelBaseWrapper>();
+				    _currentPage = (base.CurrentPage as IPublishedContent).As<ModelBase>().AsDynamic();
 				}
 
 				return _currentPage;

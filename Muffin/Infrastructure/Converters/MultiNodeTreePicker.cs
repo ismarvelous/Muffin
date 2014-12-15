@@ -34,7 +34,7 @@ namespace Muffin.Infrastructure.Converters
         /// <returns></returns>
         public override object ConvertDataToSource(PublishedPropertyType propertyType, object source, bool preview)
         {
-            var ret = new List<ModelBase>(); //return value
+            var ret = new List<IModel>(); //return value
 
             if(source != null && !string.IsNullOrEmpty(source.ToString()))
             {

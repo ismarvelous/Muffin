@@ -169,6 +169,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Our.Umbraco.Ditto">
+      <HintPath>..\packages\Our.Umbraco.Ditto.0.4.1\lib\net45\Our.Umbraco.Ditto.dll</HintPath>
+    </Reference>
     <Reference Include="SQLCE4Umbraco, Version=1.0.5451.27170, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\UmbracoCms.Core.7.2.0\lib\SQLCE4Umbraco.dll</HintPath>
@@ -278,9 +281,11 @@
     <Compile Include="Caching\DiskOutputCacheProvider.cs" />
     <Compile Include="Controllers\ContainerBaseController.cs" />
     <Compile Include="Controllers\SearchBaseController.cs" />
+    <Compile Include="Core\ModelExtensions.cs" />
     <Compile Include="Core\Models\CroppedImageModel.cs" />
     <Compile Include="Core\Models\DynamicModelBaseWrapper.cs" />
     <Compile Include="Core\Models\GridModel.cs" />
+    <Compile Include="Core\Models\IModel.cs" />
     <Compile Include="Core\Models\MediaModel.cs" />
     <Compile Include="Core\Models\ModelBase.cs" />
     <Compile Include="Core\Models\INullModel.cs" />

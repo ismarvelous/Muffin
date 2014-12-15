@@ -1,4 +1,5 @@
-﻿using Umbraco.Core.Models;
+﻿using Umbraco.Core.Dynamics;
+using Umbraco.Core.Models;
 using Umbraco.Web;
 using Umbraco.Web.Models;
 
@@ -40,6 +41,11 @@ namespace Muffin.Core.Models
                 };
 	        }
 	    }
+
+        public new IUrlModel this[string alias]
+        {
+            get { return DynamicNullMedia.Null; } //todo: define aliases in web.config!
+        }
 
         public string ToHtmlString()
         {

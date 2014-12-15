@@ -5,6 +5,7 @@ using DevTrends.MvcDonutCaching;
 using Muffin.Controllers;
 using Muffin.Core.Models;
 using Muffin.Mvc;
+using Our.Umbraco.Ditto;
 using Umbraco.Core;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models;
@@ -78,7 +79,7 @@ namespace Muffin.Infrastructure
             ViewEngines.Engines.Insert(0, new ThemeViewEngine());
 
             var types = PluginManager.Current.ResolveTypes<ModelBase>();
-            var factory = new PublishedContentModelFactory(types);
+            var factory = new DittoPublishedContentModelFactory(types);
             PublishedContentModelFactoryResolver.Current.SetFactory(factory);
 
             #endregion

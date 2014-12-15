@@ -10,74 +10,43 @@ using Umbraco.Web;
 
 namespace Example.Implementation.ViewModels
 {
-    public class Content : ModelBase
+    public class Content : Base
     {
         public Content(IPublishedContent content)
             : base(content)
         {
+
+        }
+
+        public ICropImageModel CroppedImage { get; set; }
+        public ICropImageModel Afbeelding { get; set; }
+        public string Intro { get; set; }
+
+        public GridModel Grid { get; set; }
+
+    }
+
+    public class Homepage : Base
+    {
+        public Homepage(IPublishedContent content)
+            : base (content)
+        {
             
         }
 
-        public string Title {
-            get { return this.GetPropertyValue<string>("titel"); }
-        }
+        public IEnumerable<LinkModel> SocialNetworks { get; set; } 
     }
 
-    //public class ContentViewModel : DynamicModel
-    //{
-    //    public ContentViewModel(IPublishedContent source, ISiteRepository repository)
-    //        : base(source, repository)
-    //    {
+    public class Base : ModelBase
+    {
+        public Base(IPublishedContent content)
+            :base (content)
+        {
+            
+        }
 
-    //    }
-
-    //    /// <summary>
-    //    /// As used on the homepage highligted news items list.
-    //    /// </summary>
-    //    public virtual string MiniIntro
-    //    {
-    //        get
-    //        {
-    //            string intro = CurrentContent.Intro;
-    //            if (intro.Length < 110)
-    //                return intro;
-    //            else
-    //                return string.Format("{0}..", intro.Substring(0, 110));
-    //        }
-    //    }
-
-    //}
-
-    //public class ContentViewModel
-    //{
-    //    public string BrowserTitel { get; set; }
-    //    public string MetaDescription { get; set; }
-        
-    //    public dynamic Homepage { get; set; }
-    //    public dynamic Afbeelding { get; set; }
-
-    //    public DateTime PublishDate { get; set; }
-    //    public string Titel { get; set; }
-    //    public string Intro { get; set; }
-    //    public HtmlString MainBody { get; set; }
-    //    public DateTime UpdateDate { get; set; }
-
-    //    /// <summary>
-    //    /// As used on the homepage highligted news items list.
-    //    /// </summary>
-    //    public virtual string MiniIntro
-    //    {
-    //        get
-    //        {
-    //            string intro = this.Intro;
-    //            if (intro.Length < 110)
-    //                return intro;
-    //            else
-    //                return string.Format("{0}..", intro.Substring(0, 110));
-    //        }
-    //    }
-
-    //    public IPublishedContent CurrentPage { get; set; }
-
-    //}
+        public string Titel { get; set; }
+        public string BrowserTitel { get; set; }
+        public string MetaDescription { get; set; }
+    }
 }

@@ -9,7 +9,7 @@ namespace Muffin.Core.Models
 	/// "View"model used by the container controller
 	/// </summary>
     [Obsolete("We need to implement a generic class for this!!")] //todo: bad code!!!!
-    public class DynamicCollectionModel : DynamicModelBaseWrapper, IPager, IEnumerable<IModel<IPublishedContent>>
+    public class DynamicCollectionModel : DynamicModelBaseWrapper, IPager, IEnumerable<IModel>
 	{
 		public IEnumerable<ModelBase> Container { get; private set; }
 
@@ -28,9 +28,9 @@ namespace Muffin.Core.Models
             Container = container.Select(n => new ModelBase(n)); //todo: bad code!!!!, don't use Modelbase hardcoded here..
 		}
 
-		public Func<IEnumerable<IModel<IPublishedContent>>> PagedResults { get; set; }
+		public Func<IEnumerable<IModel>> PagedResults { get; set; }
 
-        public virtual IEnumerable<IModel<IPublishedContent>> Results
+        public virtual IEnumerable<IModel> Results
 		{
 			get
 			{
@@ -51,7 +51,7 @@ namespace Muffin.Core.Models
 			}
 		}
 
-        public IEnumerator<IModel<IPublishedContent>> GetEnumerator()
+        public IEnumerator<IModel> GetEnumerator()
 		{
 			return Results.GetEnumerator();
 		}

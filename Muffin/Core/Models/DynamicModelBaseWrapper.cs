@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using Our.Umbraco.Ditto;
 using Umbraco.Core.Dynamics;
 using Umbraco.Core.Models;
 using Umbraco.Web;
@@ -10,25 +11,28 @@ using Umbraco.Web.Models;
 namespace Muffin.Core.Models
 {
     /// <summary>
-	/// Dynamic wrapper for the Modelbase. Implements the same interfase as ModelBase
+	/// Dynamic wrapper for IModels. Implements the same interfase as ModelBase
 	/// And is using the power of DynamicPublishedContent to access document type properties.
 	/// </summary>
-	public class DynamicModelBaseWrapper : DynamicObject, IModel<DynamicModelBaseWrapper>
+	public class DynamicModelBaseWrapper : DynamicObject, IModel
     {
-        protected ModelBase Source;
+        protected IModel Source;
 
         public ISiteRepository Repository { get; protected set; }
 
-        public DynamicModelBaseWrapper(ModelBase source)
+        public DynamicModelBaseWrapper(IModel source)
         {
+            if(source is DynamicModelBaseWrapper)
+                throw new ArgumentException("You try to declare a dynamicmodelbasewrapper with a source of the same type.");
+
             Source = source;
             Repository = source.Repository;
         }
 
 		public override bool TryGetMember(GetMemberBinder binder, out object result)
 		{
-            var dyn = Source.AsDynamic() as DynamicPublishedContent;
-            if(dyn != null && dyn.TryGetMember(binder, out result))
+		    var dyn = new DynamicPublishedContent(Source);
+            if(dyn.TryGetMember(binder, out result))
 		    {
 		        return true;
 		    }
@@ -37,25 +41,17 @@ namespace Muffin.Core.Models
 		    return true; //dynamic null is a succesfull value;
 		}
 
-		public virtual DynamicModelBaseWrapper Homepage
+		public virtual IModel Homepage
 		{
 			get { return new DynamicModelBaseWrapper(Source.Homepage); }
 		}
 
-		public virtual DateTime PublishDate //late binding of the publishdate...
+        public virtual DateTime PublishDate //late binding of the publishdate...
 		{
 			get { return Source.PublishDate; }
 		}
 
-		IPublishedContent IPublishedContent.Parent
-		{
-			get
-			{
-				return Source.Parent;
-			}
-		}
-
-		public virtual DynamicModelBaseWrapper Parent
+		public new IModel Parent
 		{
 			get
 			{
@@ -65,14 +61,19 @@ namespace Muffin.Core.Models
 
 		#region children
 
-        public virtual IEnumerable<DynamicModelBaseWrapper> NavigationChildren
+        public virtual IEnumerable<IModel> NavigationChildren
         {
             get { return Source.NavigationChildren.Select(itm => new DynamicModelBaseWrapper(itm)); }
         }
 
-        public virtual IEnumerable<DynamicModelBaseWrapper> Children
+        IPublishedContent IPublishedContent.Parent
         {
-            get { return Source.Children.As<DynamicModelBaseWrapper>(); }
+            get { return Parent; }
+        }
+
+        public virtual IEnumerable<IModel> Children
+        {
+            get { return Source.Children.AsDynamic(); }
         }
 
 		IEnumerable<IPublishedContent> IPublishedContent.Children
@@ -80,7 +81,7 @@ namespace Muffin.Core.Models
 			get { return Source.Children; }
 		}
 
-        public virtual IEnumerable<DynamicModelBaseWrapper> Breadcrumbs
+        public virtual IEnumerable<IModel> Breadcrumbs
         {
             get { return Source.NavigationChildren.Select(itm => new DynamicModelBaseWrapper(itm));  }
         }

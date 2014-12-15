@@ -1,23 +1,17 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
+using Our.Umbraco.Ditto;
 using Umbraco.Core.Models;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 
 namespace Muffin.Core.Models
 {
-    public interface IModel<out T> : IPublishedContent, INullModel
-        where T : IPublishedContent
-    {
-        T Homepage { get; }
-        DateTime PublishDate { get; }
-        IEnumerable<T> NavigationChildren { get; }
-        IEnumerable<T> Breadcrumbs { get; }
-    }
-
-    public class ModelBase : PublishedContentModel, IModel<ModelBase>
+    public class ModelBase : PublishedContentModel, IModel
     {
         public ISiteRepository Repository
         {
@@ -34,7 +28,7 @@ namespace Muffin.Core.Models
             return false;
         }
 
-        public ModelBase Homepage
+        public IModel Homepage
         {
             get { return new ModelBase(Content.AncestorOrSelf(1)); }
         }
@@ -50,25 +44,30 @@ namespace Muffin.Core.Models
             }
         }
 
-        public IEnumerable<ModelBase> Breadcrumbs
+        public IEnumerable<IModel> Breadcrumbs
         {
             get
             {
-                return Content.Ancestors().OrderBy("level")
+                return this.Ancestors().OrderBy("level")
                   .Where(a => a.IsVisible()).As<ModelBase>();
             }
         }
 
-        public new IEnumerable<ModelBase> Children
+        public new IModel Parent
+        {
+            get { return base.Parent.As<ModelBase>(); }
+        }
+
+        public new IEnumerable<IModel> Children
         {
             get { return base.Children.As<ModelBase>(); }
         }
 
-        public IEnumerable<ModelBase> NavigationChildren
+        public IEnumerable<IModel> NavigationChildren
         {
             get
             {
-                foreach (var item in Content.Children)
+                foreach (var item in this.Children)
                     if (item.IsVisible())
                         yield return new ModelBase(item);
             }

@@ -44,7 +44,7 @@ namespace Muffin.Infrastructure
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        public IEnumerable<ModelBase> Find(string query)
+        public IEnumerable<IModel> Find(string query)
         {
 			//todo: check for PublishedContentExtensions Search and SearchChildren extensions..
             var searcher = ExamineManager.Instance.SearchProviderCollection[SearchProvidername];
@@ -77,14 +77,14 @@ namespace Muffin.Infrastructure
             }
         }
 
-		public IEnumerable<ModelBase> FindAll()
+		public IEnumerable<IModel> FindAll()
 		{
 			var roots = Helper.ContentAtRoot() as IEnumerable<IPublishedContent>;
 		    return roots != null ? FindAll(roots.Select(n => new ModelBase(n))) : null;
 		}
 
 
-        public IEnumerable<ModelBase> FindAll(IEnumerable<ModelBase> rootNodes)
+        public IEnumerable<IModel> FindAll(IEnumerable<ModelBase> rootNodes)
 		{
             var result = new List<ModelBase>();
             foreach (var node in rootNodes)
@@ -96,13 +96,13 @@ namespace Muffin.Infrastructure
             return result;
 		}
 
-		public ModelBase FindById(int id)
+		public IModel FindById(int id)
 		{
 		    var content = Helper.TypedContent(id);
 		    return content != null ? new ModelBase(content) : null;
 		}
 
-        public ModelBase FindByUrl(string urlpath)
+        public IModel FindByUrl(string urlpath)
         {
             var content = CurrentContext.ContentCache.GetByRoute(urlpath);
             return content != null ? new ModelBase(content) : null;

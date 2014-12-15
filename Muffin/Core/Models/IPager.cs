@@ -13,12 +13,12 @@ namespace Muffin.Core.Models
 		/// <summary>
 		/// Add a custom implementation for the paged results..
 		/// </summary>
-		Func<IEnumerable<IModel<IPublishedContent>>> PagedResults { get; set; }
+		Func<IEnumerable<IModel>> PagedResults { get; set; }
 
 		/// <summary>
 		/// returns all results, or when PagedResults is set; it retuns a selection of the results.
 		/// </summary>
-		IEnumerable<IModel<IPublishedContent>> Results { get; }
+		IEnumerable<IModel> Results { get; }
 
 		/// <summary>
 		/// Total count of all results.

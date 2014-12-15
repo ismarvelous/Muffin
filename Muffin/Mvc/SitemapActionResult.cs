@@ -9,7 +9,7 @@ namespace Muffin.Mvc
 	public class SitemapActionResult : ActionResult
 	{
 		public ISiteRepository Repository { get; private set; }
-		private readonly IEnumerable<ModelBase> Pages;
+		private readonly IEnumerable<IModel> Pages;
 
 		public SitemapActionResult(ISiteRepository repository) // IEnumerable<DynamicModel> pages, UmbracoHelper helper)
 		{
