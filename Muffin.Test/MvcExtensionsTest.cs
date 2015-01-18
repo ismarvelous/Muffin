@@ -1,16 +1,14 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Muffin.Mvc;
+using Muffin.Infrastructure;
 using Umbraco.Core.Models;
-using System.Collections.Generic;
-using System.Linq;
-using Muffin.Core;
 
 namespace Muffin.Test
 {
     [TestClass]
     public class MvcExtensionsTest // Naming convention: Method_to_test__State_under_test__Expected_behavior
     {
+
 		/// <summary>
 		/// Single item test
 		/// </summary>
@@ -19,9 +17,10 @@ namespace Muffin.Test
 		{
 			//1. Arrange
 			var mContent = Arrange.Content("Consectetur hidden item", true);
+		    var mapper = new Mapper();
 
 			//2. act
-			var output = mContent.Object.AsJson(null, false);
+            var output = mapper.AsJson(mContent.Object, null, false);
 
 			//3. assert
 			Assert.IsTrue(output.ToString().Equals(string.Empty), "Ouput does contain hidden item");
@@ -35,9 +34,10 @@ namespace Muffin.Test
 		{
 			//1. Arrange
 			var mContent = Arrange.Content("Consectetur hidden item", true);
+		    var mapper = new Mapper();
 
 			//2. act
-			var output = mContent.Object.AsJson(null);
+            var output = mapper.AsJson(mContent.Object, null);
 
 			//3. assert
 			Assert.IsTrue(output.ToString().Contains("Consectetur hidden item"), "Ouput does not contains item");
@@ -60,8 +60,10 @@ namespace Muffin.Test
 					{ Arrange.Content("Consectetur child page 5", true).Object }
 				});
 
+            var mapper = new Mapper();
+
             //2. act
-            var output = mContent.Object.Children.AsJson(null, false);
+            var output = mapper.AsJson(mContent.Object.Children, null, false);
 
             //3. assert
             Assert.IsTrue(output.ToString().Contains("Lorem child page 1"), "Ouput does not contains non-hidden child 1");
@@ -89,8 +91,10 @@ namespace Muffin.Test
 					{ Arrange.Content("Consectetur child page 5", true).Object }
 				});
 
+            var mapper = new Mapper();
+
             //2. act
-            var output = mContent.Object.Children.AsJson(null);
+            var output = mapper.AsJson(mContent.Object.Children, null);
 
             //3. assert
             Assert.IsTrue(output.ToString().Contains("Lorem child page 1"), "Ouput does not contains non-hidden child 1");
@@ -117,9 +121,10 @@ namespace Muffin.Test
 					{ Arrange.Content("Sit child page 4").Object },
 					{ Arrange.Content("Consectetur child page 5", true).Object }
 				});
+            var mapper = new Mapper();
 
             //2. act
-            var output = mContent.Object.Children.AsJson(new[] { "title" });
+            var output = mapper.AsJson(mContent.Object.Children, new[] { "title" });
 
             //3. assert
             Assert.IsTrue(!output.ToString().Contains("mainBody"), "Output contains mainbody, but only title has to be returned");
@@ -140,8 +145,10 @@ namespace Muffin.Test
                 Age = 38
             };
 
+            var mapper = new Mapper();
+
             //2. Act
-            var output = Mapper.AsJson(obj);
+            var output = mapper.AsJson(obj);
 
             //3. Assert
             Assert.IsTrue(output.ToString().Equals("{\"Name\":\"John Doe\",\"City\":\"New York\",\"Age\":38}"));

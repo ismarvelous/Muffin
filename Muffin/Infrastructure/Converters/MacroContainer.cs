@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using Muffin.Core;
-using Muffin.Infrastructure.Converters.Models;
+using Muffin.Infrastructure.Models;
 using Umbraco.Core;
 using Umbraco.Core.Dynamics;
 using Umbraco.Core.IO;

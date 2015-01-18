@@ -1,5 +1,7 @@
 ﻿@using Example.Implementation.ViewModels
+@using Muffin.Core
 @using Muffin.Core.Models
+@using Muffin.Infrastructure
 @using Our.Umbraco.Ditto
 @inherits UmbracoViewPage<IModel>
 <!DOCTYPE html>
@@ -29,7 +31,7 @@
                 <h1 class="title" onclick="window.location = '/'">@(Model.Homepage.As<Base>().Titel)</h1>
                 <nav>
                     <ul>
-                        @foreach (dynamic child in Model.Homepage.Children.AsDynamic())
+                        @foreach (var child in Model.Homepage.Children.As<Base>())
                         {
                             if (!child.UmbracoNaviHide)
                             {

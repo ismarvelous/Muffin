@@ -318,6 +318,7 @@
     <Content Include="Config\BaseRestExtensions.config" />
     <Content Include="Config\applications.config" />
     <Content Include="Config\404handlers.config" />
+    <None Include="Properties\PublishProfiles\Development.pubxml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -337,7 +338,6 @@
     <None Include="_bin_deployableAssemblies\x86\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Implementation\Controllers\ContentController.cs" />
     <Compile Include="Implementation\Controllers\ListingController.cs" />
     <Compile Include="Implementation\Controllers\SearchController.cs" />
     <Compile Include="Implementation\Events\StartupHandler.cs" />

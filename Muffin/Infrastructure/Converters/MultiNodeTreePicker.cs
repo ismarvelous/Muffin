@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Muffin.Core.Models;
 using Umbraco.Core;
-using Umbraco.Core.Dynamics;
 using Umbraco.Core.Models.PublishedContent;
+using Umbraco.Web;
 
 namespace Muffin.Infrastructure.Converters
 {
@@ -43,7 +39,7 @@ namespace Muffin.Infrastructure.Converters
                     int id = 0;
                     if(int.TryParse(item, out id))
                     {
-                        ret.Add(Repository.FindById(id));
+                        ret.Add(Mapper.AsDynamicIModel(Repository.FindById<ModelBase>(id)));
                     }
                 }
             }

@@ -11,7 +11,10 @@ using Umbraco.Web;
 
 namespace Muffin.Core.Models
 {
-    public class ModelBase : PublishedContentModel, IModel
+    /// <summary>
+    /// The foundation, PublishedContentModel base class..
+    /// </summary>
+    public class ModelBase : PublishedContentModel, IModel //todo: this has to be an abstract class
     {
         public ISiteRepository Repository
         {
@@ -65,11 +68,8 @@ namespace Muffin.Core.Models
 
         public IEnumerable<IModel> NavigationChildren
         {
-            get
-            {
-                foreach (var item in this.Children)
-                    if (item.IsVisible())
-                        yield return new ModelBase(item);
+            get {
+                return (from item in Children where item.IsVisible() select new ModelBase(item));
             }
         }
 

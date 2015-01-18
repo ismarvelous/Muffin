@@ -6,6 +6,9 @@ using Umbraco.Core.Models;
 
 namespace Muffin.Core.Models
 {
+    /// <summary>
+    /// Dynamic proxy used as a "viewmodel" for macro's
+    /// </summary>
     public class DynamicMacroModel : DynamicObject
     {
         public IMacro Macro { get; protected set; }

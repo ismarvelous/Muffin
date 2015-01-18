@@ -10,17 +10,24 @@ namespace Muffin.Test
 {
     public class BaseTestClass
     {
+        public Mock<ISiteRepository> Repository { get; set; }
+        public Mock<IMapper> Mapper { get; set; }
+
         [TestInitialize]
         public void Initialize()
         {
 
             var builder = new ContainerBuilder();
 
-            builder.RegisterControllers(typeof(DynamicBaseController).Assembly);
+            builder.RegisterControllers(typeof(BaseController).Assembly);
             builder.RegisterControllers(System.Reflection.Assembly.GetExecutingAssembly());
 
-            var mSite = new Mock<ISiteRepository>();
-            builder.Register(s => mSite.Object)
+            Repository = new Mock<ISiteRepository>();
+            builder.Register(s => Repository.Object)
+                .As<ISiteRepository>();
+
+            Mapper = new Mock<IMapper>();
+            builder.Register(s => Repository.Object)
                 .As<ISiteRepository>();
 
             var container = builder.Build();

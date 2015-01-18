@@ -48,5 +48,7 @@ namespace Example.Implementation.ViewModels
         public string Titel { get; set; }
         public string BrowserTitel { get; set; }
         public string MetaDescription { get; set; }
+
+        public bool UmbracoNaviHide { get; set; }
     }
 }

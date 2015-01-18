@@ -12,6 +12,9 @@ using Umbraco.Core.Services;
 using Umbraco.Web;
 using Umbraco.Core.Dynamics;
 using System.Reflection;
+using Muffin.Infrastructure.Models;
+using Our.Umbraco.Ditto;
+using Umbraco.Core;
 
 namespace Muffin.Infrastructure
 {
@@ -66,46 +69,60 @@ namespace Muffin.Infrastructure
                 var searchHiglight = !String.IsNullOrEmpty(field.Key) ?
                     LuceneHighlightHelper.Instance.GetHighlight(field.Value, field.Key, ((LuceneSearcher)searcher).GetSearcher(), query) : String.Empty;
 
-				var content = FindById(item.Id); //returns dynamic null if this is not a content item (for example when this is a media item.
+				var content = FindById<ModelBase>(item.Id); //returns dynamic null if this is not a content item (for example when this is a media item.
 
 				if (content != null)
 				{
-					var ret = new SearchResultItem(content) {HighlightText = searchHiglight};
+					var ret = new DynamicSearchResultItem(content) {HighlightText = searchHiglight};
 
 				    yield return ret;
 				}
             }
         }
 
-		public IEnumerable<IModel> FindAll()
-		{
-			var roots = Helper.ContentAtRoot() as IEnumerable<IPublishedContent>;
-		    return roots != null ? FindAll(roots.Select(n => new ModelBase(n))) : null;
-		}
+        public IEnumerable<TM> FindAll<TM>() where TM : class, IModel
+        {
+            var roots = Helper.ContentAtRoot() as IEnumerable<IPublishedContent>;
+            return roots != null ? FindAll(roots.Select(n => n.As<TM>())) : null;
+        }
 
-
-        public IEnumerable<IModel> FindAll(IEnumerable<ModelBase> rootNodes)
+        protected IEnumerable<TM> FindAll<TM>(IEnumerable<TM> rootNodes) where TM : class, IModel
 		{
-            var result = new List<ModelBase>();
+            var result = new List<TM>();
             foreach (var node in rootNodes)
             {
                 result.Add(node);
-                result.AddRange(node.Children().Select(n => new ModelBase(n)));
+                if(node.Children.Any()) result.AddRange(FindAll(node.Children().Select(n => n.As<TM>()))); //recursive..
             }
 
             return result;
 		}
 
-		public IModel FindById(int id)
+        ///<summary>
+        ///Returns IModel as a Dynamic Proxy.
+        ///</summary>
+        ///<param name="id"></param>
+        ///<returns></returns>
+        public IModel FindById(int id)
+        {
+            return FindById<ModelBase>(id).AsDynamic();
+        }
+
+		public TM FindById<TM>(int id) where TM : class, IModel
 		{
 		    var content = Helper.TypedContent(id);
-		    return content != null ? new ModelBase(content) : null;
+		    return content != null ? content.As<TM>() : null;
 		}
 
-        public IModel FindByUrl(string urlpath)
+        public IModel FindByUrl(string urlPath)
+        {
+            return FindByUrl<ModelBase>(urlPath).AsDynamic();
+        }
+
+        public TM FindByUrl<TM>(string urlpath) where TM : class, IModel
         {
             var content = CurrentContext.ContentCache.GetByRoute(urlpath);
-            return content != null ? new ModelBase(content) : null;
+            return content != null ? content.As<TM>() : null;
         }
 
         public IContent FindContentById(int id)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Muffin.Core.Models;
 using Umbraco.Core.Models;
+using Umbraco.Core.Persistence.Migrations.Syntax.Update;
 
 namespace Muffin.Core.Models
 {

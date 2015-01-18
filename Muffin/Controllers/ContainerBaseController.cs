@@ -10,10 +10,10 @@ namespace Muffin.Controllers
     /// <summary>
 	/// Default Container Controller..
     /// </summary>
-	public abstract class ContainerBaseController : DynamicBaseController
+	public abstract class ContainerBaseController : BaseController
     {
-		public ContainerBaseController(ISiteRepository rep)
-			: base (rep)
+        protected ContainerBaseController(ISiteRepository rep, IMapper map)
+			: base (rep, map)
         {
         }
 
@@ -33,12 +33,14 @@ namespace Muffin.Controllers
 			int p=1, //read querystring parameters without using this.Request.
             int s=10)
 		{
-			var resultModel = new DynamicCollectionModel(model.Content.As<ModelBase>(), model.Content.Children);
+            var @base = model.Content as ModelBase;
+            IModel content = @base ?? new ModelBase(model.Content);
+
+			var resultModel = new CollectionModel(content, model.Content.Children);
 
 			resultModel.PagedResults = () => resultModel.Container //or model.Content.Children which is the same in this case.
 			    .Skip(s * (p - 1))
-			    .Take(s)
-                .Select(n => new DynamicModelBaseWrapper(n)); //todo: bad code!!!! this conversion is here because we need to use it as a dynamic
+			    .Take(s);
              
 			resultModel.CurrentPage = p;
 			resultModel.PageSize = s;

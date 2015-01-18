@@ -30,10 +30,10 @@ namespace Muffin.Infrastructure.Converters
         {
             if (source != null && !source.ToString().IsNullOrWhiteSpace())
             {
-                var content = Repository.FindById(Convert.ToInt32(source));
+                var content = Repository.FindById<ModelBase>(Convert.ToInt32(source));
 
                 if (content != null)
-                    return content.AsDynamic(); //todo: We like to have typed versions of the content here!!
+                    return Mapper.AsDynamicIModel(content); //todo: We like to have typed versions of the content here!!
             }
 
             return DynamicNull.Null;

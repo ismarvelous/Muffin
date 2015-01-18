@@ -21,7 +21,7 @@ namespace Example.Implementation.Events
 		{
 			var builder = new ContainerBuilder();
 			builder.RegisterApiControllers(typeof(UmbracoApiController).Assembly);
-			builder.RegisterControllers(typeof(DynamicBaseController).Assembly);
+			builder.RegisterControllers(typeof(BaseController).Assembly);
 			builder.RegisterControllers(System.Reflection.Assembly.GetExecutingAssembly());
 
 			builder.Register(s => new SiteRepository(
@@ -30,6 +30,10 @@ namespace Example.Implementation.Events
 				UmbracoContext.Current))
 					.As<ISiteRepository>()
 					.InstancePerHttpRequest();
+
+            builder.Register(s => new Mapper())
+                .As<IMapper>()
+                .InstancePerHttpRequest();
 
 			var container = builder.Build();
 			resolver = new AutofacDependencyResolver(container);

@@ -16,42 +16,44 @@ using Umbraco.Web.WebApi;
 
 namespace Muffin.Test
 {
-	[TestClass]
+    [TestClass]
     public class SearchControllerTest : BaseTestClass // Naming convention: Method_to_test__State_under_test__Expected_behavior
-	{
-		[TestMethod]
-		public void Search__NoResultsInRepository__Total_results_equals_ResultsCount()
-		{
-			//1. Arrange
-			var mSite = new Mock<ISiteRepository>();
-			mSite.Setup(s => s.Find(It.IsAny<string>()))
-				.Returns(new List<ModelBase>()); //mocked object
+    {
+        [TestMethod]
+        public void Search__NoResultsInRepository__Total_results_equals_ResultsCount()
+        {
+            //1. Arrange
+            
+            Repository.Setup(s => s.Find(It.IsAny<string>()))
+                .Returns(new List<ModelBase>()); //mocked object
+            
 
-			var mController = new Mock<SearchBaseController>(mSite.Object) { CallBase = true }; //abstract class callBase
-			var renderModel = new RenderModel(Arrange.Content().Object, CultureInfo.InvariantCulture);
+            var mController = new Mock<SearchBaseController>(Repository.Object, Mapper.Object) { CallBase = true }; //abstract class callBase
+            var renderModel = new RenderModel(Arrange.Content().Object, CultureInfo.InvariantCulture);
 
-			//2.Act
-			var result = mController.Object.Search(renderModel, 
-                p:1,
+            //2.Act
+            var result = mController.Object.Search(renderModel,
+                p: 1,
                 q: "lorem") as ViewResult;
 
-			//3. Assert.
-            Assert.IsTrue((result.Model as DynamicSearchModel).Results.Count() == 0, "Results are not '0' when no items are returned.");
-            Assert.AreEqual((result.Model as DynamicSearchModel).TotalResults, (result.Model as DynamicSearchModel).Results.Count());
-            Assert.IsTrue((result.Model as DynamicSearchModel).Query == "lorem" , "Returned Query is not equal to given search query");
+            //3. Assert.
+            Assert.IsTrue(!(result.Model as SearchModel).Results.Any(), "Results are not '0' when no items are returned.");
+            Assert.AreEqual((result.Model as SearchModel).TotalResults, (result.Model as SearchModel).Results.Count());
+            Assert.IsTrue((result.Model as SearchModel).Query == "lorem", "Returned Query is not equal to given search query");
 
-		}
+        }
 
         [TestMethod]
         public void Search__EmptyQuery__Returns_NOT_As_Query()
         {
             //1. Arrange
-			var mSite = new Mock<ISiteRepository>();
-			mSite.Setup(s => s.Find(It.IsAny<string>()))
-				.Returns(new List<ModelBase>());
+            
+            Repository.Setup(s => s.Find(It.IsAny<string>()))
+                .Returns(new List<ModelBase>());
+            
 
-			var mController = new Mock<SearchBaseController>(mSite.Object) { CallBase = true }; //abstract class callBase
-			var renderModel = new RenderModel(Arrange.Content().Object, CultureInfo.InvariantCulture);
+            var mController = new Mock<SearchBaseController>(Repository.Object, Mapper.Object) { CallBase = true }; //abstract class callBase
+            var renderModel = new RenderModel(Arrange.Content().Object, CultureInfo.InvariantCulture);
 
             //2.Act
             var result = mController.Object.Search(renderModel,
@@ -59,29 +61,36 @@ namespace Muffin.Test
                 q: "") as ViewResult;
 
             //3. Assert.
-            Assert.IsTrue((result.Model as DynamicSearchModel).Query == "<NOT>", "The <NOT> query syntax is not used for an empty search query");
+            Assert.IsTrue((result.Model as SearchModel).Query == "<NOT>", "The <NOT> query syntax is not used for an empty search query");
         }
 
         [TestMethod]
         public void Search_Pagesize3_ItemCount5_DisplayPage2__Page2_Returns_2_Items()
         {
-			//1. Arrange
-			var mSite = new Mock<ISiteRepository>();
-			mSite.Setup(s => s.Find(It.IsAny<string>())) //find returns a set of 5 dynamicmodels (mocked)
-				.Returns(Arrange.BasicPages(mSite.Object).Take(5)); //mocked object
+            //1. Arrange
+            
+            Repository.Setup(s => 
+                s.Find(It.IsAny<string>())) 
+                .Returns(Ret(Repository.Object)); //mocked object
+            
 
-			var mController = new Mock<SearchBaseController>(mSite.Object) { CallBase = true }; //abstract class callBase
-			var renderModel = new RenderModel(Arrange.Content().Object, CultureInfo.InvariantCulture);
+            var mController = new Mock<SearchBaseController>(Repository.Object, Mapper.Object) { CallBase = true }; //abstract class callBase
+            var renderModel = new RenderModel(Arrange.Content().Object, CultureInfo.InvariantCulture);
 
-			//2.Act
-			var result = mController.Object.Search(renderModel,
-				p: 2,
-				s: 3,
-				q: "search query") as ViewResult;
+            //2.Act
+            var result = mController.Object.Search(renderModel,
+                p: 2,
+                s: 3,
+                q: "search query") as ViewResult;
 
-			//3. Assert.
-			Assert.IsTrue((result.Model as DynamicSearchModel).TotalResults == 5, "Total results does not contain 5 items");
-			Assert.IsTrue((result.Model as DynamicSearchModel).Results.Count() == 2, "Resultset does not contain the correct amount of items");
+            //3. Assert.
+            Assert.IsTrue((result.Model as SearchModel).TotalResults == 5, "Total results does not contain 5 items");
+            Assert.IsTrue((result.Model as SearchModel).Results.Count() == 2, "Resultset does not contain the correct amount of items");
         }
-	}
+
+        public static IEnumerable<IModel> Ret(ISiteRepository rep)
+        {
+            return Arrange.BasicPages(rep).Take(5);
+        }
+    }
 }

@@ -1,23 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using Muffin.Core.Models;
+using Umbraco.Core.Models;
 
 namespace Muffin.Core
 {
-    public static class ModelExtensions //todo: move to different file
+    public static class ModelExtensions
     {
-        public static DynamicModelBaseWrapper AsDynamic(this IModel model)
+        private static IMapper Mapper
         {
-            var wrapper = model as DynamicModelBaseWrapper;
-            return wrapper ?? new DynamicModelBaseWrapper(model);
+            get
+            {
+                return DependencyResolver.Current.GetService<IMapper>();
+            }
         }
 
-        public static IEnumerable<DynamicModelBaseWrapper> AsDynamic(this IEnumerable<IModel> model)
+        public static MvcHtmlString AsJson(this IPublishedContent content, string[] properties = null, bool includeHiddenItems = true)
         {
-            return model.Select(itm => itm.AsDynamic());
+            return Mapper.AsJson(content, properties, includeHiddenItems);
+        }
+
+        public static MvcHtmlString AsJson(this IEnumerable<IPublishedContent> collection, string[] properties = null,
+            bool includeHiddenItems = true)
+        {
+            return Mapper.AsJson(collection, properties, includeHiddenItems);
+        }
+
+        /// <summary>
+        /// Overrule Umbraco's AsDynamic
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public static dynamic AsDynamic(IModel model)
+        {
+            return Mapper.AsDynamicIModel(model);
+        }
+
+        /// <summary>
+        /// Overrule Umbraco's AsDynamic
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public static dynamic AsDynamic(IEnumerable<IModel> model)
+        {
+            return Mapper.AsDynamicIModel(model);
         }
     }
 }

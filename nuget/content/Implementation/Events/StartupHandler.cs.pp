@@ -32,6 +32,10 @@ namespace $rootnamespace$.Implementation.Events
 					.As<ISiteRepository>()
 					.InstancePerHttpRequest();
 
+			builder.Register(s => new Mapper())
+                .As<IMapper>()
+                .InstancePerHttpRequest();
+
 			var container = builder.Build();
 			resolver = new AutofacDependencyResolver(container);
 		}

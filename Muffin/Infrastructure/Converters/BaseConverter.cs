@@ -17,21 +17,23 @@ namespace Muffin.Infrastructure.Converters
 	public abstract class BaseConverter : PropertyValueConverterBase
     {
 		protected ISiteRepository Repository;
+	    protected IMapper Mapper;
 		protected UmbracoHelper Helper;
 
 	    protected BaseConverter() 
         {
-			Initialize(DependencyResolver.Current.GetService<ISiteRepository>());
+            Initialize(DependencyResolver.Current.GetService<ISiteRepository>(), DependencyResolver.Current.GetService<IMapper>());
         }
 
-	    protected BaseConverter(ISiteRepository rep)
+	    protected BaseConverter(ISiteRepository rep, IMapper mapper)
         {
-            Initialize(rep);
+            Initialize(rep, mapper);
         }
 
-        protected void Initialize(ISiteRepository rep)
+        protected void Initialize(ISiteRepository rep, IMapper map)
         {
 			Repository = rep;
+            Mapper = map;
         }
 	}
 }

@@ -16,10 +16,10 @@ namespace Muffin.Controllers
     /// <summary>
     /// Default Search Controller..
     /// </summary>
-    public abstract class SearchBaseController : DynamicBaseController
+    public abstract class SearchBaseController : BaseController
     {
-		public SearchBaseController(ISiteRepository rep)
-			: base (rep)
+        protected SearchBaseController(ISiteRepository rep, IMapper map)
+			: base (rep, map)
         {
         }
 
@@ -41,14 +41,16 @@ namespace Muffin.Controllers
             int p=1, //read querystring parameters without using this.Request.
             int s=10,
             string q="") //for search template
-		{
-            var resultModel = new DynamicSearchModel(model.Content.As<ModelBase>(),
-                q);//this.Request.QueryString["q"]);
+        {
+            var @base = model.Content as ModelBase;
+            IModel content = @base ?? new ModelBase(model.Content);
+
+            var resultModel = new SearchModel(content,
+                q); //this.Request.QueryString["q"]);
 
             //late binding for pagedresults
-            resultModel.PagedResults = () => resultModel.Container.Skip(s * (p - 1))
-                .Take(s)
-                .Select(n => new DynamicModelBaseWrapper(n)); //todo: bad code!!!! this conversion is here because we need to use it as a dynamic
+            resultModel.PagedResults = () => resultModel.Container.Skip(s*(p - 1))
+                .Take(s); 
 
 			resultModel.CurrentPage = p;
 			resultModel.PageSize = s;
