@@ -276,15 +276,12 @@
     <Content Include="js\main.js" />
     <Content Include="js\vendor\jquery-1.10.1.min.js" />
     <Content Include="js\vendor\modernizr-2.6.2-respond-1.1.0.min.js" />
-    <Content Include="masterpages\dummy.txt" />
     <Content Include="Media\1001\dont_shout.jpg" />
     <Content Include="Media\1001\dont_shout_thumb.jpg" />
     <Content Include="Media\1002\avatar.png" />
     <Content Include="Media\1002\avatar_thumb.jpg" />
     <Content Include="Media\dummy.txt" />
-    <Content Include="scripts\dummy.txt" />
     <Content Include="usercontrols\dummy.txt" />
-    <Content Include="Views\Partials\dummy.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -375,7 +372,10 @@
       <Name>Muffin</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="masterpages\" />
+    <Folder Include="scripts\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
