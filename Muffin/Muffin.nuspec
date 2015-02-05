@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>Muffin</id>
-		<version>0.0.6-beta</version>
+		<version>0.0.7-beta</version>
 		<title>Muffin</title>
 		<authors>Chuhukon</authors>
 		<owners>Marvelous IT Solutions</owners>
@@ -15,7 +15,7 @@
       Umbraco framework to allow easier front-end development and rapid development.
     </description>
 		<releaseNotes>This is a beta release.</releaseNotes>
-		<copyright>Copyright 2014</copyright>
+		<copyright>Copyright 2015</copyright>
 		<tags>umbraco foundation mvc</tags>
 		<dependencies>
 			<dependency id="Autofac" version="3.2.0"/>
@@ -23,6 +23,8 @@
 			<dependency id="Autofac.WebApi" version="3.1.0"  />
       <dependency id="Newtonsoft.Json" version="4.5.0" />
 			<dependency id="UmbracoCms" version="7.1.0"  />
+      <dependency id="Our.Umbraco.Ditto" version="0.4.1" />
+      <dependency id="MvcDonutCaching" version="1.2.3" />
 		</dependencies>
 	</metadata>
 	<files>
