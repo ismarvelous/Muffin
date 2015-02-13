@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using Muffin.Core;
 using Muffin.Core.Models;
 using Our.Umbraco.Ditto;
@@ -11,32 +12,50 @@ namespace Muffin.Infrastructure.Converters
 {
     public class ContentPicker : BaseConverter, IConverter
     {
-		public override bool IsConverter(PublishedPropertyType propertyType)
-		{
-		    return IsConverter(propertyType.PropertyEditorAlias);
-		}
+        public override bool IsConverter(PublishedPropertyType propertyType)
+        {
+            return IsConverter(propertyType.PropertyEditorAlias);
+        }
 
         public bool IsConverter(string editoralias)
         {
             return Constants.PropertyEditors.ContentPickerAlias.Equals(editoralias);
         }
 
-		public override object ConvertDataToSource(PublishedPropertyType propertyType, object source, bool preview)
-		{
-		    return ConvertDataToSource(source);
-		}
+        public override object ConvertDataToSource(PublishedPropertyType propertyType, object source, bool preview)
+        {
+            return ConvertDataToSource(source);
+        }
 
         public object ConvertDataToSource(object source)
         {
             if (source != null && !source.ToString().IsNullOrWhiteSpace())
             {
-                var content = Repository.FindById<ModelBase>(Convert.ToInt32(source));
-
-                if (content != null)
-                    return Mapper.AsDynamicIModel(content); //todo: We like to have typed versions of the content here!!
+                Func<IModel> content = () => Repository.FindById<ModelBase>(Convert.ToInt32(source)).AsDynamic();
+                return content;
             }
 
             return DynamicNull.Null;
         }
+
+
+        //public override bool CanConvertFrom(ITypeDescriptorContext context, System.Type sourceType)
+        //{
+        //    if (sourceType == typeof(int) || sourceType == typeof(string))
+        //        return true;
+
+        //    return base.CanConvertFrom(context, sourceType);
+        //}
+
+        //public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
+        //{
+
+        //    if (value is string || value is int)
+        //    {
+        //        return ConvertDataToSource(value);
+        //    }
+
+        //    return base.ConvertFrom(context, culture, value);
+        //}
     }
 }

@@ -21,7 +21,7 @@ namespace $rootnamespace$.Implementation.Events
 		{
 			var builder = new ContainerBuilder();
 			builder.RegisterApiControllers(typeof(UmbracoApiController).Assembly);
-			builder.RegisterControllers(typeof(BaseController).Assembly);
+            builder.RegisterControllers(typeof(BaseController).Assembly);
 			builder.RegisterControllers(Assembly.GetExecutingAssembly());
 
 			builder.Register(s => new SiteRepository(
@@ -31,7 +31,7 @@ namespace $rootnamespace$.Implementation.Events
 					.As<ISiteRepository>()
 					.InstancePerHttpRequest();
 
-            builder.Register(s => new Mapper())
+			builder.Register(s => new Mapper())
                 .As<IMapper>()
                 .InstancePerHttpRequest();
 

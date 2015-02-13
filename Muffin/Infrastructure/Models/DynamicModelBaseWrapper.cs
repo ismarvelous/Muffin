@@ -37,6 +37,8 @@ namespace Muffin.Infrastructure.Models
 		    var dyn = new DynamicPublishedContent(Source); //todo: this needs performance optimization.
             if(dyn.TryGetMember(binder, out result))
 		    {
+                //todo: find IConverter for dyn.Properties[].Type ...
+
 		        return true;
 		    }
 

@@ -169,9 +169,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Our.Umbraco.Ditto">
-      <HintPath>..\packages\Our.Umbraco.Ditto.0.4.1\lib\net45\Our.Umbraco.Ditto.dll</HintPath>
-    </Reference>
     <Reference Include="SQLCE4Umbraco, Version=1.0.5451.27170, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\UmbracoCms.Core.7.2.0\lib\SQLCE4Umbraco.dll</HintPath>
@@ -279,11 +276,16 @@
     <Compile Include="Caching\DebugOutputCacheProvider.cs" />
     <Compile Include="Caching\DiskOutputCacheItem.cs" />
     <Compile Include="Caching\DiskOutputCacheProvider.cs" />
+    <Compile Include="CodeGenerator\ServiceContextManager.cs" />
+    <Compile Include="CodeGenerator\StandaloneCoreApplication.cs" />
+    <Compile Include="CodeGenerator\StandaloneCoreBootManager.cs" />
+    <Compile Include="CodeGenerator\ViewModelsGenerator.cs" />
     <Compile Include="Controllers\ContainerBaseController.cs" />
     <Compile Include="Controllers\SearchBaseController.cs" />
     <Compile Include="Core\IMapper.cs" />
     <Compile Include="Core\ModelExtensions.cs" />
     <Compile Include="Core\Models\CroppedImageModel.cs" />
+    <Compile Include="Infrastructure\CachedModelBaseFactory.cs" />
     <Compile Include="Infrastructure\Models\DynamicModelBaseWrapper.cs" />
     <Compile Include="Core\Models\GridModel.cs" />
     <Compile Include="Core\Models\IModel.cs" />
@@ -332,6 +334,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Umbraco-Ditto\src\Our.Umbraco.Ditto\Our.Umbraco.Ditto.csproj">
+      <Project>{3a2482a4-ad19-4c26-a449-4287da07ab16}</Project>
+      <Name>Our.Umbraco.Ditto</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

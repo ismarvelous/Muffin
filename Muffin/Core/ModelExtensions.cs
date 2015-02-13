@@ -31,7 +31,7 @@ namespace Muffin.Core
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public static dynamic AsDynamic(IModel model)
+        public static dynamic AsDynamic(this IModel model)
         {
             return Mapper.AsDynamicIModel(model);
         }
@@ -41,7 +41,7 @@ namespace Muffin.Core
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public static dynamic AsDynamic(IEnumerable<IModel> model)
+        public static dynamic AsDynamic(this IEnumerable<IModel> model)
         {
             return Mapper.AsDynamicIModel(model);
         }

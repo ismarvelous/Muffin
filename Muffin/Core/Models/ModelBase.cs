@@ -31,11 +31,13 @@ namespace Muffin.Core.Models
             return false;
         }
 
+        [DittoIgnore]
         public IModel Homepage
         {
             get { return new ModelBase(Content.AncestorOrSelf(1)); }
         }
 
+        [DittoIgnore]
         public DateTime PublishDate
         {
             get
@@ -47,6 +49,7 @@ namespace Muffin.Core.Models
             }
         }
 
+        [DittoIgnore]
         public IEnumerable<IModel> Breadcrumbs
         {
             get
@@ -56,16 +59,19 @@ namespace Muffin.Core.Models
             }
         }
 
+        [DittoIgnore]
         public new IModel Parent
         {
             get { return base.Parent.As<ModelBase>(); }
         }
 
+        [DittoIgnore]
         public new IEnumerable<IModel> Children
         {
             get { return base.Children.As<ModelBase>(); }
         }
 
+        [DittoIgnore]
         public IEnumerable<IModel> NavigationChildren
         {
             get {
@@ -73,6 +79,7 @@ namespace Muffin.Core.Models
             }
         }
 
+        [DittoIgnore]
         public override string Url
         {
             get { return Repository.FriendlyUrl(Content); }

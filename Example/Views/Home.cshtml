@@ -8,11 +8,11 @@
 {
 	<header>
 	    Rotatie snelheids: @Model.CarrouselContainer..Rotatiesnelheid<br />
-        @Mapper.AsJson(Model.CarrouselContainer.Children)
+        @((Model.CarrouselContainer() as IPublishedContent).Children.AsJson())
 
         
 	    <ul>
-		@foreach(var item in Model.CarrouselContainer.Children)
+		@foreach(var item in Model.CarrouselContainer().Children)
 		{
 			<li>@item.Afbeelding.Url @item.Titel - @item.Beschrijving @item.Link</li>
 		}

@@ -9,12 +9,12 @@ using Muffin.Infrastructure.Converters;
 using umbraco.cms.businesslogic.macro;
 using Umbraco.Core.Models;
 using Umbraco.Core.Services;
-using Umbraco.Web;
 using Umbraco.Core.Dynamics;
 using System.Reflection;
 using Muffin.Infrastructure.Models;
 using Our.Umbraco.Ditto;
 using Umbraco.Core;
+using Umbraco.Web;
 
 namespace Muffin.Infrastructure
 {
@@ -23,22 +23,22 @@ namespace Muffin.Infrastructure
         //protected IMediaService MediaService;
         protected IContentService Service;
         protected IMacroService MacroService;
-        protected UmbracoContext CurrentContext;
+        protected Umbraco.Web.UmbracoContext CurrentContext;
 
-        protected UmbracoHelper Helper;
+        protected Umbraco.Web.UmbracoHelper Helper;
         public string SearchProvidername { get; private set; }
 
-        public SiteRepository(IContentService service, IMacroService macroService, UmbracoContext ctx)
+        public SiteRepository(IContentService service, IMacroService macroService, Umbraco.Web.UmbracoContext ctx)
 			: this(service, macroService, ctx, "ExternalSearcher") //use umbraco default searcher.
 		{
 		}
 
-        public SiteRepository(IContentService service, IMacroService macroService, UmbracoContext ctx, string searchProvidername)
+        public SiteRepository(IContentService service, IMacroService macroService, Umbraco.Web.UmbracoContext ctx, string searchProvidername)
         {
             Service = service;
             MacroService = macroService;
             SearchProvidername = searchProvidername;
-            Helper = new UmbracoHelper(ctx);
+            Helper = new Umbraco.Web.UmbracoHelper(ctx);
             CurrentContext = ctx;
         }
 
@@ -110,7 +110,8 @@ namespace Muffin.Infrastructure
 
 		public TM FindById<TM>(int id) where TM : class, IModel
 		{
-		    var content = Helper.TypedContent(id);
+		    //var content = Helper.TypedContent(id);
+		    var content = CurrentContext.ContentCache.GetById(id);
 		    return content != null ? content.As<TM>() : null;
 		}
 
@@ -201,5 +202,6 @@ namespace Muffin.Infrastructure
 
             return gridControl.SourceValue;
         }
+
     }
 }
