@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Dynamic;
 using System.Linq;
 using Muffin.Core;
@@ -36,11 +37,21 @@ namespace Muffin.Infrastructure.Models
 		{
 		    var dyn = new DynamicPublishedContent(Source); //todo: this needs performance optimization.
             if(dyn.TryGetMember(binder, out result))
-		    {
-                //todo: find IConverter for dyn.Properties[].Type ...
+            {
+                var prop = dyn.GetProperty(binder.Name, true);
 
-		        return true;
-		    }
+                if (prop != null) //if this is a known property use a default IConverter to convert the propertyvalue.
+                {
+                    result = Repository.ConvertPropertyValue(dyn.ContentType.GetPropertyType(prop.PropertyTypeAlias).PropertyEditorAlias, result);
+                } 
+                else //be sure an available property is used when this one exsist.
+                {
+                    var typedprop = this.GetType().GetProperty(binder.Name);
+                    result = typedprop != null ? typedprop.GetValue(this, null) : result;
+                }
+
+                return true;
+            }
 
 		    result = DynamicNull.Null;
 		    return true; //dynamic null is a succesfull value;
@@ -83,7 +94,7 @@ namespace Muffin.Infrastructure.Models
 
 		IEnumerable<IPublishedContent> IPublishedContent.Children
 		{
-			get { return Source.Children; }
+            get { return Mapper.AsDynamicIModel(Source.Children); }
 		}
 
         public virtual IEnumerable<IModel> Breadcrumbs

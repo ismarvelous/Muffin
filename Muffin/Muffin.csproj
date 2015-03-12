@@ -169,6 +169,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Our.Umbraco.Ditto, Version=0.4.5372.18059, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Our.Umbraco.Ditto.0.4.1\lib\net45\Our.Umbraco.Ditto.dll</HintPath>
+    </Reference>
     <Reference Include="SQLCE4Umbraco, Version=1.0.5451.27170, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\UmbracoCms.Core.7.2.0\lib\SQLCE4Umbraco.dll</HintPath>
@@ -334,12 +338,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Umbraco-Ditto\src\Our.Umbraco.Ditto\Our.Umbraco.Ditto.csproj">
-      <Project>{3a2482a4-ad19-4c26-a449-4287da07ab16}</Project>
-      <Name>Our.Umbraco.Ditto</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

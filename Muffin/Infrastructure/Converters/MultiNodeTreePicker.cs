@@ -1,34 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
 using Muffin.Core.Models;
 using Umbraco.Core;
-using Umbraco.Core.Models.PublishedContent;
-using Umbraco.Web;
 
 namespace Muffin.Infrastructure.Converters
 {
     /// <summary>
     /// Multi node tree picker converter
     /// </summary>
-    public class MultiNodeTreePicker : BaseConverter
+    public class MultiNodeTreePicker : BaseTypeConverter, IConverter
     {
-        /// <summary>
-        /// Check converter type
-        /// </summary>
-        /// <param name="propertyType"></param>
-        /// <returns></returns>
-        public override bool IsConverter(PublishedPropertyType propertyType)
+        public bool IsConverter(string alias)
         {
-            return Constants.PropertyEditors.MultiNodeTreePickerAlias.Equals(propertyType.PropertyEditorAlias);
+            return Constants.PropertyEditors.MultiNodeTreePickerAlias.Equals(alias);
         }
 
-        /// <summary>
-        /// Convert to data source
-        /// </summary>
-        /// <param name="propertyType"></param>
-        /// <param name="source"></param>
-        /// <param name="preview"></param>
-        /// <returns></returns>
-        public override object ConvertDataToSource(PublishedPropertyType propertyType, object source, bool preview)
+        public object ConvertDataToSource(object source)
         {
             var ret = new List<IModel>(); //return value
 
@@ -44,6 +33,21 @@ namespace Muffin.Infrastructure.Converters
                 }
             }
             return ret;
+        }
+
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+        {
+            return sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
+        }
+
+        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        {
+            if (value is string)
+            {
+                return ConvertDataToSource(value);
+            }
+
+            return base.ConvertFrom(context, culture, value);
         }
     }
 }

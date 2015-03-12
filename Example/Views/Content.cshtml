@@ -18,7 +18,7 @@
 
         <img src="@Model.CroppedImage[200, 100]" />
 
-        @if (Model.Afbeelding.IsNull())
+        @if (Model.Afbeelding == null || Model.Afbeelding.IsNull())
         {
             <p>Er is geen afbeelding ingegeven.</p>
         }

@@ -7,7 +7,7 @@
 @section Main
 {
 	<header>
-	    Rotatie snelheids: @Model.CarrouselContainer..Rotatiesnelheid<br />
+	    Rotatie snelheids: @Model.CarrouselContainer().Rotatiesnelheid<br />
         @((Model.CarrouselContainer() as IPublishedContent).Children.AsJson())
 
         

@@ -35,5 +35,7 @@ namespace Muffin.Core
 
         object GetPropertyValue(MacroPropertyModel property);
         object GetPropertyValue(Control gridControl);
+
+        object ConvertPropertyValue(string editoralias, object value);
     }
 }

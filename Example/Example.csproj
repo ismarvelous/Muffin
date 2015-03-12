@@ -150,7 +150,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Our.Umbraco.Ditto">
+    <Reference Include="Our.Umbraco.Ditto, Version=0.4.5372.18059, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Our.Umbraco.Ditto.0.4.1\lib\net45\Our.Umbraco.Ditto.dll</HintPath>
     </Reference>
     <Reference Include="Owin">

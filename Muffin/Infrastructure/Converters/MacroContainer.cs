@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Muffin.Core;
@@ -11,21 +12,11 @@ using Umbraco.Web;
 
 namespace Muffin.Infrastructure.Converters
 {
-    public class MacroContainer : BaseConverter, IConverter
+    public class MacroContainer : BaseTypeConverter, IConverter
     {
-        public override bool IsConverter(PublishedPropertyType propertyType)
-        {
-            return IsConverter(propertyType.PropertyEditorAlias);
-        }
-
         public bool IsConverter(string editoralias)
         {
             return Constants.PropertyEditors.MacroContainerAlias.Equals(editoralias);
-        }
-
-        public override object ConvertDataToSource(PublishedPropertyType propertyType, object source, bool preview)
-        {
-            return ConvertDataToSource(source);
         }
 
         public object ConvertDataToSource(object source)
@@ -69,6 +60,21 @@ namespace Muffin.Infrastructure.Converters
             {
                 return DynamicNull.Null;
             }
+        }
+
+        public override bool CanConvertFrom(ITypeDescriptorContext context, System.Type sourceType)
+        {
+            return sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
+        }
+
+        public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
+        {
+            if (value is string)
+            {
+                return ConvertDataToSource(value);
+            }
+
+            return base.ConvertFrom(context, culture, value);
         }
     }
 }

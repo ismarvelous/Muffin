@@ -2,8 +2,10 @@
 using Muffin.Core.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
+using Muffin.Infrastructure.Converters;
 using Umbraco.Core.Models;
 using umbraco.dialogs;
 using Umbraco.Web;
@@ -18,10 +20,14 @@ namespace Example.Implementation.ViewModels
 
         }
 
+        [TypeConverter(typeof(ImageCropper))]
         public ICropImageModel CroppedImage { get; set; }
+
+        [TypeConverter(typeof(MediaPicker))]
         public ICropImageModel Afbeelding { get; set; }
         public string Intro { get; set; }
 
+        [TypeConverter(typeof(Grid))]
         public GridModel Grid { get; set; }
 
     }
@@ -34,6 +40,7 @@ namespace Example.Implementation.ViewModels
             
         }
 
+        [TypeConverter(typeof(RelatedLinks))]
         public IEnumerable<LinkModel> SocialNetworks { get; set; } 
     }
 

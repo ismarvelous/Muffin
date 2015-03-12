@@ -163,30 +163,25 @@ namespace Muffin.Infrastructure
 			return Helper.NiceUrlWithDomain(id);
 		}
 
-        public object GetPropertyValue(MacroPropertyModel property) 
+        #region Converted values
+
+        public object GetPropertyValue(MacroPropertyModel property)
         {
-            if (property != null)
+            if (property != null && property.Value != null)
             {
-                var assembly = typeof(IConverter).Assembly;
-                var types = assembly.GetTypes().Where(type => type != typeof(IConverter) && typeof(IConverter).IsAssignableFrom(type)).ToList();
-
-                foreach (var type in types)
-                {
-                    var instance = (IConverter) Activator.CreateInstance(type);
-                    if (instance.IsConverter(property.Type))
-                    {
-                        return instance.ConvertDataToSource(property.Value);
-                    }
-                }
-
-                return property.Value ?? DynamicNull.Null;
+                return ConvertPropertyValue(property.Type, property.Value);
             }
-            else
-                return DynamicNull.Null;
+
+            return DynamicNull.Null;
         }
 
 
         public object GetPropertyValue(Control gridControl)
+        {
+            return ConvertPropertyValue(gridControl.Editor.Alias, gridControl.SourceValue);
+        }
+
+        public object ConvertPropertyValue(string editoralias, object value)
         {
             var assembly = typeof(IConverter).Assembly;
             var types = assembly.GetTypes().Where(type => type != typeof(IConverter) && typeof(IConverter).IsAssignableFrom(type)).ToList();
@@ -194,14 +189,16 @@ namespace Muffin.Infrastructure
             foreach (var type in types)
             {
                 var instance = (IConverter)Activator.CreateInstance(type);
-                if (instance.IsConverter(gridControl.Editor.Alias))
+                if (instance.IsConverter(editoralias))
                 {
-                    return instance.ConvertDataToSource(gridControl.SourceValue);
+                    return instance.ConvertDataToSource(value);
                 }
             }
 
-            return gridControl.SourceValue;
+            return value;
         }
+
+        #endregion
 
     }
 }
