@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Muffin.Core;
 using Umbraco.Core;
+using Umbraco.Core.Models;
 
 namespace Muffin.Mvc
 {

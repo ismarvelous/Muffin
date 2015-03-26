@@ -11,12 +11,12 @@
         <h1>@Model.Titel</h1>
 
         <br />
-        @Model.CroppedImage
+        @Model.Croppedimage
 
-        <img src="@Model.CroppedImage["640x480"]" />
-        <img src="@Model.CroppedImage["1024x768"]" />
+        <img src="@Model.Croppedimage["640x480"]" />
+        <img src="@Model.Croppedimage["1024x768"]" />
 
-        <img src="@Model.CroppedImage[200, 100]" />
+        <img src="@Model.Croppedimage[200, 100]" />
 
         @if (Model.Afbeelding == null || Model.Afbeelding.IsNull())
         {

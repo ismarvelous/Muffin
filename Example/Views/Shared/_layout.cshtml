@@ -35,7 +35,7 @@
                         {
                             if (!child.UmbracoNaviHide)
                             {
-                                <li><a href="@child.Url">@child.Titel</a></li>
+                                <li><a href="@Umbraco.NiceUrlWithDomain(child.Id)">@child.Titel</a></li>
                             }
                         }
                     </ul>
@@ -61,7 +61,7 @@
             <footer class="wrapper">
                 <h3>Lorem ipsum, Some city, NL</h3>
 				<ul>
-					@foreach(var item in Model.Homepage.As<Homepage>().SocialNetworks)
+					@foreach(dynamic item in Model.Homepage.AsDynamic().SocialNetworks)
 					{
 						<li><a href="@item.Url">@item.Title</a></li>
 					}

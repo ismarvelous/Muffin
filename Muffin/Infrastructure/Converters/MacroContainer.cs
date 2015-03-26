@@ -7,6 +7,7 @@ using Muffin.Infrastructure.Models;
 using Umbraco.Core;
 using Umbraco.Core.Dynamics;
 using Umbraco.Core.IO;
+using Umbraco.Core.Models;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 
@@ -21,7 +22,10 @@ namespace Muffin.Infrastructure.Converters
 
         public object ConvertDataToSource(object source)
         {
-            var content = source.ToString();
+            var content = source is string
+                ? source as string
+                : source is IPublishedProperty ? (source as IPublishedProperty).DataValue.ToString() : null;
+
             if (!string.IsNullOrWhiteSpace(content) && UmbracoContext.Current != null && UmbracoContext.Current.PageId.HasValue)
             {
                 var macros = Regex.Matches(content, "(\\<\\?UMBRACO_MACRO.+?(\\/>))");

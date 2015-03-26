@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
 using Our.Umbraco.Ditto;
@@ -11,20 +9,28 @@ using Umbraco.Web;
 
 namespace Muffin.Core.Models
 {
+
     /// <summary>
     /// The foundation, PublishedContentModel base class..
     /// </summary>
-    public class ModelBase : PublishedContentModel, IModel //todo: this has to be an abstract class
+    public class ModelBase : PublishedContentModel, IModel //todo: return TM models instead of IModel for the properties
     {
         public ISiteRepository Repository
         {
             get { return DependencyResolver.Current.GetService<ISiteRepository>(); }
         }
 
-        public ModelBase(IPublishedContent content) 
-            : base(content)
-        {
-        }
+        //todo: furter investigate below issue:
+        //converting an IPublishedContent using .As<T> to modelbase based class when the content parameter is already loaded as a modelbase based object
+        //can result in Stackoverflow exceptions, this can occur when using the CurrentContext.ContentCache
+        //An exception need to be thronw in these situations, in all other situations like in a cshtml
+        // one possibility could be to make Modelbase an abstract class and create a sealed class TypedModelBase : ModelBase which is used in default situations..
+        //converting is allowed.
+        //if(content is ModelBase)
+        //throw new ApplicationException("Conversion!!");
+
+        public ModelBase(IPublishedContent content)
+            : base(content) { }
 
         public bool IsNull()
         {
@@ -34,7 +40,15 @@ namespace Muffin.Core.Models
         [DittoIgnore]
         public IModel Homepage
         {
-            get { return new ModelBase(Content.AncestorOrSelf(1)); }
+            get
+            {
+                var home = Content.AncestorOrSelf(1);
+
+                if (home is IModel)
+                    return home as IModel;
+
+                return home.As<ModelBase>();
+            }
         }
 
         [DittoIgnore]
@@ -55,7 +69,7 @@ namespace Muffin.Core.Models
             get
             {
                 return this.Ancestors().OrderBy("level")
-                  .Where(a => a.IsVisible()).As<ModelBase>();
+                  .Where(a => a.IsVisible()).Select(b => new ModelBase(b));
             }
         }
 
@@ -74,8 +88,9 @@ namespace Muffin.Core.Models
         [DittoIgnore]
         public IEnumerable<IModel> NavigationChildren
         {
-            get {
-                return (from item in Children where item.IsVisible() select new ModelBase(item));
+            get
+            {
+                return (from item in Children where item.IsVisible() select item.As<ModelBase>());
             }
         }
 
@@ -85,4 +100,6 @@ namespace Muffin.Core.Models
             get { return Repository.FriendlyUrl(Content); }
         }
     }
+
+
 }

@@ -1,85 +1,138 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.IO;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
-//using Muffin.Core;
-//using umbraco.editorControls;
-//using umbraco.interfaces;
-//using Umbraco.Core;
-//using Umbraco.Core.Persistence;
-//using Umbraco.Core.Services;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
+using Umbraco.Core;
 
-//namespace Muffin.CodeGenerator
-//{
-//    public class Application : UmbracoApplicationBase
-//    {
-//        public string BaseDirectory { get; private set; }
-//        public string DataDirectory { get; private set; }
-//        protected readonly string AppPath;
+namespace Muffin.CodeGenerator
+{
+    /// <summary>
+    /// ViewModels Generator using Muffin base classes
+    /// The models generator is using the uSync folder to find out which objects are in the Umbraco installation.
+    /// </summary>
+    public class ViewModelsGenerator 
+    {
+        private readonly string _uSyncPath;
+        public ViewModelsGenerator(string uSyncPath)
+        {
+            _uSyncPath = uSyncPath;
+        }
 
-//        public Application(string appPath)
-//        {
-//            AppPath = Path.GetDirectoryName(appPath);
-//        }
+        public IEnumerable<DocumentType> GetDocumentTypes()
+        {
+            var results = new List<DocumentType>();
+            var path = string.Format("{0}\\DocumentType", _uSyncPath);
+            foreach (var classdir in Directory.GetDirectories(path))
+            {
+                results.AddRange(GetDocumentTypes(classdir));
+            }
 
+            return results;
+        }
 
-//        protected override IBootManager GetBootManager()
-//        {
-//            var binDirectory = new DirectoryInfo(AppPath);
-//            BaseDirectory = ResolveBasePath(binDirectory);
-//            DataDirectory = Path.Combine(BaseDirectory, "app_data");
-//            var appDomainConfigPath = new DirectoryInfo(Path.Combine(binDirectory.FullName, "config"));
+        private IEnumerable<DocumentType> GetDocumentTypes(string path)
+        {
+            var results = new List<DocumentType>();
+            var serializer = new XmlSerializer(typeof(DocumentType));
+            using (var reader = XmlReader.Create(string.Format("{0}\\def.config", path)))
+            {
+                results.Add((DocumentType)serializer.Deserialize(reader));
+                foreach (var classdir in Directory.GetDirectories(path))
+                {
+                    results.AddRange(GetDocumentTypes(classdir));
+                }
+            }
 
-//            //Copy config files to AppDomain's base directory
-//            if (binDirectory.FullName.Equals(BaseDirectory) == false &&
-//                appDomainConfigPath.Exists == false)
-//            {
-//                appDomainConfigPath.Create();
-//                var baseConfigPath = new DirectoryInfo(Path.Combine(BaseDirectory, "config"));
-//                var sourceFiles = baseConfigPath.GetFiles("*.config", SearchOption.TopDirectoryOnly);
-//                foreach (var sourceFile in sourceFiles)
-//                {
-//                    sourceFile.CopyTo(sourceFile.FullName.Replace(baseConfigPath.FullName, appDomainConfigPath.FullName), true);
-//                }
-//            }
+            return results;
+        }
+    }
 
-//            AppDomain.CurrentDomain.SetData("DataDirectory", DataDirectory);
+    /// <summary>
+    /// Helper methods for creating class related strings which can be used by your T4 Template
+    /// </summary>
+    public static class ClassBuilderExtensions
+    {
+        #region Helpers
 
-//            return new CoreBootManager(this);
-//        }
+        public static string GetSafeClassName(this DocumentType doctype)
+        {
+            if (string.IsNullOrEmpty(doctype.Info.Alias))
+                return string.Empty;
 
-//        public void Start(object sender, EventArgs e)
-//        {
-//            base.Application_Start(sender, e);
-//        }
+            return char.ToUpper(doctype.Info.Alias[0]) + doctype.Info.Alias.Substring(1);
+        }
 
-//        private string ResolveBasePath(DirectoryInfo currentFolder)
-//        {
-//            var folders = currentFolder.GetDirectories();
-//            if (folders.Any(x => x.Name.Equals("app_data", StringComparison.OrdinalIgnoreCase)) &&
-//                folders.Any(x => x.Name.Equals("config", StringComparison.OrdinalIgnoreCase)))
-//            {
-//                return currentFolder.FullName;
-//            }
+        public static string GetSafeBaseClassName(this DocumentType doctype)
+        {
+            // Check for empty string.
+            if (string.IsNullOrEmpty(doctype.Info.Master))
+                return "ModelBase";
 
-//            if (currentFolder.Parent == null)
-//                throw new Exception("Base directory containing an 'App_Data' and 'Config' folder was not found."+
-//                    " These folders are required to run this console application as it relies on the normal umbraco configuration files.");
+            return char.ToUpper(doctype.Info.Master[0]) + doctype.Info.Master.Substring(1);
+        }
 
-//            return ResolveBasePath(currentFolder.Parent);
-//        }
-//    }
+        public static string GetConstructor(this DocumentType docType)
+        {
+            return string.Format("public {0}(IPublishedContent content): base (content) {{ }}", docType.GetSafeClassName());
+        }
 
+        #endregion
+    }
 
-//    //public class ConsoleBootManager : CoreBootManager
-//    //{
-//    //    public ConsoleBootManager(UmbracoApplicationBase umbracoApplication, string baseDirectory)
-//    //        : base(umbracoApplication)
-//    //    {
-//    //        base.InitializeApplicationRootPath(baseDirectory);
-//    //    }
-//    //}
+    /// <summary>
+    /// Helper methods for creating property related strings which can be used by your T4 Template
+    /// </summary>
+    public static class PropertyBuilderExtensions
+    {
+        public static string GetSafePropertyName(this GenericProperty property)
+        {
+            if (string.IsNullOrEmpty(property.Alias))
+                return string.Empty;
 
-//}
+            return char.ToUpper(property.Alias[0]) + property.Alias.Substring(1);
+        }
+
+        public static string GetPropertyType(this GenericProperty property)
+        {
+            //todo: make this list configurable...
+            var typeList = new Dictionary<string, string>
+            {
+                {Constants.PropertyEditors.RelatedLinksAlias, "IEnumerable<LinkModel>"},
+                {Constants.PropertyEditors.ContentPickerAlias, "Func<IModel>"},
+                {"Umbraco.Grid", "GridModel"},
+                {Constants.PropertyEditors.MacroContainerAlias, "IEnumerable<DynamicMacroModel>"},
+                {Constants.PropertyEditors.MediaPickerAlias, "MediaModel"},
+                {Constants.PropertyEditors.ImageCropperAlias, "CroppedImageModel"},
+                {Constants.PropertyEditors.TrueFalseAlias, "bool"}
+            };
+
+            return typeList.ContainsKey(property.Type) ? typeList[property.Type] : "string"; 
+        }
+
+        public static string GetPropertyAtribute(this GenericProperty property)
+        {
+            //todo: make this list configurable...
+            var typeList = new Dictionary<string, string>
+            {
+                {Constants.PropertyEditors.RelatedLinksAlias, "[TypeConverter(typeof(RelatedLinks))]"},
+                {Constants.PropertyEditors.ContentPickerAlias, "[TypeConverter(typeof(ContentPicker))]"},
+                {"Umbraco.Grid", "[TypeConverter(typeof(Grid))]"},
+                {Constants.PropertyEditors.MacroContainerAlias, "[DittoIgnore]"}, //todo:Macro containers not supported by Ditto..
+                {Constants.PropertyEditors.MediaPickerAlias, "[TypeConverter(typeof(MediaPicker))]"},
+                {Constants.PropertyEditors.ImageCropperAlias, "[TypeConverter(typeof(ImageCropper))]"},
+            };
+
+            return typeList.ContainsKey(property.Type) ? typeList[property.Type] : "//no type converter specified"; 
+        }
+
+        public static string GetPropertyAccessors(this GenericProperty property)
+        {
+            var typeList = new Dictionary<string, string>
+            {
+                { Constants.PropertyEditors.MacroContainerAlias, string.Format("{{ get {{ return (new MacroContainer()).ConvertDataToSource(this.GetProperty(\"{0}\")) as IEnumerable<DynamicMacroModel>; }} }}", property.Alias) }
+            };
+
+            return typeList.ContainsKey(property.Type) ? typeList[property.Type] : "{ get; set; }";
+        }
+    }
+}

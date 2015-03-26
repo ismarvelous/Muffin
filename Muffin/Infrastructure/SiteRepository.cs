@@ -83,7 +83,7 @@ namespace Muffin.Infrastructure
         public IEnumerable<TM> FindAll<TM>() where TM : class, IModel
         {
             var roots = Helper.ContentAtRoot() as IEnumerable<IPublishedContent>;
-            return roots != null ? FindAll(roots.Select(n => n.As<TM>())) : null;
+            return roots != null ? FindAll(roots.Select(n => n is IModel ? n as TM : n.As<TM>())) : null;
         }
 
         protected IEnumerable<TM> FindAll<TM>(IEnumerable<TM> rootNodes) where TM : class, IModel
@@ -92,7 +92,7 @@ namespace Muffin.Infrastructure
             foreach (var node in rootNodes)
             {
                 result.Add(node);
-                if(node.Children.Any()) result.AddRange(FindAll(node.Children().Select(n => n.As<TM>()))); //recursive..
+                if (node.Children.Any()) result.AddRange(FindAll(node.Children().Select(n => n is IModel ? n as TM : n.As<TM>()))); //recursive..
             }
 
             return result;
@@ -112,6 +112,10 @@ namespace Muffin.Infrastructure
 		{
 		    //var content = Helper.TypedContent(id);
 		    var content = CurrentContext.ContentCache.GetById(id);
+
+		    if (content is IModel)
+		        return content as TM;
+
 		    return content != null ? content.As<TM>() : null;
 		}
 
@@ -123,6 +127,10 @@ namespace Muffin.Infrastructure
         public TM FindByUrl<TM>(string urlpath) where TM : class, IModel
         {
             var content = CurrentContext.ContentCache.GetByRoute(urlpath);
+
+            if (content is IModel)
+                return content as TM;
+
             return content != null ? content.As<TM>() : null;
         }
 
@@ -160,7 +168,7 @@ namespace Muffin.Infrastructure
 
 		public string FriendlyUrl(int id)
 		{
-			return Helper.NiceUrlWithDomain(id);
+		    return "/"; //todo: does not work during Converter CurrentContext.UrlProvider.GetUrl(id, true);
 		}
 
         #region Converted values

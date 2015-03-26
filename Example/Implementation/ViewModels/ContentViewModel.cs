@@ -6,56 +6,58 @@ using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using Muffin.Infrastructure.Converters;
+using Our.Umbraco.Ditto;
 using Umbraco.Core.Models;
 using umbraco.dialogs;
+using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 
 namespace Example.Implementation.ViewModels
 {
-    public class Content : Base
-    {
-        public Content(IPublishedContent content)
-            : base(content)
-        {
+    //public partial class Content : Base
+    //{
+    //    public Content(IPublishedContent content)
+    //        : base(content)
+    //    {
 
-        }
+    //    }
 
-        [TypeConverter(typeof(ImageCropper))]
-        public ICropImageModel CroppedImage { get; set; }
+    //    [TypeConverter(typeof(ImageCropper))]
+    //    public ICropImageModel Croppedimage { get; set; }
 
-        [TypeConverter(typeof(MediaPicker))]
-        public ICropImageModel Afbeelding { get; set; }
-        public string Intro { get; set; }
+    //    [TypeConverter(typeof(MediaPicker))]
+    //    public ICropImageModel Afbeelding { get; set; }
+    //    public string Intro { get; set; }
 
-        [TypeConverter(typeof(Grid))]
-        public GridModel Grid { get; set; }
+    //    [TypeConverter(typeof(Grid))]
+    //    public GridModel Grid { get; set; }
 
-    }
+    //}
 
-    public class Homepage : Base
-    {
-        public Homepage(IPublishedContent content)
-            : base (content)
-        {
-            
-        }
+////    public partial class Homepage : Base
+////    {
+////        public Homepage(IPublishedContent content)
+////            : base(content)
+////        {
 
-        [TypeConverter(typeof(RelatedLinks))]
-        public IEnumerable<LinkModel> SocialNetworks { get; set; } 
-    }
+////        }
 
-    public class Base : ModelBase
-    {
-        public Base(IPublishedContent content)
-            :base (content)
-        {
-            
-        }
+////        [TypeConverter(typeof(RelatedLinks))]
+////        public IEnumerable<LinkModel> SocialNetworks { get; set; }
+////    }
 
-        public string Titel { get; set; }
-        public string BrowserTitel { get; set; }
-        public string MetaDescription { get; set; }
+//    public partial class Base : ModelBase
+//    {
+//        public Base(IPublishedContent content)
+//            : base(content)
+//        {
 
-        public bool UmbracoNaviHide { get; set; }
-    }
+//        }
+
+//        public string Titel { get; set; }
+//        public string BrowserTitel { get; set; }
+//        public string MetaDescription { get; set; }
+
+//        public bool UmbracoNaviHide { get; set; }
+//    }
 }
