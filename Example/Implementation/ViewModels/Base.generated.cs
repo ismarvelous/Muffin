@@ -45,7 +45,7 @@ namespace  Example.Implementation.ViewModels
 		public virtual bool UmbracoNaviHide { get; set; }
 		
 		[DittoIgnore]
-		public virtual IEnumerable<DynamicMacroModel> WidgetArea { get { return (new MacroContainer()).ConvertDataToSource(this.GetProperty("widgetArea")) as IEnumerable<DynamicMacroModel>; } }
+		public virtual Func<IEnumerable<DynamicMacroModel>> WidgetArea { get { return (new MacroContainer()).ConvertDataToSource(this.GetProperty("widgetArea")) as Func<IEnumerable<DynamicMacroModel>>; } }
 		
 		//no type converter specified
 		public virtual string MetaDescription { get; set; }

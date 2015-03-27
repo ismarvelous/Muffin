@@ -9,6 +9,9 @@ using Umbraco.Core;
 
 namespace Muffin.Infrastructure.Converters
 {
+    /// <summary>
+    /// Convert a MacroContainer to a Func..
+    /// </summary>
     public class RelatedLinks : BaseTypeConverter, IConverter
     {
         public bool IsConverter(string editoralias)
@@ -18,32 +21,42 @@ namespace Muffin.Infrastructure.Converters
 
         public object ConvertDataToSource(object source)
         {
-            var ret = new List<LinkModel>(); //return value
             var arr = JsonConvert.DeserializeObject(source.ToString()) as JArray;
-
             if (arr != null)
             {
-                foreach (var item in arr)
+                Func<IEnumerable<LinkModel>> func = () => ConvertToIEnumerable(arr);
+                return func;
+            }
+            else
+            {
+                Func<IEnumerable<LinkModel>> func = () => new List<LinkModel>(); //return value;
+                return func;
+            }
+        }
+
+        protected IEnumerable<LinkModel> ConvertToIEnumerable(JArray arr)
+        {
+            var ret = new List<LinkModel>();
+            foreach (var item in arr)
+            {
+                int id;
+                if (int.TryParse(item["link"].ToString(), out id)) //internal
                 {
-                    int id;
-                    if (int.TryParse(item["link"].ToString(), out id)) //internal
+                    ret.Add(new LinkModel
                     {
-                        ret.Add(new LinkModel
-                        {
-                            Title = item["title"].ToString(),
-                            Url = Repository.FriendlyUrl(id),
-                            NewWindow = (item["newWindow"].ToString() == "1")
-                        });
-                    }
-                    else //external link
+                        Title = item["title"].ToString(),
+                        Url = Repository.FriendlyUrl(id),
+                        NewWindow = (item["newWindow"].ToString() == "1")
+                    });
+                }
+                else //external link
+                {
+                    ret.Add(new LinkModel
                     {
-                        ret.Add(new LinkModel
-                        {
-                            Title = item["title"].ToString(),
-                            Url = item["link"].ToString(),
-                            NewWindow = (bool) item["newWindow"]
-                        });
-                    }
+                        Title = item["title"].ToString(),
+                        Url = item["link"].ToString(),
+                        NewWindow = (bool)item["newWindow"]
+                    });
                 }
             }
 

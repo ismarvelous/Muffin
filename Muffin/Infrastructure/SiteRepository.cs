@@ -25,7 +25,7 @@ namespace Muffin.Infrastructure
         protected IMacroService MacroService;
         protected Umbraco.Web.UmbracoContext CurrentContext;
 
-        protected Umbraco.Web.UmbracoHelper Helper;
+        protected Umbraco.Web.UmbracoHelper Helper; //todo: try to avoid using the helper
         public string SearchProvidername { get; private set; }
 
         public SiteRepository(IContentService service, IMacroService macroService, Umbraco.Web.UmbracoContext ctx)
@@ -168,7 +168,7 @@ namespace Muffin.Infrastructure
 
 		public string FriendlyUrl(int id)
 		{
-		    return "/"; //todo: does not work during Converter CurrentContext.UrlProvider.GetUrl(id, true);
+		    return CurrentContext.UrlProvider.GetUrl(id, true);
 		}
 
         #region Converted values

@@ -97,10 +97,10 @@ namespace Muffin.CodeGenerator
             //todo: make this list configurable...
             var typeList = new Dictionary<string, string>
             {
-                {Constants.PropertyEditors.RelatedLinksAlias, "IEnumerable<LinkModel>"},
-                {Constants.PropertyEditors.ContentPickerAlias, "Func<IModel>"},
+                {Constants.PropertyEditors.RelatedLinksAlias, "Func<IEnumerable<LinkModel>>"}, //late binder
+                {Constants.PropertyEditors.ContentPickerAlias, "Func<IModel>"}, //late binder..
                 {"Umbraco.Grid", "GridModel"},
-                {Constants.PropertyEditors.MacroContainerAlias, "IEnumerable<DynamicMacroModel>"},
+                {Constants.PropertyEditors.MacroContainerAlias, "Func<IEnumerable<DynamicMacroModel>>"}, //late binder
                 {Constants.PropertyEditors.MediaPickerAlias, "MediaModel"},
                 {Constants.PropertyEditors.ImageCropperAlias, "CroppedImageModel"},
                 {Constants.PropertyEditors.TrueFalseAlias, "bool"}
@@ -117,7 +117,7 @@ namespace Muffin.CodeGenerator
                 {Constants.PropertyEditors.RelatedLinksAlias, "[TypeConverter(typeof(RelatedLinks))]"},
                 {Constants.PropertyEditors.ContentPickerAlias, "[TypeConverter(typeof(ContentPicker))]"},
                 {"Umbraco.Grid", "[TypeConverter(typeof(Grid))]"},
-                {Constants.PropertyEditors.MacroContainerAlias, "[DittoIgnore]"}, //todo:Macro containers not supported by Ditto..
+                {Constants.PropertyEditors.MacroContainerAlias, "[DittoIgnore]"},  //macro containers are not supported by Ditto..
                 {Constants.PropertyEditors.MediaPickerAlias, "[TypeConverter(typeof(MediaPicker))]"},
                 {Constants.PropertyEditors.ImageCropperAlias, "[TypeConverter(typeof(ImageCropper))]"},
             };
@@ -127,9 +127,9 @@ namespace Muffin.CodeGenerator
 
         public static string GetPropertyAccessors(this GenericProperty property)
         {
-            var typeList = new Dictionary<string, string>
+            var typeList = new Dictionary<string, string> //PropertyEditors with special treatment
             {
-                { Constants.PropertyEditors.MacroContainerAlias, string.Format("{{ get {{ return (new MacroContainer()).ConvertDataToSource(this.GetProperty(\"{0}\")) as IEnumerable<DynamicMacroModel>; }} }}", property.Alias) }
+                { Constants.PropertyEditors.MacroContainerAlias, string.Format("{{ get {{ return (new MacroContainer()).ConvertDataToSource(this.GetProperty(\"{0}\")) as Func<IEnumerable<DynamicMacroModel>>; }} }}", property.Alias) }
             };
 
             return typeList.ContainsKey(property.Type) ? typeList[property.Type] : "{ get; set; }";
