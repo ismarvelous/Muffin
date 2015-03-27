@@ -8,13 +8,11 @@ namespace Muffin.Mvc
 {
     public class RssActionResult : ActionResult
     {
-        protected DynamicModel Content;
+        protected IModel Content;
 
-        public RssActionResult(DynamicModel content)
+        public RssActionResult(IModel content)
         {
             Content = content;
-            //this.title = title;
-            //this.description = description;
         }
 
         public override void ExecuteResult(ControllerContext context)

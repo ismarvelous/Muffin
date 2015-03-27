@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Muffin.Core;
 using Muffin.Core.Models;
+using Our.Umbraco.Ditto;
 using Umbraco.Web.Models;
 
 namespace Muffin.Controllers
@@ -9,10 +10,10 @@ namespace Muffin.Controllers
     /// <summary>
 	/// Default Container Controller..
     /// </summary>
-	public abstract class ContainerBaseController : DynamicBaseController
+	public abstract class ContainerBaseController : BaseController
     {
-		public ContainerBaseController(ISiteRepository rep)
-			: base (rep)
+        protected ContainerBaseController(ISiteRepository rep, IMapper map)
+			: base (rep, map)
         {
         }
 
@@ -32,13 +33,15 @@ namespace Muffin.Controllers
 			int p=1, //read querystring parameters without using this.Request.
             int s=10)
 		{
-			var resultModel = new DynamicCollectionModel(model.Content, Repository, model.Content.Children);
+            var @base = model.Content as ModelBase;
+            IModel content = @base ?? new ModelBase(model.Content);
+
+			var resultModel = new CollectionModel(content, model.Content.Children);
 
 			resultModel.PagedResults = () => resultModel.Container //or model.Content.Children which is the same in this case.
 			    .Skip(s * (p - 1))
-			    .Take(s)
-			    .Select(n => new DynamicModel(n, Repository));
-
+			    .Take(s);
+             
 			resultModel.CurrentPage = p;
 			resultModel.PageSize = s;
 

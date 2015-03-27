@@ -41,6 +41,11 @@ namespace Muffin.Caching
             }
         }
 
+        public DiskOutputCacheProvider()
+        {
+            
+        }
+
         IEnumerator<KeyValuePair<string, object>> IEnumerable<KeyValuePair<string, object>>.GetEnumerator()
         {
             return (new List<KeyValuePair<string, object>>(CacheItems)).GetEnumerator();
@@ -53,23 +58,23 @@ namespace Muffin.Caching
 
         public override object Add(string key, object entry, DateTime utcExpiry)
         {
+            key = GetSafeFileName(key); //be sure the key is a file safe name..
             LogAction("Add", string.Format("Key: {0} | UtcExpiry: {1}", key, utcExpiry.ToString()));
 
             // See if this key already exists in the cache. If so, we need to return it and NOT overwrite it!
             var results = this.Get(key);
             if (results != null)
                 return results;
-            else
-            {
-                // If the item is NOT in the cache, then save it!
-                this.Set(key, entry, utcExpiry);
 
-                return entry;
-            }
+            // If the item is NOT in the cache, then save it!
+            this.Set(key, entry, utcExpiry);
+
+            return entry;
         }
 
         public override object Get(string key)
         {
+            key = GetSafeFileName(key); //be sure the key is a file safe name..
             LogAction("Get", string.Format("Key: {0}", key));
 
             object obj = null;
@@ -94,6 +99,7 @@ namespace Muffin.Caching
 
         public override void Remove(string key)
         {
+            key = GetSafeFileName(key); //be sure the key is a file safe name..
             LogAction("Remove", string.Format("Key: {0}", key));
 
             object obj = null;
@@ -116,10 +122,11 @@ namespace Muffin.Caching
 
         public override void Set(string key, object entry, DateTime utcExpiry)
         {
+            key = GetSafeFileName(key); //be sure the key is a file safe name..
             LogAction("Set", string.Format("Key: {0} | UtcExpiry: {1}", key, utcExpiry.ToString()));
 
             // Create a DiskOutputCacheItem object
-            var item = new DiskOutputCacheItem(this.GetSafeFileName(key), utcExpiry);
+            var item = new DiskOutputCacheItem(key, utcExpiry);
 
             try
             {

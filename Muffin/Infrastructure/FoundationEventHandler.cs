@@ -3,10 +3,13 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using DevTrends.MvcDonutCaching;
 using Muffin.Controllers;
+using Muffin.Core.Models;
 using Muffin.Mvc;
+using Our.Umbraco.Ditto;
 using Umbraco.Core;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models;
+using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Core.Services;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.Routing;
@@ -71,9 +74,14 @@ namespace Muffin.Infrastructure
             //excecuting this region here allows developers to override defaults in InitializeAtStartup
             #region set defaults
             //User dynamic basecontroller as the default controller, if you like to use your own, you can change it here..
-            DefaultRenderMvcControllerResolver.Current.SetDefaultControllerType(typeof(DynamicBaseController));
+            DefaultRenderMvcControllerResolver.Current.SetDefaultControllerType(typeof(BaseController));
             //theme engine as default view engine!
             ViewEngines.Engines.Insert(0, new ThemeViewEngine());
+
+            var types = PluginManager.Current.ResolveTypes<ModelBase>();
+            var factory = new DittoPublishedContentModelFactory(types);
+            PublishedContentModelFactoryResolver.Current.SetFactory(factory);
+
             #endregion
 
             IDependencyResolver resolver;

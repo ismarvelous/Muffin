@@ -1,39 +1,52 @@
 ﻿using System;
+using System.ComponentModel;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Core.Dynamics;
 using Muffin.Core.Models;
+using Newtonsoft.Json.Linq;
 
 namespace Muffin.Infrastructure.Converters
 {
-    public class Grid : BaseConverter, IConverter
+    public class Grid : BaseTypeConverter, IConverter
     {
-        public override bool IsConverter(PublishedPropertyType propertyType)
-        {
-            return IsConverter(propertyType.PropertyEditorAlias);
-        }
-
         public bool IsConverter(string editoralias)
         {
             return "Umbraco.Grid".Equals(editoralias);
-        }
-
-        public override object ConvertDataToSource(PublishedPropertyType propertyType, object source, bool preview)
-        {
-            return ConvertDataToSource(source);
         }
 
         public object ConvertDataToSource(object source)
         {
             try
             {
-                var ret = DynamicGridModel.Create(source.ToString());
-                return ret;
+                var json = source.ToString();
+
+                if(!string.IsNullOrWhiteSpace(json))
+                {
+                    var ret = GridModel.Create(json);
+                    return ret;
+                }
             }
             catch (Exception ex)
             {
                 //todo: log exception...
-                return DynamicNull.Null;
             }
+
+            return DynamicNull.Null;
+        }
+
+        public override bool CanConvertFrom(ITypeDescriptorContext context, System.Type sourceType)
+        {
+            return sourceType == typeof(JObject) || base.CanConvertFrom(context, sourceType);
+        }
+
+        public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
+        {
+            if (value is JObject)
+            {
+                return ConvertDataToSource(value);
+            }
+
+            return null;
         }
     }
 }

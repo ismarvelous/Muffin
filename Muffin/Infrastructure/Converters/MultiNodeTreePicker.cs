@@ -1,40 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Globalization;
 using Muffin.Core.Models;
 using Umbraco.Core;
-using Umbraco.Core.Dynamics;
-using Umbraco.Core.Models.PublishedContent;
 
 namespace Muffin.Infrastructure.Converters
 {
     /// <summary>
     /// Multi node tree picker converter
     /// </summary>
-    public class MultiNodeTreePicker : BaseConverter
+    public class MultiNodeTreePicker : BaseTypeConverter, IConverter
     {
-        /// <summary>
-        /// Check converter type
-        /// </summary>
-        /// <param name="propertyType"></param>
-        /// <returns></returns>
-        public override bool IsConverter(PublishedPropertyType propertyType)
+        public bool IsConverter(string alias)
         {
-            return Constants.PropertyEditors.MultiNodeTreePickerAlias.Equals(propertyType.PropertyEditorAlias);
+            return Constants.PropertyEditors.MultiNodeTreePickerAlias.Equals(alias);
         }
 
-        /// <summary>
-        /// Convert to data source
-        /// </summary>
-        /// <param name="propertyType"></param>
-        /// <param name="source"></param>
-        /// <param name="preview"></param>
-        /// <returns></returns>
-        public override object ConvertDataToSource(PublishedPropertyType propertyType, object source, bool preview)
+        public object ConvertDataToSource(object source)
         {
-            var ret = new List<DynamicModel>(); //return value
+            var ret = new List<IModel>(); //return value
 
             if(source != null && !string.IsNullOrEmpty(source.ToString()))
             {
@@ -43,11 +28,26 @@ namespace Muffin.Infrastructure.Converters
                     int id = 0;
                     if(int.TryParse(item, out id))
                     {
-                        ret.Add(Repository.FindById(id));
+                        ret.Add(Mapper.AsDynamicIModel(Repository.FindById<ModelBase>(id)));
                     }
                 }
             }
             return ret;
+        }
+
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+        {
+            return sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
+        }
+
+        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        {
+            if (value is string)
+            {
+                return ConvertDataToSource(value);
+            }
+
+            return base.ConvertFrom(context, culture, value);
         }
     }
 }

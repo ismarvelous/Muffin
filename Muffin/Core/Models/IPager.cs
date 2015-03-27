@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Muffin.Core.Models;
+using Umbraco.Core.Models;
+using Umbraco.Core.Persistence.Migrations.Syntax.Update;
 
 namespace Muffin.Core.Models
 {
@@ -12,12 +14,12 @@ namespace Muffin.Core.Models
 		/// <summary>
 		/// Add a custom implementation for the paged results..
 		/// </summary>
-		Func<IEnumerable<DynamicModel>> PagedResults { get; set; }
+		Func<IEnumerable<IModel>> PagedResults { get; set; }
 
 		/// <summary>
 		/// returns all results, or when PagedResults is set; it retuns a selection of the results.
 		/// </summary>
-		IEnumerable<DynamicModel> Results { get; }
+		IEnumerable<IModel> Results { get; }
 
 		/// <summary>
 		/// Total count of all results.

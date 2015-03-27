@@ -9,9 +9,12 @@ using Muffin.Infrastructure.Converters;
 using umbraco.cms.businesslogic.macro;
 using Umbraco.Core.Models;
 using Umbraco.Core.Services;
-using Umbraco.Web;
 using Umbraco.Core.Dynamics;
 using System.Reflection;
+using Muffin.Infrastructure.Models;
+using Our.Umbraco.Ditto;
+using Umbraco.Core;
+using Umbraco.Web;
 
 namespace Muffin.Infrastructure
 {
@@ -20,22 +23,22 @@ namespace Muffin.Infrastructure
         //protected IMediaService MediaService;
         protected IContentService Service;
         protected IMacroService MacroService;
-        protected UmbracoContext CurrentContext;
+        protected Umbraco.Web.UmbracoContext CurrentContext;
 
-        protected UmbracoHelper Helper;
+        protected Umbraco.Web.UmbracoHelper Helper; //todo: try to avoid using the helper
         public string SearchProvidername { get; private set; }
 
-        public SiteRepository(IContentService service, IMacroService macroService, UmbracoContext ctx)
+        public SiteRepository(IContentService service, IMacroService macroService, Umbraco.Web.UmbracoContext ctx)
 			: this(service, macroService, ctx, "ExternalSearcher") //use umbraco default searcher.
 		{
 		}
 
-        public SiteRepository(IContentService service, IMacroService macroService, UmbracoContext ctx, string searchProvidername)
+        public SiteRepository(IContentService service, IMacroService macroService, Umbraco.Web.UmbracoContext ctx, string searchProvidername)
         {
             Service = service;
             MacroService = macroService;
             SearchProvidername = searchProvidername;
-            Helper = new UmbracoHelper(ctx);
+            Helper = new Umbraco.Web.UmbracoHelper(ctx);
             CurrentContext = ctx;
         }
 
@@ -44,7 +47,7 @@ namespace Muffin.Infrastructure
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        public IEnumerable<DynamicModel> Find(string query)
+        public IEnumerable<IModel> Find(string query)
         {
 			//todo: check for PublishedContentExtensions Search and SearchChildren extensions..
             var searcher = ExamineManager.Instance.SearchProviderCollection[SearchProvidername];
@@ -66,47 +69,69 @@ namespace Muffin.Infrastructure
                 var searchHiglight = !String.IsNullOrEmpty(field.Key) ?
                     LuceneHighlightHelper.Instance.GetHighlight(field.Value, field.Key, ((LuceneSearcher)searcher).GetSearcher(), query) : String.Empty;
 
-				var content = FindById(item.Id); //returns dynamic null if this is not a content item (for example when this is a media item.
+				var content = FindById<ModelBase>(item.Id); //returns dynamic null if this is not a content item (for example when this is a media item.
 
 				if (content != null)
 				{
-					var ret = new DynamicSearchResultItem(content, this) {HighlightText = searchHiglight};
+					var ret = new DynamicSearchResultItem(content) {HighlightText = searchHiglight};
 
 				    yield return ret;
 				}
             }
         }
 
-		public IEnumerable<DynamicModel> FindAll()
-		{
-			var result = new List<DynamicModel>();
-			var roots = Helper.ContentAtRoot() as IEnumerable<IPublishedContent>;
-		    return roots != null ? FindAll(roots.Select(n => new DynamicModel(n, this))) : null;
-		}
+        public IEnumerable<TM> FindAll<TM>() where TM : class, IModel
+        {
+            var roots = Helper.ContentAtRoot() as IEnumerable<IPublishedContent>;
+            return roots != null ? FindAll(roots.Select(n => n is IModel ? n as TM : n.As<TM>())) : null;
+        }
 
-
-        public IEnumerable<DynamicModel> FindAll(IEnumerable<DynamicModel> rootNodes)
+        protected IEnumerable<TM> FindAll<TM>(IEnumerable<TM> rootNodes) where TM : class, IModel
 		{
-            var result = new List<DynamicModel>();
+            var result = new List<TM>();
             foreach (var node in rootNodes)
             {
                 result.Add(node);
-                result.AddRange(node.Children().Select(n => new DynamicModel(n, this)));
+                if (node.Children.Any()) result.AddRange(FindAll(node.Children().Select(n => n is IModel ? n as TM : n.As<TM>()))); //recursive..
             }
 
             return result;
 		}
 
-		public DynamicModel FindById(int id)
+        ///<summary>
+        ///Returns IModel as a Dynamic Proxy.
+        ///</summary>
+        ///<param name="id"></param>
+        ///<returns></returns>
+        public IModel FindById(int id)
+        {
+            return FindById<ModelBase>(id).AsDynamic();
+        }
+
+		public TM FindById<TM>(int id) where TM : class, IModel
 		{
-		    var content = Helper.TypedContent(id);
-		    return content != null ? new DynamicModel(content, this) : null;
+		    //var content = Helper.TypedContent(id);
+		    var content = CurrentContext.ContentCache.GetById(id);
+
+		    if (content is IModel)
+		        return content as TM;
+
+		    return content != null ? content.As<TM>() : null;
 		}
 
-        public DynamicModel FindByUrl(string urlpath)
+        public IModel FindByUrl(string urlPath)
+        {
+            return FindByUrl<ModelBase>(urlPath).AsDynamic();
+        }
+
+        public TM FindByUrl<TM>(string urlpath) where TM : class, IModel
         {
             var content = CurrentContext.ContentCache.GetByRoute(urlpath);
-            return content != null ? new DynamicModel(content, this) : null;
+
+            if (content is IModel)
+                return content as TM;
+
+            return content != null ? content.As<TM>() : null;
         }
 
         public IContent FindContentById(int id)
@@ -114,10 +139,10 @@ namespace Muffin.Infrastructure
 			return Service.GetById(id);
 		}
 
-        public DynamicMediaModel FindMediaById(int id)
+        public MediaModel FindMediaById(int id)
         {
             var media = Helper.TypedMedia(id);
-            return media != null ? new DynamicMediaModel(media, this) : null;
+            return media != null ? new MediaModel(media) : null;
         }
 
         public string Translate(string key)
@@ -143,33 +168,28 @@ namespace Muffin.Infrastructure
 
 		public string FriendlyUrl(int id)
 		{
-			return Helper.NiceUrlWithDomain(id);
+		    return CurrentContext.UrlProvider.GetUrl(id, true);
 		}
 
-        public object GetPropertyValue(MacroPropertyModel property) 
+        #region Converted values
+
+        public object GetPropertyValue(MacroPropertyModel property)
         {
-            if (property != null)
+            if (property != null && property.Value != null)
             {
-                var assembly = typeof(IConverter).Assembly;
-                var types = assembly.GetTypes().Where(type => type != typeof(IConverter) && typeof(IConverter).IsAssignableFrom(type)).ToList();
-
-                foreach (var type in types)
-                {
-                    var instance = (IConverter) Activator.CreateInstance(type);
-                    if (instance.IsConverter(property.Type))
-                    {
-                        return instance.ConvertDataToSource(property.Value);
-                    }
-                }
-
-                return property.Value ?? DynamicNull.Null;
+                return ConvertPropertyValue(property.Type, property.Value);
             }
-            else
-                return DynamicNull.Null;
+
+            return DynamicNull.Null;
         }
 
 
         public object GetPropertyValue(Control gridControl)
+        {
+            return ConvertPropertyValue(gridControl.Editor.Alias, gridControl.SourceValue);
+        }
+
+        public object ConvertPropertyValue(string editoralias, object value)
         {
             var assembly = typeof(IConverter).Assembly;
             var types = assembly.GetTypes().Where(type => type != typeof(IConverter) && typeof(IConverter).IsAssignableFrom(type)).ToList();
@@ -177,13 +197,16 @@ namespace Muffin.Infrastructure
             foreach (var type in types)
             {
                 var instance = (IConverter)Activator.CreateInstance(type);
-                if (instance.IsConverter(gridControl.Editor.Alias))
+                if (instance.IsConverter(editoralias))
                 {
-                    return instance.ConvertDataToSource(gridControl.SourceValue);
+                    return instance.ConvertDataToSource(value);
                 }
             }
 
-            return gridControl.SourceValue;
+            return value;
         }
+
+        #endregion
+
     }
 }

@@ -1,37 +1,32 @@
-﻿using Muffin.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using System.ComponentModel;
 using System.Web.Mvc;
 using Muffin.Core;
-using Umbraco.Core;
-using Umbraco.Core.Models;
 using Umbraco.Core.PropertyEditors;
-using Umbraco.Core.Services;
 using Umbraco.Web;
 
 namespace Muffin.Infrastructure.Converters
 {
-	public abstract class BaseConverter : PropertyValueConverterBase
+    public abstract class BaseTypeConverter : TypeConverter
     {
-		protected ISiteRepository Repository;
-		protected UmbracoHelper Helper;
+        protected ISiteRepository Repository;
+        protected IMapper Mapper;
+        protected UmbracoHelper Helper;
 
-	    protected BaseConverter() 
+        protected BaseTypeConverter()
         {
-			Initialize(DependencyResolver.Current.GetService<ISiteRepository>());
+            Initialize(DependencyResolver.Current.GetService<ISiteRepository>(), DependencyResolver.Current.GetService<IMapper>());
         }
 
-	    protected BaseConverter(ISiteRepository rep)
+        protected BaseTypeConverter(ISiteRepository rep, IMapper mapper)
         {
-            Initialize(rep);
+            Initialize(rep, mapper);
         }
 
-        protected void Initialize(ISiteRepository rep)
+        protected void Initialize(ISiteRepository rep, IMapper map)
         {
-			Repository = rep;
+            Repository = rep;
+            Mapper = map;
         }
-	}
+    }
 }

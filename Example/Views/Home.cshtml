@@ -1,5 +1,8 @@
-﻿@using Example.Implementation.ViewModels
+﻿@inherits UmbracoViewPage<Example.Implementation.ViewModels.Home>
+@using Example.Implementation.ViewModels
 @using Muffin.Core
+@using Muffin.Infrastructure
+@using Our.Umbraco.Ditto;
 @{
     Layout = "~/Views/Shared/_layout.cshtml";
 }
@@ -7,12 +10,12 @@
 @section Main
 {
 	<header>
-	    Rotatie snelheids: @Model.CarrouselContainer..Rotatiesnelheid<br />
-        @Mapper.AsJson(Model.CarrouselContainer.Children)
+	    Rotatie snelheids: @(Model.CarrouselContainer().As<Carrousel>().Rotatiesnelheid)<br />
+        @((Model.CarrouselContainer() as IPublishedContent).Children.AsJson())
 
         
 	    <ul>
-		@foreach(var item in Model.CarrouselContainer.Children)
+		@foreach(var item in Model.CarrouselContainer().Children.As<CarrouselItem>())
 		{
 			<li>@item.Afbeelding.Url @item.Titel - @item.Beschrijving @item.Link</li>
 		}
@@ -30,7 +33,7 @@
 
 @section Side
 {
-	@foreach(var widget in Model.WidgetArea)
+	@foreach(var widget in Model.WidgetArea())
     {
         <aside>
             @widget

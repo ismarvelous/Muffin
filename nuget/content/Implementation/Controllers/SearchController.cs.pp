@@ -1,11 +1,6 @@
-﻿using Muffin.Controllers;
+﻿using System.Web.Mvc;
+using Muffin.Controllers;
 using Muffin.Core;
-using Muffin.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 using Umbraco.Web.Models;
 
 namespace $rootnamespace$.Implementation.Controllers
@@ -15,8 +10,8 @@ namespace $rootnamespace$.Implementation.Controllers
     /// </summary>
     public class SearchController : SearchBaseController
     {
-		public SearchController(ISiteRepository rep)
-			: base (rep)
+		public SearchController(ISiteRepository rep, IMapper map)
+			: base (rep, map)
         {
         }
 

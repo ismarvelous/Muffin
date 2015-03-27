@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Example.Implementation.ViewModels;
+using Muffin.Core.Models;
+using Muffin.Infrastructure;
+using Our.Umbraco.Ditto;
+using Umbraco.Web;
 using Umbraco.Web.Mvc;
 
 namespace Example.Implementation.SurfaceControllers

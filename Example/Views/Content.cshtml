@@ -1,70 +1,53 @@
-@using Example.Implementation.ViewModels
-@using Muffin.Core
-@using Muffin.Core.Models
-@using Muffin.Mvc
-
+@using Our.Umbraco.Ditto
+@inherits UmbracoViewPage<Example.Implementation.ViewModels.Content>
 @{
-	Layout = "~/Views/Shared/_layout.cshtml";
-    var obj = (Model as IPublishedContent).As<ContentViewModel>();
+    Layout = "~/Views/Shared/_layout.cshtml";
 }
 @section Main
 {
-    
-    
-	<header>
-	    <h1>@Model.Titel - @obj.Name - o</h1>
 
-	    <br />
-        @Model.CroppedImage
 
-        <img src="@Model.CroppedImage["640x480"]" />
-	    <img src="@Model.CroppedImage["1024x768"]" />
+    <header>
+        <h1>@Model.Titel</h1>
 
-	    <img src="@Model.CroppedImage[200, 100]" />
+        <br />
+        @Model.Croppedimage
 
-	    @if (Model.Afbeelding.IsNull())
-	    {
-	        <p>Er is geen afbeelding ingegeven.</p>
-	    }
-	    else
-	    {
-	        <p><img src="@Model.Afbeelding.Url" width="400px" height="400px" /></p>
-	    }
+        <img src="@Model.Croppedimage["640x480"]" />
+        <img src="@Model.Croppedimage["1024x768"]" />
+
+        <img src="@Model.Croppedimage[200, 100]" />
+
+        @if (Model.Afbeelding == null || Model.Afbeelding.IsNull())
+        {
+            <p>Er is geen afbeelding ingegeven.</p>
+        }
+        else
+        {
+            <p><img src="@Model.Afbeelding.Url" width="400px" height="400px" /></p>
+        }
 
         <i>@Model.Intro</i>
     </header>
     <section>
-        <hr/>
+        <hr />
         @* for demo purpose only...
-        if (Model.Intro.Length < 110)
-        {
-            <p>@Model.Intro</p>
-        }
-        else
-        {
-            <p>@Model.Intro.Substring(0, 110)</p>
-        }
+            if (Model.Intro.Length < 110)
+            {
+                <p>@Model.Intro</p>
+            }
+            else
+            {
+                <p>@Model.Intro.Substring(0, 110)</p>
+            }
         *@
 
-        @Model.MiniIntro
     </section>
 
     <section>
 
         <h2>Grid</h2>
 
-        <h3>Standaard features</h3>
-        @Model.Grid
-        @((Model as IPublishedContent).GetGridHtml("grid"))
-
-        <h2>Grid manipulation (grid as an object.)</h2>
-         @((Model.Grid as DynamicGridModel).Sections.First().Rows.First().Areas.First().Controls.First())
-        value: @((Model.Grid as DynamicGridModel).Sections.First().Rows.ElementAt(1).Areas.First().Controls.First())
-        <p>
-
-        </p>
-        <p>
-            url: @((Model.Grid as DynamicGridModel).Sections.First().Rows.ElementAt(1).Areas.First().Controls.First().Value[100,100])
-        </p>
+        @(Model.Grid.Sections.First().Rows.ElementAt(1).Areas.First().Controls.First().Value[100,100])
     </section>
 }

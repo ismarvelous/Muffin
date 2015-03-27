@@ -6,12 +6,7 @@
 @section Main
 {
 	<header>
-        <h1>@Model.Titel</h1>
-        <i>@Model.Intro</i>
-		@Model.MainBody
-		<p>
-			Er zijn @Model.TotalResults nieuws items op deze site. Default page size is 10, maar dit kun je overrulen door de query string s mee te geven.
-		</p>
+		Er zijn @Model.TotalResults nieuws items op deze site. Default page size is 10, maar dit kun je overrulen door de query string s mee te geven.
     </header>
 
 	@foreach(var child in Model.Results)

@@ -92,17 +92,17 @@ namespace Muffin.Test
 			return mockedItem;
 		}
 
-		public static List<DynamicModel> BasicPages(ISiteRepository repository)
+		public static List<ModelBase> BasicPages(ISiteRepository repository)
 		{
-			List<DynamicModel> ret = new List<DynamicModel>()
+			var ret = new List<ModelBase>()
 			{
-				{ new DynamicModel(Content("Lorem page 1").Object, repository) },
-				{ new DynamicModel(Content("Ipsum page 2").Object, repository) },
-				{ new DynamicModel(Content("Dolor page 3").Object, repository) },
-				{ new DynamicModel(Content("Sit page 4").Object, repository) },
-				{ new DynamicModel(Content("Consectetur page 5").Object, repository) },
-				{ new DynamicModel(Content("Donec page 6").Object, repository) },
-				{ new DynamicModel(Content("Commodo page 7").Object, repository) }
+				{ new ModelBase(Content("Lorem page 1").Object) },
+				{ new ModelBase(Content("Ipsum page 2").Object) },
+				{ new ModelBase(Content("Dolor page 3").Object) },
+				{ new ModelBase(Content("Sit page 4").Object) },
+				{ new ModelBase(Content("Consectetur page 5").Object) },
+				{ new ModelBase(Content("Donec page 6").Object) },
+				{ new ModelBase(Content("Commodo page 7").Object) }
 			};
 
 			return ret;

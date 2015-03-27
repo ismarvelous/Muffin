@@ -1,25 +1,16 @@
-﻿using Muffin.Core.Models;
+﻿using System.ComponentModel;
+using Muffin.Core.Models;
 using Umbraco.Core;
 using Umbraco.Core.Models.PublishedContent;
 
 namespace Muffin.Infrastructure.Converters
 {
-    public class MediaPicker : BaseConverter, IConverter
+    public class MediaPicker : BaseTypeConverter, IConverter
 	{
-		public override bool IsConverter(PublishedPropertyType propertyType)
-		{
-            return IsConverter(propertyType.PropertyEditorAlias);
-		}
-
         public bool IsConverter(string editoralias)
         {
             return Constants.PropertyEditors.MediaPickerAlias.Equals(editoralias);
         }
-
-		public override object ConvertDataToSource(PublishedPropertyType propertyType, object source, bool preview)
-		{
-		    return ConvertDataToSource(source);
-		}
 
 	    public object ConvertDataToSource(object source)
 	    {
@@ -34,5 +25,20 @@ namespace Muffin.Infrastructure.Converters
 
             return DynamicNullMedia.Null;
 	    }
+
+        public override bool CanConvertFrom(ITypeDescriptorContext context, System.Type sourceType)
+        {
+            return sourceType == typeof(string) || sourceType == typeof(int) || base.CanConvertFrom(context, sourceType);
+        }
+
+        public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
+        {
+            if (value is string || value is int)
+            {
+                return ConvertDataToSource(value);
+            }
+
+            return base.ConvertFrom(context, culture, value);
+        }
 	}
 }

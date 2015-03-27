@@ -1,16 +1,12 @@
 ﻿using Muffin.Controllers;
 using Muffin.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace Example.Controllers
+namespace Example.Implementation.Controllers
 {
 	public class ListingController : ContainerBaseController
 	{
-		public ListingController(ISiteRepository rep)
-			: base (rep)
+		public ListingController(ISiteRepository rep, IMapper map)
+			: base (rep, map)
         {
         }
 
