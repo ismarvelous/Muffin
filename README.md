@@ -7,8 +7,9 @@ It tries to focus SOLID principles as much as possible to allow better testabili
 
 ###Some features:  
 
-- Frontend developers friendly hybride "dynamic" models for templates 
-- Frontend developers friendly Partial view Macros 
+- Frontend developers friendly hybride "dynamic" or typesafe models for templates 
+- Frontend developers friendly Partial view Macros
+- T4 POCO model generation 
 - Paged result views  
 - Basic property editor converters 
 - Focused on SOLID principles, to allow better unit-testability
@@ -25,11 +26,10 @@ It tries to focus SOLID principles as much as possible to allow better testabili
 
 The whole foundation is constantly under development. But currently we are especially focused on:
 
-- Support for: IPublishedContentModelFactory
-- Theme engine
+- Stability, optimization, performance and caching
 - Azure ready examine: https://github.com/Shazwazza/Examine/wiki/Examine-with-Azure-Websites
 
-Currently build on top of Umbraco 7.2.0
+Currently build on top of Umbraco 7.2.4
 
 ##Installation
 Umbraco is installed and updated via Nuget.
