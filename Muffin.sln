@@ -22,8 +22,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{1A93A4A5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{640CA869-826B-4A2F-B362-0FF321CFC6A9}"
 	ProjectSection(SolutionItems) = preProject
+		nuget\content\Implementation\ViewModels\MultipleOutputHelper.ttinclude.pp = nuget\content\Implementation\ViewModels\MultipleOutputHelper.ttinclude.pp
 		nuget\content\Implementation\Controllers\SearchController.cs.pp = nuget\content\Implementation\Controllers\SearchController.cs.pp
 		nuget\content\Implementation\Events\StartupHandler.cs.pp = nuget\content\Implementation\Events\StartupHandler.cs.pp
+		nuget\content\Implementation\ViewModels\ViewModelsGenerator.tt.pp = nuget\content\Implementation\ViewModels\ViewModelsGenerator.tt.pp
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Muffin", "Muffin\Muffin.csproj", "{38B824F4-CC9D-49ED-A905-69413EE3E192}"

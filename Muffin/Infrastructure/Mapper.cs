@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Web;
@@ -21,20 +22,35 @@ namespace Muffin.Infrastructure
             {
                 foreach (var prop in content.Properties.Where(p => aliases.Contains(p.PropertyTypeAlias)))
                 {
-                    if (prop.Value is HtmlString || prop.Value is MediaModel) //htmlstring & DynamicMediaModel can not be serialized with Newtonsoft json..
-                        expando.Add(prop.PropertyTypeAlias, prop.Value.ToString());
-                    else
-                        expando.Add(prop.PropertyTypeAlias, prop.Value);
+                    try
+                    {
+                        if (prop.Value is HtmlString || prop.Value is MediaModel)
+                            //htmlstring & DynamicMediaModel can not be serialized with Newtonsoft json..
+                            expando.Add(prop.PropertyTypeAlias, prop.Value.ToString());
+                        else
+                            expando.Add(prop.PropertyTypeAlias, prop.Value);
+                    }
+                    catch
+                    {
+                        // ignored, some values need a PublishedContentRequest which we don't have here. these values are not supported
+                    }
                 }
             }
             else
             {
                 foreach (var prop in content.Properties)
                 {
-                    if (prop.Value is HtmlString || prop.Value is MediaModel) //htmlstring & DynamicMediaModel can not be serialized with Newtonsoft json..
-                        expando.Add(prop.PropertyTypeAlias, prop.Value.ToString());
-                    else
-                        expando.Add(prop.PropertyTypeAlias, prop.Value);
+                    try
+                    {
+                        if (prop.Value is HtmlString || prop.Value is MediaModel) //htmlstring & DynamicMediaModel can not be serialized with Newtonsoft json..
+                            expando.Add(prop.PropertyTypeAlias, prop.Value.ToString());
+                        else
+                            expando.Add(prop.PropertyTypeAlias, prop.Value);
+                    }
+                    catch
+                    {
+                        // ignored, some values need a PublishedContentRequest which we don't have here. these values are not supported
+                    }
                 }
             }
 
