@@ -19,19 +19,30 @@ namespace Muffin.Infrastructure.Converters
 
         public object ConvertDataToSource(object source)
         {
-            var ret = new List<IModel>(); //return value
-
             if(source != null && !string.IsNullOrEmpty(source.ToString()))
             {
-                foreach (var item in source.ToString().Split(',')) // source contains a comma seperate value
+                Func<IEnumerable<IModel>> func = () => ConvertToIEnumerable(source.ToString().Split(',')); //return value;
+                return func;
+            }
+            else
+            {
+                Func<IEnumerable<IModel>> func = () => new List<IModel>(); //return value;
+                return func;
+            }
+        }
+
+        protected IEnumerable<IModel> ConvertToIEnumerable(string[] arr)
+        {
+            var ret = new List<IModel>(); //return value
+            foreach (var item in arr) // source contains a comma seperate value
+            {
+                var id = 0;
+                if (int.TryParse(item, out id))
                 {
-                    int id = 0;
-                    if(int.TryParse(item, out id))
-                    {
-                        ret.Add(Mapper.AsDynamicIModel(Repository.FindById<ModelBase>(id)));
-                    }
+                    ret.Add(Mapper.AsDynamicIModel(Repository.FindById<ModelBase>(id)));
                 }
             }
+
             return ret;
         }
 

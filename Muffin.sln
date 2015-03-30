@@ -37,6 +37,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{A8
 		Muffin.sln.DotSettings = Muffin.sln.DotSettings
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{AF6B2A1E-6D73-44D6-B4E5-B561B669FE31}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Azure.Staging|Any CPU = Azure.Staging|Any CPU
@@ -75,5 +77,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{640CA869-826B-4A2F-B362-0FF321CFC6A9} = {1A93A4A5-7920-49BA-BA38-59BD702978A4}
+		{AF6B2A1E-6D73-44D6-B4E5-B561B669FE31} = {A806B2F1-EE53-47EE-B103-7579B6BF35BF}
 	EndGlobalSection
 EndGlobal

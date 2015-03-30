@@ -26,6 +26,9 @@ namespace  Example.Implementation.ViewModels
 		[TypeConverter(typeof(RelatedLinks))]
 		public virtual Func<IEnumerable<LinkModel>> SocialNetworks { get; set; }
 		
+		[TypeConverter(typeof(MultiNodeTreePicker))]
+		public virtual Func<IEnumerable<IModel>> Quickmenu { get; set; }
+		
 		[TypeConverter(typeof(ContentPicker))]
 		public virtual Func<IModel> CarrouselContainer { get; set; }
 		

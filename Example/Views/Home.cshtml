@@ -13,7 +13,11 @@
 	    Rotatie snelheids: @(Model.CarrouselContainer().As<Carrousel>().Rotatiesnelheid)<br />
         @((Model.CarrouselContainer() as IPublishedContent).Children.AsJson())
 
-        
+        @foreach(var itm in Model.Quickmenu().As<Base>())
+        {
+            @itm.Name @itm.Url
+        }
+
 	    <ul>
 		@foreach(var item in Model.CarrouselContainer().Children.As<CarrouselItem>())
 		{

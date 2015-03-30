@@ -99,6 +99,7 @@ namespace Muffin.CodeGenerator
             {
                 {Constants.PropertyEditors.RelatedLinksAlias, "Func<IEnumerable<LinkModel>>"}, //late binder
                 {Constants.PropertyEditors.ContentPickerAlias, "Func<IModel>"}, //late binder..
+                {Constants.PropertyEditors.MultiNodeTreePickerAlias, "Func<IEnumerable<IModel>>"}, //late binder..
                 {"Umbraco.Grid", "GridModel"},
                 {Constants.PropertyEditors.MacroContainerAlias, "Func<IEnumerable<DynamicMacroModel>>"}, //late binder
                 {Constants.PropertyEditors.MediaPickerAlias, "MediaModel"},
@@ -120,6 +121,7 @@ namespace Muffin.CodeGenerator
                 {Constants.PropertyEditors.MacroContainerAlias, "[DittoIgnore]"},  //macro containers are not supported by Ditto..
                 {Constants.PropertyEditors.MediaPickerAlias, "[TypeConverter(typeof(MediaPicker))]"},
                 {Constants.PropertyEditors.ImageCropperAlias, "[TypeConverter(typeof(ImageCropper))]"},
+                {Constants.PropertyEditors.MultiNodeTreePickerAlias, "[TypeConverter(typeof(MultiNodeTreePicker))]"},
             };
 
             return typeList.ContainsKey(property.Type) ? typeList[property.Type] : "//no type converter specified"; 
