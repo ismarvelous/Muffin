@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using Muffin.Core.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Umbraco.Core;
+using Umbraco.Core.Models.PublishedContent;
+using Umbraco.Core.PropertyEditors;
 
 namespace Muffin.Infrastructure.Converters
 {
@@ -21,14 +24,25 @@ namespace Muffin.Infrastructure.Converters
 
         public object ConvertDataToSource(object source)
         {
-            var arr = JsonConvert.DeserializeObject(source.ToString()) as JArray;
-            if (arr != null)
+            try
             {
-                Func<IEnumerable<LinkModel>> func = () => ConvertToIEnumerable(arr);
-                return func;
+
+
+                var arr = JsonConvert.DeserializeObject(source.ToString()) as JArray;
+                if (arr != null)
+                {
+                    Func<IEnumerable<LinkModel>> func = () => ConvertToIEnumerable(arr);
+                    return func;
+                }
+                else
+                {
+                    Func<IEnumerable<LinkModel>> func = () => new List<LinkModel>(); //return value;
+                    return func;
+                }
             }
-            else
+            catch (StackOverflowException ex)
             {
+                Debug.WriteLine(ex.Message);
                 Func<IEnumerable<LinkModel>> func = () => new List<LinkModel>(); //return value;
                 return func;
             }
@@ -76,6 +90,30 @@ namespace Muffin.Infrastructure.Converters
             }
 
             return base.ConvertFrom(context, culture, value);
+        }
+    }
+
+    /// <summary>
+    /// DIRTY FIX: override Umbraco's RelatedLinksEditorValue converter. The original Core implementation is calling 
+    /// .NiceUrl.. which results in a StackoverflowException when used together with the ditto factory.
+    /// </summary>
+    [PropertyValueType(typeof(JArray))]
+    [PropertyValueCache(PropertyCacheValue.All, PropertyCacheLevel.Content)]
+    public class RelatedLinksEditorValueConvertor : PropertyValueConverterBase
+    {
+        public override bool IsConverter(PublishedPropertyType propertyType)
+        {
+            return Constants.PropertyEditors.RelatedLinksAlias.Equals(propertyType.PropertyEditorAlias);
+        }
+
+        public override object ConvertDataToSource(PublishedPropertyType propertyType, object source, bool preview)
+        {
+            return source;
+        }
+
+        public override object ConvertSourceToXPath(PublishedPropertyType propertyType, object source, bool preview)
+        {
+            return source;
         }
     }
 }

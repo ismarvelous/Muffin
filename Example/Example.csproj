@@ -152,10 +152,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Our.Umbraco.Ditto, Version=0.4.5372.18059, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Our.Umbraco.Ditto.0.4.1\lib\net45\Our.Umbraco.Ditto.dll</HintPath>
-    </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
@@ -1897,6 +1893,10 @@
     <ProjectReference Include="..\Muffin\Muffin.csproj">
       <Project>{38b824f4-cc9d-49ed-a905-69413ee3e192}</Project>
       <Name>Muffin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Our.Umbraco.Ditto\Our.Umbraco.Ditto.csproj">
+      <Project>{3a2482a4-ad19-4c26-a449-4287da07ab16}</Project>
+      <Name>Our.Umbraco.Ditto</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
