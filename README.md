@@ -1,9 +1,9 @@
 #Muffin (An Umbraco Foundation)
 
-Muffin is the reincarnation of the foundation formerly known as the Macaw Umbraco Foundation. It's a simplefied templating API / facade on top of the
+Muffin is a simplefied templating API / facade on top of the
 Umbraco framework to allow easier front-end development, quicker development. It also comes with some helpers and default implementations of frequently used functionality.
-It tries to focus SOLID principles as much as possible to allow better testability. For more info you can als find a presentation given at the BUUG: 
-[A dynamic journey of concerns](http://www.slideshare.net/JeroenWijdeven)
+It tries to focus SOLID principles as much as possible to allow better testability. A summary of what we try to achieve:  
+[Muffin an Umbraco Foundation](http://www.slideshare.net/JeroenWijdeven/muffin-an-umbraco-foundation)
 
 ###Some features:  
 
@@ -24,10 +24,9 @@ It tries to focus SOLID principles as much as possible to allow better testabili
 
 ###Underconstruction:
 
-The whole foundation is constantly under development. But currently we are especially focused on:
+The whole foundation is constantly under development. 
 
-- Stability, optimization, performance and caching
-- Azure ready examine: https://github.com/Shazwazza/Examine/wiki/Examine-with-Azure-Websites
+Like to know what we are working on right now, see our [Trello Board](https://trello.com/b/YMtpIdMT/muffin-development)
 
 Currently build on top of Umbraco 7.2.4
 
