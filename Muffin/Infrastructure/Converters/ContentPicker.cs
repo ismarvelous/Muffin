@@ -19,18 +19,22 @@ namespace Muffin.Infrastructure.Converters
 
         public object ConvertDataToSource(object source)
         {
+            if (source is Func<IModel>)
+                return source;
+
             if (source != null && !source.ToString().IsNullOrWhiteSpace())
             {
                 Func<IModel> content = () => Repository.FindById<ModelBase>(Convert.ToInt32(source)).AsDynamic();
                 return content;
             }
 
-            return DynamicNull.Null;
+            Func<IModel> nullmodel = () => NullModel.Null;
+            return nullmodel;
         }
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, System.Type sourceType)
         {
-            if (sourceType == typeof(int) || sourceType == typeof(string))
+            if (sourceType == typeof(int) || sourceType == typeof(string) || sourceType == typeof(Func<IModel>))
                 return true;
 
             return base.CanConvertFrom(context, sourceType);
@@ -39,7 +43,7 @@ namespace Muffin.Infrastructure.Converters
         public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
         {
 
-            if (value is string || value is int)
+            if (value is string || value is int || value is Func<IModel>)
             {
                 return ConvertDataToSource(value);
             }

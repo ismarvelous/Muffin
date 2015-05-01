@@ -19,6 +19,12 @@ namespace Muffin.Infrastructure.Converters
 
         public object ConvertDataToSource(object source)
         {
+            if (source is ICropImageModel)
+                return source;
+
+            if (source == null || string.IsNullOrWhiteSpace(source.ToString()))
+                return DynamicNullMedia.Null;
+
             try
             {
                 return CroppedImageModel.Create(source.ToString());
@@ -32,12 +38,12 @@ namespace Muffin.Infrastructure.Converters
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, System.Type sourceType)
         {
-            return sourceType == typeof(string) || sourceType == typeof(JObject) || base.CanConvertFrom(context, sourceType);
+            return sourceType == typeof(string) || sourceType == typeof(JObject) || base.CanConvertFrom(context, sourceType) || sourceType == typeof(ICropImageModel);
         }
 
         public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
         {
-            if (value is string || value is JObject)
+            if (value is string || value is JObject || value is ICropImageModel)
             {
                 return ConvertDataToSource(value);
             }

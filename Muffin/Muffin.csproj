@@ -280,6 +280,7 @@
     <Compile Include="Core\IMapper.cs" />
     <Compile Include="Core\ModelExtensions.cs" />
     <Compile Include="Core\Models\CroppedImageModel.cs" />
+    <Compile Include="Core\Models\NullModel.cs" />
     <Compile Include="Infrastructure\CachedModelBaseFactory.cs" />
     <Compile Include="Infrastructure\DittoPublishedContentModelFactory.cs" />
     <Compile Include="Infrastructure\Models\DynamicModelBaseWrapper.cs" />

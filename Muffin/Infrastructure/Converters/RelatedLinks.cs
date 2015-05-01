@@ -26,7 +26,8 @@ namespace Muffin.Infrastructure.Converters
         {
             try
             {
-
+                if (source is Func<IEnumerable<LinkModel>>)
+                    return source;
 
                 var arr = JsonConvert.DeserializeObject(source.ToString()) as JArray;
                 if (arr != null)
@@ -79,12 +80,12 @@ namespace Muffin.Infrastructure.Converters
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            return sourceType == typeof(string) || sourceType == typeof(JArray) || base.CanConvertFrom(context, sourceType);
+            return sourceType == typeof(string) || sourceType == typeof(JArray) || sourceType == typeof(Func<IEnumerable<LinkModel>>) || base.CanConvertFrom(context, sourceType);
         }
 
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
-            if (value is string || value is JArray)
+            if (value is string || value is JArray || value is Func<IEnumerable<LinkModel>>)
             {
                 return ConvertDataToSource(value);
             }

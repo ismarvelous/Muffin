@@ -11,6 +11,7 @@ using Umbraco.Core.Models;
 using Umbraco.Core.Services;
 using Umbraco.Core.Dynamics;
 using System.Reflection;
+using Examine.LuceneEngine.SearchCriteria;
 using Muffin.Infrastructure.Models;
 using Our.Umbraco.Ditto;
 using Umbraco.Core;

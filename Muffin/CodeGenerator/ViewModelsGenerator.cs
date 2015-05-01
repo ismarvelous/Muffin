@@ -102,8 +102,8 @@ namespace Muffin.CodeGenerator
                 {Constants.PropertyEditors.MultiNodeTreePickerAlias, "Func<IEnumerable<IModel>>"}, //late binder..
                 {"Umbraco.Grid", "GridModel"},
                 {Constants.PropertyEditors.MacroContainerAlias, "Func<IEnumerable<DynamicMacroModel>>"}, //late binder
-                {Constants.PropertyEditors.MediaPickerAlias, "MediaModel"},
-                {Constants.PropertyEditors.ImageCropperAlias, "CroppedImageModel"},
+                {Constants.PropertyEditors.MediaPickerAlias, "ICropImageModel"},
+                {Constants.PropertyEditors.ImageCropperAlias, "ICropImageModel"},
                 {Constants.PropertyEditors.TrueFalseAlias, "bool"}
             };
 

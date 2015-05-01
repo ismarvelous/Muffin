@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Dynamic;
-using System.Web;
 using Umbraco.Core.Dynamics;
+using Umbraco.Web;
+using Umbraco.Web.Models;
 
 namespace Muffin.Core.Models
 {
@@ -83,10 +84,16 @@ namespace Muffin.Core.Models
 		    return Url;
 		}
 
-	    public IUrlModel this[int width, int height]
-	    {
-            get { return Null; }
-	    }
+        public virtual IUrlModel this[int width, int height]
+        {
+            get
+            {
+                return new UrlModel
+                {
+                    Url = Url.GetCropUrl(height: height, width: width, imageCropMode: ImageCropMode.Crop)
+                };
+            }
+        }
 
 	    public IUrlModel this[string alias]
 	    {

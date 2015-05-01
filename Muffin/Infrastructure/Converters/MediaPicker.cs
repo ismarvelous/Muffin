@@ -14,7 +14,10 @@ namespace Muffin.Infrastructure.Converters
 
 	    public object ConvertDataToSource(object source)
 	    {
-            int val;
+	        if (source is ICropImageModel)
+	            return source;
+
+;            int val;
             if (int.TryParse(source.ToString(), out val))
             {
                 var media = Repository.FindMediaById(val);
@@ -28,12 +31,12 @@ namespace Muffin.Infrastructure.Converters
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, System.Type sourceType)
         {
-            return sourceType == typeof(string) || sourceType == typeof(int) || base.CanConvertFrom(context, sourceType);
+            return sourceType == typeof(string) || sourceType == typeof(int) || sourceType == typeof(ICropImageModel) || base.CanConvertFrom(context, sourceType);
         }
 
         public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
         {
-            if (value is string || value is int)
+            if (value is string || value is int || value is ICropImageModel)
             {
                 return ConvertDataToSource(value);
             }

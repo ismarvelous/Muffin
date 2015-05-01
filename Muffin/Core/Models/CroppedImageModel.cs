@@ -63,25 +63,31 @@ namespace Muffin.Core.Models
         {
             get
             {
-                if (string.IsNullOrEmpty(_url))
+                if (_url == null)
+                {
+                    _url = Settings.EmptyImageUrl;
                     _url = Image; //hack: one of the 2 is used. (grid vs rest of the system)
+                }
 
                 return _url;
-            } 
+            }
             set { _url = value; }
         }
 
         private string _image;
         [JsonProperty("image")]
-        public virtual string Image { //hack: grid is using image as the src, croppedimage is using src.
+        public virtual string Image
+        { //hack: grid is using image as the src, croppedimage is using url.
             get
             {
-                if (string.IsNullOrEmpty(_image))
+                if (_image == null)
+                {
                     _image = Url;
+                }
 
                 return _image;
-            } 
-            set { _image = value; } 
+            }
+            set { _image = value; }
         }
 
         [JsonProperty("id")]
@@ -98,7 +104,7 @@ namespace Muffin.Core.Models
             {
                 return new UrlModel
                 {
-                    Url = Url.GetCropUrl(imageCropperValue: Json, height:height, width:width, preferFocalPoint:true)
+                    Url = Url.GetCropUrl(imageCropperValue: Json, height: height, width: width, preferFocalPoint: true)
                 };
             }
         }

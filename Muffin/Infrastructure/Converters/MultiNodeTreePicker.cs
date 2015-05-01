@@ -19,6 +19,9 @@ namespace Muffin.Infrastructure.Converters
 
         public object ConvertDataToSource(object source)
         {
+            if (source is Func<IEnumerable<IModel>>)
+                return source;
+
             if(source != null && !string.IsNullOrEmpty(source.ToString()))
             {
                 Func<IEnumerable<IModel>> func = () => ConvertToIEnumerable(source.ToString().Split(',')); //return value;
@@ -48,12 +51,12 @@ namespace Muffin.Infrastructure.Converters
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            return sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
+            return sourceType == typeof(string) || sourceType == typeof(Func<IEnumerable<IModel>>) || base.CanConvertFrom(context, sourceType);
         }
 
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
-            if (value is string)
+            if (value is string || value is Func<IEnumerable<IModel>>)
             {
                 return ConvertDataToSource(value);
             }
