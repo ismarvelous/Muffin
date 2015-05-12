@@ -5,8 +5,10 @@ using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
 using Muffin.Controllers;
 using Muffin.Core;
+using Muffin.Core.Models;
 using Muffin.Infrastructure;
 using Umbraco.Core;
+using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 using Umbraco.Web.WebApi;
 
@@ -35,7 +37,16 @@ namespace Example.Implementation.Events
                 .As<IMapper>()
                 .InstancePerHttpRequest();
 
-			var container = builder.Build();
+            
+            var types = PluginManager.Current.ResolveTypes<ModelBase>();
+            var factory = new MuffinPublishedContentModelFactory(types);
+            PublishedContentModelFactoryResolver.Current.SetFactory(factory); //remove this line if your like to depend fully on dynamic models
+
+            builder.Register(s => factory)
+                .As<IPublishedContentModelFactory>()
+                .InstancePerHttpRequest();
+
+            var container = builder.Build();
 			resolver = new AutofacDependencyResolver(container);
 		}
 	}

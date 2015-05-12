@@ -24,7 +24,7 @@ namespace Muffin.Core.Models
         {
             get
             {
-                return PublishedContentModelFactoryResolver.Current.Factory;
+                return DependencyResolver.Current.GetService<IPublishedContentModelFactory>();
             }
         }
 

@@ -79,10 +79,6 @@ namespace Muffin.Infrastructure
             //theme engine as default view engine!
             ViewEngines.Engines.Insert(0, new ThemeViewEngine());
 
-            var types = PluginManager.Current.ResolveTypes<ModelBase>();
-            var factory = new MuffinPublishedContentModelFactory(types);
-            PublishedContentModelFactoryResolver.Current.SetFactory(factory);
-
             #endregion
 
             IDependencyResolver resolver;

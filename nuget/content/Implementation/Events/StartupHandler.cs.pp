@@ -12,16 +12,14 @@ using Umbraco.Web.WebApi;
 
 namespace $rootnamespace$.Implementation.Events
 {
-	public class StartupHandler : FoundationEventHandler
-	{
-		public override void InitializeAtStartup(
+	public override void InitializeAtStartup(
 			UmbracoApplicationBase umbracoApplication,
 			ApplicationContext applicationContext,
 			out IDependencyResolver resolver)
 		{
 			var builder = new ContainerBuilder();
 			builder.RegisterApiControllers(typeof(UmbracoApiController).Assembly);
-            builder.RegisterControllers(typeof(BaseController).Assembly);
+			builder.RegisterControllers(typeof(BaseController).Assembly);
 			builder.RegisterControllers(Assembly.GetExecutingAssembly());
 
 			builder.Register(s => new SiteRepository(
@@ -31,11 +29,20 @@ namespace $rootnamespace$.Implementation.Events
 					.As<ISiteRepository>()
 					.InstancePerHttpRequest();
 
-			builder.Register(s => new Mapper())
+            builder.Register(s => new Mapper())
                 .As<IMapper>()
                 .InstancePerHttpRequest();
 
-			var container = builder.Build();
+            
+            var types = PluginManager.Current.ResolveTypes<ModelBase>();
+            var factory = new MuffinPublishedContentModelFactory(types);
+            PublishedContentModelFactoryResolver.Current.SetFactory(factory); //remove this line if your like to depend fully on dynamic models
+
+            builder.Register(s => factory)
+                .As<IPublishedContentModelFactory>()
+                .InstancePerHttpRequest();
+
+            var container = builder.Build();
 			resolver = new AutofacDependencyResolver(container);
 		}
 	}

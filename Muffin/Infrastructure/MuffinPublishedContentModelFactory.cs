@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Mvc;
+using Muffin.Core;
 using Umbraco.Core;
 using Umbraco.Core.Models;
 using Umbraco.Core.Models.PublishedContent;
@@ -12,9 +14,15 @@ namespace Muffin.Infrastructure
 {
     /// <summary>
     /// Muffin Content Factory based on The Ditto published content model factory for creating strong typed models.
+    /// But with support and optimized for muffin specific senarios
     /// </summary>
     public class MuffinPublishedContentModelFactory : IPublishedContentModelFactory
     {
+        protected IMapper Mapper
+        {
+            get { return DependencyResolver.Current.GetService<IMapper>(); }
+        }
+
         /// <summary>
         /// The type converter cache.
         /// </summary>
@@ -45,7 +53,7 @@ namespace Muffin.Infrastructure
                 }
             }
 
-            this._converterCache = converters.Count > 0 ? converters : null;
+            _converterCache = converters.Count > 0 ? converters : null;
         }
 
         /// <summary>
@@ -58,6 +66,9 @@ namespace Muffin.Infrastructure
         /// </returns>
         public IPublishedContent CreateModel(IPublishedContent content)
         {
+            if (content is IModel) //JW: Don't convert a content item that is already a typed model.
+                return content;
+
             // HACK: [LK:2014-12-04] It appears that when a Save & Publish is performed in the back-office, the model-factory's `CreateModel` is called.
             // This can cause a null-reference exception in specific cases, as the `UmbracoContext.PublishedContentRequest` might be null.
             // Ref: https://github.com/leekelleher/umbraco-ditto/issues/14
@@ -66,23 +77,17 @@ namespace Muffin.Infrastructure
                 return content;
             }
 
-            if (this._converterCache == null)
+            if (_converterCache == null)
             {
                 return content;
             }
-
-            if (content is IModel) //JW: Don't convert a content item that is already a typed model.
-                return content;
 
             var contentTypeAlias = content.DocumentTypeAlias;
             Func<IPublishedContent, IPublishedContent> converter;
 
-            if (!this._converterCache.TryGetValue(contentTypeAlias, out converter))
-            {
-                return content;
-            }
-
-            return converter(content);
+            return !_converterCache.TryGetValue(contentTypeAlias, out converter) ? 
+                content :
+                converter(content);
         }
     }
 
