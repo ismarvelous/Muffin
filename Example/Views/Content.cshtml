@@ -48,6 +48,9 @@
 
         <h2>Grid</h2>
 
-        @(Model.Grid.Sections.First().Rows.ElementAt(1).Areas.First().Controls.First().Value[100,100])
+        @if(Model.Grid != null)
+        {
+            @(Model.Grid.Sections.First().Rows.ElementAt(1).Areas.First().Controls.First().Value[100,100])
+        }
     </section>
 }

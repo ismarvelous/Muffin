@@ -33,7 +33,7 @@ namespace  Example.Implementation.ViewModels
 		public virtual string Link { get; set; }
 		
 		[TypeConverter(typeof(MediaPicker))]
-		public virtual MediaModel Afbeelding { get; set; }
+		public virtual ICropImageModel Afbeelding { get; set; }
 		
 	}
 	 

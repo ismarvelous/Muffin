@@ -11,6 +11,14 @@ namespace Muffin.Core.Models
 	/// </summary>
     public class CollectionModel : IModel, IPager, IEnumerable<IModel> //Wrapper object for collection / result models
 	{
+        protected IPublishedContentModelFactory ContentFactory
+        {
+            get
+            {
+                return PublishedContentModelFactoryResolver.Current.Factory;
+            }
+        }
+
         protected IModel Source;
 		public IEnumerable<IModel> Container { get; private set; }
 
@@ -21,7 +29,7 @@ namespace Muffin.Core.Models
 	    }
 
 		public CollectionModel(IModel source, IPublishedContent containerParent)
-			: this(source, containerParent.Children.Select(n => new ModelBase(n)))
+			: this(source, containerParent.Children)
 		{
 		}
 
@@ -31,7 +39,7 @@ namespace Muffin.Core.Models
 	    public CollectionModel(IModel source, IEnumerable<IPublishedContent> container)
 	    {
 	        Source = source;
-	        Container = container.Select(n => n is IModel ? (IModel)n : new ModelBase(n));
+	        Container = container.Select(c => ContentFactory.CreateModel(c) as IModel);
 	    }
 
 		public Func<IEnumerable<IModel>> PagedResults { get; set; }

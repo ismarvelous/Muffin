@@ -13,6 +13,7 @@ using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Core.Services;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.Routing;
+using Muffin.Infrastructure;
 
 namespace Muffin.Infrastructure
 {
@@ -79,7 +80,7 @@ namespace Muffin.Infrastructure
             ViewEngines.Engines.Insert(0, new ThemeViewEngine());
 
             var types = PluginManager.Current.ResolveTypes<ModelBase>();
-            var factory = new DittoPublishedContentModelFactory(types);
+            var factory = new MuffinPublishedContentModelFactory(types);
             PublishedContentModelFactoryResolver.Current.SetFactory(factory);
 
             #endregion

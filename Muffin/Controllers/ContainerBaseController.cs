@@ -33,7 +33,7 @@ namespace Muffin.Controllers
 			int p=1, //read querystring parameters without using this.Request.
             int s=10)
 		{
-            var @base = model.Content as ModelBase;
+            var @base = model.Content as IModel;
             IModel content = @base ?? new ModelBase(model.Content);
 
 			var resultModel = new CollectionModel(content, model.Content.Children);

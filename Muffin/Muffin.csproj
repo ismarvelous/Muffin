@@ -282,7 +282,7 @@
     <Compile Include="Core\Models\CroppedImageModel.cs" />
     <Compile Include="Core\Models\NullModel.cs" />
     <Compile Include="Infrastructure\CachedModelBaseFactory.cs" />
-    <Compile Include="Infrastructure\DittoPublishedContentModelFactory.cs" />
+    <Compile Include="Infrastructure\MuffinPublishedContentModelFactory.cs" />
     <Compile Include="Infrastructure\Models\DynamicModelBaseWrapper.cs" />
     <Compile Include="Core\Models\GridModel.cs" />
     <Compile Include="Core\Models\IModel.cs" />

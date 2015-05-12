@@ -13,6 +13,7 @@
     using global::Umbraco.Core;
     using global::Umbraco.Core.Models;
     using global::Umbraco.Web;
+    using global::Umbraco.Core.Models.PublishedContent;
 
     /// <summary>
     /// Encapsulates extension methods for <see cref="IPublishedContent"/>.
@@ -176,6 +177,9 @@
             {
                 return null;
             }
+
+            if (type.IsAssignableFrom(content.GetType()))
+                return content;
 
             using (DisposableTimer.DebugDuration(type, string.Format("IPublishedContent As ({0})", content.DocumentTypeAlias), "Complete"))
             {

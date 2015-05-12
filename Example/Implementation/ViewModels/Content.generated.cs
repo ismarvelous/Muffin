@@ -24,7 +24,7 @@ namespace  Example.Implementation.ViewModels
 
 		
 		[TypeConverter(typeof(ImageCropper))]
-		public virtual CroppedImageModel Croppedimage { get; set; }
+		public virtual ICropImageModel Croppedimage { get; set; }
 		
 		[TypeConverter(typeof(Grid))]
 		public virtual GridModel Grid { get; set; }

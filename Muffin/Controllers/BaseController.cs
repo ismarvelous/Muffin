@@ -11,6 +11,7 @@ using Umbraco.Web.Mvc;
 using DevTrends.MvcDonutCaching;
 using Muffin.Infrastructure;
 using Umbraco.Core.Models;
+using Umbraco.Core.Models.PublishedContent;
 
 namespace Muffin.Controllers
 {
@@ -21,6 +22,7 @@ namespace Muffin.Controllers
     public class BaseController : Controller, IRenderMvcController
         // more info: http://our.umbraco.org/documentation/Reference/Mvc/custom-controllers
     {
+
         protected ISiteRepository Repository;
         protected IMapper Mapper;
 

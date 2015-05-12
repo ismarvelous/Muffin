@@ -33,10 +33,10 @@ namespace  Example.Implementation.ViewModels
 		public virtual string MainBody { get; set; }
 		
 		[TypeConverter(typeof(MediaPicker))]
-		public virtual MediaModel Thumbnail { get; set; }
+		public virtual ICropImageModel Thumbnail { get; set; }
 		
 		[TypeConverter(typeof(MediaPicker))]
-		public virtual MediaModel Afbeelding { get; set; }
+		public virtual ICropImageModel Afbeelding { get; set; }
 		
 		//no type converter specified
 		public virtual string BrowserTitel { get; set; }
