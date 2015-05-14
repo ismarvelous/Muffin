@@ -97,11 +97,11 @@ namespace Muffin.CodeGenerator
             //todo: make this list configurable...
             var typeList = new Dictionary<string, string>
             {
-                {Constants.PropertyEditors.RelatedLinksAlias, "Func<IEnumerable<LinkModel>>"}, //late binder
-                {Constants.PropertyEditors.ContentPickerAlias, "Func<IModel>"}, //late binder..
-                {Constants.PropertyEditors.MultiNodeTreePickerAlias, "Func<IEnumerable<IModel>>"}, //late binder..
+                {Constants.PropertyEditors.RelatedLinksAlias, "IEnumerable<LinkModel>"}, //late binder
+                {Constants.PropertyEditors.ContentPickerAlias, "IModel"}, //late binder..
+                {Constants.PropertyEditors.MultiNodeTreePickerAlias, "IEnumerable<IModel>"}, //late binder..
                 {"Umbraco.Grid", "GridModel"},
-                {Constants.PropertyEditors.MacroContainerAlias, "Func<IEnumerable<DynamicMacroModel>>"}, //late binder
+                {Constants.PropertyEditors.MacroContainerAlias, "IEnumerable<DynamicMacroModel>"}, //late binder
                 {Constants.PropertyEditors.MediaPickerAlias, "ICropImageModel"},
                 {Constants.PropertyEditors.ImageCropperAlias, "ICropImageModel"},
                 {Constants.PropertyEditors.TrueFalseAlias, "bool"}
@@ -118,7 +118,7 @@ namespace Muffin.CodeGenerator
                 {Constants.PropertyEditors.RelatedLinksAlias, "[TypeConverter(typeof(RelatedLinks))]"},
                 {Constants.PropertyEditors.ContentPickerAlias, "[TypeConverter(typeof(ContentPicker))]"},
                 {"Umbraco.Grid", "[TypeConverter(typeof(Grid))]"},
-                {Constants.PropertyEditors.MacroContainerAlias, "[DittoIgnore]"},  //macro containers are not supported by Ditto..
+                {Constants.PropertyEditors.MacroContainerAlias, "[TypeConverter(typeof(MacroContainer))]"},
                 {Constants.PropertyEditors.MediaPickerAlias, "[TypeConverter(typeof(MediaPicker))]"},
                 {Constants.PropertyEditors.ImageCropperAlias, "[TypeConverter(typeof(ImageCropper))]"},
                 {Constants.PropertyEditors.MultiNodeTreePickerAlias, "[TypeConverter(typeof(MultiNodeTreePicker))]"},
@@ -129,12 +129,7 @@ namespace Muffin.CodeGenerator
 
         public static string GetPropertyAccessors(this GenericProperty property)
         {
-            var typeList = new Dictionary<string, string> //PropertyEditors with special treatment
-            {
-                { Constants.PropertyEditors.MacroContainerAlias, string.Format("{{ get {{ return (new MacroContainer()).ConvertDataToSource(this.GetProperty(\"{0}\")) as Func<IEnumerable<DynamicMacroModel>>; }} }}", property.Alias) }
-            };
-
-            return typeList.ContainsKey(property.Type) ? typeList[property.Type] : "{ get; set; }";
+            return "{ get; set; }";
         }
     }
 }

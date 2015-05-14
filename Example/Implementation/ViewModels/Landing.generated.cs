@@ -11,11 +11,13 @@ using System.ComponentModel;
 using Muffin.Core.Models;
 using Muffin.Infrastructure.Converters;
 using Umbraco.Core.Models;
-using Our.Umbraco.Ditto;
+using Muffin.Core;
+using Umbraco.Core.Models.PublishedContent;
 
 namespace  Example.Implementation.ViewModels
 {
 
+	[PublishedContentModel("Landing")]
 	public partial class Landing : Base 
 	{		
 		public Landing(IPublishedContent content): base (content) { }

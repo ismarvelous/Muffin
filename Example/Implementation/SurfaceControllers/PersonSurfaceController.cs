@@ -1,14 +1,6 @@
-﻿using Muffin.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Example.Implementation.ViewModels;
-using Muffin.Core.Models;
-using Muffin.Infrastructure;
-using Our.Umbraco.Ditto;
-using Umbraco.Web;
+using Muffin.Core;
 using Umbraco.Web.Mvc;
 
 namespace Example.Implementation.SurfaceControllers
@@ -31,7 +23,7 @@ namespace Example.Implementation.SurfaceControllers
             dynamic content = Repository.FindById(contentId);
 
             //map the documenttype to a typed object..
-            return PartialView("Person", new ViewModels.Person
+            return PartialView("Person", new Person
             {
                 Name = content.Name,
                 City = content.Woonplaats

@@ -1,12 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using Muffin.Core;
 using Muffin.Core.Models;
-using Our.Umbraco.Ditto;
 using Umbraco.Core;
-using Umbraco.Core.Dynamics;
-using Umbraco.Core.Models.PublishedContent;
-
 
 namespace Muffin.Infrastructure.Converters
 {
@@ -19,31 +17,29 @@ namespace Muffin.Infrastructure.Converters
 
         public object ConvertDataToSource(object source)
         {
-            if (source is Func<IModel>)
+            if (source is IModel)
                 return source;
 
             if (source != null && !source.ToString().IsNullOrWhiteSpace())
             {
-                Func<IModel> content = () => Repository.FindById<ModelBase>(Convert.ToInt32(source)).AsDynamic();
-                return content;
+                return Repository.FindById(Convert.ToInt32(source));
             }
 
-            Func<IModel> nullmodel = () => NullModel.Null;
-            return nullmodel;
+            return new List<IModel>();
         }
 
-        public override bool CanConvertFrom(ITypeDescriptorContext context, System.Type sourceType)
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            if (sourceType == typeof(int) || sourceType == typeof(string) || sourceType == typeof(Func<IModel>))
+            if (sourceType == typeof(int) || sourceType == typeof(string) || sourceType == typeof(IModel))
                 return true;
 
             return base.CanConvertFrom(context, sourceType);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
+        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
 
-            if (value is string || value is int || value is Func<IModel>)
+            if (value is string || value is int || value is IModel)
             {
                 return ConvertDataToSource(value);
             }

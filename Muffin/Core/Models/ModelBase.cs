@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using Our.Umbraco.Ditto;
 using Umbraco.Core.Models;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
@@ -50,7 +49,7 @@ namespace Muffin.Core.Models
         }
 
         private IModel _homepage;
-        [DittoIgnore]
+        [MuffinIgnore]
         public IModel Homepage
         {
             get
@@ -69,7 +68,7 @@ namespace Muffin.Core.Models
             }
         }
 
-        [DittoIgnore]
+        [MuffinIgnore]
         public DateTime PublishDate
         {
             get
@@ -82,7 +81,7 @@ namespace Muffin.Core.Models
         }
 
         private IEnumerable<IModel> _breadcrumbs;
-        [DittoIgnore]
+        [MuffinIgnore]
         public IEnumerable<IModel> Breadcrumbs
         {
             get
@@ -98,7 +97,7 @@ namespace Muffin.Core.Models
         }
 
         private IModel _parent;
-        [DittoIgnore]
+        [MuffinIgnore]
         public new IModel Parent
         {
             get 
@@ -116,7 +115,7 @@ namespace Muffin.Core.Models
         }
 
         private IEnumerable<IModel> _children;
-        [DittoIgnore]
+        [MuffinIgnore]
         public new IEnumerable<IModel> Children
         {
             get 
@@ -132,7 +131,7 @@ namespace Muffin.Core.Models
 
         private IEnumerable<IModel> _navigationChildren;
 
-        [DittoIgnore]
+        [MuffinIgnore]
         public IEnumerable<IModel> NavigationChildren
         {
             get

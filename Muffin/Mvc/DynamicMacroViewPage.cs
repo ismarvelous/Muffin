@@ -6,7 +6,7 @@ using Umbraco.Web.Macros;
 using Umbraco.Core.Models;
 using System.Web.Mvc;
 using Muffin.Infrastructure;
-using Our.Umbraco.Ditto;
+using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 
 namespace Muffin.Mvc
@@ -15,12 +15,14 @@ namespace Muffin.Mvc
 	{
 		public ISiteRepository Repository {get; private set;}
         public IMapper Mapper { get; private set; }
+        public IPublishedContentModelFactory ContentFactory { get; private set; }
 
         public DynamicMacroViewPage()
             : base()
         {
             Repository = DependencyResolver.Current.GetService<ISiteRepository>();
             Mapper = DependencyResolver.Current.GetService<IMapper>();
+            ContentFactory = DependencyResolver.Current.GetService<IPublishedContentModelFactory>();
         }
 
 		private dynamic _currentPage;
@@ -31,7 +33,7 @@ namespace Muffin.Mvc
                 // ReSharper disable once ConvertIfStatementToNullCoalescingExpression : For readability
 				if (_currentPage == null)
 				{
-				    _currentPage =  Mapper.AsDynamicIModel((base.CurrentPage as IPublishedContent).As<ModelBase>());
+				    _currentPage =  Mapper.AsDynamicIModel(ContentFactory.CreateModel(base.CurrentPage) as IModel);
 				}
 
 				return _currentPage;

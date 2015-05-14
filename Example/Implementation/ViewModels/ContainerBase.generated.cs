@@ -11,11 +11,13 @@ using System.ComponentModel;
 using Muffin.Core.Models;
 using Muffin.Infrastructure.Converters;
 using Umbraco.Core.Models;
-using Our.Umbraco.Ditto;
+using Muffin.Core;
+using Umbraco.Core.Models.PublishedContent;
 
 namespace  Example.Implementation.ViewModels
 {
 
+	[PublishedContentModel("ContainerBase")]
 	public partial class ContainerBase : ModelBase 
 	{		
 		public ContainerBase(IPublishedContent content): base (content) { }

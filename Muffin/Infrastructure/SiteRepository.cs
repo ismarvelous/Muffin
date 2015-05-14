@@ -1,20 +1,20 @@
-﻿using Examine;
-using Examine.LuceneEngine.Providers;
-using System;
+﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using Examine;
+using Examine.LuceneEngine.Providers;
+using Examine.SearchCriteria;
 using Muffin.Core;
 using Muffin.Core.Models;
 using Muffin.Infrastructure.Converters;
-using umbraco.cms.businesslogic.macro;
-using Umbraco.Core.Models;
-using Umbraco.Core.Services;
-using Umbraco.Core.Dynamics;
-using System.Reflection;
-using Examine.LuceneEngine.SearchCriteria;
 using Muffin.Infrastructure.Models;
-using Our.Umbraco.Ditto;
-using Umbraco.Core;
+using umbraco.cms.businesslogic.macro;
+using Umbraco.Core.Dynamics;
+using Umbraco.Core.Models;
+using Umbraco.Core.Models.PublishedContent;
+using Umbraco.Core.Services;
 using Umbraco.Web;
 
 namespace Muffin.Infrastructure
@@ -24,23 +24,26 @@ namespace Muffin.Infrastructure
         //protected IMediaService MediaService;
         protected IContentService Service;
         protected IMacroService MacroService;
-        protected Umbraco.Web.UmbracoContext CurrentContext;
+        protected UmbracoContext CurrentContext;
 
-        protected Umbraco.Web.UmbracoHelper Helper; //todo: try to avoid using the helper
+        protected UmbracoHelper Helper; //todo: try to avoid using the helper
         public string SearchProvidername { get; private set; }
 
-        public SiteRepository(IContentService service, IMacroService macroService, Umbraco.Web.UmbracoContext ctx)
-			: this(service, macroService, ctx, "ExternalSearcher") //use umbraco default searcher.
+        public IPublishedContentModelFactory ContentFactory { get; private set; }
+
+        public SiteRepository(IContentService service, IMacroService macroService, UmbracoContext ctx, IPublishedContentModelFactory contentFactory)
+			: this(service, macroService, ctx, "ExternalSearcher", contentFactory) //use umbraco default searcher.
 		{
 		}
 
-        public SiteRepository(IContentService service, IMacroService macroService, Umbraco.Web.UmbracoContext ctx, string searchProvidername)
+        public SiteRepository(IContentService service, IMacroService macroService, UmbracoContext ctx, string searchProvidername, IPublishedContentModelFactory contentFactory)
         {
             Service = service;
             MacroService = macroService;
             SearchProvidername = searchProvidername;
-            Helper = new Umbraco.Web.UmbracoHelper(ctx);
+            Helper = new UmbracoHelper(ctx);
             CurrentContext = ctx;
+            ContentFactory = contentFactory;
         }
 
         /// <summary>
@@ -52,7 +55,7 @@ namespace Muffin.Infrastructure
         {
 			//todo: check for PublishedContentExtensions Search and SearchChildren extensions..
             var searcher = ExamineManager.Instance.SearchProviderCollection[SearchProvidername];
-            var criteria = searcher.CreateSearchCriteria(Examine.SearchCriteria.BooleanOperation.Or);
+            var criteria = searcher.CreateSearchCriteria(BooleanOperation.Or);
             var searchCriteria = criteria.RawQuery(query);
             var results = searcher.Search(searchCriteria);
 
@@ -84,7 +87,7 @@ namespace Muffin.Infrastructure
         public IEnumerable<TM> FindAll<TM>() where TM : class, IModel
         {
             var roots = Helper.ContentAtRoot() as IEnumerable<IPublishedContent>;
-            return roots != null ? FindAll(roots.Select(n => n is IModel ? n as TM : n.As<TM>())) : null;
+            return roots != null ? FindAll(roots.Select(n => ContentFactory.CreateModel(n)).OfType<TM>()) : null;
         }
 
         protected IEnumerable<TM> FindAll<TM>(IEnumerable<TM> rootNodes) where TM : class, IModel
@@ -93,7 +96,7 @@ namespace Muffin.Infrastructure
             foreach (var node in rootNodes)
             {
                 result.Add(node);
-                if (node.Children.Any()) result.AddRange(FindAll(node.Children().Select(n => n is IModel ? n as TM : n.As<TM>()))); //recursive..
+                if (node.Children.Any()) result.AddRange(FindAll(node.Children.OfType<TM>())); //recursive..
             }
 
             return result;
@@ -106,7 +109,7 @@ namespace Muffin.Infrastructure
         ///<returns></returns>
         public IModel FindById(int id)
         {
-            return FindById<ModelBase>(id).AsDynamic();
+            return FindById<IModel>(id);
         }
 
 		public TM FindById<TM>(int id) where TM : class, IModel
@@ -114,25 +117,29 @@ namespace Muffin.Infrastructure
 		    //var content = Helper.TypedContent(id);
 		    var content = CurrentContext.ContentCache.GetById(id);
 
-		    if (content is IModel)
+		    if (content is TM)
 		        return content as TM;
 
-		    return content != null ? content.As<TM>() : null;
+            content = ContentFactory.CreateModel(content) as TM;
+
+            return (TM)(content ?? null);
 		}
 
         public IModel FindByUrl(string urlPath)
         {
-            return FindByUrl<ModelBase>(urlPath).AsDynamic();
+            return FindByUrl<IModel>(urlPath);
         }
 
         public TM FindByUrl<TM>(string urlpath) where TM : class, IModel
         {
             var content = CurrentContext.ContentCache.GetByRoute(urlpath);
 
-            if (content is IModel)
+            if (content is TM)
                 return content as TM;
 
-            return content != null ? content.As<TM>() : null;
+            content = ContentFactory.CreateModel(content) as TM;
+
+            return (TM) (content ?? null);
         }
 
         public IContent FindContentById(int id)

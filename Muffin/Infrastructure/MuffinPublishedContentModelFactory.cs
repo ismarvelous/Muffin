@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Muffin.Core;
+using Muffin.Core.Models;
 using Umbraco.Core;
 using Umbraco.Core.Models;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
-using Our.Umbraco.Ditto;
-using Muffin.Core.Models;
 
 namespace Muffin.Infrastructure
 {
@@ -41,16 +40,16 @@ namespace Muffin.Infrastructure
             foreach (var type in types.Where(x => typeof(IPublishedContent).IsAssignableFrom(x)))
             {
                 // Fixes possible compiler issues caused by accessing closure in loop.
-                var innerType = type;
-                Func<IPublishedContent, IPublishedContent> func = x => x.As(innerType) as IPublishedContent;
+                //var innerType = type;
+                //Func<IPublishedContent, IPublishedContent> func = x => x.As(innerType) as IPublishedContent;
 
-                var attribute = type.GetCustomAttribute<PublishedContentModelAttribute>(false);
-                var typeName = attribute == null ? type.Name : attribute.ContentTypeAlias;
+                //var attribute = type.GetCustomAttribute<PublishedContentModelAttribute>(false);
+                //var typeName = attribute == null ? type.Name : attribute.ContentTypeAlias;
 
-                if (!converters.ContainsKey(typeName))
-                {
-                    converters.Add(typeName, func);
-                }
+                //if (!converters.ContainsKey(typeName))
+                //{
+                //    converters.Add(typeName, func);
+                //}
             }
 
             _converterCache = converters.Count > 0 ? converters : null;

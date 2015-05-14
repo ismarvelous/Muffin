@@ -26,25 +26,27 @@ namespace Example.Implementation.Events
 			builder.RegisterControllers(typeof(BaseController).Assembly);
 			builder.RegisterControllers(Assembly.GetExecutingAssembly());
 
-			builder.Register(s => new SiteRepository(
-				applicationContext.Services.ContentService,
-                applicationContext.Services.MacroService,
-				UmbracoContext.Current))
-					.As<ISiteRepository>()
-					.InstancePerHttpRequest();
-
             builder.Register(s => new Mapper())
                 .As<IMapper>()
                 .InstancePerHttpRequest();
 
             
             var types = PluginManager.Current.ResolveTypes<ModelBase>();
-            var factory = new MuffinPublishedContentModelFactory(types);
+            var factory = new CastleContentFactory(types);
             PublishedContentModelFactoryResolver.Current.SetFactory(factory); //remove this line if your like to depend fully on dynamic models
 
             builder.Register(s => factory)
                 .As<IPublishedContentModelFactory>()
                 .InstancePerHttpRequest();
+
+            builder.Register(s => new SiteRepository(
+                applicationContext.Services.ContentService,
+                applicationContext.Services.MacroService,
+                UmbracoContext.Current,
+                factory))
+                    .As<ISiteRepository>()
+                    .InstancePerHttpRequest();
+
 
             var container = builder.Build();
 			resolver = new AutofacDependencyResolver(container);

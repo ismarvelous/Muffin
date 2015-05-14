@@ -11,11 +11,13 @@ using System.ComponentModel;
 using Muffin.Core.Models;
 using Muffin.Infrastructure.Converters;
 using Umbraco.Core.Models;
-using Our.Umbraco.Ditto;
+using Muffin.Core;
+using Umbraco.Core.Models.PublishedContent;
 
 namespace  Example.Implementation.ViewModels
 {
 
+	[PublishedContentModel("Base")]
 	public partial class Base : ModelBase 
 	{		
 		public Base(IPublishedContent content): base (content) { }
@@ -44,8 +46,8 @@ namespace  Example.Implementation.ViewModels
 		//no type converter specified
 		public virtual bool UmbracoNaviHide { get; set; }
 		
-		[DittoIgnore]
-		public virtual Func<IEnumerable<DynamicMacroModel>> WidgetArea { get { return (new MacroContainer()).ConvertDataToSource(this.GetProperty("widgetArea")) as Func<IEnumerable<DynamicMacroModel>>; } }
+		[TypeConverter(typeof(MacroContainer))]
+		public virtual IEnumerable<DynamicMacroModel> WidgetArea { get; set; }
 		
 		//no type converter specified
 		public virtual string MetaDescription { get; set; }

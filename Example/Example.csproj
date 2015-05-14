@@ -1895,10 +1895,6 @@
       <Project>{38b824f4-cc9d-49ed-a905-69413ee3e192}</Project>
       <Name>Muffin</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Our.Umbraco.Ditto\Our.Umbraco.Ditto.csproj">
-      <Project>{3a2482a4-ad19-4c26-a449-4287da07ab16}</Project>
-      <Name>Our.Umbraco.Ditto</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

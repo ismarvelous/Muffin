@@ -13,7 +13,7 @@ using Umbraco.Core.PropertyEditors;
 namespace Muffin.Infrastructure.Converters
 {
     /// <summary>
-    /// Convert a MacroContainer to a Func..
+    /// Convert a MacroContainer
     /// </summary>
     public class RelatedLinks : BaseTypeConverter, IConverter
     {
@@ -26,26 +26,16 @@ namespace Muffin.Infrastructure.Converters
         {
             try
             {
-                if (source is Func<IEnumerable<LinkModel>>)
+                if (source is IEnumerable<LinkModel>)
                     return source;
 
                 var arr = JsonConvert.DeserializeObject(source.ToString()) as JArray;
-                if (arr != null)
-                {
-                    Func<IEnumerable<LinkModel>> func = () => ConvertToIEnumerable(arr);
-                    return func;
-                }
-                else
-                {
-                    Func<IEnumerable<LinkModel>> func = () => new List<LinkModel>(); //return value;
-                    return func;
-                }
+                return arr != null ? ConvertToIEnumerable(arr) : new List<LinkModel>();
             }
             catch (StackOverflowException ex)
             {
                 Debug.WriteLine(ex.Message);
-                Func<IEnumerable<LinkModel>> func = () => new List<LinkModel>(); //return value;
-                return func;
+                return new List<LinkModel>(); //return value;
             }
         }
 
@@ -80,12 +70,12 @@ namespace Muffin.Infrastructure.Converters
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            return sourceType == typeof(string) || sourceType == typeof(JArray) || sourceType == typeof(Func<IEnumerable<LinkModel>>) || base.CanConvertFrom(context, sourceType);
+            return sourceType == typeof(string) || sourceType == typeof(JArray) || sourceType == typeof(IEnumerable<LinkModel>) || base.CanConvertFrom(context, sourceType);
         }
 
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
-            if (value is string || value is JArray || value is Func<IEnumerable<LinkModel>>)
+            if (value is string || value is JArray || value is IEnumerable<LinkModel>)
             {
                 return ConvertDataToSource(value);
             }

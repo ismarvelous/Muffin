@@ -2,7 +2,6 @@
 using System.Web.Mvc;
 using Muffin.Core;
 using Muffin.Core.Models;
-using Our.Umbraco.Ditto;
 using Umbraco.Web.Models;
 
 namespace Muffin.Controllers

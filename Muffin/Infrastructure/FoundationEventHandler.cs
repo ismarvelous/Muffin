@@ -3,17 +3,14 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using DevTrends.MvcDonutCaching;
 using Muffin.Controllers;
-using Muffin.Core.Models;
 using Muffin.Mvc;
-using Our.Umbraco.Ditto;
 using Umbraco.Core;
+using Umbraco.Core.Events;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models;
-using Umbraco.Core.Models.PublishedContent;
+using Umbraco.Core.Publishing;
 using Umbraco.Core.Services;
 using Umbraco.Web.Mvc;
-using Umbraco.Web.Routing;
-using Muffin.Infrastructure;
 
 namespace Muffin.Infrastructure
 {
@@ -95,22 +92,22 @@ namespace Muffin.Infrastructure
 
 		#region Cache management
         
-		private void ContentPublished(global::Umbraco.Core.Publishing.IPublishingStrategy sender, global::Umbraco.Core.Events.PublishEventArgs<IContent> e)
+		private void ContentPublished(IPublishingStrategy sender, PublishEventArgs<IContent> e)
 		{
 			ClearCache();
 		}
 
-		private void ContentDeleted(IContentService sender, global::Umbraco.Core.Events.DeleteEventArgs<IContent> e)
+		private void ContentDeleted(IContentService sender, DeleteEventArgs<IContent> e)
 		{
 			ClearCache();
 		}
 
-		private void ContentMoved(IContentService sender, global::Umbraco.Core.Events.MoveEventArgs<IContent> e)
+		private void ContentMoved(IContentService sender, MoveEventArgs<IContent> e)
 		{
 			ClearCache();
 		}
 
-		private void MediaSaved(IMediaService sender, global::Umbraco.Core.Events.SaveEventArgs<IMedia> e)
+		private void MediaSaved(IMediaService sender, SaveEventArgs<IMedia> e)
 		{
 			ClearCache();
 		}

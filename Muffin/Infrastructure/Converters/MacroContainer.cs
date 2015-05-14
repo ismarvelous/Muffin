@@ -16,7 +16,7 @@ using Umbraco.Web;
 namespace Muffin.Infrastructure.Converters
 {
     /// <summary>
-    /// Convert a MacroContainer to a Func..
+    /// Convert a MacroContainer
     /// </summary>
     public class MacroContainer : BaseTypeConverter, IConverter
     {
@@ -29,7 +29,7 @@ namespace Muffin.Infrastructure.Converters
 
         public object ConvertDataToSource(object source)
         {
-            if (source is Func<IEnumerable<DynamicMacroModel>>)
+            if (source is IEnumerable<DynamicMacroModel>)
                 return source;
 
             var content = source is string
@@ -38,13 +38,11 @@ namespace Muffin.Infrastructure.Converters
 
             if (!string.IsNullOrWhiteSpace(content) && UmbracoContext.Current != null && UmbracoContext.Current.PageId.HasValue)
             {
-                Func<IEnumerable<DynamicMacroModel>> func = () => ConvertToIEnumerable(content);
-                return func;
+                return ConvertToIEnumerable(content);
             }
             else
             {
-                Func<IEnumerable<DynamicMacroModel>> func = () => new List<DynamicMacroModelHtmlProxy>();
-                return func;
+                return new List<DynamicMacroModelHtmlProxy>();
             }
         }
 
@@ -85,12 +83,12 @@ namespace Muffin.Infrastructure.Converters
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, System.Type sourceType)
         {
-            return sourceType == typeof(string) || sourceType == typeof(Func<IEnumerable<DynamicMacroModel>>) || base.CanConvertFrom(context, sourceType);
+            return sourceType == typeof(string) || sourceType == typeof(IEnumerable<DynamicMacroModel>) || base.CanConvertFrom(context, sourceType);
         }
 
         public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
         {
-            if (value is string || value is Func<IEnumerable<DynamicMacroModel>>)
+            if (value is string || value is IEnumerable<DynamicMacroModel>)
             {
                 return ConvertDataToSource(value);
             }

@@ -11,11 +11,13 @@ using System.ComponentModel;
 using Muffin.Core.Models;
 using Muffin.Infrastructure.Converters;
 using Umbraco.Core.Models;
-using Our.Umbraco.Ditto;
+using Muffin.Core;
+using Umbraco.Core.Models.PublishedContent;
 
 namespace  Example.Implementation.ViewModels
 {
 
+	[PublishedContentModel("Home")]
 	public partial class Home : Base 
 	{		
 		public Home(IPublishedContent content): base (content) { }
@@ -24,13 +26,13 @@ namespace  Example.Implementation.ViewModels
 
 		
 		[TypeConverter(typeof(RelatedLinks))]
-		public virtual Func<IEnumerable<LinkModel>> SocialNetworks { get; set; }
+		public virtual IEnumerable<LinkModel> SocialNetworks { get; set; }
 		
 		[TypeConverter(typeof(MultiNodeTreePicker))]
-		public virtual Func<IEnumerable<IModel>> Quickmenu { get; set; }
+		public virtual IEnumerable<IModel> Quickmenu { get; set; }
 		
 		[TypeConverter(typeof(ContentPicker))]
-		public virtual Func<IModel> CarrouselContainer { get; set; }
+		public virtual IModel CarrouselContainer { get; set; }
 		
 	}
 	 
