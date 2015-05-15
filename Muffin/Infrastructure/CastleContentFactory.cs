@@ -41,19 +41,25 @@ namespace Muffin.Infrastructure
             _types = constructors.Count > 0 ? constructors : null;
         }
 
+        /// <summary>
+        /// Creates a Castle Dynamic (typed) proxy.
+        /// </summary>
+        /// <param name="content">Type which needs to be proxied, if already done the already proxied (IModel) is returned</param>
+        /// <returns></returns>
         public IPublishedContent CreateModel(IPublishedContent content)
         {
-            // fail fast
-            if (_types == null)
-                return content;
-
             //not generating objects twice..
             if (content is IModel)
+                return content;
+
+            // fail fast
+            if (_types == null)
                 return content;
 
             // be case-insensitive
             var contentTypeAlias = content.DocumentTypeAlias;
 
+            //use DynamicProxy2 proxy generator to generate the proxies.
             var generator = new ProxyGenerator();
             Type type;
             if (_types.TryGetValue(contentTypeAlias, out type))
@@ -67,6 +73,11 @@ namespace Muffin.Infrastructure
 
     internal static class InterceptorExtensions
     {
+        /// <summary>
+        /// When the MethodInfo is a method of a property it returns the property otherwise it returns null.
+        /// </summary>
+        /// <param name="method"></param>
+        /// <returns></returns>
         internal static PropertyInfo GetProperty(this MethodInfo method)
         {
             var takesArg = method.GetParameters().Length == 1;
@@ -104,39 +115,37 @@ namespace Muffin.Infrastructure
         {
             //do things before excecution
 
-            if (invocation.Method.Name.StartsWith("get_"))
+            var property = invocation.Method.GetProperty();
+            var ignore = property != null && property.GetCustomAttribute<MuffinIgnoreAttribute>() != null;
+
+            if (property != null && Source.HasProperty(property.Name) && !ignore)
             {
-                var propertyAlias = invocation.Method.Name.Remove(0, 4); //todo: this is quick and dirty remove get_ from method name
+                var propertyAlias = property.Name;
 
-                if (Source.HasProperty(propertyAlias))
+                //DIRTY HACK: to support macro collections..
+                var value = invocation.Method.ReturnType == typeof(IEnumerable<DynamicMacroModel>) ? 
+                    Source.GetProperty(propertyAlias) : //for macros
+                    Source.GetPropertyValue(propertyAlias); //default
+
+                var converterAttribute = property.GetCustomAttribute<TypeConverterAttribute>();
+                if (converterAttribute != null)
                 {
-                    var value = Source.GetPropertyValue(propertyAlias);
-
-                    var converterAttribute = invocation.Method.GetProperty().GetCustomAttribute<TypeConverterAttribute>();
-                    if (converterAttribute != null)
+                    var converterType = Type.GetType(converterAttribute.ConverterTypeName);
+                    if (converterType != null)
                     {
-                        var converterType = Type.GetType(converterAttribute.ConverterTypeName);
-                        if (converterType != null)
-                        {
-                            var converter = Activator.CreateInstance(converterType) as TypeConverter;
-                            invocation.ReturnValue = converter != null ? converter.ConvertFrom(value) : value;
-                        }
+                        var converter = Activator.CreateInstance(converterType) as TypeConverter;
+                        invocation.ReturnValue = converter != null ? 
+                            converter.ConvertFrom(value) : 
+                            value;
                     }
-                    else
-                    {
-                        if (invocation.Method.ReturnType == typeof(string) && !(value is string))
-                        {
-                            invocation.ReturnValue = value.ToString();
-                        }
-                        else
-                        {
-                            invocation.ReturnValue = value;
-                        }
-                    }
+                }
+                else if (invocation.Method.ReturnType == typeof(string) && !(value is string))
+                {
+                    invocation.ReturnValue = value.ToString();
                 }
                 else
                 {
-                    invocation.Proceed();
+                    invocation.ReturnValue = value;
                 }
             }
             else

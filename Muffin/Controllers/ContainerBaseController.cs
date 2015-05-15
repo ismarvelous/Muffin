@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
+using Castle.DynamicProxy;
 using Muffin.Core;
 using Muffin.Core.Models;
 using Umbraco.Web.Models;
@@ -33,7 +35,7 @@ namespace Muffin.Controllers
             int s=10)
 		{
             var @base = model.Content as IModel;
-            IModel content = @base ?? new ModelBase(model.Content);
+            var content = @base ?? new ModelBase(model.Content);
 
 			var resultModel = new CollectionModel(content, model.Content.Children);
 
@@ -43,6 +45,13 @@ namespace Muffin.Controllers
              
 			resultModel.CurrentPage = p;
 			resultModel.PageSize = s;
+
+            var generator = new ProxyGenerator();
+            var options = new ProxyGenerationOptions();
+            options.AddMixinInstance(content);
+            options.AddMixinInstance(resultModel);
+            var proxy = generator.CreateClassProxy(typeof(object), new[] { typeof(IModel), typeof(IPager), typeof(IEnumerable<IModel>) }, options) as IModel;
+
 
 			return View(resultModel);
 		}

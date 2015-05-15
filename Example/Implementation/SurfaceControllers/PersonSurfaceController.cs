@@ -19,15 +19,8 @@ namespace Example.Implementation.SurfaceControllers
         [ChildActionOnly]
         public ActionResult GetPerson(int contentId)
         {
-            //call your business services or call your repositories..
-            dynamic content = Repository.FindById(contentId);
-
-            //map the documenttype to a typed object..
-            return PartialView("Person", new Person
-            {
-                Name = content.Name,
-                City = content.Woonplaats
-            });
+            var content = Repository.FindById(contentId) as PersonItem;
+            return PartialView("Person", content);
         }
     }
 }

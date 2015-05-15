@@ -43,17 +43,6 @@ namespace Muffin.Infrastructure.Models
                 if (prop != null) //if this is a known property use a default IConverter to convert the propertyvalue.
                 {
                     result = Repository.ConvertPropertyValue(dyn.ContentType.GetPropertyType(prop.PropertyTypeAlias).PropertyEditorAlias, result);
-
-                    if (result is Func<IModel>)
-                        result = ((Func<IModel>)result).Invoke();
-                    else if (result is Func<LinkModel>)
-                        result = ((Func<LinkModel>)result).Invoke();
-                    else if (result is Func<IEnumerable<LinkModel>>)
-                        result = ((Func<IEnumerable<LinkModel>>)result).Invoke();
-                    else if (result is Func<IEnumerable<IModel>>)
-                        result = ((Func<IEnumerable<IModel>>)result).Invoke();
-                    else if (result is Func<IEnumerable<DynamicMacroModel>>)
-                        result = ((Func<IEnumerable<DynamicMacroModel>>) result).Invoke();
                 } 
                 else //be sure an available property is used when this one exsist.
                 {
@@ -67,18 +56,6 @@ namespace Muffin.Infrastructure.Models
 		    result = DynamicNull.Null;
 		    return true; //dynamic null is a succesfull value;
 		}
-
-        public override bool TryInvokeMember(InvokeMemberBinder binder, object[] args, out object result)
-        {
-            var ret = base.TryInvokeMember(binder, args, out result);
-
-            if (ret == false && (args == null || args.Length < 1))
-            {
-                ret = TryGetMember( new DynamicQueryableGetMemberBinder(binder.Name, false),  out result);
-            }
-
-            return ret;
-        }
 
         public virtual IModel Homepage
 		{

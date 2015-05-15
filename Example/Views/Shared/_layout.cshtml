@@ -60,7 +60,7 @@
             <footer class="wrapper">
                 <h3>Lorem ipsum, Some city, NL</h3>
 				<ul>
-					@foreach(dynamic item in Model.Homepage.AsDynamic().SocialNetworks())
+					@foreach(dynamic item in Model.Homepage.AsDynamic().SocialNetworks)
 					{
 						<li><a href="@item.Url">@item.Title</a></li>
 					}

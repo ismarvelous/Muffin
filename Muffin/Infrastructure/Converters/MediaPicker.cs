@@ -17,8 +17,8 @@ namespace Muffin.Infrastructure.Converters
 	        if (source is ICropImageModel)
 	            return source;
 
-;            int val;
-            if (int.TryParse(source.ToString(), out val))
+            int val;
+            if (source != null && int.TryParse(source.ToString(), out val))
             {
                 var media = Repository.FindMediaById(val);
 
@@ -36,7 +36,7 @@ namespace Muffin.Infrastructure.Converters
 
         public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
         {
-            if (value is string || value is int || value is ICropImageModel)
+            if (value == null || value is string || value is int || value is ICropImageModel)
             {
                 return ConvertDataToSource(value);
             }

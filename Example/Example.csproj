@@ -1851,7 +1851,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MultipleOutputHelper.ttinclude</DependentUpon>
     </Compile>
-    <Compile Include="Implementation\ViewModels\Person.cs" />
     <Compile Include="Implementation\ViewModels\PersonItem.generated.cs">
       <DependentUpon>ViewModelsGenerator.tt</DependentUpon>
     </Compile>
