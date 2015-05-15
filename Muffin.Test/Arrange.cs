@@ -8,7 +8,9 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using Umbraco.Core.Models;
+using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web.Models;
 
 
@@ -30,35 +32,36 @@ namespace Muffin.Test
 			return mockedProp;
 		}
 
-		public static Mock<IPublishedContent> Content()
+		public static Mock<IModel> Content()
 		{
 			return Content("Lorem ipsum dolor");
 		}
 
-		public static Mock<IPublishedContent> Content(string name, bool umbracoNaviHide = false)
+		public static Mock<IModel> Content(string name, bool umbracoNaviHide = false)
 		{
-			return Content(name, new List<IPublishedContent>(), null, umbracoNaviHide);
+			return Content(name, new List<IModel>(), null, umbracoNaviHide);
 		}
 
-		public static Mock<IPublishedContent> Content(string name, List<IPublishedContent> children, bool umbracoNaviHide = false)
+		public static Mock<IModel> Content(string name, List<IModel> children, bool umbracoNaviHide = false)
 		{
 			return Content(name, children, new List<IPublishedProperty>(), umbracoNaviHide);
 		}
 
-		public static Mock<IPublishedContent> Content(string name, List<IPublishedProperty> properties, bool umbracoNaviHide = false)
+		public static Mock<IModel> Content(string name, List<IPublishedProperty> properties, bool umbracoNaviHide = false)
 		{
-			return Content(name, new List<IPublishedContent>(), properties, umbracoNaviHide);
+			return Content(name, new List<IModel>(), properties, umbracoNaviHide);
 		}
 
-		public static Mock<IPublishedContent> Content(string name,
-			IEnumerable<IPublishedContent> children,
+		public static Mock<IModel> Content(string name,
+			IEnumerable<IModel> children,
 			List<IPublishedProperty> properties,
 			bool umbracoNaviHide = false)
 		{
-			var mockedItem = new Moq.Mock<IPublishedContent>();
+			var mockedItem = new Moq.Mock<IModel>();
 			mockedItem.SetupGet(m => m.Id).Returns(1);
 			mockedItem.SetupGet(m => m.Name).Returns(name);
 			mockedItem.SetupGet(m => m.Children).Returns(children);
+		    mockedItem.SetupGet(m => m.Repository).Returns( DependencyResolver.Current.GetService<ISiteRepository>());
 
 			//define properties
 			var props = new List<IPublishedProperty>() 
@@ -70,10 +73,7 @@ namespace Muffin.Test
 
 			if (properties != null) //and add custom properties.
 			{
-				foreach (var prop in properties)
-				{
-					props.Add(prop);
-				}
+			    props.AddRange(properties);
 			}
 
 			//set properties in property collection

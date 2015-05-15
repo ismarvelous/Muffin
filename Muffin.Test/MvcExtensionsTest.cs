@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Muffin.Core.Models;
 using Muffin.Infrastructure;
 using Umbraco.Core.Models;
 
@@ -51,7 +52,7 @@ namespace Muffin.Test
         {
             //1. Arrange
             var mContent = Arrange.Content("lorem parent page", //setup a page with 5 child objects
-                new List<IPublishedContent>()
+                new List<IModel>()
 				{
 					{ Arrange.Content("Lorem child page 1").Object },
 					{ Arrange.Content("Ipsum child page 2").Object },
@@ -82,7 +83,7 @@ namespace Muffin.Test
         {
             //1. Arrange
             var mContent = Arrange.Content("lorem parent page", //setup a page with 5 child objects
-                new List<IPublishedContent>()
+                new List<IModel>()
 				{
 					{ Arrange.Content("Lorem child page 1").Object },
 					{ Arrange.Content("Ipsum child page 2").Object },
@@ -113,7 +114,7 @@ namespace Muffin.Test
         {
             //1. Arrange
             var mContent = Arrange.Content("lorem parent page", //setup a page with 5 child objects
-                new List<IPublishedContent>()
+                new List<IModel>()
 				{
 					{ Arrange.Content("Lorem child page 1").Object },
 					{ Arrange.Content("Ipsum child page 2").Object },

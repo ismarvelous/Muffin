@@ -1635,13 +1635,13 @@
     <Content Include="Config\Dashboard.config" />
     <Content Include="Config\applications.config" />
     <Content Include="Config\uSyncSettings.config" />
-    <None Include="Implementation\ViewModels\MultipleOutputHelper.ttinclude">
+    <None Include="Implementation\Models\MultipleOutputHelper.ttinclude">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MultipleOutputHelper.cs</LastGenOutput>
     </None>
-    <None Include="Implementation\ViewModels\ViewModelsGenerator.tt">
+    <None Include="Implementation\Models\ModelsGenerator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ViewModelsGenerator.cs</LastGenOutput>
+      <LastGenOutput>ModelsGenerator.cs</LastGenOutput>
     </None>
     <Content Include="Config\UrlRewriting.config" />
     <Content Include="Config\scripting.config" />
@@ -1817,53 +1817,52 @@
     <Compile Include="Implementation\Controllers\SearchController.cs" />
     <Compile Include="Implementation\Events\StartupHandler.cs" />
     <Compile Include="Implementation\Forms\Contact.cs" />
+    <Compile Include="Implementation\Models\Base.generated.cs">
+      <DependentUpon>ModelsGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Implementation\Models\Carrousel.generated.cs">
+      <DependentUpon>ModelsGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Implementation\Models\CarrouselItem.generated.cs">
+      <DependentUpon>ModelsGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Implementation\Models\ContainerBase.generated.cs">
+      <DependentUpon>ModelsGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Implementation\Models\ContainerItemBase.generated.cs">
+      <DependentUpon>ModelsGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Implementation\Models\Content.generated.cs">
+      <DependentUpon>ModelsGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Implementation\Models\Home.generated.cs">
+      <DependentUpon>ModelsGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Implementation\Models\Landing.generated.cs">
+      <DependentUpon>ModelsGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Implementation\Models\Listing.generated.cs">
+      <DependentUpon>ModelsGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Implementation\Models\ModelsGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelsGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Implementation\Models\PersonItem.generated.cs">
+      <DependentUpon>ModelsGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Implementation\Models\Persons.generated.cs">
+      <DependentUpon>ModelsGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Implementation\Models\Search.generated.cs">
+      <DependentUpon>ModelsGenerator.tt</DependentUpon>
+    </Compile>
     <Compile Include="Implementation\SurfaceControllers\PersonSurfaceController.cs" />
-    <Compile Include="Implementation\ViewModels\Base.generated.cs">
-      <DependentUpon>ViewModelsGenerator.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Implementation\ViewModels\Carrousel.generated.cs">
-      <DependentUpon>ViewModelsGenerator.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Implementation\ViewModels\CarrouselItem.generated.cs">
-      <DependentUpon>ViewModelsGenerator.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Implementation\ViewModels\ContainerBase.generated.cs">
-      <DependentUpon>ViewModelsGenerator.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Implementation\ViewModels\ContainerItemBase.generated.cs">
-      <DependentUpon>ViewModelsGenerator.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Implementation\ViewModels\Content.generated.cs">
-      <DependentUpon>ViewModelsGenerator.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Implementation\ViewModels\ContentViewModel.cs" />
-    <Compile Include="Implementation\ViewModels\Home.generated.cs">
-      <DependentUpon>ViewModelsGenerator.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Implementation\ViewModels\Landing.generated.cs">
-      <DependentUpon>ViewModelsGenerator.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Implementation\ViewModels\Listing.generated.cs">
-      <DependentUpon>ViewModelsGenerator.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Implementation\ViewModels\MultipleOutputHelper.cs">
+    <Compile Include="Implementation\Models\MultipleOutputHelper.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MultipleOutputHelper.ttinclude</DependentUpon>
-    </Compile>
-    <Compile Include="Implementation\ViewModels\PersonItem.generated.cs">
-      <DependentUpon>ViewModelsGenerator.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Implementation\ViewModels\Persons.generated.cs">
-      <DependentUpon>ViewModelsGenerator.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Implementation\ViewModels\Search.generated.cs">
-      <DependentUpon>ViewModelsGenerator.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Implementation\ViewModels\ViewModelsGenerator.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ViewModelsGenerator.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1895,7 +1894,9 @@
       <Name>Muffin</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Implementation\ViewModels\" />
+  </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>

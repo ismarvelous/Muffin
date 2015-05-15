@@ -16,7 +16,7 @@
 <#+
 private void GenerateModels()
 {
-	var namesp ="Example.Implementation.ViewModels";
+	var namesp ="Example.Implementation.Models";
 	var gen = new ViewModelsGenerator(Host.ResolvePath("../../uSync"));
 	var doctypes = gen.GetDocumentTypes();
     var manager = Manager.Create(Host, GenerationEnvironment);

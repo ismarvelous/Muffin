@@ -1,5 +1,5 @@
 
-@inherits UmbracoViewPage<Example.Implementation.ViewModels.Content>
+@inherits UmbracoViewPage<Muffin.Core.ViewModels.IContentViewModel<Example.Implementation.Models.Content>>
 @{
     Layout = "~/Views/Shared/_layout.cshtml";
 }
@@ -8,37 +8,37 @@
 
 
     <header>
-        <h1>@Model.Titel</h1>
+        <h1>@Model.Content.Titel</h1>
 
         <br />
-        @Model.Croppedimage
+        @Model.Content.Croppedimage
 
-        <img src="@Model.Croppedimage["640x480"]" />
-        <img src="@Model.Croppedimage["1024x768"]" />
+        <img src="@Model.Content.Croppedimage["640x480"]" />
+        <img src="@Model.Content.Croppedimage["1024x768"]" />
 
-        <img src="@Model.Croppedimage[200, 100]" />
+        <img src="@Model.Content.Croppedimage[200, 100]" />
 
-        @if (Model.Afbeelding == null || Model.Afbeelding.IsNull())
+        @if (Model.Content.Afbeelding == null || Model.Content.Afbeelding.IsNull())
         {
             <p>Er is geen afbeelding ingegeven.</p>
         }
         else
         {
-            <p><img src="@Model.Afbeelding.Url" width="400px" height="400px" /></p>
+            <p><img src="@Model.Content.Afbeelding.Url" width="400px" height="400px" /></p>
         }
 
-        <i>@Model.Intro</i>
+        <i>@Model.Content.Intro</i>
     </header>
     <section>
         <hr />
         @* for demo purpose only...
-            if (Model.Intro.Length < 110)
+            if (Model.Content.Intro.Length < 110)
             {
-                <p>@Model.Intro</p>
+                <p>@Model.Content.Intro</p>
             }
             else
             {
-                <p>@Model.Intro.Substring(0, 110)</p>
+                <p>@Model.Content.Intro.Substring(0, 110)</p>
             }
         *@
 
@@ -48,9 +48,9 @@
 
         <h2>Grid</h2>
 
-        @if(Model.Grid != null)
+        @if(Model.Content.Grid != null)
         {
-            @(Model.Grid.Sections.First().Rows.ElementAt(1).Areas.First().Controls.First().Value[100,100])
+            @(Model.Content.Grid.Sections.First().Rows.ElementAt(1).Areas.First().Controls.First().Value[100,100])
         }
     </section>
 }

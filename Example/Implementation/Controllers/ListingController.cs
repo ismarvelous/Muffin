@@ -5,8 +5,8 @@ namespace Example.Implementation.Controllers
 {
 	public class ListingController : ContainerBaseController
 	{
-		public ListingController(ISiteRepository rep, IMapper map)
-			: base (rep, map)
+		public ListingController(ISiteRepository rep)
+			: base (rep)
         {
         }
 

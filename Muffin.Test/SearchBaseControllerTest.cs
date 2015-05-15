@@ -12,6 +12,7 @@ using Autofac.Integration.Mvc;
 using System.Web.Mvc;
 using System.Linq;
 using Autofac;
+using Muffin.Core.ViewModels;
 using Umbraco.Web.WebApi;
 
 namespace Muffin.Test
@@ -25,10 +26,10 @@ namespace Muffin.Test
             //1. Arrange
             
             Repository.Setup(s => s.Find(It.IsAny<string>()))
-                .Returns(new List<ModelBase>()); //mocked object
+                .Returns(new List<IModel>()); //mocked object
             
 
-            var mController = new Mock<SearchBaseController>(Repository.Object, Mapper.Object) { CallBase = true }; //abstract class callBase
+            var mController = new Mock<SearchBaseController>(Repository.Object) { CallBase = true }; //abstract class callBase
             var renderModel = new RenderModel(Arrange.Content().Object, CultureInfo.InvariantCulture);
 
             //2.Act
@@ -37,9 +38,9 @@ namespace Muffin.Test
                 q: "lorem") as ViewResult;
 
             //3. Assert.
-            Assert.IsTrue(!(result.Model as SearchModel).Results.Any(), "Results are not '0' when no items are returned.");
-            Assert.AreEqual((result.Model as SearchModel).TotalResults, (result.Model as SearchModel).Results.Count());
-            Assert.IsTrue((result.Model as SearchModel).Query == "lorem", "Returned Query is not equal to given search query");
+            Assert.IsTrue(!(result.Model as CollectionContentViewModel<IModel>).Results.Any(), "Results are not '0' when no items are returned.");
+            Assert.AreEqual((result.Model as SearchContentViewModel<IModel>).TotalResults, (result.Model as SearchContentViewModel<IModel>).Results.Count());
+            Assert.IsTrue((result.Model as SearchContentViewModel<IModel>).Query == "lorem", "Returned Query is not equal to given search query");
 
         }
 
@@ -49,10 +50,10 @@ namespace Muffin.Test
             //1. Arrange
             
             Repository.Setup(s => s.Find(It.IsAny<string>()))
-                .Returns(new List<ModelBase>());
+                .Returns(new List<IModel>());
             
 
-            var mController = new Mock<SearchBaseController>(Repository.Object, Mapper.Object) { CallBase = true }; //abstract class callBase
+            var mController = new Mock<SearchBaseController>(Repository.Object) { CallBase = true }; //abstract class callBase
             var renderModel = new RenderModel(Arrange.Content().Object, CultureInfo.InvariantCulture);
 
             //2.Act
@@ -61,7 +62,7 @@ namespace Muffin.Test
                 q: "") as ViewResult;
 
             //3. Assert.
-            Assert.IsTrue((result.Model as SearchModel).Query == "<NOT>", "The <NOT> query syntax is not used for an empty search query");
+            Assert.IsTrue((result.Model as SearchContentViewModel<IModel>).Query == "<NOT>", "The <NOT> query syntax is not used for an empty search query");
         }
 
         [TestMethod]
@@ -74,7 +75,7 @@ namespace Muffin.Test
                 .Returns(Ret(Repository.Object)); //mocked object
             
 
-            var mController = new Mock<SearchBaseController>(Repository.Object, Mapper.Object) { CallBase = true }; //abstract class callBase
+            var mController = new Mock<SearchBaseController>(Repository.Object) { CallBase = true }; //abstract class callBase
             var renderModel = new RenderModel(Arrange.Content().Object, CultureInfo.InvariantCulture);
 
             //2.Act
@@ -84,8 +85,8 @@ namespace Muffin.Test
                 q: "search query") as ViewResult;
 
             //3. Assert.
-            Assert.IsTrue((result.Model as SearchModel).TotalResults == 5, "Total results does not contain 5 items");
-            Assert.IsTrue((result.Model as SearchModel).Results.Count() == 2, "Resultset does not contain the correct amount of items");
+            Assert.IsTrue((result.Model as SearchContentViewModel<IModel>).TotalResults == 5, "Total results does not contain 5 items");
+            Assert.IsTrue((result.Model as SearchContentViewModel<IModel>).Results.Count() == 2, "Resultset does not contain the correct amount of items");
         }
 
         public static IEnumerable<IModel> Ret(ISiteRepository rep)
