@@ -38,9 +38,9 @@ namespace Muffin.Test
                 q: "lorem") as ViewResult;
 
             //3. Assert.
-            Assert.IsTrue(!(result.Model as CollectionContentViewModel<IModel>).Results.Any(), "Results are not '0' when no items are returned.");
-            Assert.AreEqual((result.Model as SearchContentViewModel<IModel>).TotalResults, (result.Model as SearchContentViewModel<IModel>).Results.Count());
-            Assert.IsTrue((result.Model as SearchContentViewModel<IModel>).Query == "lorem", "Returned Query is not equal to given search query");
+            Assert.IsTrue(!(result.Model as ICollectionContentViewModel<IModel>).Results.Any(), "Results are not '0' when no items are returned.");
+            Assert.AreEqual((result.Model as ISearchContentViewModel<IModel>).TotalResults, (result.Model as ISearchContentViewModel<IModel>).Results.Count());
+            Assert.IsTrue((result.Model as ISearchContentViewModel<IModel>).Query == "lorem", "Returned Query is not equal to given search query");
 
         }
 
@@ -62,7 +62,7 @@ namespace Muffin.Test
                 q: "") as ViewResult;
 
             //3. Assert.
-            Assert.IsTrue((result.Model as SearchContentViewModel<IModel>).Query == "<NOT>", "The <NOT> query syntax is not used for an empty search query");
+            Assert.IsTrue((result.Model as ISearchContentViewModel<IModel>).Query == "<NOT>", "The <NOT> query syntax is not used for an empty search query");
         }
 
         [TestMethod]
@@ -85,8 +85,8 @@ namespace Muffin.Test
                 q: "search query") as ViewResult;
 
             //3. Assert.
-            Assert.IsTrue((result.Model as SearchContentViewModel<IModel>).TotalResults == 5, "Total results does not contain 5 items");
-            Assert.IsTrue((result.Model as SearchContentViewModel<IModel>).Results.Count() == 2, "Resultset does not contain the correct amount of items");
+            Assert.IsTrue((result.Model as ISearchContentViewModel<IModel>).TotalResults == 5, "Total results does not contain 5 items");
+            Assert.IsTrue((result.Model as ISearchContentViewModel<IModel>).Results.Count() == 2, "Resultset does not contain the correct amount of items");
         }
 
         public static IEnumerable<IModel> Ret(ISiteRepository rep)
