@@ -46,7 +46,7 @@ namespace  <#= namesp #>
 	<#+foreach (var itm in doctypes) { #>
 	<#+ manager.StartNewFile(itm.Info.Alias + ".generated.cs"); #>
 
-	[PublishedContentModel("<#=itm.Info.Name#>")]
+	[PublishedContentModel("<#=itm.Info.Alias#>")]
 	public partial class <#=itm.GetSafeClassName()#> : <#=itm.GetSafeBaseClassName()#> 
 	{		
 		<#=itm.GetConstructor()#>

@@ -17,9 +17,11 @@ namespace Muffin.Infrastructure
     public class CastleContentFactory : IPublishedContentModelFactory
     {
         private readonly Dictionary<string, Type> _types;
+        protected readonly ProxyGenerator Generator;
 
         public CastleContentFactory(IEnumerable<Type> types)
         {
+            Generator = new ProxyGenerator();
             var ctorArgTypes = new[] { typeof(IPublishedContent) };
             var constructors = new Dictionary<string, Type>(StringComparer.InvariantCultureIgnoreCase);
 
@@ -60,13 +62,13 @@ namespace Muffin.Infrastructure
             var contentTypeAlias = content.DocumentTypeAlias;
 
             //use DynamicProxy2 proxy generator to generate the proxies.
-            var generator = new ProxyGenerator();
+
             Type type;
             if (_types.TryGetValue(contentTypeAlias, out type))
             {
-                return generator.CreateClassProxy(type, new object[] {content}, new ModelInterceptor(content)) as IPublishedContent;
+                return Generator.CreateClassProxy(type, new object[] { content }, new ModelInterceptor(content)) as IPublishedContent;
             }
-            
+
             return content;
         }
     }
@@ -123,7 +125,7 @@ namespace Muffin.Infrastructure
                 var propertyAlias = property.Name;
 
                 //DIRTY HACK: to support macro collections..
-                var value = invocation.Method.ReturnType == typeof(IEnumerable<DynamicMacroModel>) ? 
+                var value = invocation.Method.ReturnType == typeof(IEnumerable<DynamicMacroModel>) ?
                     Source.GetProperty(propertyAlias) : //for macros
                     Source.GetPropertyValue(propertyAlias); //default
 
@@ -134,8 +136,8 @@ namespace Muffin.Infrastructure
                     if (converterType != null)
                     {
                         var converter = Activator.CreateInstance(converterType) as TypeConverter;
-                        invocation.ReturnValue = converter != null ? 
-                            converter.ConvertFrom(value) : 
+                        invocation.ReturnValue = converter != null ?
+                            converter.ConvertFrom(value) :
                             value;
                     }
                 }
@@ -150,7 +152,7 @@ namespace Muffin.Infrastructure
             }
             else
             {
-                invocation.Proceed();                
+                invocation.Proceed();
             }
 
             //do things after excecution

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Serialization;
 using Umbraco.Core;
@@ -56,19 +57,19 @@ namespace Muffin.CodeGenerator
 
         public static string GetSafeClassName(this DocumentType doctype)
         {
-            if (string.IsNullOrEmpty(doctype.Info.Alias))
-                return string.Empty;
+            return string.IsNullOrEmpty(doctype.Info.Alias) ? string.Empty : GetSafeClassName(doctype.Info.Alias);
+        }
 
-            return char.ToUpper(doctype.Info.Alias[0]) + doctype.Info.Alias.Substring(1);
+        private static string GetSafeClassName(string alias)
+        {
+            return Regex.Replace(alias, @"(^\w)|(_\w)", (m) => m.Value.Substring(m.Value.Length > 1 ? 1 : 0).ToUpper(),
+                RegexOptions.IgnoreCase);
         }
 
         public static string GetSafeBaseClassName(this DocumentType doctype)
         {
             // Check for empty string.
-            if (string.IsNullOrEmpty(doctype.Info.Master))
-                return "ModelBase";
-
-            return char.ToUpper(doctype.Info.Master[0]) + doctype.Info.Master.Substring(1);
+            return string.IsNullOrEmpty(doctype.Info.Master) ? "ModelBase" : GetSafeClassName(doctype.Info.Master);
         }
 
         public static string GetConstructor(this DocumentType docType)

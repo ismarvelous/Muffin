@@ -8,7 +8,6 @@ using Umbraco.Web;
 
 namespace Muffin.Core.Models
 {
-
     /// <summary>
     /// The foundation, PublishedContentModel base class..
     /// </summary>
@@ -27,20 +26,12 @@ namespace Muffin.Core.Models
             }
         }
 
-        //todo: furter investigate below issue:
-        //converting an IPublishedContent using .As<T> to modelbase based class when the content parameter is already loaded as a modelbase based object
-        //can result in Stackoverflow exceptions, this can occur when using the CurrentContext.ContentCache
-        //An exception need to be thronw in these situations, in all other situations like in a cshtml
-        // one possibility could be to make Modelbase an abstract class and create a sealed class TypedModelBase : ModelBase which is used in default situations..
-        //converting is allowed.
-        //if(content is ModelBase)
-        //throw new ApplicationException("Conversion!!");
-
         public ModelBase(IPublishedContent content)
-            : base(content) {
+            : base(content)
+        {
 
-                if (this.GetType().IsAssignableFrom(content.GetType()))
-                    throw new ArgumentException("You can not define a ModelBase using a content type of the same type.");
+            if (this.GetType().IsAssignableFrom(content.GetType()))
+                throw new ArgumentException("You can not define a ModelBase using a content type of the same type.");
         }
 
         public bool IsNull()
@@ -54,11 +45,11 @@ namespace Muffin.Core.Models
         {
             get
             {
-                if(_homepage == null)
+                if (_homepage == null)
                 {
                     var home = Content.AncestorOrSelf(1);
 
-                    if(home is IModel) //for safety reasons
+                    if (home is IModel) //for safety reasons
                         _homepage = home as IModel;
                     else
                         _homepage = ContentFactory.CreateModel(home) as IModel;
@@ -86,13 +77,8 @@ namespace Muffin.Core.Models
         {
             get
             {
-                if(_breadcrumbs == null)
-                {
-                    _breadcrumbs = this.Ancestors().OrderBy("level")
-                        .Where(a => a.IsVisible()).Select(c => ContentFactory.CreateModel(c) as IModel);
-                }
-
-                return _breadcrumbs;
+                return _breadcrumbs ?? (_breadcrumbs = this.Ancestors().OrderBy("level")
+                    .Where(a => a.IsVisible()).Select(c => ContentFactory.CreateModel(c)).OfType<IModel>());
             }
         }
 
@@ -100,12 +86,13 @@ namespace Muffin.Core.Models
         [MuffinIgnore]
         public new IModel Parent
         {
-            get 
+            get
             {
-                if(_parent == null)
+                if (_parent == null)
                 {
-                    if (base.Parent is IModel) //for safety reasons
-                        _parent = base.Parent as IModel;
+                    var model = base.Parent as IModel;
+                    if (model != null) //for safety reasons
+                        _parent = model;
                     else
                         _parent = ContentFactory.CreateModel(base.Parent) as IModel;
                 }
@@ -118,14 +105,9 @@ namespace Muffin.Core.Models
         [MuffinIgnore]
         public new IEnumerable<IModel> Children
         {
-            get 
-            { 
-                if(_children == null)
-                {
-                    _children = base.Children.Select(c => ContentFactory.CreateModel(c) as IModel);
-                }
-
-                return _children;
+            get {
+                return _children ??
+                       (_children = base.Children.Select(c => ContentFactory.CreateModel(c)).OfType<IModel>());
             }
         }
 
@@ -134,15 +116,7 @@ namespace Muffin.Core.Models
         [MuffinIgnore]
         public IEnumerable<IModel> NavigationChildren
         {
-            get
-            {
-                if(_navigationChildren == null)
-                {
-                    _navigationChildren = this.Children.Where(c => c.IsVisible());
-                }
-
-                return _navigationChildren;
-            }
+            get { return _navigationChildren ?? (_navigationChildren = this.Children.Where(c => c.IsVisible())); }
         }
 
         //[DittoIgnore]
@@ -154,6 +128,8 @@ namespace Muffin.Core.Models
         //    }
         //}
     }
+
+
 
 
 }

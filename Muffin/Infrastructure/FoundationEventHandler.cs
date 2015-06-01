@@ -74,7 +74,7 @@ namespace Muffin.Infrastructure
             //User dynamic basecontroller as the default controller, if you like to use your own, you can change it here..
             DefaultRenderMvcControllerResolver.Current.SetDefaultControllerType(typeof(BaseController));
             //theme engine as default view engine!
-            ViewEngines.Engines.Insert(0, new ThemeViewEngine());
+            //ViewEngines.Engines.Insert(0, new ThemeViewEngine());
 
             #endregion
 
