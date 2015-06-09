@@ -1832,6 +1832,7 @@
     <Compile Include="Implementation\Models\ContainerItemBase.generated.cs">
       <DependentUpon>ModelsGenerator.tt</DependentUpon>
     </Compile>
+    <Compile Include="Implementation\Models\Content.cs" />
     <Compile Include="Implementation\Models\Content.generated.cs">
       <DependentUpon>ModelsGenerator.tt</DependentUpon>
     </Compile>
@@ -1876,7 +1877,6 @@
     <Content Include="Views\Search.cshtml" />
     <Content Include="Views\Shared\_layout.cshtml" />
     <Content Include="Views\Partials\Person.cshtml" />
-    <Content Include="Views\NewsOld.cshtml" />
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1888,9 +1888,7 @@
       <Name>Muffin</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Implementation\ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>

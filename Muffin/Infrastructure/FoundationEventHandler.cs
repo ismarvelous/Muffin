@@ -3,7 +3,6 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using DevTrends.MvcDonutCaching;
 using Muffin.Controllers;
-using Muffin.Mvc;
 using Umbraco.Core;
 using Umbraco.Core.Events;
 using Umbraco.Core.Logging;
