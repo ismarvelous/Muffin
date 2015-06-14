@@ -21,24 +21,26 @@ namespace Example.Implementation.Events
 			ApplicationContext applicationContext,
 			out IDependencyResolver resolver)
 		{
+            //1. Initialize your container..
 			var builder = new ContainerBuilder();
 			builder.RegisterApiControllers(typeof(UmbracoApiController).Assembly);
 			builder.RegisterControllers(typeof(BaseController).Assembly);
 			builder.RegisterControllers(Assembly.GetExecutingAssembly());
-
+            //1.2 define the mapper
             builder.Register(s => new Mapper())
                 .As<IMapper>()
                 .InstancePerHttpRequest();
 
-            
-            var types = PluginManager.Current.ResolveTypes<ModelBase>();
-            var factory = new CastleContentFactory(types);
+            //2. use the castle content factory, or use your own.
+            var factory = new CastleContentFactory(PluginManager.Current.ResolveTypes<ModelBase>());
             PublishedContentModelFactoryResolver.Current.SetFactory(factory); //remove this line if your like to depend fully on dynamic models
 
+            //2.1 add the factory to the container.
             builder.Register(s => factory)
                 .As<IPublishedContentModelFactory>()
                 .InstancePerHttpRequest();
 
+            //3. Register the Siterepository, you can use your own aswell.
             builder.Register(s => new SiteRepository(
                 applicationContext.Services.ContentService,
                 applicationContext.Services.MacroService,
@@ -47,7 +49,7 @@ namespace Example.Implementation.Events
                     .As<ISiteRepository>()
                     .InstancePerHttpRequest();
 
-
+            //4. Build the container...
             var container = builder.Build();
 			resolver = new AutofacDependencyResolver(container);
 		}

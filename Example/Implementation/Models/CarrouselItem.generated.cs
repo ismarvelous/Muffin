@@ -25,13 +25,13 @@ namespace  Example.Implementation.Models
 		// properties..
 
 		
-		//no type converter specified
+		
 		public virtual string Titel { get; set; }
 		
-		//no type converter specified
+		
 		public virtual string Beschrijving { get; set; }
 		
-		//no type converter specified
+		
 		public virtual string Link { get; set; }
 		
 		[TypeConverter(typeof(MediaPicker))]

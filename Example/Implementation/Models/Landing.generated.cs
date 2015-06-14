@@ -25,7 +25,7 @@ namespace  Example.Implementation.Models
 		// properties..
 
 		
-		//no type converter specified
+		
 		public virtual string AfbeeldingTekst { get; set; }
 		
 	}
