@@ -23,6 +23,7 @@ namespace Example.Implementation.Events
 		{
 			var builder = new ContainerBuilder();
 			builder.RegisterApiControllers(typeof(UmbracoApiController).Assembly);
+		    //builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 			builder.RegisterControllers(typeof(BaseController).Assembly);
 			builder.RegisterControllers(Assembly.GetExecutingAssembly());
 
@@ -43,7 +44,8 @@ namespace Example.Implementation.Events
                 applicationContext.Services.ContentService,
                 applicationContext.Services.MacroService,
                 UmbracoContext.Current,
-                factory))
+                factory,
+                applicationContext.DatabaseContext.Database))
                     .As<ISiteRepository>()
                     .InstancePerHttpRequest();
 

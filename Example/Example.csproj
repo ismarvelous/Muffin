@@ -1794,6 +1794,7 @@
     <Content Include="Views\Home.cshtml" />
     <Content Include="Views\Shared\_layoutDynamic.cshtml" />
     <Content Include="Views\Home-dynamics.cshtml" />
+    <Content Include="Views\Partials\Feedback.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -1836,6 +1837,7 @@
     <Compile Include="Implementation\Models\Content.generated.cs">
       <DependentUpon>ModelsGenerator.tt</DependentUpon>
     </Compile>
+    <Compile Include="Implementation\Models\Feedback.cs" />
     <Compile Include="Implementation\Models\Home.generated.cs">
       <DependentUpon>ModelsGenerator.tt</DependentUpon>
     </Compile>
@@ -1859,6 +1861,7 @@
     <Compile Include="Implementation\Models\Search.generated.cs">
       <DependentUpon>ModelsGenerator.tt</DependentUpon>
     </Compile>
+    <Compile Include="Implementation\SurfaceControllers\FeedbackSurfaceController.cs" />
     <Compile Include="Implementation\SurfaceControllers\PersonSurfaceController.cs" />
     <Compile Include="Implementation\Models\MultipleOutputHelper.cs">
       <AutoGen>True</AutoGen>
@@ -1888,7 +1891,9 @@
       <Name>Muffin</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Plugins\" />
+  </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>

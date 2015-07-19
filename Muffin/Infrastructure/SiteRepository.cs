@@ -2,7 +2,9 @@
 using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using Examine;
 using Examine.LuceneEngine.Providers;
 using Examine.SearchCriteria;
@@ -14,6 +16,9 @@ using umbraco.cms.businesslogic.macro;
 using Umbraco.Core.Dynamics;
 using Umbraco.Core.Models;
 using Umbraco.Core.Models.PublishedContent;
+using Umbraco.Core.Persistence;
+using Umbraco.Core.Persistence.DatabaseAnnotations;
+using Umbraco.Core.Persistence.Migrations.Syntax.Update;
 using Umbraco.Core.Services;
 using Umbraco.Web;
 
@@ -25,18 +30,28 @@ namespace Muffin.Infrastructure
         protected IContentService Service;
         protected IMacroService MacroService;
         protected UmbracoContext CurrentContext;
+        protected UmbracoDatabase Database;
 
         protected UmbracoHelper Helper; //todo: try to avoid using the helper
         public string SearchProvidername { get; private set; }
 
         public IPublishedContentModelFactory ContentFactory { get; private set; }
 
-        public SiteRepository(IContentService service, IMacroService macroService, UmbracoContext ctx, IPublishedContentModelFactory contentFactory)
-			: this(service, macroService, ctx, "ExternalSearcher", contentFactory) //use umbraco default searcher.
+        public SiteRepository(IContentService service, 
+            IMacroService macroService, 
+            UmbracoContext ctx, 
+            IPublishedContentModelFactory contentFactory,
+            UmbracoDatabase database)
+			: this(service, macroService, ctx, "ExternalSearcher", contentFactory, database) //use umbraco default searcher.
 		{
 		}
 
-        public SiteRepository(IContentService service, IMacroService macroService, UmbracoContext ctx, string searchProvidername, IPublishedContentModelFactory contentFactory)
+        public SiteRepository(IContentService service, 
+            IMacroService macroService, 
+            UmbracoContext ctx, 
+            string searchProvidername, 
+            IPublishedContentModelFactory contentFactory, 
+            UmbracoDatabase database)
         {
             Service = service;
             MacroService = macroService;
@@ -44,6 +59,7 @@ namespace Muffin.Infrastructure
             Helper = new UmbracoHelper(ctx);
             CurrentContext = ctx;
             ContentFactory = contentFactory;
+            Database = database;
         }
 
         /// <summary>
@@ -216,5 +232,75 @@ namespace Muffin.Infrastructure
 
         #endregion
 
+        public T GetObject<T>(object key) where T : new()
+        {
+            Database.CreateTable<T>(false);
+
+            var ret = Database.SingleOrDefault<T>(key);
+            if(ret == null)
+                return new T();
+
+            return ret;
+        }
+
+        public IEnumerable<T> GetObjects<T>(int page, int pageSize) where T : new()
+        {
+            try
+            {
+                Database.CreateTable<T>(false);
+                var pocodata = Umbraco.Core.Persistence.Database.PocoData.ForType(typeof(T));
+
+                var sql = new Sql()
+                    .Select("*")
+                    .From<T>()
+                    .OrderBy(pocodata.TableInfo.PrimaryKey);
+
+                return Database.Page<T>(page, pageSize, sql).Items;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                throw;
+            }
+        }
+
+        public bool SaveObject<T>(T obj) where T : new()
+        {
+            Database.CreateTable<T>(false);
+
+            try
+            {
+                var pocodata = Umbraco.Core.Persistence.Database.PocoData.ForType(typeof(T));
+                var key = (typeof(T)).GetProperties()
+                    .Where(prop => prop.GetCustomAttribute<PrimaryKeyColumnAttribute>() != null)
+                    .Select(prop => prop.GetValue(obj, null))
+                    .FirstOrDefault();
+
+                if (key != null)
+                {
+                    if (Database.Exists<T>(key))
+                    {
+                        Database.Update(pocodata.TableInfo.TableName, pocodata.TableInfo.PrimaryKey, obj);
+                    }
+                    else
+                    {
+                        Database.Insert(pocodata.TableInfo.TableName, pocodata.TableInfo.PrimaryKey, pocodata.TableInfo.AutoIncrement, obj);
+                    }
+                }
+                else
+                {
+                    //fallback: try to save this object, this only works for objects with an autoincrement primary key..
+                    Database.Save(obj);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                //todo: log this stuff
+                return false;
+            }
+
+            return true;
+        }
     }
 }

@@ -1,19 +1,19 @@
 ﻿using System.Web.Mvc;
 using Example.Implementation.Models;
+using Muffin.Controllers;
 using Muffin.Core;
 using Umbraco.Web.Mvc;
 
 namespace Example.Implementation.SurfaceControllers
 {
     //Example of how to your own controller for a partial..
-    public class PersonSurfaceController : SurfaceController
+    public class PersonSurfaceController : BaseSurfaceController
     {
-        protected ISiteRepository Repository;
 
         public PersonSurfaceController(ISiteRepository rep)
-            : base()
+            : base(rep)
         {
-            Repository = rep;
+
         }
 
         [ChildActionOnly]

@@ -37,5 +37,9 @@ namespace Muffin.Core
         object GetPropertyValue(Control gridControl);
 
         object ConvertPropertyValue(string editoralias, object value);
+
+        T GetObject<T>(object key) where T : new();
+        bool SaveObject<T>(T obj) where T : new();
+        IEnumerable<T> GetObjects<T>(int page, int pageSize) where T : new();
     }
 }

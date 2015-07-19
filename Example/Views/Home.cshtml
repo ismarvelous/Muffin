@@ -1,6 +1,7 @@
 ﻿@inherits UmbracoViewPage<Muffin.Core.ViewModels.IContentViewModel<Home>>
 @using System.Collections
 @using Example.Implementation.Models
+@using Example.Implementation.SurfaceControllers
 @using Muffin.Core
 @using Muffin.Infrastructure
 @{
@@ -43,4 +44,9 @@
             @widget
         </aside> 
 	}
+
+    <aside>
+        @Html.Action("Feedback", "FeedbackSurface")
+    </aside>
+    
 }

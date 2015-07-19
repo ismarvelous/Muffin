@@ -278,6 +278,7 @@
     <Compile Include="CodeGenerator\DocumentType.cs" />
     <Compile Include="CodeGenerator\GenericProperty.cs" />
     <Compile Include="CodeGenerator\ModelsGenerator.cs" />
+    <Compile Include="Controllers\BaseSurfaceController.cs" />
     <Compile Include="Controllers\ContainerBaseController.cs" />
     <Compile Include="Controllers\SearchBaseController.cs" />
     <Compile Include="Core\IMapper.cs" />

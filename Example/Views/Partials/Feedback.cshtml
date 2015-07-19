@@ -1,0 +1,17 @@
+﻿@model string
+@using Example.Implementation.SurfaceControllers
+
+@if (string.IsNullOrEmpty(Model))
+{
+    using (Html.BeginUmbracoForm<FeedbackSurfaceController>("Save"))
+    {
+        @Html.RadioButton("Feedback", "yes")
+        @Html.RadioButton("Feedback", "no")
+    
+        <input type="submit" value="SEND"/>
+    }
+}
+else
+{
+    <p>@Model</p>
+}
