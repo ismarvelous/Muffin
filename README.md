@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/6tn3dnvmuek4olhq?svg=true)](https://ci.appveyor.com/project/ismarvelous/muffin)
+  
 #Muffin (An Umbraco Foundation)
 
 Muffin is a simplefied templating API / facade on top of the

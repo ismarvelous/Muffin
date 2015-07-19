@@ -32,6 +32,5 @@
 	<files>
 		<file src="..\nuget\content\Implementation\**\*.*" target="content\Implementation" />
     <file src="\bin\release\Muffin.dll" target="lib\net45\Muffin.dll" />
-    <file src="\bin\release\Our.Umbraco.Ditto.dll" target="lib\net45\Our.Umbraco.Ditto.dll" />
 	</files>
 </package>
