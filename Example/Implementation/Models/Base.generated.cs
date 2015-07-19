@@ -25,13 +25,13 @@ namespace  Example.Implementation.Models
 		// properties..
 
 		
-		//no type converter specified
+		
 		public virtual string Titel { get; set; }
 		
-		//no type converter specified
+		
 		public virtual string Intro { get; set; }
 		
-		//no type converter specified
+		
 		public virtual string MainBody { get; set; }
 		
 		[TypeConverter(typeof(MediaPicker))]
@@ -40,25 +40,25 @@ namespace  Example.Implementation.Models
 		[TypeConverter(typeof(MediaPicker))]
 		public virtual ICropImageModel Afbeelding { get; set; }
 		
-		//no type converter specified
+		
 		public virtual string BrowserTitel { get; set; }
 		
-		//no type converter specified
+		
 		public virtual bool UmbracoNaviHide { get; set; }
 		
 		[TypeConverter(typeof(MacroContainer))]
 		public virtual IEnumerable<DynamicMacroModel> WidgetArea { get; set; }
 		
-		//no type converter specified
+		
 		public virtual string MetaDescription { get; set; }
 		
-		//no type converter specified
+		
 		public virtual string MetaKeywords { get; set; }
 		
-		//no type converter specified
+		
 		public virtual bool MetaRobots { get; set; }
 		
-		//no type converter specified
+		
 		public virtual string CanonicalTag { get; set; }
 		
 	}

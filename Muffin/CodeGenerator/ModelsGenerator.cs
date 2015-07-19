@@ -14,9 +14,16 @@ namespace Muffin.CodeGenerator
     public class ModelsGenerator 
     {
         private readonly string _uSyncPath;
-        public ModelsGenerator(string uSyncPath)
+        //todo: clean up code so these statics are not needed.
+        internal static IDictionary<string, string> TypeList;
+        internal static IDictionary<string, string> Converters;
+
+        public ModelsGenerator(string uSyncPath, IDictionary<string, string> typeList, IDictionary<string, string> converters)
         {
+
             _uSyncPath = uSyncPath;
+            TypeList = typeList;
+            Converters = converters;
         }
 
         public IEnumerable<DocumentType> GetDocumentTypes()
@@ -95,37 +102,18 @@ namespace Muffin.CodeGenerator
 
         public static string GetPropertyType(this GenericProperty property)
         {
-            //todo: make this list configurable...
-            var typeList = new Dictionary<string, string>
-            {
-                {Constants.PropertyEditors.RelatedLinksAlias, "IEnumerable<LinkModel>"}, //late binder
-                {Constants.PropertyEditors.ContentPickerAlias, "IModel"}, //late binder..
-                {Constants.PropertyEditors.MultiNodeTreePickerAlias, "IEnumerable<IModel>"}, //late binder..
-                {"Umbraco.Grid", "GridModel"},
-                {Constants.PropertyEditors.MacroContainerAlias, "IEnumerable<DynamicMacroModel>"}, //late binder
-                {Constants.PropertyEditors.MediaPickerAlias, "ICropImageModel"},
-                {Constants.PropertyEditors.ImageCropperAlias, "ICropImageModel"},
-                {Constants.PropertyEditors.TrueFalseAlias, "bool"}
-            };
-
-            return typeList.ContainsKey(property.Type) ? typeList[property.Type] : "string"; 
+            var typeList = ModelsGenerator.TypeList;
+            return typeList.ContainsKey(property.Type) ? 
+                typeList[property.Type] : 
+                "string"; //default type. 
         }
 
         public static string GetPropertyAtribute(this GenericProperty property)
         {
-            //todo: make this list configurable...
-            var typeList = new Dictionary<string, string>
-            {
-                {Constants.PropertyEditors.RelatedLinksAlias, "[TypeConverter(typeof(RelatedLinks))]"},
-                {Constants.PropertyEditors.ContentPickerAlias, "[TypeConverter(typeof(ContentPicker))]"},
-                {"Umbraco.Grid", "[TypeConverter(typeof(Grid))]"},
-                {Constants.PropertyEditors.MacroContainerAlias, "[TypeConverter(typeof(MacroContainer))]"},
-                {Constants.PropertyEditors.MediaPickerAlias, "[TypeConverter(typeof(MediaPicker))]"},
-                {Constants.PropertyEditors.ImageCropperAlias, "[TypeConverter(typeof(ImageCropper))]"},
-                {Constants.PropertyEditors.MultiNodeTreePickerAlias, "[TypeConverter(typeof(MultiNodeTreePicker))]"},
-            };
-
-            return typeList.ContainsKey(property.Type) ? typeList[property.Type] : "//no type converter specified"; 
+            var attr = ModelsGenerator.Converters;
+            return attr.ContainsKey(property.Type) ? 
+                attr[property.Type] : 
+                "";  //no type converters defined.
         }
 
         public static string GetPropertyAccessors(this GenericProperty property)
