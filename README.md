@@ -21,6 +21,7 @@ It tries to focus SOLID principles as much as possible to allow better testabili
 - Standard Examine Search implementation  
 - File based caching with MvcDonutCaching
 - Grid manipulation (typed grid object and control value converters)
+- Strongly Typed Models Generator
 
 ###Underconstruction:
 
@@ -31,7 +32,8 @@ Like to know what we are working on right now, see our [Trello Board](https://tr
 Currently build on top of Umbraco 7.2.4
 
 ##Installation
-Umbraco is installed and updated via Nuget.
+- Umbraco is installed and updated via Nuget.  
+- The models generator currently relies on uSync which is also installed and updated via Nuget.
 
 ##Examples and documentation
 

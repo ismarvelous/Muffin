@@ -1,41 +1,27 @@
-﻿using Muffin.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Example.Implementation.ViewModels;
-using Muffin.Core.Models;
-using Muffin.Infrastructure;
-using Our.Umbraco.Ditto;
-using Umbraco.Web;
+﻿using System.Web.Mvc;
+using Example.Implementation.Models;
+using Muffin.Controllers;
+using Muffin.Core;
 using Umbraco.Web.Mvc;
 
 namespace Example.Implementation.SurfaceControllers
 {
     //Example of how to your own controller for a partial..
-    public class PersonSurfaceController : SurfaceController
+    public class PersonSurfaceController : BaseSurfaceController
     {
-        protected ISiteRepository Repository;
 
         public PersonSurfaceController(ISiteRepository rep)
-            : base()
+            : base(rep)
         {
-            Repository = rep;
+
         }
 
         [ChildActionOnly]
         public ActionResult GetPerson(int contentId)
         {
-            //call your business services or call your repositories..
-            dynamic content = Repository.FindById(contentId);
-
-            //map the documenttype to a typed object..
-            return PartialView("Person", new ViewModels.Person
-            {
-                Name = content.Name,
-                City = content.Woonplaats
-            });
+            var content = Repository.FindById(contentId) as PersonItem;
+            return PartialView("Person", content);
+            return null;
         }
     }
 }

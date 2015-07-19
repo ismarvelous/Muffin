@@ -1,3 +1,4 @@
+@inherits UmbracoViewPage<Muffin.Core.ViewModels.IContentViewModel<Example.Implementation.Models.Content>>
 @{
     Layout = "~/Views/Shared/_layout.cshtml";
 }
@@ -5,9 +6,9 @@
 @section Main
 {
 	<header>
-        <h1>@Model.Titel</h1>
-        <i>- @Model.PublishDate.ToShortDateString() - @Model.Intro</i>
-		u: @Model.UpdateDate
+        <h1>@Model.Content.Titel</h1>
+        <i>- @Model.Content.PublishDate.ToShortDateString() - @Model.Content.Intro</i>
+		u: @Model.Content.UpdateDate
     </header>
 	<section>
 	</section>

@@ -1,0 +1,49 @@
+﻿@using Muffin.Core.Models
+@{
+    Layout = "~/Views/Shared/_layoutDynamic.cshtml";
+}
+
+@section Main
+{
+    <header>
+        Rotatie snelheids: @(Model.CarrouselContainer().Rotatiesnelheid)<br/>
+
+        @foreach (var itm in Model.Quickmenu())
+        {
+            @itm.Name
+            @itm.Url
+        }
+
+        <ul>
+            @foreach (var item in Model.CarrouselContainer().Children)
+            {
+                <li>@item.Afbeelding.Url @item.Titel - @item.Beschrijving @item.Link</li>
+            }
+
+        </ul>
+    </header>
+    
+	<section>
+		<h1>@Model.Titel</h1>
+        <p>@Model.Intro</p>
+		<section>
+			@Model.MainBody
+            
+		</section>
+	</section>
+}
+
+@section Side
+{
+    @{
+        var itm = Model.WidgetArea();
+        @(itm);
+    }
+
+    @foreach(var widget in Model.WidgetArea())
+    {
+        <aside>
+            @widget
+        </aside> 
+	}
+}

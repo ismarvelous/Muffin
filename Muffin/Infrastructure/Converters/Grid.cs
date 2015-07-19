@@ -16,6 +16,9 @@ namespace Muffin.Infrastructure.Converters
 
         public object ConvertDataToSource(object source)
         {
+            if (source is GridModel)
+                return source;
+
             try
             {
                 var json = source.ToString();
@@ -36,12 +39,12 @@ namespace Muffin.Infrastructure.Converters
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, System.Type sourceType)
         {
-            return sourceType == typeof(JObject) || base.CanConvertFrom(context, sourceType);
+            return sourceType == typeof(JObject) || base.CanConvertFrom(context, sourceType) || sourceType == typeof(GridModel);
         }
 
         public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
         {
-            if (value is JObject)
+            if (value is JObject || value is GridModel)
             {
                 return ConvertDataToSource(value);
             }

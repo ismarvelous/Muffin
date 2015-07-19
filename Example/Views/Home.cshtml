@@ -1,8 +1,9 @@
-﻿@inherits UmbracoViewPage<Example.Implementation.ViewModels.Home>
-@using Example.Implementation.ViewModels
+﻿@inherits UmbracoViewPage<Muffin.Core.ViewModels.IContentViewModel<Home>>
+@using System.Collections
+@using Example.Implementation.Models
+@using Example.Implementation.SurfaceControllers
 @using Muffin.Core
 @using Muffin.Infrastructure
-@using Our.Umbraco.Ditto;
 @{
     Layout = "~/Views/Shared/_layout.cshtml";
 }
@@ -10,16 +11,16 @@
 @section Main
 {
 	<header>
-	    Rotatie snelheids: @(Model.CarrouselContainer().As<Carrousel>().Rotatiesnelheid)<br />
-        @((Model.CarrouselContainer() as IPublishedContent).Children.AsJson())
+	    Rotatie snelheids: @((Model.Content.CarrouselContainer as Carrousel).Rotatiesnelheid)<br />
+        @((Model.Content.CarrouselContainer as IPublishedContent).Children.AsJson())
 
-        @foreach(var itm in Model.Quickmenu().As<Base>())
+        @foreach(var itm in Model.Content.Quickmenu.OfType<Base>())
         {
             @itm.Name @itm.Url
         }
 
 	    <ul>
-		@foreach(var item in Model.CarrouselContainer().Children.As<CarrouselItem>())
+		@foreach(var item in Model.Content.CarrouselContainer.Children.OfType<CarrouselItem>())
 		{
 			<li>@item.Afbeelding.Url @item.Titel - @item.Beschrijving @item.Link</li>
 		}
@@ -27,20 +28,25 @@
 		</ul>
     </header>
 	<section>
-		<h1>@Model.Titel</h1>
-        <p>@Model.Intro</p>
+		<h1>@Model.Content.Titel</h1>
+        <p>@Model.Content.Intro</p>
 		<section>
-			@Model.MainBody
+			@Model.Content.MainBody
 		</section>
 	</section>
 }
 
 @section Side
 {
-	@foreach(var widget in Model.WidgetArea())
+	@foreach(var widget in Model.Content.WidgetArea)
     {
         <aside>
             @widget
         </aside> 
 	}
+
+    <aside>
+        @Html.Action("Feedback", "FeedbackSurface")
+    </aside>
+    
 }

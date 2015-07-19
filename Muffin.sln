@@ -39,8 +39,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{A8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{AF6B2A1E-6D73-44D6-B4E5-B561B669FE31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Our.Umbraco.Ditto", "Our.Umbraco.Ditto\Our.Umbraco.Ditto.csproj", "{3A2482A4-AD19-4C26-A449-4287DA07AB16}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Azure.Staging|Any CPU = Azure.Staging|Any CPU
@@ -73,14 +71,6 @@ Global
 		{52EE6C1F-5A04-449E-9A2E-6E168AF732D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52EE6C1F-5A04-449E-9A2E-6E168AF732D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52EE6C1F-5A04-449E-9A2E-6E168AF732D4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3A2482A4-AD19-4C26-A449-4287DA07AB16}.Azure.Staging|Any CPU.ActiveCfg = Release|Any CPU
-		{3A2482A4-AD19-4C26-A449-4287DA07AB16}.Azure.Staging|Any CPU.Build.0 = Release|Any CPU
-		{3A2482A4-AD19-4C26-A449-4287DA07AB16}.Azure.Test|Any CPU.ActiveCfg = Release|Any CPU
-		{3A2482A4-AD19-4C26-A449-4287DA07AB16}.Azure.Test|Any CPU.Build.0 = Release|Any CPU
-		{3A2482A4-AD19-4C26-A449-4287DA07AB16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3A2482A4-AD19-4C26-A449-4287DA07AB16}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3A2482A4-AD19-4C26-A449-4287DA07AB16}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3A2482A4-AD19-4C26-A449-4287DA07AB16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -10,8 +10,8 @@ namespace Example.Implementation.Controllers
     /// </summary>
     public class SearchController : SearchBaseController
     {
-		public SearchController(ISiteRepository rep, IMapper map)
-			: base (rep, map)
+		public SearchController(ISiteRepository rep)
+			: base (rep)
         {
         }
 

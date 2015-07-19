@@ -19,15 +19,16 @@ namespace Muffin.Infrastructure.Converters
 
         public object ConvertDataToSource(object source)
         {
+            if (source is IEnumerable<IModel>)
+                return source;
+
             if(source != null && !string.IsNullOrEmpty(source.ToString()))
             {
-                Func<IEnumerable<IModel>> func = () => ConvertToIEnumerable(source.ToString().Split(',')); //return value;
-                return func;
+                return ConvertToIEnumerable(source.ToString().Split(',')); //return value;
             }
             else
             {
-                Func<IEnumerable<IModel>> func = () => new List<IModel>(); //return value;
-                return func;
+                return new List<IModel>(); //return value;
             }
         }
 
@@ -39,7 +40,7 @@ namespace Muffin.Infrastructure.Converters
                 var id = 0;
                 if (int.TryParse(item, out id))
                 {
-                    ret.Add(Mapper.AsDynamicIModel(Repository.FindById<ModelBase>(id)));
+                    ret.Add(Repository.FindById(id));
                 }
             }
 
@@ -48,12 +49,12 @@ namespace Muffin.Infrastructure.Converters
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            return sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
+            return sourceType == typeof(string) || sourceType == typeof(IEnumerable<IModel>) || base.CanConvertFrom(context, sourceType);
         }
 
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
-            if (value is string)
+            if (value is string || value is IEnumerable<IModel>)
             {
                 return ConvertDataToSource(value);
             }

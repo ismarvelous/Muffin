@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Muffin.Core;
 using Muffin.Core.Models;
-using Our.Umbraco.Ditto;
+using Muffin.Core.ViewModels;
 using Umbraco.Web.Models;
 
 namespace Muffin.Controllers
@@ -18,8 +18,8 @@ namespace Muffin.Controllers
     /// </summary>
     public abstract class SearchBaseController : BaseController
     {
-        protected SearchBaseController(ISiteRepository rep, IMapper map)
-			: base (rep, map)
+        protected SearchBaseController(ISiteRepository rep)
+			: base (rep)
         {
         }
 
@@ -42,20 +42,17 @@ namespace Muffin.Controllers
             int s=10,
             string q="") //for search template
         {
-            var @base = model.Content as ModelBase;
-            IModel content = @base ?? new ModelBase(model.Content);
-
-            var resultModel = new SearchModel(content,
-                q); //this.Request.QueryString["q"]);
+            var type = typeof(SearchContentViewModel<>).MakeGenericType(model.Content.GetType());
+            var result = Activator.CreateInstance(type, model.Content, q) as ISearchContentViewModel<IModel>;
 
             //late binding for pagedresults
-            resultModel.PagedResults = () => resultModel.Container.Skip(s*(p - 1))
+            result.PagedResults = () => result.Container.Skip(s*(p - 1))
                 .Take(s); 
 
-			resultModel.CurrentPage = p;
-			resultModel.PageSize = s;
+			result.CurrentPage = p;
+			result.PageSize = s;
 
-            return View(resultModel);
+            return View(result);
         }
     }
 }

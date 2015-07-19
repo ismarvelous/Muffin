@@ -16,7 +16,7 @@
 <#+
 private void GenerateModels()
 {
-	var namesp ="$rootnamespace$.ViewModels";
+	var namesp ="Example.Implementation.Models";
 	var gen = new ViewModelsGenerator(Host.ResolvePath("../../uSync"));
 	var doctypes = gen.GetDocumentTypes();
     var manager = Manager.Create(Host, GenerationEnvironment);
@@ -36,7 +36,7 @@ using System.ComponentModel;
 using Muffin.Core.Models;
 using Muffin.Infrastructure.Converters;
 using Umbraco.Core.Models;
-using Our.Umbraco.Ditto;
+using Muffin.Core;
 
 namespace  <#= namesp #>
 {

@@ -16,7 +16,7 @@ using Umbraco.Web;
 namespace Muffin.Infrastructure.Converters
 {
     /// <summary>
-    /// Convert a MacroContainer to a Func..
+    /// Convert a MacroContainer
     /// </summary>
     public class MacroContainer : BaseTypeConverter, IConverter
     {
@@ -29,20 +29,19 @@ namespace Muffin.Infrastructure.Converters
 
         public object ConvertDataToSource(object source)
         {
+            if (source is IEnumerable<DynamicMacroModel>)
+                return source;
+
             var content = source is string
                 ? source as string
-                : source is IPublishedProperty ? (source as IPublishedProperty).DataValue.ToString() : null;
+                : source is IPublishedProperty ? ((IPublishedProperty) source).DataValue.ToString() : null;
 
             if (!string.IsNullOrWhiteSpace(content) && UmbracoContext.Current != null && UmbracoContext.Current.PageId.HasValue)
             {
-                Func<IEnumerable<DynamicMacroModel>> func = () => ConvertToIEnumerable(content);
-                return func;
+                return ConvertToIEnumerable(content);
             }
-            else
-            {
-                Func<IEnumerable<DynamicMacroModel>> func = () => new List<DynamicMacroModelHtmlProxy>();
-                return func;
-            }
+
+            return new List<DynamicMacroModelHtmlProxy>();
         }
 
         protected IEnumerable<DynamicMacroModel> ConvertToIEnumerable(string content)
@@ -80,14 +79,14 @@ namespace Muffin.Infrastructure.Converters
             return ret;
         }
 
-        public override bool CanConvertFrom(ITypeDescriptorContext context, System.Type sourceType)
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            return sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
+            return sourceType == typeof(string) || sourceType == typeof(IEnumerable<DynamicMacroModel>) || base.CanConvertFrom(context, sourceType);
         }
 
         public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
         {
-            if (value is string)
+            if (value is string || value is IEnumerable<DynamicMacroModel> || value is IPublishedProperty)
             {
                 return ConvertDataToSource(value);
             }

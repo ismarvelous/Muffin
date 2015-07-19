@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using Our.Umbraco.Ditto;
 using Umbraco.Core.Models;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 
 namespace Muffin.Core.Models
 {
-
     /// <summary>
     /// The foundation, PublishedContentModel base class..
     /// </summary>
@@ -20,38 +18,48 @@ namespace Muffin.Core.Models
             get { return DependencyResolver.Current.GetService<ISiteRepository>(); }
         }
 
-        //todo: furter investigate below issue:
-        //converting an IPublishedContent using .As<T> to modelbase based class when the content parameter is already loaded as a modelbase based object
-        //can result in Stackoverflow exceptions, this can occur when using the CurrentContext.ContentCache
-        //An exception need to be thronw in these situations, in all other situations like in a cshtml
-        // one possibility could be to make Modelbase an abstract class and create a sealed class TypedModelBase : ModelBase which is used in default situations..
-        //converting is allowed.
-        //if(content is ModelBase)
-        //throw new ApplicationException("Conversion!!");
+        protected IPublishedContentModelFactory ContentFactory
+        {
+            get
+            {
+                return DependencyResolver.Current.GetService<IPublishedContentModelFactory>();
+            }
+        }
 
         public ModelBase(IPublishedContent content)
-            : base(content) { }
+            : base(content)
+        {
+
+            if (this.GetType().IsAssignableFrom(content.GetType()))
+                throw new ArgumentException("You can not define a ModelBase using a content type of the same type.");
+        }
 
         public bool IsNull()
         {
             return false;
         }
 
-        [DittoIgnore]
+        private IModel _homepage;
+        [MuffinIgnore]
         public IModel Homepage
         {
             get
             {
-                var home = Content.AncestorOrSelf(1);
+                if (_homepage == null)
+                {
+                    var home = Content.AncestorOrSelf(1);
 
-                if (home is IModel)
-                    return home as IModel;
+                    if (home is IModel) //for safety reasons
+                        _homepage = home as IModel;
+                    else
+                        _homepage = ContentFactory.CreateModel(home) as IModel;
+                }
 
-                return home.As<ModelBase>();
+                return _homepage;
             }
         }
 
-        [DittoIgnore]
+        [MuffinIgnore]
         public DateTime PublishDate
         {
             get
@@ -63,43 +71,65 @@ namespace Muffin.Core.Models
             }
         }
 
-        [DittoIgnore]
+        private IEnumerable<IModel> _breadcrumbs;
+        [MuffinIgnore]
         public IEnumerable<IModel> Breadcrumbs
         {
             get
             {
-                return this.Ancestors().OrderBy("level")
-                  .Where(a => a.IsVisible()).Select(b => new ModelBase(b));
+                return _breadcrumbs ?? (_breadcrumbs = this.Ancestors().OrderBy("level")
+                    .Where(a => a.IsVisible()).Select(c => ContentFactory.CreateModel(c)).OfType<IModel>());
             }
         }
 
-        [DittoIgnore]
+        private IModel _parent;
+        [MuffinIgnore]
         public new IModel Parent
-        {
-            get { return base.Parent.As<ModelBase>(); }
-        }
-
-        [DittoIgnore]
-        public new IEnumerable<IModel> Children
-        {
-            get { return base.Children.As<ModelBase>(); }
-        }
-
-        [DittoIgnore]
-        public IEnumerable<IModel> NavigationChildren
         {
             get
             {
-                return (from item in Children where item.IsVisible() select item.As<ModelBase>());
+                if (_parent == null)
+                {
+                    var model = base.Parent as IModel;
+                    if (model != null) //for safety reasons
+                        _parent = model;
+                    else
+                        _parent = ContentFactory.CreateModel(base.Parent) as IModel;
+                }
+
+                return _parent;
             }
         }
 
-        [DittoIgnore]
-        public override string Url
+        private IEnumerable<IModel> _children;
+        [MuffinIgnore]
+        public new IEnumerable<IModel> Children
         {
-            get { return Repository.FriendlyUrl(Content); }
+            get {
+                return _children ??
+                       (_children = base.Children.Select(c => ContentFactory.CreateModel(c)).OfType<IModel>());
+            }
         }
+
+        private IEnumerable<IModel> _navigationChildren;
+
+        [MuffinIgnore]
+        public IEnumerable<IModel> NavigationChildren
+        {
+            get { return _navigationChildren ?? (_navigationChildren = this.Children.Where(c => c.IsVisible())); }
+        }
+
+        //[DittoIgnore]
+        //public override string Url
+        //{
+        //    get 
+        //    {
+        //        return Repository.FriendlyUrl(Content); 
+        //    }
+        //}
     }
+
+
 
 
 }

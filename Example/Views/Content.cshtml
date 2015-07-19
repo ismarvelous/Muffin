@@ -1,5 +1,6 @@
-@using Our.Umbraco.Ditto
-@inherits UmbracoViewPage<Example.Implementation.ViewModels.Content>
+
+@using Muffin.Core
+@inherits UmbracoViewPage<Muffin.Core.ViewModels.IContentViewModel<Example.Implementation.Models.Content>>
 @{
     Layout = "~/Views/Shared/_layout.cshtml";
 }
@@ -8,46 +9,36 @@
 
 
     <header>
-        <h1>@Model.Titel</h1>
-
+        <h1>@Model.Content.Titel</h1>
+        
         <br />
-        @Model.Croppedimage
+        @Model.Content.Croppedimage
 
-        <img src="@Model.Croppedimage["640x480"]" />
-        <img src="@Model.Croppedimage["1024x768"]" />
+        <!--USE CROP ALIAS-->
+        <img src="@Model.Content.Croppedimage["640x480"]"/>
+        <!--OR USE YOUR OWN DEFINED FORMAT, CROPPED BY USING THE FOCUS POINT-->
+        <img src="@Model.Content.Croppedimage[200, 100]" />
 
-        <img src="@Model.Croppedimage[200, 100]" />
-
-        @if (Model.Afbeelding == null || Model.Afbeelding.IsNull())
-        {
-            <p>Er is geen afbeelding ingegeven.</p>
+        @if (Model.Content.Afbeelding.IsNull()) //a default null image is used when image is null
+        {                                       //therefor the property is never null.
+            <p>No image available</p>
         }
         else
         {
-            <p><img src="@Model.Afbeelding.Url" width="400px" height="400px" /></p>
+            <p><img src="@Model.Content.Afbeelding" width="400px" height="400px" /></p>
         }
 
-        <i>@Model.Intro</i>
+        <i>@Model.Content.Intro</i>
     </header>
-    <section>
-        <hr />
-        @* for demo purpose only...
-            if (Model.Intro.Length < 110)
-            {
-                <p>@Model.Intro</p>
-            }
-            else
-            {
-                <p>@Model.Intro.Substring(0, 110)</p>
-            }
-        *@
-
-    </section>
 
     <section>
-
+        <!-- GRID MANIPULATION-->
         <h2>Grid</h2>
 
-        @(Model.Grid.Sections.First().Rows.ElementAt(1).Areas.First().Controls.First().Value[100,100])
+        @if(Model.Content.Grid != null)
+        {
+            //value is an image, you can use it like it is a cropped image..
+            @(Model.Content.Grid.Sections.First().Rows.ElementAt(1).Areas.First().Controls.First().Value[100,100])
+        }
     </section>
 }

@@ -9,8 +9,11 @@ using Umbraco.Web;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 using DevTrends.MvcDonutCaching;
+using Muffin.Core.ViewModels;
 using Muffin.Infrastructure;
 using Umbraco.Core.Models;
+using Umbraco.Core.Models.PublishedContent;
+using Umbraco.Core.Persistence.Migrations.Syntax.Update;
 
 namespace Muffin.Controllers
 {
@@ -21,26 +24,24 @@ namespace Muffin.Controllers
     public class BaseController : Controller, IRenderMvcController
         // more info: http://our.umbraco.org/documentation/Reference/Mvc/custom-controllers
     {
-        protected ISiteRepository Repository;
-        protected IMapper Mapper;
 
-        public BaseController(ISiteRepository rep, IMapper mapper)
+        protected ISiteRepository Repository;
+
+        public BaseController(ISiteRepository rep)
             : base()
         {
             Repository = rep;
-            Mapper = mapper;
         }
 
         [DonutOutputCache(Duration = 86400, VaryByCustom = "url", Options = OutputCacheOptions.NoCacheLookupForPosts)]
         public virtual ActionResult Index(RenderModel model) //Template name, default is Index
         {
-            if (model.Content is IModel) //Content is ModelBase or any other IModel created by the muffin framework
-            {
-                return View(model.Content);
-            }
+            var content = model.Content as IModel;
+            return View(content != null ? 
+                CreateViewModel(content) : 
+                CreateViewModel((new ModelBase(model.Content)).AsDynamic()));
 
             //if there is not a muffin IModel version found, create a default modelbase and wrap it as a dynamic object.
-            return View(Mapper.AsDynamicIModel(new ModelBase(model.Content)));
         }
 
         //http://our.umbraco.org/documentation/Reference/Mvc/custom-controllers
@@ -68,9 +69,21 @@ namespace Muffin.Controllers
             var content = Repository.FindByUrl<ModelBase>(string.Format("/{0}", path));
             return new ContentResult()
             {
-                Content =  Mapper.AsJson(content).ToString(),
+                Content =  content.AsJson().ToString(),
                 ContentType = "application/json"
             };
         }
-}
+
+        /// <summary>
+        /// helper function to create a default ContentViewModel.T.
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
+        public virtual IContentViewModel<T> CreateViewModel<T>(T content)
+            where T : IModel
+        {
+            var type = typeof(ContentViewModel<>).MakeGenericType(content.GetType());
+            return Activator.CreateInstance(type, content) as IContentViewModel<T>;
+        }
+    }
 }

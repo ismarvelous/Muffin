@@ -1,8 +1,10 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
+using Castle.DynamicProxy;
 using Muffin.Core;
 using Muffin.Core.Models;
-using Our.Umbraco.Ditto;
+using Muffin.Core.ViewModels;
 using Umbraco.Web.Models;
 
 namespace Muffin.Controllers
@@ -12,8 +14,8 @@ namespace Muffin.Controllers
     /// </summary>
 	public abstract class ContainerBaseController : BaseController
     {
-        protected ContainerBaseController(ISiteRepository rep, IMapper map)
-			: base (rep, map)
+        protected ContainerBaseController(ISiteRepository rep)
+			: base (rep)
         {
         }
 
@@ -33,19 +35,18 @@ namespace Muffin.Controllers
 			int p=1, //read querystring parameters without using this.Request.
             int s=10)
 		{
-            var @base = model.Content as ModelBase;
-            IModel content = @base ?? new ModelBase(model.Content);
+            var content = model.Content as IModel;
 
-			var resultModel = new CollectionModel(content, model.Content.Children);
+            var result = new CollectionContentViewModel<IModel>(content, content);
 
-			resultModel.PagedResults = () => resultModel.Container //or model.Content.Children which is the same in this case.
+			result.PagedResults = () => result.Container
 			    .Skip(s * (p - 1))
 			    .Take(s);
              
-			resultModel.CurrentPage = p;
-			resultModel.PageSize = s;
+			result.CurrentPage = p;
+			result.PageSize = s;
 
-			return View(resultModel);
+			return View(result);
 		}
     }
 }

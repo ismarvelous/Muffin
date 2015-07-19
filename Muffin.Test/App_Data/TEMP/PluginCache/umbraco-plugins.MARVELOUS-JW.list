@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<plugins>
+  <baseType type="Muffin.Core.Models.ModelBase" resolutionType="FindAllTypes">
+    <add type="Muffin.Core.Models.ModelBase, Muffin, Version=0.0.10.0, Culture=neutral, PublicKeyToken=null" />
+    <add type="Muffin.Core.Models.MediaModel, Muffin, Version=0.0.10.0, Culture=neutral, PublicKeyToken=null" />
+  </baseType>
+</plugins>

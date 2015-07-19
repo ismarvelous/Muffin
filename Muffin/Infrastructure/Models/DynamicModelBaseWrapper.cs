@@ -5,11 +5,13 @@ using System.Dynamic;
 using System.Linq;
 using Muffin.Core;
 using Muffin.Core.Models;
-using Umbraco.Core.Dynamics;
+using umbraco.MacroEngines;
 using Umbraco.Core.Models;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 using Umbraco.Web.Models;
+using Umbraco.Web.Mvc;
+using DynamicNull = Umbraco.Core.Dynamics.DynamicNull;
 
 namespace Muffin.Infrastructure.Models
 {
@@ -17,9 +19,8 @@ namespace Muffin.Infrastructure.Models
 	/// Dynamic wrapper for IModels. Implements the same interfase as ModelBase
 	/// And is using the power of DynamicPublishedContent to access document type properties.
 	/// </summary>
-	internal class DynamicModelBaseWrapper : DynamicObject, IModel
+    internal class DynamicModelBaseWrapper : DynamicObject, IModel
     {
-        public IMapper Mapper { get; private set; }
         protected IModel Source;
 
         public ISiteRepository Repository { get { return Source.Repository; } }
@@ -30,7 +31,6 @@ namespace Muffin.Infrastructure.Models
                 throw new ArgumentException("You try to declare a dynamicmodelbasewrapper with a source of the same type.");
 
             Source = source;
-            Mapper = new Mapper();
         }
 
 		public override bool TryGetMember(GetMemberBinder binder, out object result)
@@ -57,9 +57,9 @@ namespace Muffin.Infrastructure.Models
 		    return true; //dynamic null is a succesfull value;
 		}
 
-		public virtual IModel Homepage
+        public virtual IModel Homepage
 		{
-			get { return new DynamicModelBaseWrapper(Source.Homepage); }
+			get { return Source.Homepage; }
 		}
 
         public virtual DateTime PublishDate //late binding of the publishdate...
@@ -71,7 +71,7 @@ namespace Muffin.Infrastructure.Models
 		{
 			get
 			{
-				return new DynamicModelBaseWrapper(Source.Parent);
+				return Source.Parent;
 			}
 		}
 
@@ -79,7 +79,7 @@ namespace Muffin.Infrastructure.Models
 
         public virtual IEnumerable<IModel> NavigationChildren
         {
-            get { return Source.NavigationChildren.Select(itm => new DynamicModelBaseWrapper(itm)); }
+            get { return Source.NavigationChildren; }
         }
 
         IPublishedContent IPublishedContent.Parent
@@ -89,17 +89,17 @@ namespace Muffin.Infrastructure.Models
 
         public virtual IEnumerable<IModel> Children
         {
-            get { return Mapper.AsDynamicIModel(Source.Children); }
+            get { return Source.Children; }
         }
 
 		IEnumerable<IPublishedContent> IPublishedContent.Children
 		{
-            get { return Mapper.AsDynamicIModel(Source.Children); }
+            get { return Source.Children; }
 		}
 
         public virtual IEnumerable<IModel> Breadcrumbs
         {
-            get { return Source.NavigationChildren.Select(itm => new DynamicModelBaseWrapper(itm));  }
+            get { return Source.NavigationChildren;  }
         }
 
 		#endregion
