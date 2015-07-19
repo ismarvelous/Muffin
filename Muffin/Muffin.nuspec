@@ -2,6 +2,7 @@
 <package >
 	<metadata>
 		<id>Muffin</id>
+		<version>$version$-beta</version>
 		<title>Muffin</title>
 		<authors>Chuhukon</authors>
 		<owners>Marvelous IT Solutions</owners>
