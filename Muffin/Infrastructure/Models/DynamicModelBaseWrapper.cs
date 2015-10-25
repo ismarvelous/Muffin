@@ -67,7 +67,7 @@ namespace Muffin.Infrastructure.Models
 			get { return Source.PublishDate; }
 		}
 
-		public new IModel Parent
+		public IModel Parent
 		{
 			get
 			{
