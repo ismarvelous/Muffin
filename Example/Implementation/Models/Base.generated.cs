@@ -1,5 +1,5 @@
 
-// -- AUTO GENERATED CONTENT, DO NOT MODIFY --		
+// -- AUTO GENERATED CONTENT ON, DO NOT MODIFY --		
 // <copyright file="ViewModelsGenerator.tt" company="Marvelous IT Solutions">
 // Copyright © Marvelous IT Solutions. All Rights Reserved.
 // this file is auto-generated, don't change anything in the created files.
@@ -25,29 +25,20 @@ namespace  Example.Implementation.Models
 		// properties..
 
 		
-		
-		public virtual string Titel { get; set; }
-		
-		
-		public virtual string Intro { get; set; }
+		[TypeConverter(typeof(MediaPicker))]
+		public virtual ICropImageModel Afbeelding { get; set; }
 		
 		
 		public virtual string MainBody { get; set; }
-		
-		[TypeConverter(typeof(MediaPicker))]
-		public virtual ICropImageModel Thumbnail { get; set; }
-		
-		[TypeConverter(typeof(MediaPicker))]
-		public virtual ICropImageModel Afbeelding { get; set; }
 		
 		
 		public virtual string BrowserTitel { get; set; }
 		
 		
-		public virtual bool UmbracoNaviHide { get; set; }
+		public virtual string CanonicalTag { get; set; }
 		
-		[TypeConverter(typeof(MacroContainer))]
-		public virtual IEnumerable<DynamicMacroModel> WidgetArea { get; set; }
+		
+		public virtual string Intro { get; set; }
 		
 		
 		public virtual string MetaDescription { get; set; }
@@ -58,8 +49,17 @@ namespace  Example.Implementation.Models
 		
 		public virtual bool MetaRobots { get; set; }
 		
+		[TypeConverter(typeof(MediaPicker))]
+		public virtual ICropImageModel Thumbnail { get; set; }
 		
-		public virtual string CanonicalTag { get; set; }
+		
+		public virtual string Titel { get; set; }
+		
+		
+		public virtual bool UmbracoNaviHide { get; set; }
+		
+		[TypeConverter(typeof(MacroContainer))]
+		public virtual IEnumerable<DynamicMacroModel> WidgetArea { get; set; }
 		
 	}
 	 

@@ -18,8 +18,8 @@
 		<copyright>Copyright 2015</copyright>
 		<tags>umbraco foundation mvc</tags>
 		<dependencies>
-			<dependency id="Autofac" version="3.2.0"/>
-			<dependency id="Autofac.Mvc4" version="3.1.0"  />
+			<dependency id="Autofac" version="3.5.2"/>
+			<dependency id="Autofac.Mvc5" version="3.3.4"  />
 			<dependency id="Autofac.WebApi" version="3.1.0"  />
       <dependency id="Newtonsoft.Json" version="4.5.0" />
 			<dependency id="UmbracoCms" version="7.2.4"  />

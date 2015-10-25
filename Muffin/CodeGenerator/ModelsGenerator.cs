@@ -29,7 +29,7 @@ namespace Muffin.CodeGenerator
         public IEnumerable<DocumentType> GetDocumentTypes()
         {
             var results = new List<DocumentType>();
-            var path = string.Format("{0}\\DocumentType", _uSyncPath);
+            var path = string.Format("{0}\\data\\DocumentType", _uSyncPath);
             foreach (var classdir in Directory.GetDirectories(path))
             {
                 results.AddRange(GetDocumentTypes(classdir));
