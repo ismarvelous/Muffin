@@ -29,7 +29,7 @@ namespace Muffin.Infrastructure.Converters
             {
                 return CroppedImageModel.Create(source.ToString());
             }
-            catch(Exception)
+            catch(Exception ex)
             {
                 //todo: log exception...
                 return DynamicNullMedia.Null;

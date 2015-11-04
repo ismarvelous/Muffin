@@ -29,7 +29,7 @@ namespace Muffin.Infrastructure.Converters
                     return ret;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 //todo: log exception...
             }
