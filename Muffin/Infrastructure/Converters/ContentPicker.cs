@@ -38,6 +38,8 @@ namespace Muffin.Infrastructure.Converters
 
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
+            if (value == null)
+                return null;
 
             if (value is string || value is int || value is IModel)
             {
