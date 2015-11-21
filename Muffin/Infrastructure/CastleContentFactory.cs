@@ -139,7 +139,7 @@ namespace Muffin.Infrastructure
                 }
                 else if (invocation.Method.ReturnType == typeof(string) && !(value is string))
                 {
-                    invocation.ReturnValue = value?.ToString();
+                    invocation.ReturnValue = value != null ? value.ToString() : null;
                 }
                 else
                 {
