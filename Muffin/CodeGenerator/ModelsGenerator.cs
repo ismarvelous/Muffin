@@ -44,7 +44,10 @@ namespace Muffin.CodeGenerator
             var serializer = new XmlSerializer(typeof(DocumentType));
             using (var reader = XmlReader.Create(string.Format("{0}\\def.config", path)))
             {
-                results.Add((DocumentType)serializer.Deserialize(reader));
+                var cls = (DocumentType)serializer.Deserialize(reader);
+                //uWebshop escape
+                cls.GenericProperties = cls.GetSafeClassName().StartsWith("uwbs", System.StringComparison.InvariantCultureIgnoreCase) ? new GenericProperty[] {} : cls.GenericProperties;
+                results.Add(cls);
                 foreach (var classdir in Directory.GetDirectories(path))
                 {
                     results.AddRange(GetDocumentTypes(classdir));
