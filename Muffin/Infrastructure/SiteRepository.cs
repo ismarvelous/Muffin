@@ -103,16 +103,16 @@ namespace Muffin.Infrastructure
         public IEnumerable<TM> FindAll<TM>() where TM : class, IModel
         {
             var roots = Helper.ContentAtRoot() as IEnumerable<IPublishedContent>;
-            return roots != null ? FindAll(roots.Select(n => ContentFactory.CreateModel(n)).OfType<TM>()) : null;
+            return roots != null ? FindAll<TM>(roots.Select(n => ContentFactory.CreateModel(n))) : null;
         }
 
-        protected IEnumerable<TM> FindAll<TM>(IEnumerable<TM> rootNodes) where TM : class, IModel
+        protected IEnumerable<TM> FindAll<TM>(IEnumerable<IPublishedContent> rootNodes) where TM : class, IModel, IPublishedContent
 		{
             var result = new List<TM>();
             foreach (var node in rootNodes)
             {
-                result.Add(node);
-                if (node.Children.Any()) result.AddRange(FindAll(node.Children.OfType<TM>())); //recursive..
+                if(node is TM) result.Add(node as TM);
+                if (node.Children.Any()) result.AddRange(FindAll<TM>(node.Children)); //recursive..
             }
 
             return result;

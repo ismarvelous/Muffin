@@ -7,6 +7,7 @@ using System.Web.Hosting;
 using System.IO;
 using Umbraco.Core.Logging;
 using System.Collections;
+using System.Globalization;
 using System.Linq;
 
 namespace Muffin.Caching
@@ -59,7 +60,7 @@ namespace Muffin.Caching
         public override object Add(string key, object entry, DateTime utcExpiry)
         {
             key = GetSafeFileName(key); //be sure the key is a file safe name..
-            LogAction("Add", string.Format("Key: {0} | UtcExpiry: {1}", key, utcExpiry.ToString()));
+            LogAction("Add", string.Format("Key: {0} | UtcExpiry: {1}", key, utcExpiry.ToString(CultureInfo.InvariantCulture)));
 
             // See if this key already exists in the cache. If so, we need to return it and NOT overwrite it!
             var results = this.Get(key);

@@ -23,7 +23,6 @@
 			<dependency id="Autofac.WebApi" version="3.1.0"  />
       <dependency id="Newtonsoft.Json" version="4.5.0" />
 			<dependency id="UmbracoCms" version="7.2.4"  />
-      <!--dependency id="Our.Umbraco.Ditto" version="0.6.1" /-->
       <dependency id="MvcDonutCaching" version="1.2.3" />
       <dependency id="Lucene.Net.Contrib" version="2.9.4.1" />
       <dependency id="uSync" version="2.4.10" />
