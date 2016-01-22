@@ -85,10 +85,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\xmlrpcnet.2.5.0\lib\net20\CookComputing.XmlRpcV2.dll</HintPath>
     </Reference>
-    <Reference Include="DevTrends.MvcDonutCaching, Version=1.2.3.0, Culture=neutral, PublicKeyToken=73c58d802958a09f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MvcDonutCaching.1.2.3\lib\net40\DevTrends.MvcDonutCaching.dll</HintPath>
-    </Reference>
     <Reference Include="Examine, Version=0.1.60.2941, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Examine.0.1.60.2941\lib\Examine.dll</HintPath>
@@ -354,6 +350,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DevTrends.MvcDonutCaching.README.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\mvcdonutcaching-master\mvcdonutcaching-master\DevTrends.MvcDonutCaching\MvcDonutCaching.csproj">
+      <Project>{854e90c7-8320-4eb6-a286-24a8ee5ebe9b}</Project>
+      <Name>MvcDonutCaching</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
