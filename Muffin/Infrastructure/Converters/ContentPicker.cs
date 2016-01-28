@@ -25,7 +25,7 @@ namespace Muffin.Infrastructure.Converters
                 return Repository.FindById(Convert.ToInt32(source));
             }
 
-            return new List<IModel>();
+            return null;
         }
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
