@@ -1,0 +1,749 @@
+2016-04-30 11:38:31,459 [12] INFO  Umbraco.Core.CoreBootManager - Umbraco 7.3.0 application starting on MARVELOUS-JW
+2016-04-30 11:38:31,574 [12] INFO  Umbraco.Core.PluginManager - Determining hash of code files on disk
+2016-04-30 11:38:31,611 [12] INFO  Umbraco.Core.PluginManager - Hash determined (took 34ms)
+2016-04-30 11:38:31,857 [12] INFO  Umbraco.Core.PluginManager - Starting resolution types of umbraco.interfaces.IApplicationStartupHandler
+2016-04-30 11:38:32,445 [12] INFO  Umbraco.Core.PluginManager - Completed resolution of types of umbraco.interfaces.IApplicationStartupHandler, found 0 (took 588ms)
+2016-04-30 11:38:32,465 [12] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter
+2016-04-30 11:38:32,479 [12] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter, found 0 (took 13ms)
+2016-04-30 11:38:32,480 [12] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.PropertyEditors.IPropertyValueConverter
+2016-04-30 11:38:32,499 [12] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.PropertyEditors.IPropertyValueConverter, found 0 (took 19ms)
+2016-04-30 11:38:32,515 [12] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Web.Mvc.SurfaceController
+2016-04-30 11:38:32,531 [12] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Web.Mvc.SurfaceController, found 0 (took 16ms)
+2016-04-30 11:38:32,532 [12] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Web.WebApi.UmbracoApiController
+2016-04-30 11:38:32,544 [12] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Web.WebApi.UmbracoApiController, found 0 (took 12ms)
+2016-04-30 11:38:32,595 [12] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.Media.IThumbnailProvider
+2016-04-30 11:38:32,606 [12] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.Media.IThumbnailProvider, found 0 (took 11ms)
+2016-04-30 11:38:32,606 [12] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.Media.IImageUrlProvider
+2016-04-30 11:38:32,621 [12] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.Media.IImageUrlProvider, found 0 (took 14ms)
+2016-04-30 11:38:33,425 [12] INFO  Umbraco.Core.DatabaseContext - CanConnect = True
+2016-04-30 11:38:33,678 [12] INFO  Umbraco.Core.PluginManager - Starting resolution types of Muffin.Core.Models.ModelBase
+2016-04-30 11:38:33,700 [12] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Muffin.Core.Models.ModelBase, found 0 (took 21ms)
+2016-04-30 11:38:33,897 [12] INFO  Umbraco.Core.DatabaseContext - CanConnect = True
+2016-04-30 11:38:33,899 [12] INFO  Jumoo.uSync.BackOffice.uSyncApplicationEventHandler - Initializing uSync 73
+2016-04-30 11:38:33,901 [12] INFO  Jumoo.uSync.BackOffice.uSyncApplicationEventHandler - Firing up uSync
+2016-04-30 11:38:33,906 [12] INFO  Jumoo.uSync.BackOffice.uSyncBackOfficeContext - Loading up Sync Handlers : 8
+2016-04-30 11:38:34,148 [12] INFO  Jumoo.uSync.BackOffice.uSyncAction - ### uSync.BackOffice Processed 0 items with 0 changes ###
+2016-04-30 11:38:34,149 [12] INFO  Jumoo.uSync.BackOffice.uSyncApplicationEventHandler - uSync Complete (247ms)
+2016-04-30 11:38:34,189 [12] INFO  Umbraco.Core.DatabaseContext - CanConnect = True
+2016-04-30 11:38:34,251 [12] WARN  Umbraco.Core.Sync.DatabaseServerMessenger - No last synced Id found, this generally means this is a new server/install. The server will rebuild its caches and indexes and then adjust it's last synced id to the latest found in the database and will start maintaining cache updates based on that id
+2016-04-30 11:38:34,332 [12] INFO  umbraco.content - Load Xml from file...
+2016-04-30 11:38:34,333 [12] WARN  umbraco.content - Failed to load Xml, file does not exist.
+2016-04-30 11:38:34,336 [12] INFO  umbraco.content - Loading content from database...
+2016-04-30 11:38:35,609 [12] INFO  umbraco.content - Loading content from database...
+2016-04-30 11:38:35,629 [12] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.Persistence.Mappers.BaseMapper
+2016-04-30 11:38:35,643 [12] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.Persistence.Mappers.BaseMapper, found 0 (took 13ms)
+2016-04-30 11:38:36,290 [12] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.PropertyEditors.IParameterEditor
+2016-04-30 11:38:36,323 [12] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.PropertyEditors.IParameterEditor, found 0 (took 32ms)
+2016-04-30 11:38:36,805 [12] INFO  Umbraco.Web.Cache.CacheRefresherEventHandler - Initializing Umbraco internal event handlers for cache refreshing
+2016-04-30 11:38:36,852 [12] INFO  Umbraco.Web.Search.ExamineEvents - Initializing Examine and binding to business logic events
+2016-04-30 11:38:36,853 [12] INFO  Umbraco.Web.Search.ExamineEvents - Adding examine event handlers for index providers: 3
+2016-04-30 11:38:36,869 [12] INFO  Umbraco.Core.CoreBootManager - Umbraco application startup complete (took 5704ms)
+2016-04-30 11:38:38,302 [12] INFO  Umbraco.Core.Sync.ApplicationUrlHelper - ApplicationUrl: http://localhost:8080/umbraco (UmbracoModule request)
+2016-04-30 11:38:38,610 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/' from cache
+2016-04-30 11:38:39,888 [12] INFO  umbraco.content - Save Xml to file...
+2016-04-30 11:38:39,919 [12] INFO  umbraco.content - Saved Xml to file.
+2016-04-30 11:38:39,978 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Get '_d0nutc@che.base.home#url=url=http://localhost:8080/;#' from cache
+2016-04-30 11:38:46,864 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Add '_d0nutc@che.base.home#url=url=http://localhost:8080/;#' of type 'DevTrends.MvcDonutCaching.CacheItem' which expires at: 5/1/2016 9:38:46 AM 
+2016-04-30 11:38:48,391 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/__browserlink/requestdata/2b60e109ae444d99b600b0a35785cc95' from cache
+2016-04-30 11:38:48,436 [12] WARN  Umbraco.Web.UmbracoModule - Status code is 404 yet TrySkipIisCustomErrors is false - IIS will take over.
+2016-04-30 11:39:46,939 [12] INFO  umbraco.BusinessLogic.Log - Log scrubbed.  Removed all items older than 2016-04-29 11:39:46
+2016-04-30 11:39:46,949 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a1/umbraco/restservices/scheduledpublish/index' from cache
+2016-04-30 11:39:46,950 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/ping.aspx' from cache
+2016-04-30 11:40:47,043 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a1/umbraco/restservices/scheduledpublish/index' from cache
+2016-04-30 11:41:47,117 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a1/umbraco/restservices/scheduledpublish/index' from cache
+2016-04-30 11:42:47,179 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a1/umbraco/restservices/scheduledpublish/index' from cache
+2016-04-30 11:43:47,237 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a1/umbraco/restservices/scheduledpublish/index' from cache
+2016-04-30 11:44:47,291 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a1/umbraco/restservices/scheduledpublish/index' from cache
+2016-04-30 11:44:47,536 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/ping.aspx' from cache
+2016-04-30 11:45:37,552 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/news/congrats-lorem-ipsum/' from cache
+2016-04-30 11:45:37,587 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Get '_d0nutc@che.base.content#url=url=http://localhost:8080/news/congrats-lorem-ipsum/;#' from cache
+2016-04-30 11:45:38,199 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Add '_d0nutc@che.base.content#url=url=http://localhost:8080/news/congrats-lorem-ipsum/;#' of type 'DevTrends.MvcDonutCaching.CacheItem' which expires at: 5/1/2016 9:45:38 AM 
+2016-04-30 11:45:38,335 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/news/congrats-lorem-ipsum/js/main.js' from cache
+2016-04-30 11:45:39,098 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/app_data/cache/e/6/c/b/9/2/e6cb9268d95f0787f97d5bbc7557d09a8ab60300.jpg' from cache
+2016-04-30 11:45:39,207 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/__browserlink/requestdata/65b6a912c4964f27a243ab2129137501' from cache
+2016-04-30 11:45:39,723 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/news/' from cache
+2016-04-30 11:45:40,544 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/news/js/main.js' from cache
+2016-04-30 11:45:40,808 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/__browserlink/requestdata/1af72cba70a348139c7932b9f6b18e56' from cache
+2016-04-30 11:45:41,446 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/about-us/' from cache
+2016-04-30 11:45:41,457 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Get '_d0nutc@che.base.content#url=url=http://localhost:8080/about-us/;#' from cache
+2016-04-30 11:45:41,680 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Add '_d0nutc@che.base.content#url=url=http://localhost:8080/about-us/;#' of type 'DevTrends.MvcDonutCaching.CacheItem' which expires at: 5/1/2016 9:45:41 AM 
+2016-04-30 11:45:41,796 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/about-us/js/main.js' from cache
+2016-04-30 11:45:42,110 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/app_data/cache/0/1/9/f/a/d/019fada22e9f36f5fcba5e163b3bbaa31bffc3b2.jpg' from cache
+2016-04-30 11:45:42,137 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/app_data/cache/b/e/4/4/d/e/be44defc07b96e910fe3e974b27646013f745e09.jpg' from cache
+2016-04-30 11:45:42,253 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/__browserlink/requestdata/dd866abd23e9457b9b65cdc183c36be5' from cache
+2016-04-30 11:45:47,351 [12] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a1/umbraco/restservices/scheduledpublish/index' from cache
+2016-04-30 13:12:07,863 [10] INFO  Umbraco.Core.CoreBootManager - Umbraco 7.4.3 application starting on MARVELOUS-JW
+2016-04-30 13:12:07,900 [10] INFO  Umbraco.Core.PluginManager - Determining hash of code files on disk
+2016-04-30 13:12:07,916 [10] INFO  Umbraco.Core.PluginManager - Hash determined (took 16ms)
+2016-04-30 13:12:07,977 [10] INFO  Umbraco.Core.PluginManager - Starting resolution types of umbraco.interfaces.IApplicationStartupHandler
+2016-04-30 13:12:08,351 [10] INFO  Umbraco.Core.PluginManager - Completed resolution of types of umbraco.interfaces.IApplicationStartupHandler, found 0 (took 374ms)
+2016-04-30 13:12:08,370 [10] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter
+2016-04-30 13:12:08,383 [10] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter, found 0 (took 12ms)
+2016-04-30 13:12:08,383 [10] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.PropertyEditors.IPropertyValueConverter
+2016-04-30 13:12:08,396 [10] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.PropertyEditors.IPropertyValueConverter, found 0 (took 13ms)
+2016-04-30 13:12:08,414 [10] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Web.Mvc.SurfaceController
+2016-04-30 13:12:08,429 [10] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Web.Mvc.SurfaceController, found 0 (took 15ms)
+2016-04-30 13:12:08,430 [10] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Web.WebApi.UmbracoApiController
+2016-04-30 13:12:08,445 [10] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Web.WebApi.UmbracoApiController, found 0 (took 15ms)
+2016-04-30 13:12:08,491 [10] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.Media.IThumbnailProvider
+2016-04-30 13:12:08,499 [10] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.Media.IThumbnailProvider, found 0 (took 8ms)
+2016-04-30 13:12:08,500 [10] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.Media.IImageUrlProvider
+2016-04-30 13:12:08,511 [10] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.Media.IImageUrlProvider, found 0 (took 10ms)
+2016-04-30 13:12:09,435 [10] INFO  Umbraco.Core.PluginManager - Starting resolution types of Muffin.Core.Models.ModelBase
+2016-04-30 13:12:09,454 [10] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Muffin.Core.Models.ModelBase, found 0 (took 19ms)
+2016-04-30 13:12:09,551 [10] INFO  Umbraco.Core.CoreBootManager - Umbraco application startup complete (took 1751ms)
+2016-04-30 13:12:51,123 [10] INFO  Umbraco.Core.UmbracoApplicationBase - Application shutdown. Details: InitializationError
+
+_shutDownMessage=Initialization Error
+HostingEnvironment initiated shutdown
+CONFIG change
+CONFIG change
+CONFIG change
+CONFIG change
+HostingEnvironment caused shutdown
+
+_shutDownStack=   at System.Environment.GetStackTrace(Exception e, Boolean needFileInfo)
+   at System.Environment.get_StackTrace()
+   at System.Web.Hosting.HostingEnvironment.InitiateShutdownInternal()
+   at System.Web.Hosting.HostingEnvironment.InitiateShutdownWithoutDemand()
+   at System.Web.HttpRuntime.ShutdownAppDomain(String stackTrace)
+   at System.Web.HttpRuntime.AppDomainShutdownTimerCallback(Object state)
+   at System.Threading.TimerQueueTimer.CallCallbackInContext(Object state)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Threading.TimerQueueTimer.CallCallback()
+   at System.Threading.TimerQueueTimer.Fire()
+   at System.Threading.TimerQueue.FireNextTimers()
+   at System.Threading.TimerQueue.AppDomainTimerCallback()
+2016-04-30 13:14:36,504 [7] INFO  Umbraco.Core.CoreBootManager - Umbraco 7.4.3 application starting on MARVELOUS-JW
+2016-04-30 13:14:36,537 [7] INFO  Umbraco.Core.PluginManager - Determining hash of code files on disk
+2016-04-30 13:14:36,547 [7] INFO  Umbraco.Core.PluginManager - Hash determined (took 10ms)
+2016-04-30 13:14:36,613 [7] INFO  Umbraco.Core.PluginManager - Starting resolution types of umbraco.interfaces.IApplicationStartupHandler
+2016-04-30 13:14:37,010 [7] INFO  Umbraco.Core.PluginManager - Completed resolution of types of umbraco.interfaces.IApplicationStartupHandler, found 0 (took 396ms)
+2016-04-30 13:14:37,029 [7] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter
+2016-04-30 13:14:37,034 [7] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter, found 0 (took 5ms)
+2016-04-30 13:14:37,035 [7] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.PropertyEditors.IPropertyValueConverter
+2016-04-30 13:14:37,053 [7] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.PropertyEditors.IPropertyValueConverter, found 0 (took 18ms)
+2016-04-30 13:14:37,069 [7] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Web.Mvc.SurfaceController
+2016-04-30 13:14:37,079 [7] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Web.Mvc.SurfaceController, found 0 (took 9ms)
+2016-04-30 13:14:37,079 [7] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Web.WebApi.UmbracoApiController
+2016-04-30 13:14:37,095 [7] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Web.WebApi.UmbracoApiController, found 0 (took 16ms)
+2016-04-30 13:14:37,139 [7] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.Media.IThumbnailProvider
+2016-04-30 13:14:37,147 [7] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.Media.IThumbnailProvider, found 0 (took 8ms)
+2016-04-30 13:14:37,147 [7] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.Media.IImageUrlProvider
+2016-04-30 13:14:37,159 [7] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.Media.IImageUrlProvider, found 0 (took 11ms)
+2016-04-30 13:14:38,211 [7] INFO  Umbraco.Core.PluginManager - Starting resolution types of Muffin.Core.Models.ModelBase
+2016-04-30 13:14:38,232 [7] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Muffin.Core.Models.ModelBase, found 0 (took 21ms)
+2016-04-30 13:14:38,350 [7] INFO  Umbraco.Core.CoreBootManager - Umbraco application startup complete (took 1909ms)
+2016-04-30 13:14:40,407 [7] INFO  Umbraco.Core.Sync.ApplicationUrlHelper - ApplicationUrl: http://localhost:8080/umbraco (UmbracoModule request)
+2016-04-30 13:14:40,612 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/' from cache
+2016-04-30 13:14:40,727 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/install/' from cache
+2016-04-30 13:14:41,085 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/authorizeupgrade' from cache
+2016-04-30 13:14:42,994 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/assets/css/umbraco.css' from cache
+2016-04-30 13:14:43,012 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/lib/font-awesome/css/font-awesome.min.css' from cache
+2016-04-30 13:14:43,032 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/application' from cache
+2016-04-30 13:14:43,068 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/lib/rgrove-lazyload/lazyload.js' from cache
+2016-04-30 13:14:43,118 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/lib/bootstrap-social/bootstrap-social.css' from cache
+2016-04-30 13:14:43,168 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/assets/img/application/logo.png' from cache
+2016-04-30 13:14:43,272 [7] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.PropertyEditors.IParameterEditor
+2016-04-30 13:14:43,312 [7] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.PropertyEditors.IParameterEditor, found 0 (took 39ms)
+2016-04-30 13:14:43,469 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/lib/angular/1.1.5/angular.min.js' from cache
+2016-04-30 13:14:43,561 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/lib/angular/1.1.5/angular-cookies.min.js' from cache
+2016-04-30 13:14:43,573 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/lib/underscore/underscore-min.js' from cache
+2016-04-30 13:14:43,574 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/lib/jquery-ui-touch-punch/jquery.ui.touch-punch.js' from cache
+2016-04-30 13:14:43,582 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/lib/jquery-ui/jquery-ui.min.js' from cache
+2016-04-30 13:14:43,594 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/lib/jquery/jquery.min.js' from cache
+2016-04-30 13:14:43,660 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/lib/angular/1.1.5/angular-sanitize.min.js' from cache
+2016-04-30 13:14:43,726 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/lib/angular/1.1.5/angular-mobile.js' from cache
+2016-04-30 13:14:43,782 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/lib/angular/angular-ui-sortable.js' from cache
+2016-04-30 13:14:43,784 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/lib/bootstrap/js/bootstrap.2.3.2.min.js' from cache
+2016-04-30 13:14:43,834 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/lib/angular-dynamic-locale/tmhdynamiclocale.min.js' from cache
+2016-04-30 13:14:43,874 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/lib/bootstrap-tabdrop/bootstrap-tabdrop.js' from cache
+2016-04-30 13:14:43,903 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/lib/angular-local-storage/angular-local-storage.min.js' from cache
+2016-04-30 13:14:43,924 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/lib/ng-file-upload/ng-file-upload.min.js' from cache
+2016-04-30 13:14:43,955 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/js/app.js' from cache
+2016-04-30 13:14:43,974 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/lib/umbraco/legacyspeechbubble.js' from cache
+2016-04-30 13:14:43,998 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/lib/umbraco/legacyumbclientmgr.js' from cache
+2016-04-30 13:14:44,021 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/js/umbraco.directives.js' from cache
+2016-04-30 13:14:44,024 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/lib/umbraco/extensions.js' from cache
+2016-04-30 13:14:44,047 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/lib/umbraco/namespacemanager.js' from cache
+2016-04-30 13:14:44,095 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/js/umbraco.resources.js' from cache
+2016-04-30 13:14:44,100 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/js/umbraco.controllers.js' from cache
+2016-04-30 13:14:44,111 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/js/umbraco.filters.js' from cache
+2016-04-30 13:14:44,123 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/js/umbraco.services.js' from cache
+2016-04-30 13:14:44,172 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/js/umbraco.security.js' from cache
+2016-04-30 13:14:44,198 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/js/init.js' from cache
+2016-04-30 13:14:44,253 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/app_plugins/modelsbuilder/modelsbuilder.controller.js' from cache
+2016-04-30 13:14:44,262 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/app_plugins/modelsbuilder/modelsbuilder.resource.js' from cache
+2016-04-30 13:14:44,264 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/js/routes.js' from cache
+2016-04-30 13:14:44,285 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/developer/relationtypes/treemenu/actionnewrelationtype.js' from cache
+2016-04-30 13:14:44,288 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/developer/relationtypes/treemenu/actiondeleterelationtype.js' from cache
+2016-04-30 13:14:44,385 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/lib/moment/moment-with-locales.js' from cache
+2016-04-30 13:14:44,481 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/views/common/dialogs/login.html' from cache
+2016-04-30 13:14:44,484 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/views/components/notifications/umb-notifications.html' from cache
+2016-04-30 13:14:44,559 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/localizedtext' from cache
+2016-04-30 13:14:44,600 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/favicon.ico' from cache
+2016-04-30 13:14:45,651 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/__browserlink/requestdata/7213b664c87847b8b4424c25981bbbbb' from cache
+2016-04-30 13:14:48,789 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a1/umbraco/backoffice/umbracoapi/authentication/postlogin' from cache
+2016-04-30 13:14:49,056 [7] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.Persistence.Mappers.BaseMapper
+2016-04-30 13:14:49,067 [7] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.Persistence.Mappers.BaseMapper, found 0 (took 10ms)
+2016-04-30 13:14:49,440 [7] INFO  Umbraco.Core.Security.BackOfficeSignInManager - Event Id: 0, state: Login attempt succeeded for username admin from IP address ::1
+2016-04-30 13:14:49,442 [7] INFO  Umbraco.Core.Security.BackOfficeSignInManager - Event Id: 0, state: User: admin logged in from IP address ::1
+2016-04-30 13:14:49,794 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/servervariables' from cache
+2016-04-30 13:14:49,794 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/install/' from cache
+2016-04-30 13:14:50,363 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a1/umbraco/backoffice/umbracoapi/authentication/postlogin' from cache
+2016-04-30 13:14:50,410 [7] INFO  Umbraco.Core.Security.BackOfficeSignInManager - Event Id: 0, state: Login attempt succeeded for username admin from IP address ::1
+2016-04-30 13:14:50,410 [7] INFO  Umbraco.Core.Security.BackOfficeSignInManager - Event Id: 0, state: User: admin logged in from IP address ::1
+2016-04-30 13:14:50,588 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/install/' from cache
+2016-04-30 13:14:51,957 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/assets/img/application/logo_white.png' from cache
+2016-04-30 13:14:51,967 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/js/install.loader.js' from cache
+2016-04-30 13:14:51,978 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/assets/css/installer.css' from cache
+2016-04-30 13:14:52,156 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/lib/angular/1.1.5/angular-mocks.js' from cache
+2016-04-30 13:14:52,188 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/lib/angular/1.1.5/angular-mobile.min.js' from cache
+2016-04-30 13:14:52,211 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/js/umbraco.installer.js' from cache
+2016-04-30 13:14:52,213 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/assets/img/installer.jpg' from cache
+2016-04-30 13:14:52,426 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/install/api/getsetup' from cache
+2016-04-30 13:14:52,694 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/__browserlink/requestdata/d2a69c276c5547d3bb04ccc4646f59be' from cache
+2016-04-30 13:14:52,709 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/umbraco/views/install/upgrade.html' from cache
+2016-04-30 13:14:52,744 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a2/install/' from cache
+2016-04-30 13:14:56,484 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a1/install/api/postperforminstall' from cache
+2016-04-30 13:14:56,509 [7] INFO  Umbraco.Web.Install.Controllers.InstallApiController - Executing installation step: Permissions
+2016-04-30 13:14:56,545 [7] INFO  Umbraco.Web.Install.Controllers.InstallApiController - Step completed (took 35ms)
+2016-04-30 13:14:56,594 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a1/install/api/postperforminstall' from cache
+2016-04-30 13:14:56,611 [7] INFO  Umbraco.Web.Install.Controllers.InstallApiController - Executing installation step: Upgrade
+2016-04-30 13:14:56,611 [7] INFO  Umbraco.Web.Install.Controllers.InstallApiController - Step completed (took 0ms)
+2016-04-30 13:14:56,675 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a1/install/api/postperforminstall' from cache
+2016-04-30 13:14:56,683 [7] INFO  Umbraco.Web.Install.Controllers.InstallApiController - Executing installation step: DatabaseInstall
+2016-04-30 13:14:56,690 [7] INFO  Umbraco.Core.DatabaseContext - Database configuration status: Started
+2016-04-30 13:14:56,691 [7] INFO  Umbraco.Core.DatabaseContext - Database requires upgrade
+2016-04-30 13:14:56,692 [7] INFO  Umbraco.Web.Install.Controllers.InstallApiController - Step completed (took 9ms)
+2016-04-30 13:14:56,740 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a1/install/api/postperforminstall' from cache
+2016-04-30 13:14:56,743 [7] INFO  Umbraco.Web.Install.Controllers.InstallApiController - Executing installation step: DatabaseUpgrade
+2016-04-30 13:14:56,744 [7] INFO  Umbraco.Web.Install.InstallSteps.DatabaseUpgradeStep - Running 'Upgrade' service
+2016-04-30 13:14:56,752 [7] INFO  Umbraco.Core.DatabaseContext - Database upgrade started
+2016-04-30 13:14:56,871 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Initializing database migrations
+2016-04-30 13:14:56,876 [7] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.Persistence.Migrations.IMigration
+2016-04-30 13:14:56,909 [7] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.Persistence.Migrations.IMigration, found 0 (took 32ms)
+2016-04-30 13:14:57,023 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Added UPGRADE migration 'UpdateUserLanguagesToIsoCode' to context
+2016-04-30 13:14:57,028 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Added UPGRADE migration 'EnsureMigrationsTableIdentityIsCorrect' to context
+2016-04-30 13:14:57,198 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Added UPGRADE migration 'AddDataDecimalColumn' to context
+2016-04-30 13:14:57,341 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Added UPGRADE migration 'AddUniqueIdPropertyTypeGroupColumn' to context
+2016-04-30 13:14:57,407 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Added UPGRADE migration 'EnsureContentTypeUniqueIdsAreConsistent' to context
+2016-04-30 13:14:57,449 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Added UPGRADE migration 'FixListViewMediaSortOrder' to context
+2016-04-30 13:14:57,863 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Added UPGRADE migration 'RemoveParentIdPropertyTypeGroupColumn' to context
+2016-04-30 13:14:57,917 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Added UPGRADE migration 'AddUmbracoDeployTables' to context
+2016-04-30 13:14:57,960 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 2: DELETE FROM [umbracoMigration] WHERE 1 = 1
+
+2016-04-30 13:14:57,989 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 4: ALTER TABLE [cmsPropertyData] ADD [dataDecimal] DECIMAL(20,9) NULL
+
+2016-04-30 13:14:57,992 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 5: ALTER TABLE [cmsPropertyTypeGroup] ADD [uniqueID] UniqueIdentifier NOT NULL CONSTRAINT [DF_cmsPropertyTypeGroup_uniqueID] DEFAULT (NEWID())
+
+2016-04-30 13:14:57,999 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 6: CREATE UNIQUE NONCLUSTERED INDEX [IX_cmsPropertyTypeGroupUniqueID] ON [cmsPropertyTypeGroup] ([uniqueID])
+
+2016-04-30 13:14:58,072 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 8: UPDATE [umbracoNode] SET [uniqueID] = 'd8cf185c-392f-591a-6100-c1d9d9963817' WHERE [id] = 1031
+
+2016-04-30 13:14:58,073 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 9: UPDATE [umbracoNode] SET [uniqueID] = '16bc0049-e8f5-d321-6c76-3dfbb1367a2d' WHERE [id] = 1032
+
+2016-04-30 13:14:58,074 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 10: UPDATE [umbracoNode] SET [uniqueID] = '34599b89-f7f5-1535-66e0-c6fd0ea11880' WHERE [id] = 1033
+
+2016-04-30 13:14:58,075 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 11: UPDATE [umbracoNode] SET [uniqueID] = 'afb9573b-b5e7-bf0a-1fca-78ac0cd2689a' WHERE [id] = 1168
+
+2016-04-30 13:14:58,075 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 12: UPDATE [umbracoNode] SET [uniqueID] = '552c0e1f-6e27-3e03-9244-18e1b40a3cd8' WHERE [id] = 1070
+
+2016-04-30 13:14:58,076 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 13: UPDATE [umbracoNode] SET [uniqueID] = '3b4c72c5-20e0-3e42-ee87-f833b3a3d557' WHERE [id] = 1073
+
+2016-04-30 13:14:58,077 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 14: UPDATE [umbracoNode] SET [uniqueID] = 'b4defa97-1b77-75c3-831e-0c29e34a11eb' WHERE [id] = 1075
+
+2016-04-30 13:14:58,078 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 15: UPDATE [umbracoNode] SET [uniqueID] = '81736462-9c9a-4004-92af-90dd41a1c1fe' WHERE [id] = 1079
+
+2016-04-30 13:14:58,080 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 16: UPDATE [umbracoNode] SET [uniqueID] = '14a3a72b-15a7-0613-9646-c289b2eadaa0' WHERE [id] = 1083
+
+2016-04-30 13:14:58,082 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 17: UPDATE [umbracoNode] SET [uniqueID] = '67d221a1-e581-5bcd-0d10-8b8253952c7f' WHERE [id] = 1080
+
+2016-04-30 13:14:58,084 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 18: UPDATE [umbracoNode] SET [uniqueID] = '9e2e3f26-5dfc-e842-ed95-b5fe7008d873' WHERE [id] = 1084
+
+2016-04-30 13:14:58,087 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 19: UPDATE [umbracoNode] SET [uniqueID] = 'd8f4e60d-3b39-e642-5150-b313c34c687c' WHERE [id] = 1149
+
+2016-04-30 13:14:58,088 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 20: UPDATE [umbracoNode] SET [uniqueID] = '1aaf0c7f-6335-b4d4-9c44-609a7112394b' WHERE [id] = 1151
+
+2016-04-30 13:14:58,089 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 21: UPDATE [umbracoNode] SET [uniqueID] = '1aed9100-c182-80b3-7d23-8c7ea2248a73' WHERE [id] = 1152
+
+2016-04-30 13:14:58,090 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 22: UPDATE [umbracoNode] SET [uniqueID] = 'cdc31c9e-e1f3-c554-6a97-f79480ac56fd' WHERE [id] = 1159
+
+2016-04-30 13:14:58,091 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 23: UPDATE [umbracoNode] SET [uniqueID] = '79233023-1b6d-aa17-6146-baa16bc60f1c' WHERE [id] = 1160
+
+2016-04-30 13:14:58,093 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 24: ALTER TABLE [cmsPropertyTypeGroup] DROP CONSTRAINT [FK_cmsPropertyTypeGroup_cmsPropertyTypeGroup_id]
+
+2016-04-30 13:14:58,095 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 25: ALTER TABLE [cmsPropertyTypeGroup] DROP COLUMN [parentGroupId]
+
+2016-04-30 13:14:58,104 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 26: CREATE TABLE [umbracoDeployChecksum] ([id] INTEGER NOT NULL IDENTITY(1,1),
+[entityType] NVARCHAR(32) NOT NULL,
+[entityGuid] UniqueIdentifier NULL,
+[entityPath] NVARCHAR(256) NULL,
+[localChecksum] NVARCHAR(32) NOT NULL,
+[compositeChecksum] NVARCHAR(32) NULL)
+
+2016-04-30 13:14:58,106 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 27: ALTER TABLE [umbracoDeployChecksum] ADD CONSTRAINT [PK_umbracoDeployChecksum] PRIMARY KEY ([id])
+
+2016-04-30 13:14:58,108 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 28: CREATE TABLE [umbracoDeployDependency] ([sourceId] INTEGER NOT NULL,
+[targetId] INTEGER NOT NULL,
+[mode] INTEGER NOT NULL)
+
+2016-04-30 13:14:58,110 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 29: ALTER TABLE [umbracoDeployDependency] ADD CONSTRAINT [FK_umbracoDeployDependency_umbracoDeployChecksum_id1] FOREIGN KEY ([sourceId]) REFERENCES [umbracoDeployChecksum] ([id])
+
+2016-04-30 13:14:58,111 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 30: ALTER TABLE [umbracoDeployDependency] ADD CONSTRAINT [FK_umbracoDeployDependency_umbracoDeployChecksum_id2] FOREIGN KEY ([targetId]) REFERENCES [umbracoDeployChecksum] ([id])
+
+2016-04-30 13:14:58,118 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 31: ALTER TABLE [umbracoDeployDependency] ADD CONSTRAINT [PK_umbracoDeployDependency] PRIMARY KEY ([sourceId], [targetId])
+
+2016-04-30 13:14:58,120 [7] INFO  Umbraco.Core.Persistence.Migrations.MigrationRunner - Executing sql statement 32: CREATE UNIQUE NONCLUSTERED INDEX [IX_umbracoDeployChecksum] ON [umbracoDeployChecksum] ([entityType],[entityGuid],[entityPath])
+
+2016-04-30 13:14:58,313 [7] INFO  Umbraco.Core.DatabaseContext - Database configuration status: <p>Upgrade completed!</p>
+2016-04-30 13:14:58,317 [7] INFO  Umbraco.Web.Install.Controllers.InstallApiController - Step completed (took 1573ms)
+2016-04-30 13:14:58,342 [7] INFO  Muffin.Caching.DebugOutputCacheProvider - Get 'a1/install/api/postperforminstall' from cache
+2016-04-30 13:14:58,345 [7] INFO  Umbraco.Web.Install.Controllers.InstallApiController - Executing installation step: UmbracoVersion
+2016-04-30 13:14:58,361 [7] INFO  Umbraco.Core.PluginManager - Starting resolution types of umbraco.interfaces.ICacheRefresher
+2016-04-30 13:14:58,400 [7] INFO  Umbraco.Core.PluginManager - Completed resolution of types of umbraco.interfaces.ICacheRefresher, found 0 (took 39ms)
+2016-04-30 13:14:58,425 [7] INFO  umbraco.content - Load Xml from file...
+2016-04-30 13:14:58,428 [7] INFO  umbraco.content - Loaded Xml from file.
+2016-04-30 13:14:58,434 [7] INFO  umbraco.content - Loading content from database...
+2016-04-30 13:14:59,155 [7] ERROR umbraco.BusinessLogic.Application - Can't instantiate SQLHelper with connectionstring "Data Source=|DataDirectory|\Umbraco.sdf;Flush Interval=1;"
+umbraco.UmbracoException: Umbraco Exception (DataLayer): Could not load type SQLCE4Umbraco.SqlCEHelper (SQLCE4Umbraco, Version=1.0.5948.18145, Culture=neutral, PublicKeyToken=null). ---> System.IO.FileLoadException: Could not load file or assembly 'System.Data.SqlServerCe, Version=4.0.0.1, Culture=neutral, PublicKeyToken=89845dcd8080cc91' or one of its dependencies. The located assembly's manifest definition does not match the assembly reference. (Exception from HRESULT: 0x80131040)
+   at System.Reflection.RuntimeAssembly.GetType(RuntimeAssembly assembly, String name, Boolean throwOnError, Boolean ignoreCase, ObjectHandleOnStack type)
+   at System.Reflection.RuntimeAssembly.GetType(String name, Boolean throwOnError, Boolean ignoreCase)
+   at umbraco.DataLayer.DataLayerHelper.CreateSqlHelper(String connectionString, Boolean forceLegacyConnection)
+   --- End of inner exception stack trace ---
+   at umbraco.DataLayer.DataLayerHelper.CreateSqlHelper(String connectionString, Boolean forceLegacyConnection)
+   at umbraco.BusinessLogic.Application.get_SqlHelper()
+2016-04-30 13:14:59,156 [7] ERROR umbraco.BusinessLogic.Application - Can't instantiate SQLHelper with connectionstring "Data Source=|DataDirectory|\Umbraco.sdf;Flush Interval=1;"
+umbraco.UmbracoException: Umbraco Exception (DataLayer): Could not load type SQLCE4Umbraco.SqlCEHelper (SQLCE4Umbraco, Version=1.0.5948.18145, Culture=neutral, PublicKeyToken=null). ---> System.IO.FileLoadException: Could not load file or assembly 'System.Data.SqlServerCe, Version=4.0.0.1, Culture=neutral, PublicKeyToken=89845dcd8080cc91' or one of its dependencies. The located assembly's manifest definition does not match the assembly reference. (Exception from HRESULT: 0x80131040)
+   at System.Reflection.RuntimeAssembly.GetType(RuntimeAssembly assembly, String name, Boolean throwOnError, Boolean ignoreCase, ObjectHandleOnStack type)
+   at System.Reflection.RuntimeAssembly.GetType(String name, Boolean throwOnError, Boolean ignoreCase)
+   at umbraco.DataLayer.DataLayerHelper.CreateSqlHelper(String connectionString, Boolean forceLegacyConnection)
+   --- End of inner exception stack trace ---
+   at umbraco.DataLayer.DataLayerHelper.CreateSqlHelper(String connectionString, Boolean forceLegacyConnection)
+   at umbraco.BusinessLogic.Application.get_SqlHelper()
+2016-04-30 13:14:59,157 [7] ERROR umbraco.content - Error Republishing
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at umbraco.content.LoadContentFromDatabase()
+2016-04-30 13:14:59,188 [7] INFO  umbraco.content - Save Xml to file...
+2016-04-30 13:14:59,191 [7] INFO  Umbraco.Core.Configuration.ClientDependencyConfiguration - Updated version number from 1672118944 to 1572956592
+2016-04-30 13:14:59,857 [7] INFO  Umbraco.Web.Install.Controllers.InstallApiController - Step completed (took 1512ms)
+2016-04-30 13:15:02,274 [16] INFO  Umbraco.Core.CoreBootManager - Umbraco 7.4.3 application starting on MARVELOUS-JW
+2016-04-30 13:15:02,359 [16] INFO  Umbraco.Core.PluginManager - Determining hash of code files on disk
+2016-04-30 13:15:02,371 [16] INFO  Umbraco.Core.PluginManager - Hash determined (took 12ms)
+2016-04-30 13:15:02,420 [16] INFO  Umbraco.Core.PluginManager - Starting resolution types of umbraco.interfaces.IApplicationStartupHandler
+2016-04-30 13:15:02,750 [16] INFO  Umbraco.Core.PluginManager - Completed resolution of types of umbraco.interfaces.IApplicationStartupHandler, found 0 (took 329ms)
+2016-04-30 13:15:02,891 [16] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter
+2016-04-30 13:15:02,891 [16] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter, found 0 (took 0ms)
+2016-04-30 13:15:02,892 [16] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.PropertyEditors.IPropertyValueConverter
+2016-04-30 13:15:02,893 [16] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.PropertyEditors.IPropertyValueConverter, found 0 (took 1ms)
+2016-04-30 13:15:02,913 [16] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Web.Mvc.SurfaceController
+2016-04-30 13:15:02,918 [16] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Web.Mvc.SurfaceController, found 0 (took 5ms)
+2016-04-30 13:15:02,920 [16] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Web.WebApi.UmbracoApiController
+2016-04-30 13:15:02,943 [16] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Web.WebApi.UmbracoApiController, found 0 (took 22ms)
+2016-04-30 13:15:03,133 [16] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.Media.IThumbnailProvider
+2016-04-30 13:15:03,137 [16] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.Media.IThumbnailProvider, found 0 (took 3ms)
+2016-04-30 13:15:03,137 [16] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.Media.IImageUrlProvider
+2016-04-30 13:15:03,138 [16] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.Media.IImageUrlProvider, found 0 (took 0ms)
+2016-04-30 13:15:04,558 [16] INFO  Umbraco.Core.DatabaseContext - CanConnect = True
+2016-04-30 13:15:04,877 [16] INFO  Umbraco.Core.PluginManager - Starting resolution types of Muffin.Core.Models.ModelBase
+2016-04-30 13:15:04,880 [16] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Muffin.Core.Models.ModelBase, found 0 (took 3ms)
+2016-04-30 13:15:05,641 [16] INFO  Umbraco.Core.DatabaseContext - CanConnect = True
+2016-04-30 13:15:05,686 [16] INFO  Umbraco.Core.DatabaseContext - CanConnect = True
+2016-04-30 13:15:05,731 [16] WARN  Umbraco.Core.Sync.DatabaseServerMessenger - No last synced Id found, this generally means this is a new server/install. The server will build its caches and indexes, and then adjust its last synced Id to the latest found in the database and maintain cache updates based on that Id.
+2016-04-30 13:15:05,785 [16] INFO  umbraco.content - Load Xml from file...
+2016-04-30 13:15:05,786 [16] INFO  umbraco.content - Loaded Xml from file.
+2016-04-30 13:15:05,838 [16] INFO  umbraco.content - Loading content from database...
+2016-04-30 13:15:06,671 [16] ERROR umbraco.BusinessLogic.Application - Can't instantiate SQLHelper with connectionstring "Data Source=|DataDirectory|\Umbraco.sdf;Flush Interval=1;"
+umbraco.UmbracoException: Umbraco Exception (DataLayer): Could not load type SQLCE4Umbraco.SqlCEHelper (SQLCE4Umbraco, Version=1.0.5948.18145, Culture=neutral, PublicKeyToken=null). ---> System.IO.FileLoadException: Could not load file or assembly 'System.Data.SqlServerCe, Version=4.0.0.1, Culture=neutral, PublicKeyToken=89845dcd8080cc91' or one of its dependencies. The located assembly's manifest definition does not match the assembly reference. (Exception from HRESULT: 0x80131040)
+   at System.Reflection.RuntimeAssembly.GetType(RuntimeAssembly assembly, String name, Boolean throwOnError, Boolean ignoreCase, ObjectHandleOnStack type)
+   at System.Reflection.RuntimeAssembly.GetType(String name, Boolean throwOnError, Boolean ignoreCase)
+   at umbraco.DataLayer.DataLayerHelper.CreateSqlHelper(String connectionString, Boolean forceLegacyConnection)
+   --- End of inner exception stack trace ---
+   at umbraco.DataLayer.DataLayerHelper.CreateSqlHelper(String connectionString, Boolean forceLegacyConnection)
+   at umbraco.BusinessLogic.Application.get_SqlHelper()
+2016-04-30 13:15:06,672 [16] ERROR umbraco.BusinessLogic.Application - Can't instantiate SQLHelper with connectionstring "Data Source=|DataDirectory|\Umbraco.sdf;Flush Interval=1;"
+umbraco.UmbracoException: Umbraco Exception (DataLayer): Could not load type SQLCE4Umbraco.SqlCEHelper (SQLCE4Umbraco, Version=1.0.5948.18145, Culture=neutral, PublicKeyToken=null). ---> System.IO.FileLoadException: Could not load file or assembly 'System.Data.SqlServerCe, Version=4.0.0.1, Culture=neutral, PublicKeyToken=89845dcd8080cc91' or one of its dependencies. The located assembly's manifest definition does not match the assembly reference. (Exception from HRESULT: 0x80131040)
+   at System.Reflection.RuntimeAssembly.GetType(RuntimeAssembly assembly, String name, Boolean throwOnError, Boolean ignoreCase, ObjectHandleOnStack type)
+   at System.Reflection.RuntimeAssembly.GetType(String name, Boolean throwOnError, Boolean ignoreCase)
+   at umbraco.DataLayer.DataLayerHelper.CreateSqlHelper(String connectionString, Boolean forceLegacyConnection)
+   --- End of inner exception stack trace ---
+   at umbraco.DataLayer.DataLayerHelper.CreateSqlHelper(String connectionString, Boolean forceLegacyConnection)
+   at umbraco.BusinessLogic.Application.get_SqlHelper()
+2016-04-30 13:15:06,672 [16] ERROR umbraco.content - Error Republishing
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at umbraco.content.LoadContentFromDatabase()
+2016-04-30 13:15:07,592 [16] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.PropertyEditors.IParameterEditor
+2016-04-30 13:15:07,594 [16] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.PropertyEditors.IParameterEditor, found 0 (took 1ms)
+2016-04-30 13:15:08,447 [16] ERROR Umbraco.Core.CoreBootManager - An error occurred running OnApplicationStarted for handler Umbraco.Web.BatchedDatabaseServerMessengerStartup
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at umbraco.library.GetXmlNodeByXPath(String xpathQuery)
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at UmbracoExamine.LegacyLibrary.GetXmlNodeByXPath(String xpathQuery)
+   at UmbracoExamine.DataServices.UmbracoContentService.GetPublishedContentByXPath(String xpath)
+   at UmbracoExamine.BaseUmbracoIndexer.GetXDocument(String xPath, String type)
+   at UmbracoExamine.BaseUmbracoIndexer.AddNodesToIndex(String xPath, String type)
+   at UmbracoExamine.BaseUmbracoIndexer.PerformIndexAll(String type)
+   at UmbracoExamine.UmbracoContentIndexer.PerformIndexAll(String type)
+   at Examine.LuceneEngine.Providers.LuceneIndexer.IndexAll(String type) in x:\Projects\Examine\Examine\Projects\Examine\LuceneEngine\Providers\LuceneIndexer.cs:line 829
+   at UmbracoExamine.BaseUmbracoIndexer.IndexAll(String type)
+   at UmbracoExamine.BaseUmbracoIndexer.PerformIndexRebuild()
+   at Examine.LuceneEngine.Providers.LuceneIndexer.RebuildIndex() in x:\Projects\Examine\Examine\Projects\Examine\LuceneEngine\Providers\LuceneIndexer.cs:line 775
+   at UmbracoExamine.BaseUmbracoIndexer.RebuildIndex()
+   at UmbracoExamine.UmbracoContentIndexer.RebuildIndex()
+   at Umbraco.Web.WebBootManager.<InitializeResolvers>b__f()
+   at Umbraco.Core.Sync.DatabaseServerMessenger.Initialize()
+   at Umbraco.Core.Sync.DatabaseServerMessenger.Boot()
+   at Umbraco.Web.BatchedDatabaseServerMessenger.Startup()
+   at Umbraco.Web.BatchedDatabaseServerMessengerStartup.ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
+   at Umbraco.Core.ApplicationEventHandler.OnApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
+   at Umbraco.Core.CoreBootManager.<Complete>b__a(IApplicationEventHandler x)
+   at Umbraco.Core.EnumerableExtensions.ForEach[TItem](IEnumerable`1 items, Action`1 action)
+   at Umbraco.Core.CoreBootManager.Complete(Action`1 afterComplete)
+   at Umbraco.Web.WebBootManager.Complete(Action`1 afterComplete)
+   at Umbraco.Core.UmbracoApplicationBase.StartApplication(Object sender, EventArgs e)
+   at Umbraco.Core.UmbracoApplicationBase.Application_Start(Object sender, EventArgs e)
+2016-04-30 13:15:08,448 [16] ERROR Umbraco.Core.UmbracoApplicationBase - An unhandled exception occurred
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at umbraco.library.GetXmlNodeByXPath(String xpathQuery)
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at UmbracoExamine.LegacyLibrary.GetXmlNodeByXPath(String xpathQuery)
+   at UmbracoExamine.DataServices.UmbracoContentService.GetPublishedContentByXPath(String xpath)
+   at UmbracoExamine.BaseUmbracoIndexer.GetXDocument(String xPath, String type)
+   at UmbracoExamine.BaseUmbracoIndexer.AddNodesToIndex(String xPath, String type)
+   at UmbracoExamine.BaseUmbracoIndexer.PerformIndexAll(String type)
+   at UmbracoExamine.UmbracoContentIndexer.PerformIndexAll(String type)
+   at Examine.LuceneEngine.Providers.LuceneIndexer.IndexAll(String type) in x:\Projects\Examine\Examine\Projects\Examine\LuceneEngine\Providers\LuceneIndexer.cs:line 829
+   at UmbracoExamine.BaseUmbracoIndexer.IndexAll(String type)
+   at UmbracoExamine.BaseUmbracoIndexer.PerformIndexRebuild()
+   at Examine.LuceneEngine.Providers.LuceneIndexer.RebuildIndex() in x:\Projects\Examine\Examine\Projects\Examine\LuceneEngine\Providers\LuceneIndexer.cs:line 775
+   at UmbracoExamine.BaseUmbracoIndexer.RebuildIndex()
+   at UmbracoExamine.UmbracoContentIndexer.RebuildIndex()
+   at Umbraco.Web.WebBootManager.<InitializeResolvers>b__f()
+   at Umbraco.Core.Sync.DatabaseServerMessenger.Initialize()
+   at Umbraco.Core.Sync.DatabaseServerMessenger.Boot()
+   at Umbraco.Web.BatchedDatabaseServerMessenger.Startup()
+   at Umbraco.Web.BatchedDatabaseServerMessengerStartup.ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
+   at Umbraco.Core.ApplicationEventHandler.OnApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
+   at Umbraco.Core.CoreBootManager.<Complete>b__a(IApplicationEventHandler x)
+   at Umbraco.Core.EnumerableExtensions.ForEach[TItem](IEnumerable`1 items, Action`1 action)
+   at Umbraco.Core.CoreBootManager.Complete(Action`1 afterComplete)
+   at Umbraco.Web.WebBootManager.Complete(Action`1 afterComplete)
+   at Umbraco.Core.UmbracoApplicationBase.StartApplication(Object sender, EventArgs e)
+   at Umbraco.Core.UmbracoApplicationBase.Application_Start(Object sender, EventArgs e)
+2016-04-30 13:15:10,698 [16] INFO  umbraco.content - Save Xml to file...
+2016-04-30 13:15:29,459 [7] INFO  Umbraco.Core.UmbracoApplicationBase - Application shutdown. Details: ConfigurationChange
+
+_shutDownMessage=CONFIG change
+HostingEnvironment initiated shutdown
+CONFIG change
+HostingEnvironment caused shutdown
+
+_shutDownStack=   at System.Environment.GetStackTrace(Exception e, Boolean needFileInfo)
+   at System.Environment.get_StackTrace()
+   at System.Web.Hosting.HostingEnvironment.InitiateShutdownInternal()
+   at System.Web.Hosting.HostingEnvironment.InitiateShutdownWithoutDemand()
+   at System.Web.HttpRuntime.ShutdownAppDomain(String stackTrace)
+   at System.Web.Configuration.HttpConfigurationSystem.OnConfigurationChanged(Object sender, InternalConfigEventArgs e)
+   at System.Configuration.Internal.InternalConfigRoot.OnConfigChanged(InternalConfigEventArgs e)
+   at System.Configuration.BaseConfigurationRecord.OnStreamChanged(String streamname)
+   at System.Web.Configuration.WebConfigurationHostFileChange.OnFileChanged(Object sender, FileChangeEvent e)
+   at System.Web.DirectoryMonitor.FireNotifications()
+   at System.Web.Util.WorkItem.CallCallbackWithAssert(WorkItemCallback callback)
+   at System.Web.Util.WorkItem.OnQueueUserWorkItemCompletion(Object state)
+   at System.Threading.QueueUserWorkItemCallback.WaitCallback_Context(Object state)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Threading.QueueUserWorkItemCallback.System.Threading.IThreadPoolWorkItem.ExecuteWorkItem()
+   at System.Threading.ThreadPoolWorkQueue.Dispatch()
+   at System.Threading._ThreadPoolWaitCallback.PerformWaitCallback()
+2016-04-30 13:15:48,589 [16] INFO  Umbraco.Core.UmbracoApplicationBase - Application shutdown. Details: InitializationError
+
+_shutDownMessage=Initialization Error
+HostingEnvironment initiated shutdown
+HostingEnvironment caused shutdown
+
+_shutDownStack=   at System.Environment.GetStackTrace(Exception e, Boolean needFileInfo)
+   at System.Environment.get_StackTrace()
+   at System.Web.Hosting.HostingEnvironment.InitiateShutdownInternal()
+   at System.Web.Hosting.HostingEnvironment.InitiateShutdownWithoutDemand()
+   at System.Web.HttpRuntime.ShutdownAppDomain(String stackTrace)
+   at System.Web.HttpRuntime.AppDomainShutdownTimerCallback(Object state)
+   at System.Threading.TimerQueueTimer.CallCallbackInContext(Object state)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Threading.TimerQueueTimer.CallCallback()
+   at System.Threading.TimerQueueTimer.Fire()
+   at System.Threading.TimerQueue.FireNextTimers()
+   at System.Threading.TimerQueue.AppDomainTimerCallback()
+2016-04-30 14:12:07,930 [11] INFO  Umbraco.Core.CoreBootManager - Umbraco 7.4.3 application starting on MARVELOUS-JW
+2016-04-30 14:12:07,978 [11] INFO  Umbraco.Core.PluginManager - Determining hash of code files on disk
+2016-04-30 14:12:07,994 [11] INFO  Umbraco.Core.PluginManager - Hash determined (took 15ms)
+2016-04-30 14:12:08,105 [11] INFO  Umbraco.Core.PluginManager - Starting resolution types of umbraco.interfaces.IApplicationStartupHandler
+2016-04-30 14:12:08,611 [11] INFO  Umbraco.Core.PluginManager - Completed resolution of types of umbraco.interfaces.IApplicationStartupHandler, found 0 (took 505ms)
+2016-04-30 14:12:08,629 [11] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter
+2016-04-30 14:12:08,638 [11] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter, found 0 (took 8ms)
+2016-04-30 14:12:08,638 [11] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.PropertyEditors.IPropertyValueConverter
+2016-04-30 14:12:08,649 [11] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.PropertyEditors.IPropertyValueConverter, found 0 (took 10ms)
+2016-04-30 14:12:08,667 [11] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Web.Mvc.SurfaceController
+2016-04-30 14:12:08,681 [11] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Web.Mvc.SurfaceController, found 0 (took 14ms)
+2016-04-30 14:12:08,681 [11] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Web.WebApi.UmbracoApiController
+2016-04-30 14:12:08,695 [11] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Web.WebApi.UmbracoApiController, found 0 (took 14ms)
+2016-04-30 14:12:08,787 [11] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.Media.IThumbnailProvider
+2016-04-30 14:12:08,796 [11] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.Media.IThumbnailProvider, found 0 (took 9ms)
+2016-04-30 14:12:08,797 [11] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.Media.IImageUrlProvider
+2016-04-30 14:12:08,809 [11] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.Media.IImageUrlProvider, found 0 (took 11ms)
+2016-04-30 14:12:10,194 [11] INFO  Umbraco.Core.DatabaseContext - CanConnect = True
+2016-04-30 14:12:10,373 [11] INFO  Umbraco.Core.PluginManager - Starting resolution types of Muffin.Core.Models.ModelBase
+2016-04-30 14:12:10,394 [11] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Muffin.Core.Models.ModelBase, found 0 (took 20ms)
+2016-04-30 14:12:10,543 [11] INFO  Umbraco.Core.DatabaseContext - CanConnect = True
+2016-04-30 14:12:10,577 [11] INFO  Umbraco.Core.DatabaseContext - CanConnect = True
+2016-04-30 14:12:10,618 [11] WARN  Umbraco.Core.Sync.DatabaseServerMessenger - No last synced Id found, this generally means this is a new server/install. The server will build its caches and indexes, and then adjust its last synced Id to the latest found in the database and maintain cache updates based on that Id.
+2016-04-30 14:12:10,667 [11] INFO  umbraco.content - Load Xml from file...
+2016-04-30 14:12:10,678 [11] INFO  umbraco.content - Loaded Xml from file.
+2016-04-30 14:12:10,683 [11] INFO  umbraco.content - Loading content from database...
+2016-04-30 14:12:11,305 [11] ERROR umbraco.BusinessLogic.Application - Can't instantiate SQLHelper with connectionstring "Data Source=|DataDirectory|\Umbraco.sdf;Flush Interval=1;"
+umbraco.UmbracoException: Umbraco Exception (DataLayer): Could not load type SQLCE4Umbraco.SqlCEHelper (SQLCE4Umbraco, Version=1.0.5948.18145, Culture=neutral, PublicKeyToken=null). ---> System.IO.FileLoadException: Could not load file or assembly 'System.Data.SqlServerCe, Version=4.0.0.1, Culture=neutral, PublicKeyToken=89845dcd8080cc91' or one of its dependencies. The located assembly's manifest definition does not match the assembly reference. (Exception from HRESULT: 0x80131040)
+   at System.Reflection.RuntimeAssembly.GetType(RuntimeAssembly assembly, String name, Boolean throwOnError, Boolean ignoreCase, ObjectHandleOnStack type)
+   at System.Reflection.RuntimeAssembly.GetType(String name, Boolean throwOnError, Boolean ignoreCase)
+   at umbraco.DataLayer.DataLayerHelper.CreateSqlHelper(String connectionString, Boolean forceLegacyConnection)
+   --- End of inner exception stack trace ---
+   at umbraco.DataLayer.DataLayerHelper.CreateSqlHelper(String connectionString, Boolean forceLegacyConnection)
+   at umbraco.BusinessLogic.Application.get_SqlHelper()
+2016-04-30 14:12:11,307 [11] ERROR umbraco.BusinessLogic.Application - Can't instantiate SQLHelper with connectionstring "Data Source=|DataDirectory|\Umbraco.sdf;Flush Interval=1;"
+umbraco.UmbracoException: Umbraco Exception (DataLayer): Could not load type SQLCE4Umbraco.SqlCEHelper (SQLCE4Umbraco, Version=1.0.5948.18145, Culture=neutral, PublicKeyToken=null). ---> System.IO.FileLoadException: Could not load file or assembly 'System.Data.SqlServerCe, Version=4.0.0.1, Culture=neutral, PublicKeyToken=89845dcd8080cc91' or one of its dependencies. The located assembly's manifest definition does not match the assembly reference. (Exception from HRESULT: 0x80131040)
+   at System.Reflection.RuntimeAssembly.GetType(RuntimeAssembly assembly, String name, Boolean throwOnError, Boolean ignoreCase, ObjectHandleOnStack type)
+   at System.Reflection.RuntimeAssembly.GetType(String name, Boolean throwOnError, Boolean ignoreCase)
+   at umbraco.DataLayer.DataLayerHelper.CreateSqlHelper(String connectionString, Boolean forceLegacyConnection)
+   --- End of inner exception stack trace ---
+   at umbraco.DataLayer.DataLayerHelper.CreateSqlHelper(String connectionString, Boolean forceLegacyConnection)
+   at umbraco.BusinessLogic.Application.get_SqlHelper()
+2016-04-30 14:12:11,307 [11] ERROR umbraco.content - Error Republishing
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at umbraco.content.LoadContentFromDatabase()
+2016-04-30 14:12:11,953 [11] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.PropertyEditors.IParameterEditor
+2016-04-30 14:12:11,977 [11] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.PropertyEditors.IParameterEditor, found 0 (took 24ms)
+2016-04-30 14:12:12,641 [11] ERROR Umbraco.Core.CoreBootManager - An error occurred running OnApplicationStarted for handler Umbraco.Web.BatchedDatabaseServerMessengerStartup
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at umbraco.library.GetXmlNodeByXPath(String xpathQuery)
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at UmbracoExamine.LegacyLibrary.GetXmlNodeByXPath(String xpathQuery)
+   at UmbracoExamine.DataServices.UmbracoContentService.GetPublishedContentByXPath(String xpath)
+   at UmbracoExamine.BaseUmbracoIndexer.GetXDocument(String xPath, String type)
+   at UmbracoExamine.BaseUmbracoIndexer.AddNodesToIndex(String xPath, String type)
+   at UmbracoExamine.BaseUmbracoIndexer.PerformIndexAll(String type)
+   at UmbracoExamine.UmbracoContentIndexer.PerformIndexAll(String type)
+   at Examine.LuceneEngine.Providers.LuceneIndexer.IndexAll(String type) in x:\Projects\Examine\Examine\Projects\Examine\LuceneEngine\Providers\LuceneIndexer.cs:line 829
+   at UmbracoExamine.BaseUmbracoIndexer.IndexAll(String type)
+   at UmbracoExamine.BaseUmbracoIndexer.PerformIndexRebuild()
+   at Examine.LuceneEngine.Providers.LuceneIndexer.RebuildIndex() in x:\Projects\Examine\Examine\Projects\Examine\LuceneEngine\Providers\LuceneIndexer.cs:line 775
+   at UmbracoExamine.BaseUmbracoIndexer.RebuildIndex()
+   at UmbracoExamine.UmbracoContentIndexer.RebuildIndex()
+   at Umbraco.Web.WebBootManager.<InitializeResolvers>b__f()
+   at Umbraco.Core.Sync.DatabaseServerMessenger.Initialize()
+   at Umbraco.Core.Sync.DatabaseServerMessenger.Boot()
+   at Umbraco.Web.BatchedDatabaseServerMessenger.Startup()
+   at Umbraco.Web.BatchedDatabaseServerMessengerStartup.ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
+   at Umbraco.Core.ApplicationEventHandler.OnApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
+   at Umbraco.Core.CoreBootManager.<Complete>b__a(IApplicationEventHandler x)
+   at Umbraco.Core.EnumerableExtensions.ForEach[TItem](IEnumerable`1 items, Action`1 action)
+   at Umbraco.Core.CoreBootManager.Complete(Action`1 afterComplete)
+   at Umbraco.Web.WebBootManager.Complete(Action`1 afterComplete)
+   at Umbraco.Core.UmbracoApplicationBase.StartApplication(Object sender, EventArgs e)
+   at Umbraco.Core.UmbracoApplicationBase.Application_Start(Object sender, EventArgs e)
+2016-04-30 14:12:12,641 [11] ERROR Umbraco.Core.UmbracoApplicationBase - An unhandled exception occurred
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at umbraco.library.GetXmlNodeByXPath(String xpathQuery)
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at UmbracoExamine.LegacyLibrary.GetXmlNodeByXPath(String xpathQuery)
+   at UmbracoExamine.DataServices.UmbracoContentService.GetPublishedContentByXPath(String xpath)
+   at UmbracoExamine.BaseUmbracoIndexer.GetXDocument(String xPath, String type)
+   at UmbracoExamine.BaseUmbracoIndexer.AddNodesToIndex(String xPath, String type)
+   at UmbracoExamine.BaseUmbracoIndexer.PerformIndexAll(String type)
+   at UmbracoExamine.UmbracoContentIndexer.PerformIndexAll(String type)
+   at Examine.LuceneEngine.Providers.LuceneIndexer.IndexAll(String type) in x:\Projects\Examine\Examine\Projects\Examine\LuceneEngine\Providers\LuceneIndexer.cs:line 829
+   at UmbracoExamine.BaseUmbracoIndexer.IndexAll(String type)
+   at UmbracoExamine.BaseUmbracoIndexer.PerformIndexRebuild()
+   at Examine.LuceneEngine.Providers.LuceneIndexer.RebuildIndex() in x:\Projects\Examine\Examine\Projects\Examine\LuceneEngine\Providers\LuceneIndexer.cs:line 775
+   at UmbracoExamine.BaseUmbracoIndexer.RebuildIndex()
+   at UmbracoExamine.UmbracoContentIndexer.RebuildIndex()
+   at Umbraco.Web.WebBootManager.<InitializeResolvers>b__f()
+   at Umbraco.Core.Sync.DatabaseServerMessenger.Initialize()
+   at Umbraco.Core.Sync.DatabaseServerMessenger.Boot()
+   at Umbraco.Web.BatchedDatabaseServerMessenger.Startup()
+   at Umbraco.Web.BatchedDatabaseServerMessengerStartup.ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
+   at Umbraco.Core.ApplicationEventHandler.OnApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
+   at Umbraco.Core.CoreBootManager.<Complete>b__a(IApplicationEventHandler x)
+   at Umbraco.Core.EnumerableExtensions.ForEach[TItem](IEnumerable`1 items, Action`1 action)
+   at Umbraco.Core.CoreBootManager.Complete(Action`1 afterComplete)
+   at Umbraco.Web.WebBootManager.Complete(Action`1 afterComplete)
+   at Umbraco.Core.UmbracoApplicationBase.StartApplication(Object sender, EventArgs e)
+   at Umbraco.Core.UmbracoApplicationBase.Application_Start(Object sender, EventArgs e)
+2016-04-30 14:12:15,334 [11] INFO  umbraco.content - Save Xml to file...
+2016-04-30 14:12:52,788 [11] INFO  Umbraco.Core.UmbracoApplicationBase - Application shutdown. Details: InitializationError
+
+_shutDownMessage=Initialization Error
+HostingEnvironment initiated shutdown
+HostingEnvironment caused shutdown
+
+_shutDownStack=   at System.Environment.GetStackTrace(Exception e, Boolean needFileInfo)
+   at System.Environment.get_StackTrace()
+   at System.Web.Hosting.HostingEnvironment.InitiateShutdownInternal()
+   at System.Web.Hosting.HostingEnvironment.InitiateShutdownWithoutDemand()
+   at System.Web.HttpRuntime.ShutdownAppDomain(String stackTrace)
+   at System.Web.HttpRuntime.AppDomainShutdownTimerCallback(Object state)
+   at System.Threading.TimerQueueTimer.CallCallbackInContext(Object state)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   at System.Threading.TimerQueueTimer.CallCallback()
+   at System.Threading.TimerQueueTimer.Fire()
+   at System.Threading.TimerQueue.FireNextTimers()
+   at System.Threading.TimerQueue.AppDomainTimerCallback()
+2016-04-30 14:14:59,952 [15] INFO  Umbraco.Core.CoreBootManager - Umbraco 7.4.3 application starting on MARVELOUS-JW
+2016-04-30 14:15:00,031 [15] INFO  Umbraco.Core.PluginManager - Determining hash of code files on disk
+2016-04-30 14:15:00,045 [15] INFO  Umbraco.Core.PluginManager - Hash determined (took 14ms)
+2016-04-30 14:15:00,100 [15] INFO  Umbraco.Core.PluginManager - Starting resolution types of umbraco.interfaces.IApplicationStartupHandler
+2016-04-30 14:15:00,348 [15] INFO  Umbraco.Core.PluginManager - Completed resolution of types of umbraco.interfaces.IApplicationStartupHandler, found 0 (took 247ms)
+2016-04-30 14:15:00,500 [15] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter
+2016-04-30 14:15:00,501 [15] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.PropertyEditors.IPropertyEditorValueConverter, found 0 (took 0ms)
+2016-04-30 14:15:00,502 [15] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.PropertyEditors.IPropertyValueConverter
+2016-04-30 14:15:00,503 [15] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.PropertyEditors.IPropertyValueConverter, found 0 (took 1ms)
+2016-04-30 14:15:00,516 [15] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Web.Mvc.SurfaceController
+2016-04-30 14:15:00,518 [15] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Web.Mvc.SurfaceController, found 0 (took 1ms)
+2016-04-30 14:15:00,518 [15] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Web.WebApi.UmbracoApiController
+2016-04-30 14:15:00,531 [15] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Web.WebApi.UmbracoApiController, found 0 (took 11ms)
+2016-04-30 14:15:00,656 [15] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.Media.IThumbnailProvider
+2016-04-30 14:15:00,658 [15] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.Media.IThumbnailProvider, found 0 (took 0ms)
+2016-04-30 14:15:00,659 [15] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.Media.IImageUrlProvider
+2016-04-30 14:15:00,659 [15] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.Media.IImageUrlProvider, found 0 (took 0ms)
+2016-04-30 14:15:01,772 [15] INFO  Umbraco.Core.DatabaseContext - CanConnect = True
+2016-04-30 14:15:02,018 [15] INFO  Umbraco.Core.PluginManager - Starting resolution types of Muffin.Core.Models.ModelBase
+2016-04-30 14:15:02,019 [15] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Muffin.Core.Models.ModelBase, found 0 (took 1ms)
+2016-04-30 14:15:02,578 [15] INFO  Umbraco.Core.DatabaseContext - CanConnect = True
+2016-04-30 14:15:02,612 [15] INFO  Umbraco.Core.DatabaseContext - CanConnect = True
+2016-04-30 14:15:02,657 [15] WARN  Umbraco.Core.Sync.DatabaseServerMessenger - No last synced Id found, this generally means this is a new server/install. The server will build its caches and indexes, and then adjust its last synced Id to the latest found in the database and maintain cache updates based on that Id.
+2016-04-30 14:15:02,717 [15] INFO  umbraco.content - Load Xml from file...
+2016-04-30 14:15:02,718 [15] WARN  umbraco.content - Failed to load Xml, file does not exist.
+2016-04-30 14:15:02,780 [15] INFO  umbraco.content - Loading content from database...
+2016-04-30 14:15:03,413 [15] ERROR umbraco.BusinessLogic.Application - Can't instantiate SQLHelper with connectionstring "Data Source=|DataDirectory|\Umbraco.sdf;Flush Interval=1;"
+umbraco.UmbracoException: Umbraco Exception (DataLayer): Could not load type SQLCE4Umbraco.SqlCEHelper (SQLCE4Umbraco, Version=1.0.5948.18145, Culture=neutral, PublicKeyToken=null). ---> System.IO.FileLoadException: Could not load file or assembly 'System.Data.SqlServerCe, Version=4.0.0.1, Culture=neutral, PublicKeyToken=89845dcd8080cc91' or one of its dependencies. The located assembly's manifest definition does not match the assembly reference. (Exception from HRESULT: 0x80131040)
+   at System.Reflection.RuntimeAssembly.GetType(RuntimeAssembly assembly, String name, Boolean throwOnError, Boolean ignoreCase, ObjectHandleOnStack type)
+   at System.Reflection.RuntimeAssembly.GetType(String name, Boolean throwOnError, Boolean ignoreCase)
+   at umbraco.DataLayer.DataLayerHelper.CreateSqlHelper(String connectionString, Boolean forceLegacyConnection)
+   --- End of inner exception stack trace ---
+   at umbraco.DataLayer.DataLayerHelper.CreateSqlHelper(String connectionString, Boolean forceLegacyConnection)
+   at umbraco.BusinessLogic.Application.get_SqlHelper()
+2016-04-30 14:15:03,415 [15] ERROR umbraco.BusinessLogic.Application - Can't instantiate SQLHelper with connectionstring "Data Source=|DataDirectory|\Umbraco.sdf;Flush Interval=1;"
+umbraco.UmbracoException: Umbraco Exception (DataLayer): Could not load type SQLCE4Umbraco.SqlCEHelper (SQLCE4Umbraco, Version=1.0.5948.18145, Culture=neutral, PublicKeyToken=null). ---> System.IO.FileLoadException: Could not load file or assembly 'System.Data.SqlServerCe, Version=4.0.0.1, Culture=neutral, PublicKeyToken=89845dcd8080cc91' or one of its dependencies. The located assembly's manifest definition does not match the assembly reference. (Exception from HRESULT: 0x80131040)
+   at System.Reflection.RuntimeAssembly.GetType(RuntimeAssembly assembly, String name, Boolean throwOnError, Boolean ignoreCase, ObjectHandleOnStack type)
+   at System.Reflection.RuntimeAssembly.GetType(String name, Boolean throwOnError, Boolean ignoreCase)
+   at umbraco.DataLayer.DataLayerHelper.CreateSqlHelper(String connectionString, Boolean forceLegacyConnection)
+   --- End of inner exception stack trace ---
+   at umbraco.DataLayer.DataLayerHelper.CreateSqlHelper(String connectionString, Boolean forceLegacyConnection)
+   at umbraco.BusinessLogic.Application.get_SqlHelper()
+2016-04-30 14:15:03,415 [15] ERROR umbraco.content - Error Republishing
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at umbraco.content.LoadContentFromDatabase()
+2016-04-30 14:15:03,419 [15] INFO  umbraco.content - Loading content from database...
+2016-04-30 14:15:03,422 [15] ERROR umbraco.BusinessLogic.Application - Can't instantiate SQLHelper with connectionstring "Data Source=|DataDirectory|\Umbraco.sdf;Flush Interval=1;"
+umbraco.UmbracoException: Umbraco Exception (DataLayer): Could not load type SQLCE4Umbraco.SqlCEHelper (SQLCE4Umbraco, Version=1.0.5948.18145, Culture=neutral, PublicKeyToken=null). ---> System.IO.FileLoadException: Could not load file or assembly 'System.Data.SqlServerCe, Version=4.0.0.1, Culture=neutral, PublicKeyToken=89845dcd8080cc91' or one of its dependencies. The located assembly's manifest definition does not match the assembly reference. (Exception from HRESULT: 0x80131040)
+   at System.Reflection.RuntimeAssembly.GetType(RuntimeAssembly assembly, String name, Boolean throwOnError, Boolean ignoreCase, ObjectHandleOnStack type)
+   at System.Reflection.RuntimeAssembly.GetType(String name, Boolean throwOnError, Boolean ignoreCase)
+   at umbraco.DataLayer.DataLayerHelper.CreateSqlHelper(String connectionString, Boolean forceLegacyConnection)
+   --- End of inner exception stack trace ---
+   at umbraco.DataLayer.DataLayerHelper.CreateSqlHelper(String connectionString, Boolean forceLegacyConnection)
+   at umbraco.BusinessLogic.Application.get_SqlHelper()
+2016-04-30 14:15:03,422 [15] ERROR umbraco.BusinessLogic.Application - Can't instantiate SQLHelper with connectionstring "Data Source=|DataDirectory|\Umbraco.sdf;Flush Interval=1;"
+umbraco.UmbracoException: Umbraco Exception (DataLayer): Could not load type SQLCE4Umbraco.SqlCEHelper (SQLCE4Umbraco, Version=1.0.5948.18145, Culture=neutral, PublicKeyToken=null). ---> System.IO.FileLoadException: Could not load file or assembly 'System.Data.SqlServerCe, Version=4.0.0.1, Culture=neutral, PublicKeyToken=89845dcd8080cc91' or one of its dependencies. The located assembly's manifest definition does not match the assembly reference. (Exception from HRESULT: 0x80131040)
+   at System.Reflection.RuntimeAssembly.GetType(RuntimeAssembly assembly, String name, Boolean throwOnError, Boolean ignoreCase, ObjectHandleOnStack type)
+   at System.Reflection.RuntimeAssembly.GetType(String name, Boolean throwOnError, Boolean ignoreCase)
+   at umbraco.DataLayer.DataLayerHelper.CreateSqlHelper(String connectionString, Boolean forceLegacyConnection)
+   --- End of inner exception stack trace ---
+   at umbraco.DataLayer.DataLayerHelper.CreateSqlHelper(String connectionString, Boolean forceLegacyConnection)
+   at umbraco.BusinessLogic.Application.get_SqlHelper()
+2016-04-30 14:15:03,423 [15] ERROR umbraco.content - Error Republishing
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at umbraco.content.LoadContentFromDatabase()
+2016-04-30 14:15:04,143 [15] INFO  Umbraco.Core.PluginManager - Starting resolution types of Umbraco.Core.PropertyEditors.IParameterEditor
+2016-04-30 14:15:04,144 [15] INFO  Umbraco.Core.PluginManager - Completed resolution of types of Umbraco.Core.PropertyEditors.IParameterEditor, found 0 (took 0ms)
+2016-04-30 14:15:04,792 [15] ERROR Umbraco.Core.CoreBootManager - An error occurred running OnApplicationStarted for handler Umbraco.Web.BatchedDatabaseServerMessengerStartup
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at umbraco.library.GetXmlNodeByXPath(String xpathQuery)
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at UmbracoExamine.LegacyLibrary.GetXmlNodeByXPath(String xpathQuery)
+   at UmbracoExamine.DataServices.UmbracoContentService.GetPublishedContentByXPath(String xpath)
+   at UmbracoExamine.BaseUmbracoIndexer.GetXDocument(String xPath, String type)
+   at UmbracoExamine.BaseUmbracoIndexer.AddNodesToIndex(String xPath, String type)
+   at UmbracoExamine.BaseUmbracoIndexer.PerformIndexAll(String type)
+   at UmbracoExamine.UmbracoContentIndexer.PerformIndexAll(String type)
+   at Examine.LuceneEngine.Providers.LuceneIndexer.IndexAll(String type) in x:\Projects\Examine\Examine\Projects\Examine\LuceneEngine\Providers\LuceneIndexer.cs:line 829
+   at UmbracoExamine.BaseUmbracoIndexer.IndexAll(String type)
+   at UmbracoExamine.BaseUmbracoIndexer.PerformIndexRebuild()
+   at Examine.LuceneEngine.Providers.LuceneIndexer.RebuildIndex() in x:\Projects\Examine\Examine\Projects\Examine\LuceneEngine\Providers\LuceneIndexer.cs:line 775
+   at UmbracoExamine.BaseUmbracoIndexer.RebuildIndex()
+   at UmbracoExamine.UmbracoContentIndexer.RebuildIndex()
+   at Umbraco.Web.WebBootManager.<InitializeResolvers>b__f()
+   at Umbraco.Core.Sync.DatabaseServerMessenger.Initialize()
+   at Umbraco.Core.Sync.DatabaseServerMessenger.Boot()
+   at Umbraco.Web.BatchedDatabaseServerMessenger.Startup()
+   at Umbraco.Web.BatchedDatabaseServerMessengerStartup.ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
+   at Umbraco.Core.ApplicationEventHandler.OnApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
+   at Umbraco.Core.CoreBootManager.<Complete>b__a(IApplicationEventHandler x)
+   at Umbraco.Core.EnumerableExtensions.ForEach[TItem](IEnumerable`1 items, Action`1 action)
+   at Umbraco.Core.CoreBootManager.Complete(Action`1 afterComplete)
+   at Umbraco.Web.WebBootManager.Complete(Action`1 afterComplete)
+   at Umbraco.Core.UmbracoApplicationBase.StartApplication(Object sender, EventArgs e)
+   at Umbraco.Core.UmbracoApplicationBase.Application_Start(Object sender, EventArgs e)
+2016-04-30 14:15:04,793 [15] ERROR Umbraco.Core.UmbracoApplicationBase - An unhandled exception occurred
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at umbraco.library.GetXmlNodeByXPath(String xpathQuery)
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at UmbracoExamine.LegacyLibrary.GetXmlNodeByXPath(String xpathQuery)
+   at UmbracoExamine.DataServices.UmbracoContentService.GetPublishedContentByXPath(String xpath)
+   at UmbracoExamine.BaseUmbracoIndexer.GetXDocument(String xPath, String type)
+   at UmbracoExamine.BaseUmbracoIndexer.AddNodesToIndex(String xPath, String type)
+   at UmbracoExamine.BaseUmbracoIndexer.PerformIndexAll(String type)
+   at UmbracoExamine.UmbracoContentIndexer.PerformIndexAll(String type)
+   at Examine.LuceneEngine.Providers.LuceneIndexer.IndexAll(String type) in x:\Projects\Examine\Examine\Projects\Examine\LuceneEngine\Providers\LuceneIndexer.cs:line 829
+   at UmbracoExamine.BaseUmbracoIndexer.IndexAll(String type)
+   at UmbracoExamine.BaseUmbracoIndexer.PerformIndexRebuild()
+   at Examine.LuceneEngine.Providers.LuceneIndexer.RebuildIndex() in x:\Projects\Examine\Examine\Projects\Examine\LuceneEngine\Providers\LuceneIndexer.cs:line 775
+   at UmbracoExamine.BaseUmbracoIndexer.RebuildIndex()
+   at UmbracoExamine.UmbracoContentIndexer.RebuildIndex()
+   at Umbraco.Web.WebBootManager.<InitializeResolvers>b__f()
+   at Umbraco.Core.Sync.DatabaseServerMessenger.Initialize()
+   at Umbraco.Core.Sync.DatabaseServerMessenger.Boot()
+   at Umbraco.Web.BatchedDatabaseServerMessenger.Startup()
+   at Umbraco.Web.BatchedDatabaseServerMessengerStartup.ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
+   at Umbraco.Core.ApplicationEventHandler.OnApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
+   at Umbraco.Core.CoreBootManager.<Complete>b__a(IApplicationEventHandler x)
+   at Umbraco.Core.EnumerableExtensions.ForEach[TItem](IEnumerable`1 items, Action`1 action)
+   at Umbraco.Core.CoreBootManager.Complete(Action`1 afterComplete)
+   at Umbraco.Web.WebBootManager.Complete(Action`1 afterComplete)
+   at Umbraco.Core.UmbracoApplicationBase.StartApplication(Object sender, EventArgs e)
+   at Umbraco.Core.UmbracoApplicationBase.Application_Start(Object sender, EventArgs e)
+2016-04-30 14:15:07,457 [15] INFO  umbraco.content - Save Xml to file...
