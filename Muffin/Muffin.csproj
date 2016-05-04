@@ -352,7 +352,7 @@
     <Content Include="DevTrends.MvcDonutCaching.README.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\mvcdonutcaching-master\mvcdonutcaching-master\DevTrends.MvcDonutCaching\MvcDonutCaching.csproj">
+    <ProjectReference Include="..\DevTrends.MvcDonutCaching\MvcDonutCaching.csproj">
       <Project>{854e90c7-8320-4eb6-a286-24a8ee5ebe9b}</Project>
       <Name>MvcDonutCaching</Name>
     </ProjectReference>

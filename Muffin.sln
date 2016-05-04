@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8F87E13A-EFDF-4DBA-BCB2-706C9B72FC94}"
 	ProjectSection(SolutionItems) = preProject
@@ -39,11 +39,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{A8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{AF6B2A1E-6D73-44D6-B4E5-B561B669FE31}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcDonutCaching", "DevTrends.MvcDonutCaching\MvcDonutCaching.csproj", "{854E90C7-8320-4EB6-A286-24A8EE5EBE9B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Azure.Staging|Any CPU = Azure.Staging|Any CPU
 		Azure.Test|Any CPU = Azure.Test|Any CPU
+		CI|Any CPU = CI|Any CPU
 		Debug|Any CPU = Debug|Any CPU
+		Release.Public|Any CPU = Release.Public|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
@@ -51,26 +55,50 @@ Global
 		{5734CB28-1B6A-43A5-90A3-5A0289D5EC60}.Azure.Staging|Any CPU.Build.0 = Release|Any CPU
 		{5734CB28-1B6A-43A5-90A3-5A0289D5EC60}.Azure.Test|Any CPU.ActiveCfg = Release|Any CPU
 		{5734CB28-1B6A-43A5-90A3-5A0289D5EC60}.Azure.Test|Any CPU.Build.0 = Release|Any CPU
+		{5734CB28-1B6A-43A5-90A3-5A0289D5EC60}.CI|Any CPU.ActiveCfg = Debug|Any CPU
+		{5734CB28-1B6A-43A5-90A3-5A0289D5EC60}.CI|Any CPU.Build.0 = Debug|Any CPU
 		{5734CB28-1B6A-43A5-90A3-5A0289D5EC60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5734CB28-1B6A-43A5-90A3-5A0289D5EC60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5734CB28-1B6A-43A5-90A3-5A0289D5EC60}.Release.Public|Any CPU.ActiveCfg = Release|Any CPU
+		{5734CB28-1B6A-43A5-90A3-5A0289D5EC60}.Release.Public|Any CPU.Build.0 = Release|Any CPU
 		{5734CB28-1B6A-43A5-90A3-5A0289D5EC60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5734CB28-1B6A-43A5-90A3-5A0289D5EC60}.Release|Any CPU.Build.0 = Release|Any CPU
 		{38B824F4-CC9D-49ED-A905-69413EE3E192}.Azure.Staging|Any CPU.ActiveCfg = Azure.Staging|Any CPU
 		{38B824F4-CC9D-49ED-A905-69413EE3E192}.Azure.Staging|Any CPU.Build.0 = Azure.Staging|Any CPU
 		{38B824F4-CC9D-49ED-A905-69413EE3E192}.Azure.Test|Any CPU.ActiveCfg = Azure.Test|Any CPU
 		{38B824F4-CC9D-49ED-A905-69413EE3E192}.Azure.Test|Any CPU.Build.0 = Azure.Test|Any CPU
+		{38B824F4-CC9D-49ED-A905-69413EE3E192}.CI|Any CPU.ActiveCfg = Release|Any CPU
+		{38B824F4-CC9D-49ED-A905-69413EE3E192}.CI|Any CPU.Build.0 = Release|Any CPU
 		{38B824F4-CC9D-49ED-A905-69413EE3E192}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{38B824F4-CC9D-49ED-A905-69413EE3E192}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38B824F4-CC9D-49ED-A905-69413EE3E192}.Release.Public|Any CPU.ActiveCfg = Release|Any CPU
+		{38B824F4-CC9D-49ED-A905-69413EE3E192}.Release.Public|Any CPU.Build.0 = Release|Any CPU
 		{38B824F4-CC9D-49ED-A905-69413EE3E192}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38B824F4-CC9D-49ED-A905-69413EE3E192}.Release|Any CPU.Build.0 = Release|Any CPU
 		{52EE6C1F-5A04-449E-9A2E-6E168AF732D4}.Azure.Staging|Any CPU.ActiveCfg = Release|Any CPU
 		{52EE6C1F-5A04-449E-9A2E-6E168AF732D4}.Azure.Staging|Any CPU.Build.0 = Release|Any CPU
 		{52EE6C1F-5A04-449E-9A2E-6E168AF732D4}.Azure.Test|Any CPU.ActiveCfg = Release|Any CPU
 		{52EE6C1F-5A04-449E-9A2E-6E168AF732D4}.Azure.Test|Any CPU.Build.0 = Release|Any CPU
+		{52EE6C1F-5A04-449E-9A2E-6E168AF732D4}.CI|Any CPU.ActiveCfg = Debug|Any CPU
+		{52EE6C1F-5A04-449E-9A2E-6E168AF732D4}.CI|Any CPU.Build.0 = Debug|Any CPU
 		{52EE6C1F-5A04-449E-9A2E-6E168AF732D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{52EE6C1F-5A04-449E-9A2E-6E168AF732D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52EE6C1F-5A04-449E-9A2E-6E168AF732D4}.Release.Public|Any CPU.ActiveCfg = Release|Any CPU
+		{52EE6C1F-5A04-449E-9A2E-6E168AF732D4}.Release.Public|Any CPU.Build.0 = Release|Any CPU
 		{52EE6C1F-5A04-449E-9A2E-6E168AF732D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52EE6C1F-5A04-449E-9A2E-6E168AF732D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{854E90C7-8320-4EB6-A286-24A8EE5EBE9B}.Azure.Staging|Any CPU.ActiveCfg = CI|Any CPU
+		{854E90C7-8320-4EB6-A286-24A8EE5EBE9B}.Azure.Staging|Any CPU.Build.0 = CI|Any CPU
+		{854E90C7-8320-4EB6-A286-24A8EE5EBE9B}.Azure.Test|Any CPU.ActiveCfg = CI|Any CPU
+		{854E90C7-8320-4EB6-A286-24A8EE5EBE9B}.Azure.Test|Any CPU.Build.0 = CI|Any CPU
+		{854E90C7-8320-4EB6-A286-24A8EE5EBE9B}.CI|Any CPU.ActiveCfg = CI|Any CPU
+		{854E90C7-8320-4EB6-A286-24A8EE5EBE9B}.CI|Any CPU.Build.0 = CI|Any CPU
+		{854E90C7-8320-4EB6-A286-24A8EE5EBE9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{854E90C7-8320-4EB6-A286-24A8EE5EBE9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{854E90C7-8320-4EB6-A286-24A8EE5EBE9B}.Release.Public|Any CPU.ActiveCfg = Release.Public|Any CPU
+		{854E90C7-8320-4EB6-A286-24A8EE5EBE9B}.Release.Public|Any CPU.Build.0 = Release.Public|Any CPU
+		{854E90C7-8320-4EB6-A286-24A8EE5EBE9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{854E90C7-8320-4EB6-A286-24A8EE5EBE9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
