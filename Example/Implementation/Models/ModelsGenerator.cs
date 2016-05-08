@@ -4,7 +4,7 @@
 
 	
 
-// -- AUTO GENERATED CONTENT, DO NOT MODIFY --		
+// -- AUTO GENERATED CONTENT ON, DO NOT MODIFY --		
 // <copyright file="ViewModelsGenerator.tt" company="Marvelous IT Solutions">
 // Copyright © Marvelous IT Solutions. All Rights Reserved.
 // this file is auto-generated, don't change anything in the created files.

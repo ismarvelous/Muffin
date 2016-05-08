@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/6tn3dnvmuek4olhq?svg=true)](https://ci.appveyor.com/project/ismarvelous/muffin)
+  
 #Muffin (An Umbraco Foundation)
 
 Muffin is a simplefied templating API / facade on top of the
@@ -34,6 +36,7 @@ Currently build on top of Umbraco 7.2.4
 ##Installation
 - Umbraco is installed and updated via Nuget.  
 - The models generator currently relies on uSync which is also installed and updated via Nuget.
+- Our latest build is always available on nuget at: https://ci.appveyor.com/nuget/muffin-xmcwl6r6371j
 
 ##Examples and documentation
 

@@ -1,5 +1,5 @@
 
-// -- AUTO GENERATED CONTENT, DO NOT MODIFY --		
+// -- AUTO GENERATED CONTENT ON, DO NOT MODIFY --		
 // <copyright file="ViewModelsGenerator.tt" company="Marvelous IT Solutions">
 // Copyright © Marvelous IT Solutions. All Rights Reserved.
 // this file is auto-generated, don't change anything in the created files.
@@ -25,14 +25,14 @@ namespace  Example.Implementation.Models
 		// properties..
 
 		
-		[TypeConverter(typeof(RelatedLinks))]
-		public virtual IEnumerable<LinkModel> SocialNetworks { get; set; }
+		[TypeConverter(typeof(ContentPicker))]
+		public virtual IModel CarrouselContainer { get; set; }
 		
 		[TypeConverter(typeof(MultiNodeTreePicker))]
 		public virtual IEnumerable<IModel> Quickmenu { get; set; }
 		
-		[TypeConverter(typeof(ContentPicker))]
-		public virtual IModel CarrouselContainer { get; set; }
+		[TypeConverter(typeof(RelatedLinks))]
+		public virtual IEnumerable<LinkModel> SocialNetworks { get; set; }
 		
 	}
 	 

@@ -50,12 +50,8 @@ namespace Muffin.Infrastructure
         /// <returns></returns>
         public IPublishedContent CreateModel(IPublishedContent content)
         {
-            //not generating objects twice..
-            if (content is IModel)
-                return content;
-
-            // fail fast
-            if (_types == null)
+            //not generating objects twice.. // fail fast.
+            if (content is IModel || _types == null || content == null)
                 return content;
 
             // be case-insensitive
@@ -143,7 +139,7 @@ namespace Muffin.Infrastructure
                 }
                 else if (invocation.Method.ReturnType == typeof(string) && !(value is string))
                 {
-                    invocation.ReturnValue = value.ToString();
+                    invocation.ReturnValue = value != null ? value.ToString() : null;
                 }
                 else
                 {
@@ -159,3 +155,4 @@ namespace Muffin.Infrastructure
         }
     }
 }
+

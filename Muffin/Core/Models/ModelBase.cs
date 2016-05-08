@@ -73,7 +73,7 @@ namespace Muffin.Core.Models
 
         private IEnumerable<IModel> _breadcrumbs;
         [MuffinIgnore]
-        public IEnumerable<IModel> Breadcrumbs
+        public virtual IEnumerable<IModel> Breadcrumbs
         {
             get
             {

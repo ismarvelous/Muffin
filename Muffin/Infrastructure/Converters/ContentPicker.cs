@@ -25,7 +25,7 @@ namespace Muffin.Infrastructure.Converters
                 return Repository.FindById(Convert.ToInt32(source));
             }
 
-            return new List<IModel>();
+            return null;
         }
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
@@ -38,6 +38,8 @@ namespace Muffin.Infrastructure.Converters
 
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
+            if (value == null)
+                return null;
 
             if (value is string || value is int || value is IModel)
             {

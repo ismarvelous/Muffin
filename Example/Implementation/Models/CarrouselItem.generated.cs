@@ -1,5 +1,5 @@
 
-// -- AUTO GENERATED CONTENT, DO NOT MODIFY --		
+// -- AUTO GENERATED CONTENT ON, DO NOT MODIFY --		
 // <copyright file="ViewModelsGenerator.tt" company="Marvelous IT Solutions">
 // Copyright © Marvelous IT Solutions. All Rights Reserved.
 // this file is auto-generated, don't change anything in the created files.
@@ -25,8 +25,8 @@ namespace  Example.Implementation.Models
 		// properties..
 
 		
-		
-		public virtual string Titel { get; set; }
+		[TypeConverter(typeof(MediaPicker))]
+		public virtual ICropImageModel Afbeelding { get; set; }
 		
 		
 		public virtual string Beschrijving { get; set; }
@@ -34,8 +34,8 @@ namespace  Example.Implementation.Models
 		
 		public virtual string Link { get; set; }
 		
-		[TypeConverter(typeof(MediaPicker))]
-		public virtual ICropImageModel Afbeelding { get; set; }
+		
+		public virtual string Titel { get; set; }
 		
 	}
 	 
