@@ -17,7 +17,6 @@ namespace Muffin.Infrastructure
 	{
 		public virtual void RegisterBaseRoutes()
 		{
-			//todo: add route for json and rss.
 			RouteTable.Routes.MapRoute(
 			"Sitemap",
 			"sitemap",

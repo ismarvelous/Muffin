@@ -7,7 +7,7 @@ using Umbraco.Web;
 
 namespace Muffin.Infrastructure.Converters
 {
-    public abstract class BaseTypeConverter : TypeConverter
+    public abstract class BaseTypeConverter : TypeConverter, IConverter
     {
         protected ISiteRepository Repository;
         protected IMapper Mapper;
@@ -28,5 +28,10 @@ namespace Muffin.Infrastructure.Converters
             Repository = rep;
             Mapper = map;
         }
+
+        public abstract object ConvertDataToSource(object source);
+
+        public abstract bool IsConverter(string editoralias);
+        public virtual Type ReturnType => typeof(object);
     }
 }

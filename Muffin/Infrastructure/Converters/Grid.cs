@@ -7,14 +7,16 @@ using Newtonsoft.Json.Linq;
 
 namespace Muffin.Infrastructure.Converters
 {
-    public class Grid : BaseTypeConverter, IConverter
+    public class Grid : BaseTypeConverter
     {
-        public bool IsConverter(string editoralias)
+        public override Type ReturnType => typeof(GridModel);
+
+        public override bool IsConverter(string editoralias)
         {
             return "Umbraco.Grid".Equals(editoralias);
         }
 
-        public object ConvertDataToSource(object source)
+        public override object ConvertDataToSource(object source)
         {
             if (source is GridModel)
                 return source;

@@ -13,5 +13,6 @@ namespace Muffin.Infrastructure.Converters
     {
         object ConvertDataToSource(object source);
         bool IsConverter(string editoralias);
+        Type ReturnType { get; }
     }
 }

@@ -98,11 +98,6 @@ namespace Muffin.Infrastructure
 
     internal class ModelInterceptor : IInterceptor
     {
-        public ISiteRepository Repository
-        {
-            get { return DependencyResolver.Current.GetService<ISiteRepository>(); }
-        }
-
         public readonly IPublishedContent Source;
         public ModelInterceptor(IPublishedContent source)
         {
@@ -114,32 +109,33 @@ namespace Muffin.Infrastructure
             //do things before excecution
 
             var property = invocation.Method.GetProperty();
-            var ignore = property != null && property.GetCustomAttribute<MuffinIgnoreAttribute>() != null;
+            var ignore = property != null && 
+                (property.GetCustomAttribute<MuffinIgnoreAttribute>() != null ||
+                property.GetSetMethod() == null); //skip everything that has no public setter
 
-            if (property != null && Source.HasProperty(property.Name) && !ignore)
+            var propertyAlias = property?.Name;
+            if (Source.HasProperty(propertyAlias) && !ignore)
             {
-                var propertyAlias = property.Name;
-
                 //DIRTY HACK: to support macro collections..
                 var value = invocation.Method.ReturnType == typeof(IEnumerable<DynamicMacroModel>) ?
                     Source.GetProperty(propertyAlias) : //for macros
                     Source.GetPropertyValue(propertyAlias); //default
 
                 var converterAttribute = property.GetCustomAttribute<TypeConverterAttribute>();
-                if (converterAttribute != null)
+                if (converterAttribute != null) //TypeConverter support.
                 {
                     var converterType = Type.GetType(converterAttribute.ConverterTypeName);
-                    if (converterType != null)
-                    {
-                        var converter = Activator.CreateInstance(converterType) as TypeConverter;
-                        invocation.ReturnValue = converter != null ?
-                            converter.ConvertFrom(value) :
-                            value;
-                    }
+                    if (converterType == null) return;
+
+                    var converter = Activator.CreateInstance(converterType) as TypeConverter;
+                    invocation.ReturnValue = converter != null ?
+                        converter.ConvertFrom(value) :
+                        value;
                 }
                 else if (invocation.Method.ReturnType == typeof(string) && !(value is string))
                 {
-                    invocation.ReturnValue = value != null ? value.ToString() : null;
+                    //when return type is string always return the to string value.
+                    invocation.ReturnValue = value?.ToString();
                 }
                 else
                 {

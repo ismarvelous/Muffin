@@ -36,7 +36,7 @@ namespace Muffin.Infrastructure.Models
                     ScriptName = Macro.ScriptPath
                 };
 
-                return engine.Execute(m, Repository.FindById<ModelBase>(_pageId));
+                return engine.Execute(m, Repository.FindById<IModel>(_pageId));
             }
 
             return Macro.Alias; //default;

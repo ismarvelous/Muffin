@@ -7,7 +7,7 @@ using Muffin.Core.Models;
 
 namespace Muffin.Core.ViewModels
 {
-    public interface ICollectionContentViewModel<out T> : IEnumerable<IModel> 
+    public interface ICollectionContentViewModel<out T> : IEnumerable<IModel>, IPageViewModel
         where T : IModel
     {
         T Content { get; }

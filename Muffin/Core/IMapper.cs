@@ -16,6 +16,5 @@ namespace Muffin.Core
         MvcHtmlString AsJson(IEnumerable<IPublishedContent> collection, string[] properties = null, bool includeHiddenItems = true);
 
         IModel AsDynamicIModel(IModel model);
-        IEnumerable<IModel> AsDynamicIModel(IEnumerable<IModel> model);
     }
 }

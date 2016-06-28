@@ -1,21 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
-using Muffin.Core;
 using Muffin.Core.Models;
 using Umbraco.Core;
 
 namespace Muffin.Infrastructure.Converters
 {
-    public class ContentPicker : BaseTypeConverter, IConverter
+    public class ContentPicker : BaseTypeConverter
     {
-        public bool IsConverter(string editoralias)
+        public override Type ReturnType => typeof(IModel);
+
+        public override bool IsConverter(string editoralias)
         {
             return Constants.PropertyEditors.ContentPickerAlias.Equals(editoralias);
         }
 
-        public object ConvertDataToSource(object source)
+        public override object ConvertDataToSource(object source)
         {
             if (source is IModel)
                 return source;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using Muffin.Core.Models;
 
 namespace Muffin.Core.ViewModels
@@ -21,8 +22,8 @@ namespace Muffin.Core.ViewModels
         public SearchContentViewModel(
             T source,
             string query)
-			: base(source, 
-				source.Repository.Find(string.IsNullOrWhiteSpace(query) ? "<NOT>" : query))
+			: base(source, //todo: ugly code here!!
+                DependencyResolver.Current.GetService<ISiteRepository>().Find(string.IsNullOrWhiteSpace(query) ? "<NOT>" : query))
 
         {
             Query = string.IsNullOrWhiteSpace(query) ? "<NOT>" : query;

@@ -9,15 +9,17 @@ namespace Muffin.Infrastructure.Converters
     /// <summary>
     /// More info on the image cropper: http://our.umbraco.org/documentation/Using-Umbraco/Backoffice-Overview/Property-Editors/Built-in-Property-Editors-v7/Image-Cropper
     /// </summary>
-    public class ImageCropper : BaseTypeConverter, IConverter
+    public class ImageCropper : BaseTypeConverter
     {
-        public bool IsConverter(string editoralias)
+        public override Type ReturnType => typeof(ICropImageModel);
+
+        public override bool IsConverter(string editoralias)
         {
             return "Umbraco.ImageCropper".Equals(editoralias) 
                 || "media".Equals(editoralias); //support for grid media aswell.
         }
 
-        public object ConvertDataToSource(object source)
+        public override object ConvertDataToSource(object source)
         {
             if (source is ICropImageModel)
                 return source;

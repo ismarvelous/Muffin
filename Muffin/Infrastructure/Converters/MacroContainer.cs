@@ -18,16 +18,18 @@ namespace Muffin.Infrastructure.Converters
     /// <summary>
     /// Convert a MacroContainer
     /// </summary>
-    public class MacroContainer : BaseTypeConverter, IConverter
+    public class MacroContainer : BaseTypeConverter
     {
-        public bool IsConverter(string editoralias)
+        public override Type ReturnType => typeof(IEnumerable<DynamicMacroModel>);
+
+        public override bool IsConverter(string editoralias)
         {
             return Constants.PropertyEditors.MacroContainerAlias.Equals(editoralias);
         }
 
         //todo: this doesn't support the umbraco macro build in cache strategie, find a way to cache the outputs..
 
-        public object ConvertDataToSource(object source)
+        public override object ConvertDataToSource(object source)
         {
             if (source is IEnumerable<DynamicMacroModel>)
                 return source;
@@ -66,7 +68,7 @@ namespace Muffin.Infrastructure.Converters
                 if (macro.Macro.ScriptPath.Contains(macroPartialsPath))
                 {
                     macro.Macro.ScriptPath = macro.Macro.ScriptPath.Replace(macroPartialsPath,
-                        string.Format("{0}/{1}/", Settings.CurrentThemeViewPath, "MacroPartials"));
+                        string.Format("{0}/{1}/", "~/Views", "MacroPartials"));
                 }
                 #endregion
 

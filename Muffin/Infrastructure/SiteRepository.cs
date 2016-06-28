@@ -11,7 +11,6 @@ using Examine.SearchCriteria;
 using Muffin.Core;
 using Muffin.Core.Models;
 using Muffin.Infrastructure.Converters;
-using Muffin.Infrastructure.Models;
 using umbraco.cms.businesslogic.macro;
 using Umbraco.Core.Dynamics;
 using Umbraco.Core.Models;
@@ -86,16 +85,15 @@ namespace Muffin.Infrastructure
                 var field = fields.Keys.Contains("mainbody", StringComparer.InvariantCultureIgnoreCase) ? 
                     fields.FirstOrDefault(f => f.Key.ToLower() == "mainbody") : fields.FirstOrDefault();
 
-                var searchHiglight = !String.IsNullOrEmpty(field.Key) ?
+                var searchHiglight = !string.IsNullOrEmpty(field.Key) ?
                     LuceneHighlightHelper.Instance.GetHighlight(field.Value, field.Key, ((LuceneSearcher)searcher).GetSearcher(), query) : String.Empty;
 
-				var content = FindById<ModelBase>(item.Id); //returns dynamic null if this is not a content item (for example when this is a media item.
+				var content = FindById<IModel>(item.Id); //returns dynamic null if this is not a content item (for example when this is a media item.
 
 				if (content != null)
 				{
-					var ret = new DynamicSearchResultItem(content) {HighlightText = searchHiglight};
-
-				    yield return ret;
+                    //todo: searchhighlight
+				    yield return content;
 				}
             }
         }
@@ -216,7 +214,7 @@ namespace Muffin.Infrastructure
         public object ConvertPropertyValue(string editoralias, object value)
         {
             var assembly = typeof(IConverter).Assembly;
-            var types = assembly.GetTypes().Where(type => type != typeof(IConverter) && typeof(IConverter).IsAssignableFrom(type)).ToList();
+            var types = assembly.GetTypes().Where(type => type != typeof(IConverter) && typeof(IConverter).IsAssignableFrom(type) && type != typeof(BaseTypeConverter)).ToList();
 
             foreach (var type in types)
             {

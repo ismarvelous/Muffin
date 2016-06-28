@@ -2,7 +2,11 @@
 @using Muffin.Core
 @using Muffin.Core.Models
 @using Muffin.Infrastructure
+@using Newtonsoft.Json.Linq
 @inherits UmbracoViewPage<Muffin.Core.ViewModels.IContentViewModel<Base>>
+@{
+    var socialitms = (Model.Homepage as Home).SocialNetworks as IEnumerable<LinkModel>;
+}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -27,10 +31,10 @@
 
         <div class="header-container">
             <header class="wrapper clearfix">
-                <h1 class="title" onclick="window.location = '/'">@((Model.Content.Homepage as Base).Titel)</h1>
+                <h1 class="title" onclick="window.location = '/'">@((Model.Homepage as Base).Titel)</h1>
                 <nav>
                     <ul>
-                        @foreach (var child in Model.Content.Homepage.Children.OfType<Base>())
+                        @foreach (var child in Model.Homepage.Children<Base>())
                         {
                             if (!child.UmbracoNaviHide)
                             {
@@ -59,12 +63,16 @@
         <div class="footer-container">
             <footer class="wrapper">
                 <h3>Lorem ipsum, Some city, NL</h3>
-				<ul>
-					@foreach(dynamic item in (Model.Content.Homepage as Home).SocialNetworks)
-					{
-						<li><a href="@item.Url">@item.Title</a></li>
-					}
-				</ul>
+                <ul>
+                    @if (socialitms != null)
+                    {
+                        foreach (var item in socialitms)
+                        {
+                            <li><a href="@item.Url">@item.Title</a></li>
+                        }
+                    }
+
+                </ul>
             </footer>
         </div>
 

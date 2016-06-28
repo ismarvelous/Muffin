@@ -107,10 +107,5 @@ namespace Muffin.Infrastructure
             var wrapper = model as DynamicModelBaseWrapper;
             return wrapper ?? new DynamicModelBaseWrapper(model);
         }
-
-        public IEnumerable<IModel> AsDynamicIModel (IEnumerable<IModel> model)
-        {
-            return model.Select(AsDynamicIModel);
-        }
     }
 }

@@ -1,8 +1,9 @@
 ﻿using System.Linq;
+using Example.Implementation.Models;
 using Muffin.Controllers;
 using Muffin.Core;
-using Muffin.Core.Models;
 using Muffin.Core.ViewModels;
+using Umbraco.Web.PublishedContentModels;
 
 namespace Example.Implementation.Controllers
 {
@@ -20,9 +21,9 @@ namespace Example.Implementation.Controllers
 
 		public System.Web.Mvc.ActionResult Listing(Umbraco.Web.Models.RenderModel model, int p = 1, int s = 10)
 		{
-            var content = model.Content as Models.Base;
+            var content = model.Content as Base;
 
-            var result = new CollectionContentViewModel<Models.Base>(content, content);
+            var result = new CollectionContentViewModel<Base>(content, content);
 
             result.PagedResults = () => result.Container
                 .Skip(s * (p - 1))
@@ -32,6 +33,7 @@ namespace Example.Implementation.Controllers
             result.PageSize = s;
 
             return View(result);
+
         }
 	}
 }

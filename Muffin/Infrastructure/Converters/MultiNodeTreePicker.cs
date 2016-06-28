@@ -10,14 +10,16 @@ namespace Muffin.Infrastructure.Converters
     /// <summary>
     /// Multi node tree picker converter
     /// </summary>
-    public class MultiNodeTreePicker : BaseTypeConverter, IConverter
+    public class MultiNodeTreePicker : BaseTypeConverter
     {
-        public bool IsConverter(string alias)
+        public override Type ReturnType => typeof(IEnumerable<IModel>);
+
+        public override bool IsConverter(string alias)
         {
             return Constants.PropertyEditors.MultiNodeTreePickerAlias.Equals(alias);
         }
 
-        public object ConvertDataToSource(object source)
+        public override object ConvertDataToSource(object source)
         {
             if (source is IEnumerable<IModel>)
                 return source;

@@ -1,18 +1,21 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using Muffin.Core.Models;
 using Umbraco.Core;
 using Umbraco.Core.Models.PublishedContent;
 
 namespace Muffin.Infrastructure.Converters
 {
-    public class MediaPicker : BaseTypeConverter, IConverter
+    public class MediaPicker : BaseTypeConverter
 	{
-        public bool IsConverter(string editoralias)
+        public override Type ReturnType => typeof(ICropImageModel);
+
+        public override bool IsConverter(string editoralias)
         {
             return Constants.PropertyEditors.MediaPickerAlias.Equals(editoralias);
         }
 
-	    public object ConvertDataToSource(object source)
+	    public override object ConvertDataToSource(object source)
 	    {
 	        if (source is ICropImageModel)
 	            return source;

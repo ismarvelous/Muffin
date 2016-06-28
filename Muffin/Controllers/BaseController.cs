@@ -37,9 +37,8 @@ namespace Muffin.Controllers
         public virtual ActionResult Index(RenderModel model) //Template name, default is Index
         {
             var content = model.Content as IModel;
-            return View(content != null ? 
-                CreateViewModel(content) : 
-                CreateViewModel((new ModelBase(model.Content)).AsDynamic()));
+            return View(content != null ?
+                CreateViewModel(content) : null);
 
             //if there is not a muffin IModel version found, create a default modelbase and wrap it as a dynamic object.
         }
@@ -53,7 +52,7 @@ namespace Muffin.Controllers
         {
             //var path = Request.Url.GetAbsolutePathDecoded().ToLower();
             //var contentPath = path.Remove(path.IndexOf("json", StringComparison.InvariantCulture)); 
-            var content = Repository.FindByUrl<ModelBase>(string.Format("/{0}", path));
+            var content = Repository.FindByUrl<IModel>(string.Format("/{0}", path));
             return new RssActionResult(content);
         }
 
@@ -66,7 +65,7 @@ namespace Muffin.Controllers
         {
             //var path = Request.Url.GetAbsolutePathDecoded().ToLower();
             //var contentPath = path.Remove(path.IndexOf("json", StringComparison.InvariantCulture)); 
-            var content = Repository.FindByUrl<ModelBase>(string.Format("/{0}", path));
+            var content = Repository.FindByUrl<IModel>(string.Format("/{0}", path));
             return new ContentResult()
             {
                 Content =  content.AsJson().ToString(),

@@ -14,7 +14,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Example</RootNamespace>
     <AssemblyName>Example</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -313,6 +313,10 @@
     </Reference>
     <Reference Include="Umbraco.ModelsBuilder, Version=3.0.2.93, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Umbraco.ModelsBuilder.3.0.2\lib\Umbraco.ModelsBuilder.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Umbraco.ModelsBuilder.Api, Version=3.0.2.93, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Umbraco.ModelsBuilder.Api.3.0.2\lib\Umbraco.ModelsBuilder.Api.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="umbraco.providers, Version=1.0.5885.31230, Culture=neutral, processorArchitecture=MSIL">
@@ -1770,13 +1774,13 @@
     <None Include="_bin_deployableAssemblies\amd64\sqlceca40.dll" />
     <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\README_ENU.txt" />
     <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\msvcr90.dll" />
-    <None Include="Implementation\Models\MultipleOutputHelper.ttinclude">
+    <None Include="Implementation\Models\MultipleOutputHelper.ttinclude.old">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MultipleOutputHelper.cs</LastGenOutput>
+      <LastGenOutput>MultipleOutputHelper.ttinclude.cs</LastGenOutput>
     </None>
-    <None Include="Implementation\Models\ModelsGenerator.tt">
+    <None Include="Implementation\Models\ModelsGenerator.tt.old">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ModelsGenerator.cs</LastGenOutput>
+      <LastGenOutput>ModelsGenerator.tt.cs</LastGenOutput>
     </None>
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\Development.pubxml" />
@@ -1913,7 +1917,6 @@
     <Content Include="umbraco\Xslt\Web.config" />
     <Content Include="Views\Home.cshtml" />
     <Content Include="Views\Shared\_layoutDynamic.cshtml" />
-    <Content Include="Views\Home-dynamics.cshtml" />
     <Content Include="Views\Partials\Feedback.cshtml" />
     <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
     <None Include="_bin_deployableAssemblies\x86\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
@@ -1923,56 +1926,69 @@
     <Compile Include="Implementation\Controllers\SearchController.cs" />
     <Compile Include="Implementation\Events\StartupHandler.cs" />
     <Compile Include="Implementation\Forms\Contact.cs" />
+    <Compile Include="Implementation\Models\Base.cs" />
     <Compile Include="Implementation\Models\Base.generated.cs">
-      <DependentUpon>ModelsGenerator.tt</DependentUpon>
+      <DependentUpon>Builder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Implementation\Models\Builder.generated.cs">
+      <DependentUpon>Builder.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Implementation\Models\Carrousel.generated.cs">
-      <DependentUpon>ModelsGenerator.tt</DependentUpon>
+      <DependentUpon>Builder.cs</DependentUpon>
     </Compile>
     <Compile Include="Implementation\Models\CarrouselItem.generated.cs">
-      <DependentUpon>ModelsGenerator.tt</DependentUpon>
+      <DependentUpon>Builder.cs</DependentUpon>
     </Compile>
     <Compile Include="Implementation\Models\ContainerBase.generated.cs">
-      <DependentUpon>ModelsGenerator.tt</DependentUpon>
+      <DependentUpon>Builder.cs</DependentUpon>
     </Compile>
     <Compile Include="Implementation\Models\ContainerItemBase.generated.cs">
-      <DependentUpon>ModelsGenerator.tt</DependentUpon>
+      <DependentUpon>Builder.cs</DependentUpon>
     </Compile>
     <Compile Include="Implementation\Models\Content.cs" />
     <Compile Include="Implementation\Models\Content.generated.cs">
-      <DependentUpon>ModelsGenerator.tt</DependentUpon>
+      <DependentUpon>Builder.cs</DependentUpon>
     </Compile>
     <Compile Include="Implementation\Models\Feedback.cs" />
+    <Compile Include="Implementation\Models\Builder.cs">
+      <Generator>UmbracoModelsBuilder</Generator>
+      <CustomToolNamespace>Umbraco.ModelsBuilder.CustomTool</CustomToolNamespace>
+      <LastGenOutput>Builder.generated.cs</LastGenOutput>
+    </Compile>
+    <Compile Include="Implementation\Models\File.generated.cs">
+      <DependentUpon>Builder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Implementation\Models\Folder.generated.cs">
+      <DependentUpon>Builder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Implementation\Models\Home.generated.cs">
-      <DependentUpon>ModelsGenerator.tt</DependentUpon>
+      <DependentUpon>Builder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Implementation\Models\Image.generated.cs">
+      <DependentUpon>Builder.cs</DependentUpon>
     </Compile>
     <Compile Include="Implementation\Models\Landing.generated.cs">
-      <DependentUpon>ModelsGenerator.tt</DependentUpon>
+      <DependentUpon>Builder.cs</DependentUpon>
     </Compile>
     <Compile Include="Implementation\Models\Listing.generated.cs">
-      <DependentUpon>ModelsGenerator.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Implementation\Models\ModelsGenerator.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelsGenerator.tt</DependentUpon>
+      <DependentUpon>Builder.cs</DependentUpon>
     </Compile>
     <Compile Include="Implementation\Models\PersonItem.generated.cs">
-      <DependentUpon>ModelsGenerator.tt</DependentUpon>
+      <DependentUpon>Builder.cs</DependentUpon>
     </Compile>
     <Compile Include="Implementation\Models\Persons.generated.cs">
-      <DependentUpon>ModelsGenerator.tt</DependentUpon>
+      <DependentUpon>Builder.cs</DependentUpon>
     </Compile>
     <Compile Include="Implementation\Models\Search.generated.cs">
-      <DependentUpon>ModelsGenerator.tt</DependentUpon>
+      <DependentUpon>Builder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Implementation\Models\Sized.generated.cs">
+      <DependentUpon>Builder.cs</DependentUpon>
     </Compile>
     <Compile Include="Implementation\SurfaceControllers\FeedbackSurfaceController.cs" />
     <Compile Include="Implementation\SurfaceControllers\PersonSurfaceController.cs" />
-    <Compile Include="Implementation\Models\MultipleOutputHelper.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MultipleOutputHelper.ttinclude</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1998,6 +2014,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

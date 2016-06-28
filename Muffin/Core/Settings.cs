@@ -21,38 +21,5 @@ namespace Muffin.Core
 				return ret ?? string.Empty;
 			}
 		}
-
-        #region Theme / custom view folder support
-        public static string CurrentTheme
-        {
-            get
-            {
-                var ret = WebConfigurationManager.AppSettings["Muffin.Themes.Current"];
-                return ret ?? string.Empty;
-            }
-        }
-
-	    public static string CurrentThemeViewPath
-	    {
-	        get 
-            {
-	            return !string.IsNullOrEmpty(CurrentTheme) ? 
-                    string.Format("~/Themes/{0}/Views", CurrentTheme) : 
-                    "~/Views";
-	        }
-	    }
-
-        public static string CurrentThemePath
-        {
-            get
-            {
-                return !string.IsNullOrEmpty(CurrentTheme) ?
-                    string.Format("~/Themes/{0}", CurrentTheme) :
-                    "~/";
-            }
-        }
-
-        #endregion
-
     }
 }

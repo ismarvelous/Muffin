@@ -1,4 +1,6 @@
-﻿namespace Muffin.Core.Models
+﻿using Newtonsoft.Json.Linq;
+
+namespace Muffin.Core.Models
 {
     public interface IUrlModel
     {

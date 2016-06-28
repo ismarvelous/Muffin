@@ -13,16 +13,18 @@ using Umbraco.Core.PropertyEditors;
 namespace Muffin.Infrastructure.Converters
 {
     /// <summary>
-    /// Convert a MacroContainer
+    /// Convert a Relatedlinks
     /// </summary>
-    public class RelatedLinks : BaseTypeConverter, IConverter
+    public class RelatedLinks : BaseTypeConverter
     {
-        public bool IsConverter(string editoralias)
+        public override Type ReturnType => typeof(IEnumerable<LinkModel>);
+
+        public override bool IsConverter(string editoralias)
         {
             return Constants.PropertyEditors.RelatedLinksAlias.Equals(editoralias);
         }
 
-        public object ConvertDataToSource(object source)
+        public override object ConvertDataToSource(object source)
         {
             try
             {
@@ -81,30 +83,6 @@ namespace Muffin.Infrastructure.Converters
             }
 
             return base.ConvertFrom(context, culture, value);
-        }
-    }
-
-    /// <summary>
-    /// DIRTY FIX: override Umbraco's RelatedLinksEditorValue converter. The original Core implementation is calling 
-    /// .NiceUrl.. which results in a StackoverflowException when used together with the ditto factory.
-    /// </summary>
-    [PropertyValueType(typeof(JArray))]
-    [PropertyValueCache(PropertyCacheValue.All, PropertyCacheLevel.Content)]
-    public class RelatedLinksEditorValueConvertor : PropertyValueConverterBase
-    {
-        public override bool IsConverter(PublishedPropertyType propertyType)
-        {
-            return Constants.PropertyEditors.RelatedLinksAlias.Equals(propertyType.PropertyEditorAlias);
-        }
-
-        public override object ConvertDataToSource(PublishedPropertyType propertyType, object source, bool preview)
-        {
-            return source;
-        }
-
-        public override object ConvertSourceToXPath(PublishedPropertyType propertyType, object source, bool preview)
-        {
-            return source;
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Dynamic;
 using System.Linq;
+using System.Web.Mvc;
 using Muffin.Core;
 using Muffin.Core.Models;
 using umbraco.MacroEngines;
@@ -23,7 +24,7 @@ namespace Muffin.Infrastructure.Models
     {
         protected IModel Source;
 
-        public ISiteRepository Repository { get { return Source.Repository; } }
+        public ISiteRepository Repository => DependencyResolver.Current.GetService<ISiteRepository>();
 
         internal DynamicModelBaseWrapper(IModel source)
         {
@@ -57,10 +58,6 @@ namespace Muffin.Infrastructure.Models
 		    return true; //dynamic null is a succesfull value;
 		}
 
-        public virtual IModel Homepage
-		{
-			get { return Source.Homepage; }
-		}
 
         public virtual DateTime PublishDate //late binding of the publishdate...
 		{
@@ -77,11 +74,6 @@ namespace Muffin.Infrastructure.Models
 
 		#region children
 
-        public virtual IEnumerable<IModel> NavigationChildren
-        {
-            get { return Source.NavigationChildren; }
-        }
-
         IPublishedContent IPublishedContent.Parent
         {
             get { return Parent; }
@@ -96,11 +88,6 @@ namespace Muffin.Infrastructure.Models
 		{
             get { return Source.Children; }
 		}
-
-        public virtual IEnumerable<IModel> Breadcrumbs
-        {
-            get { return Source.NavigationChildren;  }
-        }
 
 		#endregion
 

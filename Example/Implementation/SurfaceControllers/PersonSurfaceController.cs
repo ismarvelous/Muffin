@@ -1,8 +1,10 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Example.Implementation.Models;
 using Muffin.Controllers;
 using Muffin.Core;
 using Umbraco.Web.Mvc;
+using Umbraco.Web.PublishedContentModels;
 
 namespace Example.Implementation.SurfaceControllers
 {
@@ -21,7 +23,6 @@ namespace Example.Implementation.SurfaceControllers
         {
             var content = Repository.FindById(contentId) as PersonItem;
             return PartialView("Person", content);
-            return null;
         }
     }
 }

@@ -11,6 +11,7 @@ using Umbraco.Core;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 using Umbraco.Web.WebApi;
+using RegistrationExtensions = Autofac.Integration.Mvc.RegistrationExtensions;
 
 namespace Example.Implementation.Events
 {
@@ -29,12 +30,14 @@ namespace Example.Implementation.Events
 			builder.RegisterControllers(Assembly.GetExecutingAssembly());
             //1.2 define the mapper
             builder.Register(s => new Mapper())
-                .As<IMapper>()
-                .InstancePerHttpRequest();
+                .As<IMapper>().InstancePerHttpRequest();
 
             //2. use the castle content factory, or use your own.
-            var factory = new CastleContentFactory(PluginManager.Current.ResolveTypes<ModelBase>());
-            PublishedContentModelFactoryResolver.Current.SetFactory(factory); //remove this line if your like to depend fully on dynamic models
+
+            var types = PluginManager.Current.ResolveTypes<PublishedContentModel>();
+            //var factory = new PublishedContentModelFactory(types);
+            var factory = new CastleContentFactory(types); //our custom castle content factory has support for typeconverters
+            PublishedContentModelFactoryResolver.Current.SetFactory(factory); 
 
             //2.1 add the factory to the container.
             builder.Register(s => factory)

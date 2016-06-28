@@ -21,15 +21,9 @@ namespace Muffin.Core.Models
 			_dynamicNull = dn;
 		}
 
-		public virtual string Url
-		{
-			get
-			{
-				return Settings.EmptyImageUrl;
-			}
-		}
+		public virtual string Url => Settings.EmptyImageUrl;
 
-		public virtual bool IsNull()
+	    public virtual bool IsNull()
 		{
 			return true;
 		}
@@ -84,20 +78,11 @@ namespace Muffin.Core.Models
 		    return Url;
 		}
 
-        public virtual IUrlModel this[int width, int height]
+        public virtual IUrlModel this[int width, int height] => new UrlModel
         {
-            get
-            {
-                return new UrlModel
-                {
-                    Url = Url.GetCropUrl(height: height, width: width, imageCropMode: ImageCropMode.Crop)
-                };
-            }
-        }
+            Url = Url.GetCropUrl(height: height, width: width, imageCropMode: ImageCropMode.Crop)
+        };
 
-	    public IUrlModel this[string alias]
-	    {
-	        get { return Null; }
-	    }
+	    public IUrlModel this[string alias] => Null;
 	}
 }
