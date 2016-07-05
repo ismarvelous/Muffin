@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 using Muffin.Core;
 using Muffin.Core.Models;
+using Muffin.Infrastructure.Converters;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.ModelsBuilder;
-using Umbraco.Web;
 
 // ReSharper disable ConvertPropertyToExpressionBody
 
@@ -14,12 +16,13 @@ namespace Example.Implementation.Models
 {
     public partial class Base : IModel
     {
-        //todo: add support for the castle factory / normal type converters...
-        [ImplementPropertyType("afbeelding")]
+        [ImplementPropertyType("afbeelding")] //this avoids creation of the property by the builder.
+        //use your own type converter...[TypeConverter(typeof(YourOwnLocalConverter))] 
+        //or use the default stuff..
         public virtual ICropImageModel Afbeelding
         {
-            get; set;
-            //get { return this.GetPropertyValue<Muffin.Core.Models.ICropImageModel>("afbeelding"); }
+            get; set; //when using get; and set; the castle factory handles all the magic
+            // when set; is not implemented, it ignores the property
         }
 
         protected ISiteRepository Repository
