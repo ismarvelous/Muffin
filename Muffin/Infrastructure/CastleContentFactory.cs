@@ -114,7 +114,7 @@ namespace Muffin.Infrastructure
                 property.GetSetMethod() == null); //skip everything that has no public setter
 
             var propertyAlias = property?.Name;
-            if (Source.HasProperty(propertyAlias) && !ignore)
+            if (!ignore && propertyAlias != null && Source.HasProperty(propertyAlias))
             {
                 //DIRTY HACK: to support macro collections..
                 var value = invocation.Method.ReturnType == typeof(IEnumerable<DynamicMacroModel>) ?

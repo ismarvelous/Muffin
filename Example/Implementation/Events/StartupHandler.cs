@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
+using Example.Implementation.Models;
 using Muffin.Controllers;
 using Muffin.Core;
 using Muffin.Core.Models;
@@ -34,10 +35,8 @@ namespace Example.Implementation.Events
 
             //2. use the castle content factory, or use your own.
 
-            var types = PluginManager.Current.ResolveTypes<PublishedContentModel>();
-            //var factory = new PublishedContentModelFactory(types);
-            var factory = new CastleContentFactory(types); //our custom castle content factory has support for typeconverters
-            PublishedContentModelFactoryResolver.Current.SetFactory(factory); 
+            var factory = new CastleContentFactory(PluginManager.Current.ResolveTypes<PublishedContentModel>());
+            PublishedContentModelFactoryResolver.Current.SetFactory(factory);
 
             //2.1 add the factory to the container.
             builder.Register(s => factory)

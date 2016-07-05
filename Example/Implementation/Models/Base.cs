@@ -16,9 +16,10 @@ namespace Example.Implementation.Models
     {
         //todo: add support for the castle factory / normal type converters...
         [ImplementPropertyType("afbeelding")]
-        public object Afbeelding
+        public virtual ICropImageModel Afbeelding
         {
-            get { return this.GetPropertyValue<Muffin.Core.Models.ICropImageModel>("afbeelding"); }
+            get; set;
+            //get { return this.GetPropertyValue<Muffin.Core.Models.ICropImageModel>("afbeelding"); }
         }
 
         protected ISiteRepository Repository

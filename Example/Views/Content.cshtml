@@ -1,6 +1,6 @@
 
 @using Muffin.Core
-@inherits UmbracoViewPage<Muffin.Core.ViewModels.IContentViewModel<Umbraco.Web.PublishedContentModels.Content>>
+@inherits UmbracoViewPage<Muffin.Core.ViewModels.IContentViewModel<Example.Implementation.Models.Content>>
 @{
     Layout = "~/Views/Shared/_layout.cshtml";
 }
@@ -19,7 +19,7 @@
         <!--OR USE YOUR OWN DEFINED FORMAT, CROPPED BY USING THE FOCUS POINT-->
         <img src="@Model.Content.Croppedimage[200, 100]" />
 
-        @if (Model.Content.Afbeelding.IsNull()) //a default null image is used when image is null
+        @if (Model.Content.Afbeelding == null) //a default null image is used when image is null
         {                                       //therefor the property is never null.
             <p>No image available</p>
         }
