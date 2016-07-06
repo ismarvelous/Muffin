@@ -25,6 +25,7 @@ namespace Muffin.Infrastructure
 {
     public class SiteRepository : ISiteRepository
     {
+        //todo:add logging
         //protected IMediaService MediaService;
         protected IContentService Service;
         protected IMacroService MacroService;
@@ -128,12 +129,13 @@ namespace Muffin.Infrastructure
 
 		public TM FindById<TM>(int id) where TM : class, IModel
 		{
-		    //var content = Helper.TypedContent(id);
 		    var content = CurrentContext.ContentCache.GetById(id);
 
 		    if (content is TM)
 		        return content as TM;
 
+            //fallback
+            //todo: log warning in..
             content = ContentFactory.CreateModel(content) as TM;
 
             return (TM)(content ?? null);
@@ -151,6 +153,8 @@ namespace Muffin.Infrastructure
             if (content is TM)
                 return content as TM;
 
+            //fallback
+            //todo: log warning
             content = ContentFactory.CreateModel(content) as TM;
 
             return (TM) (content ?? null);

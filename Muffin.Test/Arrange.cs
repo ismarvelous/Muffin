@@ -61,7 +61,6 @@ namespace Muffin.Test
 			mockedItem.SetupGet(m => m.Id).Returns(1);
 			mockedItem.SetupGet(m => m.Name).Returns(name);
 			mockedItem.SetupGet(m => m.Children).Returns(children);
-		    mockedItem.SetupGet(m => m.Repository).Returns( DependencyResolver.Current.GetService<ISiteRepository>());
 
 			//define properties
 			var props = new List<IPublishedProperty>() 
@@ -92,17 +91,17 @@ namespace Muffin.Test
 			return mockedItem;
 		}
 
-		public static List<ModelBase> BasicPages(ISiteRepository repository)
+		public static List<IModel> BasicPages(ISiteRepository repository)
 		{
-			var ret = new List<ModelBase>()
+			var ret = new List<IModel>()
 			{
-				{ new ModelBase(Content("Lorem page 1").Object) },
-				{ new ModelBase(Content("Ipsum page 2").Object) },
-				{ new ModelBase(Content("Dolor page 3").Object) },
-				{ new ModelBase(Content("Sit page 4").Object) },
-				{ new ModelBase(Content("Consectetur page 5").Object) },
-				{ new ModelBase(Content("Donec page 6").Object) },
-				{ new ModelBase(Content("Commodo page 7").Object) }
+				{ Content("Lorem page 1").Object },
+				{ Content("Ipsum page 2").Object },
+				{ Content("Dolor page 3").Object },
+				{ Content("Sit page 4").Object },
+				{ Content("Consectetur page 5").Object },
+				{ Content("Donec page 6").Object },
+				{ Content("Commodo page 7").Object }
 			};
 
 			return ret;
