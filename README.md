@@ -1,6 +1,4 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/6tn3dnvmuek4olhq?svg=true)](https://ci.appveyor.com/project/ismarvelous/muffin)
-  
-#Muffin (An Umbraco Foundation)
+  #Muffin (An Umbraco Foundation)
 
 Muffin is a simplefied templating API / facade on top of the
 Umbraco framework to allow easier front-end development, quicker development. It also comes with some helpers and default implementations of frequently used functionality.
@@ -11,7 +9,7 @@ It tries to focus SOLID principles as much as possible to allow better testabili
 
 - Frontend developers friendly hybride "dynamic" or typesafe models for templates 
 - Frontend developers friendly Partial view Macros
-- T4 POCO model generation 
+- Support for Umbraco Modelsbuilder
 - Paged result views  
 - Basic property editor converters 
 - Focused on SOLID principles, to allow better unit-testability
@@ -28,20 +26,13 @@ It tries to focus SOLID principles as much as possible to allow better testabili
 ###Underconstruction:
 
 The whole foundation is constantly under development. 
-
-Like to know what we are working on right now, see our [Trello Board](https://trello.com/b/YMtpIdMT/muffin-development)
-
-Currently build on top of Umbraco 7.2.4
+Currently build on top of Umbraco 7.4.0
 
 ##Installation
 - Umbraco is installed and updated via Nuget.  
 - The models generator currently relies on uSync which is also installed and updated via Nuget.
-- Our latest build is always available on nuget at: https://ci.appveyor.com/nuget/muffin-xmcwl6r6371j
 
 ##Examples and documentation
 
 - The example database username is "admin" and the password is "password".  
 - The nuget package and the example project both use Autofac. See the implementation folder for more information and / or customization. 
-
-##Credits
-- [Macaw Umbraco Foundation](https://github.com/MacawNL/Macaw.Umbraco.Foundation/)

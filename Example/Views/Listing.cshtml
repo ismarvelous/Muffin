@@ -1,5 +1,4 @@
 @using Muffin.Mvc
-@using Content = Umbraco.Web.PublishedContentModels.Content
 @model Muffin.Core.ViewModels.ICollectionContentViewModel<Muffin.Core.Models.IModel>
 @{
     Layout = "~/Views/Shared/_layout.cshtml";
@@ -11,7 +10,7 @@
 		There are @Model.TotalResults items in the result. But only @(Model.Results.OfType<Example.Implementation.Models.Content>().Count()) are Content items
     </header>
 
-	@foreach(var child in Model.Results.OfType<Content>())
+	@foreach(var child in Model.Results.OfType<Example.Implementation.Models.Content>())
 	{
 		<section>
 			<h2>@child.Titel</h2>
